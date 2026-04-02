@@ -1,0 +1,71 @@
+{% extends "minerve/pages/responsive_dashboard/index.html" %}
+{% load i18n %}
+{% load django_bootstrap5 %}
+{% load humanize %}
+{% block MINERVE_PAGE_SUBTITLE %}: {% translate "Account Losses Limits" %}{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_BODY %}
+<div class="w-100 flex-container"
+     data-bs-theme="{{ MINERVE_BODY_THEME }}"
+     style="position: relative; min-height: 100dvh;">    <div class="card-header">
+{#    {{ limits }}#}
+        <h1> <i class="fa-duotone fa-solid fa-dial-high" style="color: #dd8fda;"></i> &#160; {% translate "Account Losses Limits" %}</h1>
+        <p>{% translate "These are your per-account losses limits." %} </p>
+        <h4>{% translate "Play responsibly! This tool allows you to set a hard limit for your daily, weekly, and monthly losses." %}</h4>
+    <div class="card-body">
+            <table class="table table-striped table-responsive">
+                <thead>
+                <tr>
+                    <th scope="col">{% translate "Daily Losses" %}</th>
+                    <th scope="col">{% translate "Weekly Losses" %}</th>
+                    <th scope="col">{% translate "Monthly Losses" %}</th>
+                    <th scope="col">{% translate "Edit" %}</th>
+                </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                        <td>
+                            {% if cashier_limits.active %}
+                            {{ cashier_limits.daily_limit}}
+                            {% else %}
+                                {% translate "No Limit." %}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if cashier_limits.active %}
+                            {{ cashier_limits.weekly_limit}}
+                            {% else %}
+                                {% translate "No Limit." %}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if cashier_limits.active %}
+                            {{cashier_limits.monthly_limit}}
+                            {% else %}
+                                {% translate "No Limit." %}
+                            {% endif %}
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" onclick="cashier.start_loss_limit_modal()"><i class="fa-duotone fa-solid fa-pen pe-2"></i>{% translate "Edit Limits" %}</button>
+                        </td>
+                        </tr>
+
+                </tbody>
+            </table>
+            <div class="d-flex">
+
+            </div>
+
+    </div>
+    </div>
+</div>
+<script type="module" src="/static/mycashier/js/Cashier/loader.js"></script>
+
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+{% include "lobby/dashboard/components/account_sidebar_header.html" %}
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY_FOOTER %}
+    {% include "lobby/index/theme_switcher.html" %}
+ {% endblock %}

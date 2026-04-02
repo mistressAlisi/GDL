@@ -1,0 +1,34 @@
+# Washington - Lotto
+# Draws Monday, Wednesday, and Saturday at 8:00 PM PT
+# Pick 6 numbers from 1-49
+
+state: WA
+name: "Lotto"
+slug: wa-lotto
+url: "https://www.walottery.com/JackpotGames/Lotto.aspx"
+game_type: pool
+
+format:
+  main_count: 6
+  main_range: [1, 49]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: false
+
+schedule:
+  days: [monday, wednesday, saturday]
+  times:
+    - time: "20:00"
+      label: null
+  timezone: "America/Los_Angeles"
+
+selectors:
+  all_numbers: ".winning-numbers span, .ball, .number"
+  draw_date: ".draw-date, .date"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%m/%d/%Y"
+  split_main_bonus: false
+
+active: true

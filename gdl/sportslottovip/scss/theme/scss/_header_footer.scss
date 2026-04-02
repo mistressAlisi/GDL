@@ -1,0 +1,240 @@
+@use 'variables';
+@use 'theme-custom-core';
+
+// ------------------------------
+// HEADER
+// ------------------------------
+.sportslotto-topbar {
+  width: 100%;
+  background: var(--bg1);
+  position: relative;
+  z-index: 50;
+  backdrop-filter: blur(12px);
+  padding: 0 2rem;
+
+  @media (max-width: 1024px) { padding: 0 1.5rem; }
+  @media (max-width: 768px)  { padding: 0 1rem; }
+  @media (max-width: 480px)  { padding: 0 0.75rem; }
+}
+
+.topbar-inner {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0.4rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topbar-title-link { text-decoration: none; }
+
+.topbar-title {
+  font-family: "Teko", sans-serif;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  color: var(--ticket-text);
+  text-shadow: 0 0 6px var(--ticket-text-glow);
+}
+
+.lotto-accent {
+  color: var(--ticket-glow-inner);
+  text-shadow: 0 0 8px var(--ticket-text-glow-2);
+}
+
+// Topbar buttons
+.topbar-btn {
+  padding: 0.2rem 0.3rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: linear-gradient(135deg, var(--ticket-bg-1, #ed7b42), var(--ticket-bg-2, #ff3d3d));
+  border: 1px solid var(--ticket-border, #ff00f2);
+  color: #fff;
+  cursor: pointer;
+  transition: 0.2s ease, transform 0.2s, box-shadow 0.2s;
+
+  &.register { border-color: var(--ticket-border); }
+
+  @media (max-width: 768px) { padding: 0.6rem 1rem; font-size: 0.8rem; }
+  @media (max-width: 480px) { padding: 0.5rem .5rem; font-size: 0.75rem; }
+}
+
+// ------------------------------
+// STICKY NAV
+// ------------------------------
+.sportslotto-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 60;
+  background: var(--bg2);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--ticket-border);
+  box-shadow: 0 0 15px var(--ticket-shadow);
+}
+
+.scrollable-nav {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 1rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+
+  @media (max-width: 1024px) { gap: 1.25rem; }
+  @media (max-width: 768px)  { gap: 1rem; padding: 0.75rem 0; }
+  @media (max-width: 480px)  { gap: 0.5rem; padding: 0.5rem 0; }
+}
+
+.nav-link {
+  color: var(--ticket-text);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: 0.25s ease;
+  font-family: 'Rajdhani', sans-serif;
+
+  @media (max-width: 1024px) { font-size: 1.1rem; }
+  @media (max-width: 768px)  { font-size: 1rem; }
+  @media (max-width: 480px)  { font-size: 0.9rem; }
+}
+
+#loginModal {
+  display: none; /* hidden initially */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#loginModal.active {
+  display: flex;
+}
+
+// ------------------------------
+// LOGO
+// ------------------------------
+#site-logo {
+  width: 120px;
+  height: auto;
+  max-height: 40px;
+  margin-right: 8px;
+  transition: all 0.3s ease;
+
+  @media (max-width: 1024px) { width: 120px; }
+  @media (max-width: 768px)  { width: 100px; }
+  @media (max-width: 480px)  { width: 90px; }
+}
+
+// ------------------------------
+// FOOTER
+// ------------------------------
+.site-footer {
+  width: 100%;
+  background: var(--bg1);
+  position: relative;
+  z-index: 50;
+  backdrop-filter: blur(12px);
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text1, #fff);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.footer-container {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+
+  @media (max-width: 768px) { padding: 1rem 1rem; gap: 1rem; }
+  @media (max-width: 480px) { padding: 0.75rem 0.5rem; gap: 0.75rem; }
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+
+    a {
+      color: var(--theme-text);
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 600;
+      transition: 0.25s ease;
+
+      &:hover { color: var(--glow); }
+
+      @media (max-width: 768px) { font-size: 1rem; }
+      @media (max-width: 480px) { font-size: 0.9rem; }
+    }
+  }
+}
+
+.footer-contact {
+  margin-top: 0.9rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--ticket-text, #fff);
+    font-weight: 600;
+    transition: 0.25s ease;
+
+    .icon-bg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: var(--bs-dark, #1a1a1a);
+      box-shadow: 0 0 6px var(--prize-glow-1, #dd00d1),
+                  0 0 12px var(--prize-glow-2, #00eaff);
+      flex-shrink: 0;
+
+      svg { width: 20px; height: 20px; fill: currentColor; }
+    }
+
+    &:hover {
+      color: var(--bs-info, #00eaff);
+      .icon-bg { box-shadow: 0 0 10px var(--prize-glow-1, #dd00d1), 0 0 18px var(--prize-glow-2, #00eaff); }
+    }
+  }
+
+  @media (max-width: 480px) {
+    gap: 1rem;
+
+    .contact-item {
+      font-size: 0.85rem;
+
+      .icon-bg {
+        width: 28px;
+        height: 28px;
+        svg { width: 16px; height: 16px; }
+      }
+    }
+  }
+}

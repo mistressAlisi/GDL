@@ -1,0 +1,15 @@
+{% extends "minerve/base/page.html" %}
+{% block MINERVE_PAGE_BODY %}
+  <main class="px-3">
+    <h1>{{ MINERVE_SITE_TAGLINE }}</h1>
+    {% autoescape off %}
+    <p class="lead">
+        {{ MINERVE_SITE_INDEX_INTRO }}
+    </p>
+    <p class="lead">
+        {{ MINERVE_SITE_INDEX_SEC_INTRO }}
+    </p>
+  {% endautoescape %}
+  </main>
+{% endblock %}
+

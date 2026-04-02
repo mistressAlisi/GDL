@@ -1,0 +1,27 @@
+{% load i18n %}
+{% load django_bootstrap5 %}
+{% load crispy_forms_tags %}
+<div class="card">
+    <div class="card-header">
+        <h3 class="text-muted"><i class="fa-duotone fa-solid fa-table text-purple"></i>{%  translate "GDL - Core Sport and League Filters:" %}</h3>
+    </div>
+    {%  block card_body %}
+    <div class="card-body table-card ps-4 pe-4">
+{#        <div class="p-2 border border-primary border-opacity-50 rounded search-form-div">#}
+{#        <form method="GET" action="#" onsubmit="window.agent.paginator.start(event); return false;" class="form">#}
+{#        </form>#}
+{#        </div>#}
+       <div style="min-height: 40vh;">
+       {% blocktranslate %}
+           <h4>This tool lets you configure the Core Groups and Sports that are enabled for GDL in this current Domain and Host.</h4>
+           <h6>These filters cannot be disabled by players. Any changes done here will be reflected immediately.</h6>
+           <p class="alert alert-warning">Warning! The system will not check if the Sports and Groups match. Exercise caution. Use Ctrl to select multiple.</p>
+       {% endblocktranslate %}
+       <form id="gdl_filter_form" data-post-url="game/rules/filters/save"  method="POST" action="#" onsubmit="agent.generic_post_form_v2({'event':event});">
+       {% csrf_token %}
+        {% crispy sport_form %}
+        </form>
+       </div>
+    {%  endblock %}
+    </div>
+</div>

@@ -1,0 +1,387 @@
+{#{% load static %}#}
+{#<!-- Animated Team Logo Lottery Balls Background - Endless Falling -->#}
+{##}
+{#<script>#}
+{#(function() {#}
+{#    console.log('🎾 Canvas animation loading...');#}
+{##}
+{#    // CREATE canvas element with JavaScript to bypass body conflicts#}
+{#    const canvas = document.createElement('canvas');#}
+{#    canvas.id = 'canvas-bg';#}
+{#    canvas.style.cssText = `#}
+{#        position: fixed !important;#}
+{#        top: 0 !important;#}
+{#        left: 0 !important;#}
+{#        right: 0 !important;#}
+{#        bottom: 0 !important;#}
+{#        width: 100vw !important;#}
+{#        height: 100vh !important;#}
+{#        z-index: 0 !important;#}
+{#        background-color: transparent !important;#}
+{#        pointer-events: none !important;#}
+{#        margin: 0 !important;#}
+{#        padding: 0 !important;#}
+{#    `;#}
+{##}
+{#    // Insert as FIRST child of body#}
+{#    document.body.insertBefore(canvas, document.body.firstChild);#}
+{#    console.log('✅ Canvas element created and injected into DOM');#}
+{##}
+{#    const ctx = canvas.getContext('2d');#}
+{##}
+{#    function resizeCanvas() {#}
+{#        canvas.width = window.innerWidth;#}
+{#        canvas.height = window.innerHeight;#}
+{#        console.log(`📐 Canvas resized to ${canvas.width}x${canvas.height}`);#}
+{#    }#}
+{#    resizeCanvas();#}
+{#    window.addEventListener('resize', resizeCanvas);#}
+{##}
+{#    const lotteryBalls = [];#}
+{#    const teamLogos = [];#}
+{#    let logosLoaded = 0;#}
+{#    let totalLogosNeeded = 30;#}
+{##}
+{#    // Mobile detection#}
+{#    const isMobile = window.innerWidth <= 768;#}
+{#    const initialBallCount = isMobile ? 8 : 12; // Start small for fast load#}
+{#    const maxBallCount = isMobile ? 20 : 40; // Maximum balls to add over time#}
+{#    const ballSizeMultiplier = isMobile ? 0.6 : 1; // 60% size on mobile#}
+{##}
+{#    console.log(`📱 Device: ${isMobile ? 'Mobile' : 'Desktop'}, Initial: ${initialBallCount}, Max: ${maxBallCount}, Size: ${ballSizeMultiplier}x`);#}
+{##}
+{#    // Fetch team logos from Django backend#}
+{#    async function fetchTeamLogos() {#}
+{#        console.log('🔄 Fetching team logos from Django (ONE TIME ONLY)...');#}
+{#        const logos = [];#}
+{##}
+{#        // Fetch only ONCE - single call to get 8 teams#}
+{#        try {#}
+{#            const res = await fetch("{% url 'hero_rows_json' %}");#}
+{#            const data = await res.json();#}
+{#            console.log(`📦 Single fetch complete:`, data);#}
+{##}
+{#            // Collect all teams with logos from top and bottom#}
+{#            [...data.top, ...data.bottom].forEach(team => {#}
+{#                if (team.logo) {#}
+{#                    logos.push({#}
+{#                        url: team.logo,#}
+{#                        color: team.color || '#38d97d',#}
+{#                        name: team.name#}
+{#                    });#}
+{#                    console.log(`  ✓ Added logo: ${team.name} - ${team.logo}`);#}
+{#                } else {#}
+{#                    console.log(`  ⚠️ No logo for: ${team.name}`);#}
+{#                }#}
+{#            });#}
+{#        } catch (error) {#}
+{#            console.error('❌ Error fetching team data:', error);#}
+{#        }#}
+{##}
+{#        console.log(`✅ Collected ${logos.length} team logos (will reuse for all 30 balls)`);#}
+{#        return logos;#}
+{#    }#}
+{##}
+{#    // Load logo images#}
+{#    async function loadLogos() {#}
+{#        const logoData = await fetchTeamLogos();#}
+{##}
+{#        if (logoData.length === 0) {#}
+{#            console.error('❌ No logos loaded, falling back to colored balls');#}
+{#            createFallbackBalls();#}
+{#            animate();#}
+{#            return;#}
+{#        }#}
+{##}
+{#        console.log(`🔄 Starting to load ${logoData.length} images...`);#}
+{##}
+{#        logoData.forEach((logoInfo, index) => {#}
+{#            const img = new Image();#}
+{#            img.crossOrigin = "anonymous"; // Handle CORS if needed#}
+{#            img.onload = () => {#}
+{#                logosLoaded++;#}
+{#                teamLogos[index].loaded = true;#}
+{#                console.log(`✅ Loaded logo ${logosLoaded}/${logoData.length}: ${logoInfo.name}`);#}
+{##}
+{#                if (logosLoaded === logoData.length) {#}
+{#                    console.log('🎨 All logos loaded! Creating balls...');#}
+{#                    createBalls();#}
+{#                    animate();#}
+{#                }#}
+{#            };#}
+{#            img.onerror = () => {#}
+{#                console.warn(`⚠️ Failed to load logo: ${logoInfo.url}`);#}
+{#                logosLoaded++;#}
+{##}
+{#                if (logosLoaded === logoData.length) {#}
+{#                    console.log('🎨 Logo loading complete (with some errors). Creating balls...');#}
+{#                    createBalls();#}
+{#                    animate();#}
+{#                }#}
+{#            };#}
+{##}
+{#            teamLogos.push({#}
+{#                img: img,#}
+{#                color: logoInfo.color,#}
+{#                name: logoInfo.name,#}
+{#                loaded: false#}
+{#            });#}
+{##}
+{#            img.src = logoInfo.url;#}
+{#        });#}
+{#    }#}
+{##}
+{#    // Create balls with team logos#}
+{#    function createBalls() {#}
+{#        console.log(`🎾 Creating ${initialBallCount} balls from ${teamLogos.length} available logos...`);#}
+{##}
+{#        for (let i = 0; i < initialBallCount; i++) {#}
+{#            const randomLogoIndex = Math.floor(Math.random() * teamLogos.length);#}
+{#            const logo = teamLogos[randomLogoIndex];#}
+{##}
+{#            lotteryBalls.push({#}
+{#                x: Math.random() * canvas.width,#}
+{#                y: Math.random() * canvas.height,#}
+{#                vx: (Math.random() - 0.5) * 4, // Random horizontal velocity#}
+{#                vy: (Math.random() - 0.5) * 4, // Random vertical velocity#}
+{#                radius: 30 * ballSizeMultiplier + Math.random() * 25 * ballSizeMultiplier,#}
+{#                color: logo.color,#}
+{#                logoImg: logo.img,#}
+{#                logoIndex: randomLogoIndex,#}
+{#                rotation: Math.random() * Math.PI * 2,#}
+{#                rotationSpeed: (Math.random() - 0.5) * 0.1,#}
+{#                mass: 1 + Math.random() * 0.5 // Affects how wind pushes them#}
+{#            });#}
+{#        }#}
+{#        console.log(`✅ Created ${lotteryBalls.length} juggling logo balls`);#}
+{#    }#}
+{##}
+{#    // Fallback to colored balls if logos fail#}
+{#    function createFallbackBalls() {#}
+{#        console.log('🎨 Creating 30 fallback colored balls...');#}
+{#        const colors = ['#ff6b35', '#4facfe', '#38d97d', '#00b4d8', '#764ba2', '#f72585'];#}
+{##}
+{#        for (let i = 0; i < 30; i++) {#}
+{#            lotteryBalls.push({#}
+{#                x: Math.random() * canvas.width,#}
+{#                y: Math.random() * canvas.height,#}
+{#                vx: (Math.random() - 0.5) * 4,#}
+{#                vy: (Math.random() - 0.5) * 4,#}
+{#                radius: 30 + Math.random() * 25,#}
+{#                color: colors[Math.floor(Math.random() * colors.length)],#}
+{#                logoImg: null,#}
+{#                rotation: Math.random() * Math.PI * 2,#}
+{#                rotationSpeed: (Math.random() - 0.5) * 0.1,#}
+{#                mass: 1 + Math.random() * 0.5#}
+{#            });#}
+{#        }#}
+{#        console.log(`✅ Created ${lotteryBalls.length} fallback balls`);#}
+{#    }#}
+{##}
+{#    function drawTeamBall(ball) {#}
+{#        ctx.save();#}
+{#        ctx.translate(ball.x, ball.y);#}
+{#        ctx.rotate(ball.rotation);#}
+{##}
+{#        // Get --bs-primary color from CSS#}
+{#        const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--bs-primary').trim() || '#38d97d';#}
+{##}
+{#        // Main ball background with primary color gradient#}
+{#        ctx.shadowBlur = 0;#}
+{#        ctx.beginPath();#}
+{#        ctx.arc(0, 0, ball.radius, 0, Math.PI * 2);#}
+{##}
+{#        const ballGradient = ctx.createRadialGradient(#}
+{#            -ball.radius * 0.3, -ball.radius * 0.3, 0,#}
+{#            0, 0, ball.radius#}
+{#        );#}
+{#        ballGradient.addColorStop(0, primaryColor);#}
+{#        ballGradient.addColorStop(0.7, primaryColor);#}
+{#        ballGradient.addColorStop(1, primaryColor);#}
+{#        ctx.fillStyle = ballGradient;#}
+{#        ctx.fill();#}
+{##}
+{#        // Draw team logo image if loaded (directly on primary color background)#}
+{#        if (ball.logoImg && ball.logoImg.complete && ball.logoImg.naturalWidth > 0) {#}
+{#            ctx.save();#}
+{##}
+{#            // Add subtle shadow backing (same size as logo) for contrast#}
+{#            ctx.beginPath();#}
+{#            ctx.arc(0, 0, ball.radius * 0.7, 0, Math.PI * 2);#}
+{#            ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';#}
+{#            ctx.fill();#}
+{##}
+{#            // Create circular clipping region for logo#}
+{#            ctx.beginPath();#}
+{#            ctx.arc(0, 0, ball.radius * 0.7, 0, Math.PI * 2);#}
+{#            ctx.clip();#}
+{##}
+{#            const logoSize = ball.radius * 1.4;#}
+{#            ctx.drawImage(#}
+{#                ball.logoImg,#}
+{#                -logoSize / 2,#}
+{#                -logoSize / 2,#}
+{#                logoSize,#}
+{#                logoSize#}
+{#            );#}
+{#            ctx.restore();#}
+{#        }#}
+{##}
+{#        // Glossy shine effect (top-left highlight)#}
+{#        ctx.beginPath();#}
+{#        ctx.arc(-ball.radius * 0.35, -ball.radius * 0.35, ball.radius * 0.3, 0, Math.PI * 2);#}
+{#        const shineGradient = ctx.createRadialGradient(#}
+{#            -ball.radius * 0.35, -ball.radius * 0.35, 0,#}
+{#            -ball.radius * 0.35, -ball.radius * 0.35, ball.radius * 0.3#}
+{#        );#}
+{#        shineGradient.addColorStop(0, 'rgba(255, 255, 255, 0.6)');#}
+{#        shineGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');#}
+{#        ctx.fillStyle = shineGradient;#}
+{#        ctx.fill();#}
+{##}
+{#        // Bottom shadow for depth#}
+{#        ctx.beginPath();#}
+{#        ctx.arc(ball.radius * 0.2, ball.radius * 0.4, ball.radius * 0.4, 0, Math.PI * 2);#}
+{#        const shadowGradient = ctx.createRadialGradient(#}
+{#            ball.radius * 0.2, ball.radius * 0.4, 0,#}
+{#            ball.radius * 0.2, ball.radius * 0.4, ball.radius * 0.4#}
+{#        );#}
+{#        shadowGradient.addColorStop(0, 'rgba(0, 0, 0, 0.3)');#}
+{#        shadowGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');#}
+{#        ctx.fillStyle = shadowGradient;#}
+{#        ctx.fill();#}
+{##}
+{#        ctx.restore();#}
+{#    }#}
+{##}
+{#    let frameCount = 0;#}
+{#    let animationStarted = false;#}
+{##}
+{#    function animate() {#}
+{#        if (!animationStarted) {#}
+{#            animationStarted = true;#}
+{#            console.log('🎬 Chaotic juggling animation started!');#}
+{#        }#}
+{##}
+{#        // Clear with transparent background#}
+{#        ctx.clearRect(0, 0, canvas.width, canvas.height);#}
+{##}
+{#        lotteryBalls.forEach((ball, index) => {#}
+{#            // GRAVITY - pulls balls down (SLOWER)#}
+{#            ball.vy += 0.05;#}
+{##}
+{#            // UPWARD WIND - constant chaotic push from below (SLOWER, varies over time)#}
+{#            const windStrength = 0.1 + Math.sin(frameCount * 0.01 + index) * 0.05;#}
+{#            ball.vy -= windStrength / ball.mass;#}
+{##}
+{#            // HORIZONTAL TURBULENCE - random sideways gusts (SLOWER)#}
+{#            const turbulence = Math.sin(frameCount * 0.015 + index * 0.5) * 0.08;#}
+{#            ball.vx += turbulence + (Math.random() - 0.5) * 0.03;#}
+{##}
+{#            // SWIRLING MOTION - adds circular chaos (SLOWER)#}
+{#            const swirl = Math.cos(frameCount * 0.008 + index * 0.3) * 0.06;#}
+{#            ball.vx += swirl;#}
+{##}
+{#            // AIR RESISTANCE - slows down fast balls#}
+{#            ball.vx *= 0.98;#}
+{#            ball.vy *= 0.98;#}
+{##}
+{#            // Update position#}
+{#            ball.x += ball.vx;#}
+{#            ball.y += ball.vy;#}
+{##}
+{#            // WRAP AROUND EDGES (keep balls in view)#}
+{#            const margin = ball.radius * 2;#}
+{#            if (ball.x < -margin) ball.x = canvas.width + margin;#}
+{#            if (ball.x > canvas.width + margin) ball.x = -margin;#}
+{#            if (ball.y < -margin) ball.y = canvas.height + margin;#}
+{#            if (ball.y > canvas.height + margin) ball.y = -margin;#}
+{##}
+{#            // CHAOTIC ROTATION - speed varies with velocity (SLOWER)#}
+{#            const velocityMagnitude = Math.sqrt(ball.vx * ball.vx + ball.vy * ball.vy);#}
+{#            ball.rotationSpeed = velocityMagnitude * 0.01 * (ball.vx > 0 ? 1 : -1);#}
+{#            ball.rotation += ball.rotationSpeed;#}
+{##}
+{#            // Draw the team logo ball#}
+{#            drawTeamBall(ball);#}
+{#        });#}
+{##}
+{#        frameCount++;#}
+{#        requestAnimationFrame(animate);#}
+{#    }#}
+{##}
+{#    // Start loading logos#}
+{#    loadLogos();#}
+{##}
+{#    // PROGRESSIVE BALL ADDITION - Add more balls slowly over time#}
+{#    function addNewBalls() {#}
+{#        if (lotteryBalls.length >= maxBallCount) {#}
+{#            console.log(`🛑 Max ball count reached (${maxBallCount}), stopping progressive addition`);#}
+{#            return;#}
+{#        }#}
+{##}
+{#        const ballsToAdd = isMobile ? 2 : 3; // Add 2 on mobile, 3 on desktop#}
+{#        const actualBallsToAdd = Math.min(ballsToAdd, maxBallCount - lotteryBalls.length);#}
+{##}
+{#        console.log(`➕ Adding ${actualBallsToAdd} new balls (${lotteryBalls.length} → ${lotteryBalls.length + actualBallsToAdd})...`);#}
+{##}
+{#        for (let i = 0; i < actualBallsToAdd; i++) {#}
+{#            if (teamLogos.length > 0) {#}
+{#                const randomLogoIndex = Math.floor(Math.random() * teamLogos.length);#}
+{#                const logo = teamLogos[randomLogoIndex];#}
+{##}
+{#                // Add balls from random edges for variety#}
+{#                const edge = Math.floor(Math.random() * 4); // 0=top, 1=right, 2=bottom, 3=left#}
+{#                let x, y;#}
+{##}
+{#                switch(edge) {#}
+{#                    case 0: x = Math.random() * canvas.width; y = -50; break; // top#}
+{#                    case 1: x = canvas.width + 50; y = Math.random() * canvas.height; break; // right#}
+{#                    case 2: x = Math.random() * canvas.width; y = canvas.height + 50; break; // bottom#}
+{#                    case 3: x = -50; y = Math.random() * canvas.height; break; // left#}
+{#                }#}
+{##}
+{#                lotteryBalls.push({#}
+{#                    x: x,#}
+{#                    y: y,#}
+{#                    vx: (Math.random() - 0.5) * 3,#}
+{#                    vy: (Math.random() - 0.5) * 3,#}
+{#                    radius: 30 * ballSizeMultiplier + Math.random() * 25 * ballSizeMultiplier,#}
+{#                    color: logo.color,#}
+{#                    logoImg: logo.img,#}
+{#                    logoIndex: randomLogoIndex,#}
+{#                    rotation: Math.random() * Math.PI * 2,#}
+{#                    rotationSpeed: (Math.random() - 0.5) * 0.1,#}
+{#                    mass: 1 + Math.random() * 0.5#}
+{#                });#}
+{#            }#}
+{#        }#}
+{##}
+{#        console.log(`✅ Total balls now: ${lotteryBalls.length}`);#}
+{#    }#}
+{##}
+{#    // Schedule progressive ball addition every 30 seconds#}
+{#    setInterval(addNewBalls, 30000); // 30 seconds#}
+{#    console.log('⏰ Progressive ball addition scheduled (every 30 seconds)');#}
+{##}
+{#    // Click to push balls away#}
+{#    canvas.addEventListener('click', (e) => {#}
+{#        const rect = canvas.getBoundingClientRect();#}
+{#        const clickX = e.clientX - rect.left;#}
+{#        const clickY = e.clientY - rect.top;#}
+{##}
+{#        lotteryBalls.forEach((ball) => {#}
+{#            const dx = ball.x - clickX;#}
+{#            const dy = ball.y - clickY;#}
+{#            const distance = Math.sqrt(dx * dx + dy * dy);#}
+{#            const force = Math.max(0, 400 - distance) / 30;#}
+{##}
+{#            if (distance < 400) {#}
+{#                ball.vx += (dx / distance) * force;#}
+{#                ball.vy += (dy / distance) * force * 0.5;#}
+{#                ball.rotationSpeed += (Math.random() - 0.5) * 0.3;#}
+{#            }#}
+{#        });#}
+{#    });#}
+{#})();#}
+{#</script>#}

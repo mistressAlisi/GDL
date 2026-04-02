@@ -1,0 +1,68 @@
+{% extends "minerve/pages/responsive_dashboard/index.html" %}
+{% load i18n %}
+{% load django_bootstrap5 %}
+{% load humanize %}
+{% block MINERVE_PAGE_SUBTITLE %}: {% translate "Application Wagering Limits" %}{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_BODY %}
+<div class="w-100 flex-container"
+     data-bs-theme="{{ MINERVE_BODY_THEME }}"
+     style="position: relative; min-height: 100dvh;">
+    <div class="card-header">
+{#    {{ limits }}#}
+        <h1> <i class="fa-duotone fa-solid fa-lock" style="color: #dd8fda;"></i> &#160; {% translate "Account Lockout" %}</h1>
+        <p>{% translate "This tool allows you to self-exclude for a period of time." %} </p>
+        <h4>{% translate "Play responsibly! This tool will lock out your account for the specified period of time." %}</h4>
+        <h5 class="text-warning">{% translate "Once this tool is used - no one may unlock your account until the desired lockout time has passed." %}</h5>
+    <div class="card-body">
+
+            <div class="d-flex justify-content-center border-danger border-opacity-50 border-2">
+                <form id="lockout_form" method="POST" data-post-url="lockout/execute" onsubmit="cashier.set_lockout(event);" action="#" class="">
+                    {% csrf_token %}
+
+
+            <div class="input-group flex-nowrap">
+              <span class="input-group-text" id="addon-wrapping">{% translate "Please lock my account for:" %}</span>
+               <select class="form-select" id="id_period" name="period">
+                         <option value="86400">{% translate "1 Day" %}</option>
+                         <option value="604800">{% translate "1 Week" %}</option>
+                         <option value="2592000">{% translate "1 Month" %}</option>
+                         <option value="31536000">{% translate "1 Year" %}</option>
+                         <option value="3153600000">{% translate "Forever..." %}</option>
+                         <option value="c">{% translate "Custom (enter below)" %}</option>
+                 </select>
+            </div>
+            <div class="input-group flex-nowrap pt-2">
+              <span class="input-group-text" id="addon-wrapping">{% translate "Lockout until:" %}</span>
+                <input type="datetime-local" class="field" id="id_custom" name="custom"/>
+            </div>
+
+
+            <div class="input-group flex-nowrap pt-2">
+              <span class="input-group-text" id="addon-wrapping">{% translate "Password:" %}</span>
+                <input type="password" class="field" id="id_password" name="password"/>
+            </div>
+
+            <div class="form-check form-switch pt-2">
+              <input class="form-check-input" type="checkbox" role="switch" id="id_confirmSwitch" name="confirmSwitch">
+              <label class="form-check-label" for="confirmSwitch">{% translate "(Please Confirm lockout)" %}</label>
+            </div>
+
+            <button type="submit" class="btn btn-danger p-2 mt-4 w-100">{% translate "Lockout Account Now." %}</button>
+
+                </form>
+            </div>
+
+    </div>
+    </div>
+</div>
+<script type="module" src="/static/mycashier/js/Cashier/loader.js"></script>
+
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+{% include "lobby/dashboard/components/account_sidebar_header.html" %}
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY_FOOTER %}
+    {% include "lobby/index/theme_switcher.html" %}
+ {% endblock %}

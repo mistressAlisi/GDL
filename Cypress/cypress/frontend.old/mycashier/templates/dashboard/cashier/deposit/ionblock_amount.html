@@ -1,0 +1,197 @@
+{% extends "minerve/pages/responsive_dashboard/index.html" %}
+{% load django_bootstrap5 %}
+{% load humanize %}
+{% block bootstrap5_title %}
+    {{ vdomain.website_name }}: Deposit - ionBlock (ETH)
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_BODY %}
+<div class="container-fluid p-4" data-bs-theme="{{ MINERVE_BODY_THEME }}">
+    <div class="card border-0">
+        <div class="card-header bg-transparent border-0">
+            <h1>
+                <i class="fa-duotone fa-solid fa-coins" style="color: #6366f1;"></i>
+                &#160; Deposit with ionBlock (Ethereum)
+            </h1>
+        </div>
+        <div class="card-body px-0">
+            <!-- Back button -->
+            <div class="mb-3">
+                <a href="/cashier/deposit" class="btn btn-outline-secondary">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Deposit Options
+                </a>
+            </div>
+
+            <!-- Info Section -->
+            <div class="alert alert-info" role="alert">
+                <h5><i class="fa-solid fa-info-circle"></i> How it works:</h5>
+                <ol class="mb-0">
+                    <li>Enter the amount you want to deposit in USD</li>
+                    <li>We'll generate a unique Ethereum address for your deposit</li>
+                    <li>Send ETH to the provided address</li>
+                    <li>Your account will be credited automatically once confirmed</li>
+                </ol>
+            </div>
+
+            <!-- Amount Input Form -->
+            <div class="row justify-content-center mt-4">
+                <div class="col-12 col-lg-10 col-xl-9">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-5">
+                            <h4 class="card-title text-center mb-5">Enter Deposit Amount</h4>
+
+                            <form method="POST" action="/cashier/deposit/start/cashier.providers.ionBlock" id="ionBlockAmountForm">
+                                {% csrf_token %}
+
+                                <div class="mb-5">
+                                    <label for="amount" class="form-label fs-5 mb-3">
+                                        <strong>Amount (USD)</strong>
+                                    </label>
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-text fs-4">$</span>
+                                        <input
+                                            type="number"
+                                            class="form-control fs-4"
+                                            id="amount"
+                                            name="amount"
+                                            min="{{ min_deposit }}"
+                                            max="{{ max_deposit }}"
+                                            step="0.01"
+                                            placeholder="Enter amount"
+                                            required
+                                            autofocus
+                                        >
+                                        <span class="input-group-text fs-5">USD</span>
+                                    </div>
+                                    <div class="form-text fs-6 mt-2">
+                                        Minimum: ${{ min_deposit|floatformat:2 }} |
+                                        Maximum: ${{ max_deposit|floatformat:2 }}
+                                    </div>
+                                </div>
+
+                                <!-- Quick Amount Buttons -->
+                                <div class="mb-5">
+                                    <small class="text-muted">Quick amounts:</small>
+                                    <div class="d-flex gap-2 mt-2 flex-wrap">
+                                        <button type="button" class="btn btn-outline-primary" onclick="setAmount(25)">$25</button>
+                                        <button type="button" class="btn btn-outline-primary" onclick="setAmount(50)">$50</button>
+                                        <button type="button" class="btn btn-outline-primary" onclick="setAmount(100)">$100</button>
+                                        <button type="button" class="btn btn-outline-primary" onclick="setAmount(250)">$250</button>
+                                        <button type="button" class="btn btn-outline-primary" onclick="setAmount(500)">$500</button>
+                                    </div>
+                                </div>
+
+                                <!-- Cryptocurrency Display (ETH only) -->
+                                <div class="mb-4">
+                                    <label class="form-label fs-6 mb-2">
+                                        <strong>Cryptocurrency</strong>
+                                    </label>
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-text">
+                                            <i class="fa-brands fa-ethereum"></i>
+                                        </span>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            value="Ethereum (ETH)"
+                                            readonly
+                                        >
+                                    </div>
+                                    <div class="form-text mt-2">
+                                        Currently supporting Ethereum only
+                                    </div>
+                                </div>
+
+                                <!-- Network Display -->
+                                <div class="mb-5">
+                                    <label class="form-label fs-6 mb-2">
+                                        <strong>Network</strong>
+                                    </label>
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-text">
+                                            <i class="fa-solid fa-network-wired"></i>
+                                        </span>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            value="Ethereum Mainnet"
+                                            readonly
+                                        >
+                                    </div>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="d-grid gap-2 mt-4">
+                                    <button type="submit" class="btn btn-primary btn-lg py-3 fs-5">
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                        Continue to Payment
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <i class="fa-solid fa-shield-check fa-3x text-success mb-2"></i>
+                        <h5>Secure</h5>
+                        <p class="text-muted small">Military-grade encryption</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <i class="fa-solid fa-bolt fa-3x text-warning mb-2"></i>
+                        <h5>Fast</h5>
+                        <p class="text-muted small">Instant credit on confirmation</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <i class="fa-solid fa-wallet fa-3x text-info mb-2"></i>
+                        <h5>Easy</h5>
+                        <p class="text-muted small">Pay from any ETH wallet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function setAmount(amount) {
+    document.getElementById('amount').value = amount;
+}
+</script>
+
+<style>
+    /* Make ionBlock modal wider by overriding Bootstrap CSS variable */
+    .modal.cashier-modal {
+        --bs-modal-width: 90vw !important;
+    }
+    @media (min-width: 768px) {
+        .modal.cashier-modal {
+            --bs-modal-width: 80vw !important;
+        }
+    }
+    @media (min-width: 1200px) {
+        .modal.cashier-modal {
+            --bs-modal-width: 1200px !important;
+        }
+    }
+    @media (min-width: 1400px) {
+        .modal.cashier-modal {
+            --bs-modal-width: 1400px !important;
+        }
+    }
+</style>
+
+{% include "minerve/pages/dynamic_dashboard/loading_toast.html" %}
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+{% include "lobby/dashboard/components/account_sidebar_header.html" %}
+{% endblock %}

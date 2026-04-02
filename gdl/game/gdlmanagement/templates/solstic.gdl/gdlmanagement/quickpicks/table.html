@@ -1,0 +1,64 @@
+{% load i18n %}
+{% load django_bootstrap5 %}
+{% load crispy_forms_tags %}
+<div class="">
+    <div class="card-header">
+        <h3 class="text-muted"><i class="fa-duotone fa-solid fa-table text-purple"></i>{%  translate "GDL - Quick Picks Sports Settings:" %}</h3>
+    </div>
+    {%  block card_body %}
+    <div class="card-body table-card">
+{#        <div class="p-2 border border-primary border-opacity-50 rounded search-form-div">#}
+{#        <form method="GET" action="#" onsubmit="window.agent.paginator.start(event); return false;" class="form">#}
+{#        </form>#}
+{#        </div>#}
+       <div style="min-height: 40vh;">
+       <button class="btn btn-success" onclick="window.bsm.show();" >Add new GDL QuickPicks Entry</button><br/>
+       <div id="table_placeholder" class="mt-2 table_placeholder align-middle text-center text-muted opacity-50 p-5 m-5">
+       <h1><i class="fa-duotone fa-solid fa-file-chart-column fa-5x"></i></h1>
+       <br/>
+       <h4>{%  translate "Loading..." %}</h4>
+       </div>
+       <div id="table_container">
+       </div>
+       </div>
+    {%  endblock %}
+    </div>
+</div>
+<div class="modal" tabindex="-1" id="create_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create new GDL Quickpicks Entry</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+          <div class="modal-body">
+      <form id="create_qp_form" method="POST" action="#" data-post-url="game/quickpicks/create" onsubmit="save_qp(event);">
+      {% crispy new_form %}
+      </form>
+        </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    window.bsm = new bootstrap.Modal("#create_modal");
+    function save_and_reset() {
+        bsm.hide();
+        window.dtable.reset()
+    }
+    function save_qp(event) {
+        manager.generic_post_form_v2({"event":event,"callback":save_and_reset})
+    }
+</script>
+<script type="module">
+    import {DynamicTableApp} from "/static/minerve/js/TableApp/DynamicTableApp.js";
+    window.dtable = new DynamicTableApp()
+
+    $("#table_container").append(window.dtable.dom_con)
+    $(dtable.dom_con).on("table_start",function(){
+        $("#table_placeholder").hide();
+    });
+    window.dtable.start("management/game/quickpicks/table/meta");
+</script>

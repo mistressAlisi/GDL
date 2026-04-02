@@ -1,0 +1,54 @@
+{% extends "lobby/dashboard/index.html" %}
+{% load crispy_forms_tags %}
+
+{% block DYNAMIC_DASHBOARD_PRE_BODY %}
+{% include "gdlfront/dashboard/tickets/prev_trigger_form.html" %}
+
+{% endblock %}
+{% block bootstrap5_title %}
+    {% if vdomain.website_name %}
+        {{ vdomain.website_name }}
+    {% else %}
+        {{ apperance.site_name }}
+    {% endif %}
+    {% block MINERVE_PAGE_SUBTITLE %} {% endblock %}
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY %}
+{% include "minerve/pages/dynamic_dashboard/loading_toast.html" %}
+
+<div class="position-absolute top-50 start-50 translate-middle text-white" id="gdl_loading_message">
+<h1 class="align-middle"><i class="fa-duotone fa-solid fa-spinner-third fa-spin mx-1"></i>Retrieving Previous Tickets...</h1>
+
+</div>
+<div class="w-100 h-100 row gx-0 ps-2 pe-0 me-0" id="gdl_play_area">
+
+
+</div>
+
+       {% include "gdlfront/dashboard/play_app/nav_controls.html" %}
+</div>
+<script src="/static/minerve/js/components/dynamic_dashboard/helper.js"></script>
+<script type="module" src="/static/gdlfront/js/loader-previous.js"/>
+{% endblock %}
+{% block MINERVE_PAGE_FOOTER %}
+    {% include "lobby/dashboard/account/login/signup_modal.html" %}
+    <script>
+        $(document).ready(function() {
+        $("#parameter_form").submit();
+        });
+    </script>
+{% endblock %}
+{% block MINERVE_NAV_PAGE_NAME %}
+    <span class="navbar-brand"> <span class="text-decoration-underline">Previous Tickets</span></span>
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+{% include "lobby/dashboard/components/account_sidebar_header.html" %}
+{% endblock %}
+
+
+{% block MINERVE_PAGE_NAV_HEADER_POST_MENU %}
+<div class="col">
+    <a id="cart" class="btn btn-danger p-2 m-2 rounded-3"  href="/cashier/deposit"><i class="fa-duotone fa-solid fa-cash-register"></i>Cashier</a>
+</div>
+{% endblock %}

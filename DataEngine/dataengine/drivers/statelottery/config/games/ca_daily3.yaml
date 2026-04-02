@@ -1,0 +1,42 @@
+# California Daily 3
+# Draws twice daily - Midday (~1:00 PM) and Evening (~6:30 PM) PT
+# Pick 3 digits from 0-9 (positional game)
+
+state: CA
+name: "Daily 3"
+slug: ca-daily3
+url: "https://www.calottery.com/en/draw-games/daily-3"
+game_type: positional
+
+format:
+  main_count: 3
+  main_range: [0, 9]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: true
+
+schedule:
+  days: [daily]
+  times:
+    - time: "13:00"
+      label: "midday"
+    - time: "18:30"
+      label: "evening"
+  timezone: "America/Los_Angeles"
+
+selectors:
+  # Page shows both draws - 6 balls for current day (3 per draw)
+  # First 3 = Evening, Next 3 = Midday
+  all_numbers: ".winning-numbers li"
+  draw_date: "[class*='date']"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%a/%b %d, %Y"
+  multi_draw: true
+  draws_per_page: 2
+  balls_per_draw: 3
+  # CA shows evening first, midday second
+  draw_order: ["evening", "midday"]
+
+active: true

@@ -1,0 +1,4 @@
+<form method="POST" action="#" data-post-url="tickets/confirm" id="confirm_form" onsubmit="carthandler._save_tickets(event);">
+    {% csrf_token %}
+    <input type="hidden" id="gdl_data"  name="gdl_data" value="{{ bet.id }}">
+</form>

@@ -1,0 +1,27 @@
+{% load i18n %}
+<h3>{% translate "Risking "%} {{ stake }} {% translate "to return " %} {{ returns|floatformat:0 }}</h3>
+<h6>
+    {% translate "Number of Matches in ticket:" %} {{ length }}:
+    {% for rule in rules %}
+    {{ rule.max_losses }} {% translate "loss pays" %} {{ rule.players_percentage }}%
+    {% endfor %}
+</h6>
+
+
+<hr class="border-2 opacity-50" style="border-color: var(--bs-success);"/>
+<div class="container-fluid d-flex" id="tvd{{ rootWagerObj.uuid }}">
+    <div class="col col-lg-12">
+        <ul>
+            {% for match in matches %}
+                <li class="">
+                {% include  "gdlfront/dashboard/tickets/match_name.html" with match=match.match type=match.type %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% if skip_accept %}
+<input type="hidden" name="skip_accept" id="skip_accept" value="true">
+{% endif %}
+</div>
+
+

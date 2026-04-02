@@ -1,0 +1,35 @@
+# Arkansas - Natural State Jackpot
+# Draws daily at 8:00 PM CST
+# Pick 5 numbers from 1-39
+
+state: AR
+name: "Natural State Jackpot"
+slug: ar-natural-state-jackpot
+url: "https://www.myarkansaslottery.com/games/natural-state-jackpot"
+game_type: pool
+
+format:
+  main_count: 5
+  main_range: [1, 39]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: false
+
+schedule:
+  days: [daily]
+  times:
+    - time: "20:00"
+      label: null
+  timezone: "America/Chicago"
+
+selectors:
+  # Arkansas Lottery displays numbers in card format
+  all_numbers: ".winning-numbers .ball, .number-ball, .drawing-results span"
+  draw_date: ".draw-date, .drawing-date"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%B %d, %Y"
+  split_main_bonus: false
+
+active: true

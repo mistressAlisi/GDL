@@ -1,0 +1,86 @@
+<!-- Carousel Section -->
+<div class="theme-card" style="padding:20px; position:relative; overflow:hidden;">
+  <section class="rules-header">
+    <div style="max-width:600px; margin:0 auto; position:relative;">
+      <div class="shimmer"></div>
+      <div class="prize-box" style="font-size:1.6rem; padding:0.5rem 0.7rem;">The Rules</div>
+      <p>So you’re curious how this actually works? Let’s break it down.</p>
+    </div>
+  </section>
+
+  <section class="theme-carousel" style="height:450px; position:relative;">
+    <div id="h-carousel" style="position:relative; width:100%; height:100%;"></div>
+    <div id="left" style="position:absolute;top:50%;left:15px;cursor:pointer;font-size:2.5rem;z-index:5;">❮</div>
+    <div id="right" style="position:absolute;top:50%;right:15px;cursor:pointer;font-size:2.5rem;z-index:5;">❯</div>
+  </section>
+</div>
+
+<script>
+(function(){
+  const data = [
+    {title:"1. You pick three things:", text:"Your Stake, Games, and Dream Win.<br>We do the rest."},
+    {title:"2. We build your ticket:", text:"Auto-generated combos — no pressure, just vibes."},
+    {title:"3. How winning works:", text:"If all your games hit — boom, payout! Some tickets even offer partial wins. See table below.  <br> <a href='/slv/consolation_payout_table' class='nav-link'>Consolation Payout</a>"},
+    {title:"4. Quick turnover:", text:"Games happen soon — no waiting around for results."},
+    {title:"5. Big win energy:", text:"Lottery-style odds with huge potential returns. Every ticket is a shot to hit it big!"}
+  ];
+  const container = document.getElementById('h-carousel');
+  const total = data.length;
+  const angleStep = 360 / total;
+  let currentIndex = 0;
+
+  data.forEach((d,i) => {
+    const card = document.createElement('div');
+    card.className = 'hcard';
+    card.innerHTML = `<div class="card-inner">
+                        <h3 class="card-title">${d.title}</h3>
+                        <p class="card-text">${d.text}</p>
+                        <div class="card-counter">${i+1}/${total}</div>
+                      </div>`;
+    container.appendChild(card);
+  });
+
+  const cards = document.querySelectorAll('.hcard');
+  const depth = 600;
+
+  function positionCards() {
+    let radius;
+    if(window.innerWidth <= 768){
+      radius = window.innerWidth * 0.6; // increase spacing on mobile
+    } else {
+      radius = window.innerWidth * 0.45; // default for desktop
+    }
+
+    cards.forEach((card, i) => {
+      const rel = (i - currentIndex + total) % total;
+      const angle = rel * angleStep * Math.PI / 180;
+      const x = Math.sin(angle) * radius;
+      const z = Math.cos(angle) * depth - depth;
+      const scale = 0.5 + 0.5 * (1 + Math.cos(angle)) / 2;
+      const opacity = 0.3 + 0.7 * scale;
+
+      card.style.transform = `translate3d(${x}px,0,${z}px) scale(${scale})`;
+      card.style.opacity = opacity;
+      card.style.zIndex = Math.round(scale * 100);
+    });
+  }
+
+  const prev = () => { currentIndex = (currentIndex - 1 + total) % total; positionCards(); };
+  const next = () => { currentIndex = (currentIndex + 1) % total; positionCards(); };
+
+  document.getElementById('left').onclick = prev;
+  document.getElementById('right').onclick = next;
+
+  // Mobile touch
+  let startX = 0, endX = 0;
+  container.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+  container.addEventListener('touchmove', e => endX = e.touches[0].clientX);
+  container.addEventListener('touchend', () => {
+    if(Math.abs(startX - endX) > 50) startX > endX ? next() : prev();
+  });
+
+  positionCards();
+  window.addEventListener('resize', () => positionCards());
+})();
+
+</script>

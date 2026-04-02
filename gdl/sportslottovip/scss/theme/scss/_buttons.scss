@@ -1,0 +1,308 @@
+  @use 'sass:color';
+@use 'variables';
+@use 'vendor/bootstrap/scss/bootstrap' as bs;
+  .btn-primary-custom {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+
+  padding: 0.8rem 2rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 3rem;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+
+  /* Use ticket background variables */
+  background: linear-gradient(
+    135deg,
+    var(--ticket-bg-1),
+    var(--ticket-bg-2)
+  );
+
+  /* Use ticket glow variables */
+  box-shadow: 0 0 15px var(--ticket-glow-outer),
+              0 5px 25px var(--ticket-glow-inner);
+
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.btn-primary-custom:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px var(--ticket-glow-outer),
+              0 8px 35px var(--ticket-glow-inner);
+}
+
+/* Play icon inside button */
+.btn-primary-custom .play-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  background: var(--ticket-text-glow);
+  color: var(--ticket-text-glow-2);
+  border-radius: 50%;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+///ABOUT US PAGE//
+  #ctaLoginBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 0.8rem 2rem;
+  border-radius: 1.25rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+
+  /* Hero-inspired gradient */
+  background: linear-gradient(
+    90deg,
+    var(--ticket-bg-1, #ED7B42),
+    var(--ticket-bg-2, #FFAA70)
+  );
+
+  color: var(--ticket-text-glow, #fff);
+  text-shadow: 0 0 6px var(--ticket-text-glow-2, #fff);
+
+  /* Glow effect */
+  box-shadow: 0 0 10px var(--ticket-glow-outer, #ED7B42),
+              inset 0 0 6px var(--ticket-glow-inner, #FFA066);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 14px var(--ticket-glow-outer, #ED7B42),
+                inset 0 0 8px var(--ticket-glow-inner, #FFA066);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  .play-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+}
+  /* Modal container */
+.login-modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, 0.6);
+
+  &.active {
+    display: flex;
+  }
+
+  .login-backdrop {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 1;
+  }
+
+  .login-container {
+    position: relative;
+    z-index: 2;
+    background: rgba(0,26,42,0.85); // theme bg
+    border-radius: 20px;
+    padding: 30px;
+    min-width: 320px;
+    max-width: 450px;
+    width: 90%;
+    box-shadow:
+      0 0 20px var(--prize-glow-1, #38d97d),
+      0 0 40px var(--prize-glow-2, #2dbd66) inset;
+    backdrop-filter: blur(8px);
+
+    .loading-spinner {
+      font-weight: 700;
+      color: var(--prize-text, #fff);
+      text-align: center;
+      font-size: 1.2rem;
+      padding: 40px 0;
+    }
+  }
+
+  .close-login-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #ff3d3d;
+    text-shadow: 0 0 6px #ff3d3d, 0 0 12px #ff7b42;
+    cursor: pointer;
+    z-index: 3;
+    transition: transform 0.2s;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
+
+/* Trigger button */
+.login-btn {
+  padding: 12px 24px;
+  font-weight: 700;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(45deg, var(--prize-glow-1, #38d97d), var(--prize-glow-2, #2dbd66));
+  color: var(--prize-text, #fff);
+  cursor: pointer;
+  box-shadow:
+    0 0 12px var(--prize-glow-1, #38d97d),
+    0 0 24px var(--prize-glow-2, #2dbd66) inset;
+  transition: transform 0.2s, box-shadow 0.2s;
+  &:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow:
+      0 0 20px var(--prize-glow-1, #38d97d),
+      0 0 36px var(--prize-glow-2, #2dbd66) inset;
+  }
+}
+
+/* Scroll progress bar (optional) */
+.scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,0.1);
+  z-index: 9999;
+
+  .scroll-progress {
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, var(--prize-glow-1, #38d97d), var(--prize-glow-2, #2dbd66));
+    transition: width 0.2s;
+  }
+}
+
+////FAQ button //////
+
+  #faq-clear {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary, #fff);
+  border: 1px solid var(--ticket-border, #555);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    color: var(--text-primary, #fff);
+  }
+
+  &:active {
+  }
+}
+
+//
+//// Map of glow colors linked to your variables
+//$btn-glow-colors: (
+//  "primary": variables.$primary-hover,
+//  "success": variables.$success-hover,
+//  "warning": variables.$neon-orange,
+//  "danger":  variables.$neon-rose
+//);
+//
+//// Adaptive circular button mixin with dark-glow style
+//@mixin btn-round {
+//  border-radius: 50% !important;
+//  padding: 0;
+//  display: inline-flex;
+//  align-items: center;
+//  justify-content: center;
+//  line-height: 1;
+//  position: relative;
+//
+//  transition: box-shadow 0.2s ease, transform 0.15s ease, color 0.15s ease, text-shadow 0.15s ease;
+//
+//  // Default size
+//  $py: bs.$btn-padding-y;
+//  $fs: bs.$btn-font-size;
+//  width: calc(#{$py * 2} + #{$fs * 1.5});
+//  height: calc(#{$py * 2} + #{$fs * 1.5});
+//
+//  // Small
+//  &.btn-sm {
+//    $py-sm: bs.$btn-padding-y-sm;
+//    $fs-sm: bs.$btn-font-size-sm;
+//    width: calc(#{$py-sm * 2} + #{$fs-sm * 1.5});
+//    height: calc(#{$py-sm * 2} + #{$fs-sm * 1.5});
+//  }
+//
+//  // Large
+//  &.btn-lg {
+//    $py-lg: bs.$btn-padding-y-lg;
+//    $fs-lg: bs.$btn-font-size-lg;
+//    width: calc(#{$py-lg * 2} + #{$fs-lg * 1.5});
+//    height: calc(#{$py-lg * 2} + #{$fs-lg * 1.5});
+//  }
+//}
+//
+//// Icon scaling
+//.btn-round > i,
+//.btn-round > svg {
+//  font-size: 1.25em;
+//}
+//
+//// Generate .btn-{color}.btn-round with dark insets, variable-based glow, and text glow on hover
+//@each $name, $color in bs.$theme-colors {
+//  $glow: map-get($btn-glow-colors, $name);
+//
+//  .btn-#{$name}.btn-round {
+//    @include btn-round;
+//
+//    @if $glow {
+//      // Darkened versions for inner shadows
+//      $inner-light: color.scale($glow, $lightness: -40%);
+//      $inner-dark: color.scale($glow, $lightness: -60%);
+//
+//      box-shadow:
+//        inset 0 2px 4px rgba($inner-light, 0.6),
+//        inset 0 -2px 4px rgba($inner-dark, 0.6),
+//        0 0 10px $glow;
+//
+//      &:hover {
+//        box-shadow:
+//          inset 0 2px 6px rgba($inner-light, 0.7),
+//          inset 0 -3px 6px rgba($inner-dark, 0.7),
+//          0 0 14px $glow;
+//
+//        transform: translateY(-1px);
+//        color: variables.$neon-yellow;       // text glow color
+//        text-shadow: 0 0 6px variables.$neon-yellow, 0 0 10px variables.$neon-yellow;
+//      }
+//
+//      &:active {
+//        box-shadow:
+//          inset 0 1px 3px rgba($inner-dark, 0.6),
+//          inset 0 -1px 2px rgba($inner-light, 0.4),
+//          0 0 6px $glow;
+//
+//        transform: translateY(0);
+//      }
+//    }
+//  }
+//}

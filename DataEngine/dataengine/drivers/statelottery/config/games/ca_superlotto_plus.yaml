@@ -1,0 +1,35 @@
+# California - SuperLotto Plus
+# Draws Wednesday and Saturday at 7:57 PM PT
+# Pick 5 numbers from 1-47, plus 1 Mega from 1-27
+
+state: CA
+name: "SuperLotto Plus"
+slug: ca-superlotto-plus
+url: "https://www.calottery.com/draw-games/superlotto-plus"
+game_type: bonus
+
+format:
+  main_count: 5
+  main_range: [1, 47]
+  bonus_count: 1
+  bonus_range: [1, 27]
+  is_positional: false
+
+schedule:
+  days: [wednesday, saturday]
+  times:
+    - time: "19:57"
+      label: null
+  timezone: "America/Los_Angeles"
+
+selectors:
+  # CA Lottery displays numbers in circles/list items
+  all_numbers: ".winning-numbers li, .past-results li, .draw-results .number"
+  draw_date: ".draw-date, .past-results-header"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%a/%b %d, %Y"
+  split_main_bonus: true
+
+active: true

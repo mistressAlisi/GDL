@@ -1,0 +1,35 @@
+# Arizona - The Pick
+# Draws Monday, Wednesday, and Saturday evenings
+# Pick 6 numbers from 1-44
+
+state: AZ
+name: "The Pick"
+slug: az-the-pick
+url: "https://www.arizonalottery.com/draw-games/the-pick/"
+game_type: pool
+
+format:
+  main_count: 6
+  main_range: [1, 44]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: false
+
+schedule:
+  days: [monday, wednesday, saturday]
+  times:
+    - time: "20:00"
+      label: null
+  timezone: "America/Phoenix"
+
+selectors:
+  # Arizona Lottery displays numbers in .draw class as space-separated text
+  all_numbers: ".draw"
+  draw_date: ".draw-row"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%m/%d/%Y"
+  split_main_bonus: false
+
+active: false

@@ -1,0 +1,16 @@
+<ul class="list-group">
+    {% for wager in ticket.wagers %}
+
+    <li class="list-group-item m-1 border-opacity-50 border-primary border-1">
+
+
+    {% include  "gdlfront/dashboard/tickets/match_name.html" with match=wager.0.match  wager=wager.0 %}
+
+    {% if wager.for_draw %}
+    <p class="text-muted">DRAW!</p>
+    {%  else %}
+    <p="text-muted">Chosen Winner: {{ wager.0.team_1.get_name }}</h6>
+    {% endif %}
+    </li>
+{% endfor %}
+</ul>

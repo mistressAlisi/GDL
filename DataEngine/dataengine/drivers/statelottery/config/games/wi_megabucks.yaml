@@ -1,0 +1,34 @@
+# Wisconsin - Megabucks
+# Draws Wednesday and Saturday at 9:00 PM CT
+# Pick 6 numbers from 1-49
+
+state: WI
+name: "Megabucks"
+slug: wi-megabucks
+url: "https://wilottery.com/games/megabucks"
+game_type: pool
+
+format:
+  main_count: 6
+  main_range: [1, 49]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: false
+
+schedule:
+  days: [wednesday, saturday]
+  times:
+    - time: "21:00"
+      label: null
+  timezone: "America/Chicago"
+
+selectors:
+  all_numbers: ".winning-numbers span, .ball, .number"
+  draw_date: ".draw-date, .date"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%m/%d/%Y"
+  split_main_bonus: false
+
+active: true

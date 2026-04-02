@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Statwise Sports | Contact Us</title>
+
+  <style>
+    :root{
+      --bg-dark:#03141c;
+      --panel:#051922;
+      --card-dark:#0b1f29;
+      --accent:#39dbc1;
+      --accent-dark:#2cb4a0;
+      --text:#dffbf7;
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+      font-family:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial;
+    }
+
+    body{
+      background:var(--bg-dark);
+      color:var(--text);
+      display:flex;
+      justify-content:center;
+      padding:40px 20px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* NAV ==================== */
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    /* LOGO =================== */
+    .logo {
+      text-decoration: none;
+      cursor: pointer;
+      color: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .logo:hover .logo-text { color: var(--accent); }
+    .logo:hover { transform: scale(1.04); transition: .18s ease; }
+
+    .logo svg{ width:34px;height:34px;margin-top:1px; }
+    .logo-text{
+      font-family:"Montserrat","Segoe UI",sans-serif;
+      font-weight:800;
+      font-size:20px;
+      letter-spacing:0.07em;
+      text-transform:uppercase;
+      color:var(--text);
+      padding-top:1px;
+    }
+
+    .nav-links a{
+      color:var(--accent);
+      text-decoration:none;
+      margin-left:28px;
+      font-weight:500;
+    }
+
+    /* HERO ==================== */
+    .hero{text-align:center;margin-top:56px;margin-bottom:20px;}
+    .hero h1{
+      color:var(--accent);
+      font-size:46px;
+      font-weight:800;
+      letter-spacing:1px;
+    }
+
+    /* BIO LAYOUT ============= */
+    .bio-wrapper{
+      display:flex;
+      gap:40px;
+      margin-top:40px;
+      align-items:flex-start;
+    }
+
+    .bio-image{
+      flex:0 0 380px;
+      max-width:380px;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 8px 20px rgba(0,0,0,0.5);
+    }
+
+    .bio-image img{
+      display:block;
+      width:100%;
+      height:auto;
+    }
+
+    .bio-content{
+      flex:1;
+      line-height:1.6;
+      font-size:17px;
+      padding-right:10px;
+    }
+
+    .bio-content h2{
+      color:var(--accent);
+      font-size:24px;
+      font-weight:800;
+      margin-bottom:12px;
+    }
+
+    .bio-content p{
+      opacity:0.95;
+      margin-bottom:18px;
+    }
+
+    @media(max-width:900px){
+      .bio-wrapper{
+        flex-direction:column;
+        align-items:center;
+      }
+      .bio-content{
+        padding-right:0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+{% include "header.html" %}
+
+    <!-- HERO -->
+    <section class="hero">
+      <h1>THANK YOU</h1>
+    </section>
+
+    <!-- BIO SECTION -->
+    <section class="bio-wrapper">
+        <p>Your message has been sent to us. We'll get back to you soon.</p>
+    </section>
+
+  {% include "footer.html" %}    
+  </div>
+</body>
+</html>

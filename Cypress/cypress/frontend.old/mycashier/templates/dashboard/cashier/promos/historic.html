@@ -1,0 +1,57 @@
+{% extends "lobby/dashboard/index.html" %}
+{% load mathfilters %}
+{% load django_bootstrap5 %}
+{% load humanize %}
+{% load i18n %}
+{% block MINERVE_PAGE_SUBTITLE %}: {% translate "Cashier: Past Promos and Bonuses" %}{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_BODY %}
+<div class="card w-100 h-100 m-2 p-2" data-bs-theme="{{ MINERVE_BODY_THEME }}">
+    <div class="card-header">
+        <h1> <i class="fa-duotone fa-solid fa-gifts"></i> &#160; {% translate "Cashier: Promos and Bonuses" %}</h1>
+    </div>
+    <div class="card-body text-center w-100">
+      <h4>{%  translate "Previously active Bonuses for your account:" %}</h4>
+    <div class="d-flex justify-content-center w-100">
+       <table class="table table-hover table-responsive table-dark table-striped">
+           <tr>
+               <th>{% translate "Name" %}</th>
+               <th>{% translate "Type" %}</th>
+               <th>{% translate "Created At" %}</th>
+               <th>{% translate "Completed At" %}</th>
+               <th>{% translate "Bonuses Deposited" %}</th>
+               <th>{% translate "Rollover Total" %}</th>
+
+           </tr>
+           {% for promo in promos %}
+               <tr>
+               {% if promo.deposit_bonus %}
+                   <td>{{ promo.deposit_bonus.name }}</td>
+                   <td>{% translate "Deposit Bonus" %}</td>
+               {% elif promo.activation_bonus %}
+                   <td>{{ promo.activation_bonus.name }}</td>
+                   <td>{% translate "Account Level Bonus" %}</td>
+               {% endif %}
+               <td>{{ promo.created_at }}</td>
+               <td>{{ promo.finished_at }}</td>
+
+               {% if promo.current_deposit < promo.min_deposit %}
+               <td>{{ promo.deposit_multiplier}}x</td>
+               {% else %}
+               <td>{{ promo.reward_deposit}}</td>
+               {% endif %}
+               <td>{{ promo.rollover}}</td>
+
+
+               </tr>
+           {% endfor %}
+       </table>
+    </div>
+    </div>
+</div>
+{% include "minerve/pages/dynamic_dashboard/loading_toast.html" %}
+<script type="module" src="/static/mycashier/js/Cashier/loader.js"></script>
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+{% include "lobby/dashboard/components/account_sidebar_header.html" %}
+{% endblock %}

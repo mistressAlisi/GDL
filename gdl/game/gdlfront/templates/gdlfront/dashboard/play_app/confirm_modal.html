@@ -1,0 +1,22 @@
+{% load i18n %}
+<div class="modal fade" id="confirm_ticket_modal" tabindex="-1" aria-labelledby="confirmTicketLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="confirmTicketLabel">{% translate "Ready to play!" %}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{% translate "Close" %}"></button>
+      </div>
+      <div class="modal-body">
+        {% translate "You've picked <span class='modal_counter'>0</span> tickets: Risking $<span class='modal_stake'>0</span> returns $<span id='modal_wins'>0</span>." %}
+
+          <h6> {% translate "Press the button below to confirm your ticket(s):" %}</h6>
+      </div>
+      <div class="modal-footer" style="justify-content: center;">
+          <div class="slider-container">
+
+              <button class="btn btn-bd-primary p-2 w-100" id="" onclick="gdlapp._handle_confirm(event);">{% translate "Confirm Tickets!" %}</button>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,552 @@
+{% extends "sportslottonet/base/page.html" %}
+
+{% load static %}
+{% block bootstrap5_title %} SPORTSLOTTO: What is Sportslotto? {% endblock %}
+{% block PAGE_BODY %}
+<style>
+    body {
+        background-color: var(--bs-secondary);
+        color: white;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    }
+
+    .gradient-text {
+        background: linear-gradient(to right, #667eea, #a855f7, #ec4899);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero-section {
+        position: relative;
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .hero-bg {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, var(--bs-secondary), rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.6));
+    }
+
+    .hero-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .badge-pill {
+        background: rgba(168, 85, 247, 0.2);
+        border: 1px solid rgba(168, 85, 247, 0.5);
+        border-radius: 50px;
+        padding: 12px 24px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .card-custom {
+        background: linear-gradient(135deg, #1a1a2e, #0f172a);
+        border: 2px solid rgba(168, 85, 247, 0.3);
+        border-radius: 24px;
+        transition: all 0.3s;
+    }
+
+    .card-custom:hover {
+        border-color: rgba(168, 85, 247, 0.6);
+    }
+
+    .icon-box {
+        width: 80px;
+        height: 80px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+    }
+
+    .icon-box-purple {
+        background: rgba(168, 85, 247, 0.2);
+        border: 2px solid rgba(168, 85, 247, 0.5);
+    }
+
+    .icon-box-pink {
+        background: rgba(236, 72, 153, 0.2);
+        border: 2px solid rgba(236, 72, 153, 0.5);
+    }
+
+    .icon-box-indigo {
+        background: rgba(102, 126, 234, 0.2);
+        border: 2px solid rgba(102, 126, 234, 0.5);
+    }
+
+    .icon-box-success {
+        background: rgba(16, 185, 129, 0.2);
+        border: 2px solid rgba(16, 185, 129, 0.5);
+    }
+
+    .btn-toggle {
+        padding: 16px 32px;
+        border-radius: 12px;
+        font-weight: 900;
+        font-size: 18px;
+        border: none;
+        background: transparent;
+        color: #9ca3af;
+        transition: all 0.3s;
+    }
+
+    .btn-toggle:hover {
+        color: white;
+    }
+
+    .btn-toggle.active {
+        background: linear-gradient(to right, #9333ea, #ec4899);
+        color: white;
+        box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+    }
+
+    .toggle-container {
+        background: #1a1a2e;
+        border: 2px solid rgba(168, 85, 247, 0.3);
+        border-radius: 16px;
+        padding: 8px;
+        display: inline-flex;
+        gap: 8px;
+    }
+
+    .feature-item {
+        display: flex;
+        gap: 16px;
+        align-items: start;
+    }
+
+    .check-icon {
+        width: 32px;
+        height: 32px;
+        background: rgba(16, 185, 129, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-top: 4px;
+    }
+
+    .x-icon {
+        width: 32px;
+        height: 32px;
+        background: rgba(107, 114, 128, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-top: 4px;
+    }
+
+    .btn-cta {
+        background: linear-gradient(to right, #9333ea, #ec4899);
+        box-shadow: 0 0 40px rgba(168, 85, 247, 0.4);
+        transition: transform 0.3s;
+    }
+
+    .btn-cta:hover {
+        transform: scale(1.05);
+    }
+
+    .divider {
+        height: 1px;
+        background: linear-gradient(to right, transparent, rgba(168, 85, 247, 0.3), transparent);
+    }
+
+    @media (max-width: 768px) {
+        .display-1 {
+            font-size: 3rem;
+        }
+
+        .btn-toggle {
+            padding: 12px 20px;
+            font-size: 16px;
+        }
+
+        .toggle-container {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .btn-toggle {
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="pt-5">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="position-absolute w-100 h-100">
+            <div class="hero-bg"></div>
+        </div>
+
+        <div class="container position-relative text-center py-5">
+
+
+            <h1 class="display-1 fw-bold mb-4">
+                What Is a<br>
+                <span class="gradient-text">Sportslotto?</span>
+            </h1>
+
+            <p class="lead fs-3 text-white px-3" style="max-width: 900px; margin: 0 auto;">
+                A sports-based game where outcomes are tied to <span class="text-purple fw-bold">real sporting events</span> rather than random number draws.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Definition Section -->
+    <section class="py-5" style="background: linear-gradient(to bottom, var(--bs-secondary), var(--bs-dark));">
+        <div class="container px-3">
+            <div class="card-custom p-4 p-md-5">
+                <div class="row g-4 mb-5">
+                    <div class="col-md-4 text-center">
+                        <div class="icon-box icon-box-purple mb-3">
+                            <svg width="40" height="40" fill="none" stroke="#a855f7" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+                            </svg>
+                        </div>
+                        <h3 class="h5 fw-bold mb-2">Real Sports Events</h3>
+                        <p class="text-white small">Based on actual game outcomes, not random numbers</p>
+                    </div>
+
+                    <div class="col-md-4 text-center">
+                        <div class="icon-box icon-box-pink mb-3">
+                            <svg width="40" height="40" fill="none" stroke="#ec4899" stroke-width="2" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10"/>
+                                <circle cx="12" cy="12" r="6"/>
+                                <circle cx="12" cy="12" r="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="h5 fw-bold mb-2">Structured System</h3>
+                        <p class="text-white small">Make selections within a clear framework</p>
+                    </div>
+
+                    <div class="col-md-4 text-center">
+                        <div class="icon-box icon-box-indigo mb-3">
+                            <svg width="40" height="40" fill="none" stroke="#667eea" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                            </svg>
+                        </div>
+                        <h3 class="h5 fw-bold mb-2">Sports + Chance</h3>
+                        <p class="text-white small">Knowledge meets lottery-style excitement</p>
+                    </div>
+                </div>
+
+                <div class="divider mb-5"></div>
+
+                <p class="fs-5 text-white text-center px-3" style="max-width: 900px; margin: 0 auto;">
+                    Instead of selecting traditional lottery numbers, participants make selections related to <span class="text-purple fw-bold">game results</span> or <span class="text-purple fw-bold">event outcomes</span> within a structured system. This creates an experience that combines sports knowledge with elements of chance.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Free to Play Section -->
+    <section class="py-5" style="background: var(--bs-dark);">
+        <div class="container px-3">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold mb-3">Accessible to Everyone</h2>
+                <p class="fs-5 text-white">No real-money wagering required</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card-custom p-4 h-100">
+                        <div class="d-flex align-items-center gap-3 mb-4">
+                            <div class="icon-box-success" style="width: 56px; height: 56px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <svg width="28" height="28" fill="none" stroke="#10b981" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                            <h3 class="h4 fw-bold mb-0">Points-Based</h3>
+                        </div>
+                        <p class="fs-6 text-white mb-3">
+                            Participation is based on <span class="fw-bold" style="color: var(--bs-success);">earning or using points</span> rather than placing monetary bets.
+                        </p>
+                        <div class="d-flex align-items-center gap-2" style="color: var(--bs-success);">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <span class="fw-bold">No Money Required</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card-custom p-4 h-100">
+                        <div class="d-flex align-items-center gap-3 mb-4">
+                            <div class="icon-box-purple" style="width: 56px; height: 56px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <svg width="28" height="28" fill="none" stroke="#a855f7" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                                </svg>
+                            </div>
+                            <h3 class="h4 fw-bold mb-0">Wider Audience</h3>
+                        </div>
+                        <p class="fs-6 text-white mb-3">
+                            Makes sports lotteries <span class="fw-bold text-purple">more accessible</span> to everyone, regardless of budget.
+                        </p>
+                        <div class="d-flex align-items-center gap-2 text-purple">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <span class="fw-bold">Everyone Can Play</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Toggle Section -->
+    <section class="py-5" style="background: linear-gradient(to bottom, var(--bs-dark), var(--bs-secondary));">
+        <div class="container px-3">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold mb-3">Sports Lottery vs Traditional Lottery</h2>
+                <p class="fs-5 text-white mb-4">Tap to compare the differences</p>
+
+                <div class="toggle-container">
+                    <button class="btn-toggle active" onclick="showTab('sports')">
+                        🏆 Sports Lottery
+                    </button>
+                    <button class="btn-toggle" onclick="showTab('traditional')">
+                        🎱 Traditional Lottery
+                    </button>
+                </div>
+            </div>
+
+            <div class="card-custom p-4 p-md-5" id="comparison-content">
+                <!-- Sports Lottery Tab (Default) -->
+                <div id="sports-tab">
+                    <div class="feature-item mb-4">
+                        <div class="check-icon">
+                            <svg width="20" height="20" fill="none" stroke="#10b981" stroke-width="2" viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="h5 fw-bold mb-2 text-center text-md-start">Based on Real Sports Events</h4>
+                            <p class="text-white">Results determined by official outcomes of actual sporting events, not random number generators.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item mb-4">
+                        <div class="check-icon">
+                            <svg width="20" height="20" fill="none" stroke="#10b981" stroke-width="2" viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="h5 fw-bold mb-2 text-center text-md-start">Sports Knowledge Matters</h4>
+                            <p class="text-white">Your understanding of teams, players, and leagues can inform your selections.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item mb-4">
+                        <div class="check-icon">
+                            <svg width="20" height="20" fill="none" stroke="#10b981" stroke-width="2" viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="h5 fw-bold mb-2 text-center text-md-start">Entertainment-Focused</h4>
+                            <p class="text-white">Interactive alternative focused on entertainment, simplicity, and responsible participation.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item mb-4">
+                        <div class="check-icon">
+                            <svg width="20" height="20" fill="none" stroke="#10b981" stroke-width="2" viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="h5 fw-bold mb-2 text-center text-md-start">Quick Results</h4>
+                            <p class="text-white">Results typically available within 24-48 hours based on game schedules.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="check-icon">
+                            <svg width="20" height="20" fill="none" stroke="#10b981" stroke-width="2" viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="h5 fw-bold mb-2 text-center text-md-start">Points or Free to Play</h4>
+                            <p class="text-white">Many models don't require real-money wagering, making it accessible to everyone.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Traditional Lottery Tab (Hidden by default) -->
+                <div id="traditional-tab" style="display: none;">
+                    <div class="feature-item mb-4">
+                        <div class="x-icon">
+                            <svg width="20" height="20" fill="none" stroke="#6b7280" stroke-width="2" viewBox="0 0 24 24">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="h5 fw-bold mb-2 text-center text-md-start">Random Number Selection</h4>
+                            <p class="text-white">Outcomes based entirely on random number draws using mechanical or digital systems.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item mb-4">
+                        <div class="x-icon">
+                            <svg width="20" height="20" fill="none" stroke="#6b7280" stroke-width="2" viewBox="0 0 24 24">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="h5 fw-bold mb-2 text-center text-md-start">Pure Luck Only</h4>
+                            <p class="text-white">No skill, knowledge, or strategy can influence the outcome — it's entirely chance.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item mb-4">
+                        <div class="x-icon">
+                            <svg width="20" height="20" fill="none" stroke="#6b7280" stroke-width="2" viewBox="0 0 24 24">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="h5 fw-bold mb-2 text-center text-md-start">Fixed Draw Schedules</h4>
+                            <p class="text-white">Results only available at specific draw times (often weekly or bi-weekly).</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item mb-4">
+                        <div class="x-icon">
+                            <svg width="20" height="20" fill="none" stroke="#6b7280" stroke-width="2" viewBox="0 0 24 24">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="h5 fw-bold mb-2 text-center text-md-start">Less Interactive</h4>
+                            <p class="text-white">Simply pick numbers and wait — no connection to real-world events.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="x-icon">
+                            <svg width="20" height="20" fill="none" stroke="#6b7280" stroke-width="2" viewBox="0 0 24 24">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="h5 fw-bold mb-2 text-center text-md-start">Usually Costs Money</h4>
+                            <p class="text-white">Traditional lotteries almost always require purchasing tickets with real money.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Principles Section -->
+    <section class="py-5" style="background: var(--bs-secondary);">
+        <div class="container px-3">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold mb-3">Core Principles</h2>
+                <p class="fs-5 text-white">What makes sports lottery unique</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card-custom p-4 h-100">
+                        <svg width="48" height="48" fill="none" stroke="#a855f7" stroke-width="2" viewBox="0 0 24 24" class="mb-3">
+                            <circle cx="12" cy="8" r="7"/>
+                            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+                        </svg>
+                        <h3 class="h4 fw-bold mb-3">Entertainment</h3>
+                        <p class="text-white">Designed to be fun and engaging, connecting you to the sports you love.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card-custom p-4 h-100">
+                        <svg width="48" height="48" fill="none" stroke="#ec4899" stroke-width="2" viewBox="0 0 24 24" class="mb-3">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                        <h3 class="h4 fw-bold mb-3">Simplicity</h3>
+                        <p class="text-white">Easy to understand and participate — no complex strategies required.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card-custom p-4 h-100">
+                        <svg width="48" height="48" fill="none" stroke="#10b981" stroke-width="2" viewBox="0 0 24 24" class="mb-3">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                        <h3 class="h4 fw-bold mb-3">Responsibility</h3>
+                        <p class="text-white">Focused on responsible participation with points-based or free models.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-5" style="background: linear-gradient(to top, var(--bs-dark), var(--bs-secondary));">
+        <div class="container text-center px-3">
+            <h2 class="display-5 fw-bold mb-4">Ready to Experience It?</h2>
+            <p class="fs-5 text-white mb-4">See how sports lottery combines real games with lottery-level excitement</p>
+            <a href="#" class="btn btn-lg btn-cta btn-play text-white fw-bold px-5 py-3" style="border-radius: 12px; font-size: 20px;">
+                EXPLORE NOW
+            </a>
+        </div>
+    </section>
+</div>
+
+<script>
+    function showTab(tab) {
+        const sportsTab = document.getElementById('sports-tab');
+        const traditionalTab = document.getElementById('traditional-tab');
+        const buttons = document.querySelectorAll('.btn-toggle');
+
+        if (tab === 'sports') {
+            sportsTab.style.display = 'block';
+            traditionalTab.style.display = 'none';
+            buttons[0].classList.add('active');
+            buttons[1].classList.remove('active');
+        } else {
+            sportsTab.style.display = 'none';
+            traditionalTab.style.display = 'block';
+            buttons[0].classList.remove('active');
+            buttons[1].classList.add('active');
+        }
+    }
+
+    // Play Now login functionality
+    document.addEventListener("DOMContentLoaded", () => {
+        const playButton = document.querySelector(".btn-play");
+        const loginTrigger = document.getElementById("loginTrigger");
+
+        if (playButton && loginTrigger) {
+            playButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                loginTrigger.click();
+            });
+        }
+    });
+</script>
+{% endblock %}

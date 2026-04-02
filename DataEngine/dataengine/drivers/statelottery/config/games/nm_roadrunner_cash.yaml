@@ -1,0 +1,34 @@
+# New Mexico - Roadrunner Cash
+# Draws daily at 9:30 PM MT
+# Pick 5 numbers from 1-37
+
+state: NM
+name: "Roadrunner Cash"
+slug: nm-roadrunner-cash
+url: "https://www.nmlottery.com/games/roadrunner-cash/"
+game_type: pool
+
+format:
+  main_count: 5
+  main_range: [1, 37]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: false
+
+schedule:
+  days: [daily]
+  times:
+    - time: "21:30"
+      label: null
+  timezone: "America/Denver"
+
+selectors:
+  all_numbers: ".winning-numbers span, .ball, .number"
+  draw_date: ".draw-date, .date"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%m/%d/%Y"
+  split_main_bonus: false
+
+active: false

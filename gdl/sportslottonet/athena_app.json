@@ -1,0 +1,16 @@
+{
+    "name":"SportsLottoNet",
+    "version":"1.0",
+    "studio":"Solstic Systems",
+    "studio_slug":"solstic",
+    "slug":"sportslottonet",
+    "backend":false,
+    "frontend":"applications.sportslottonet",
+    "agent": false,
+    "management": false,
+    "grader":false,
+    "card_image":"data/info/gdl_card1.png",
+    "card_logo":"data/info/gdl_card_logo.png",
+    "url_root": "sln/",
+    "uses_channels": false
+}

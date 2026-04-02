@@ -1,0 +1,35 @@
+# Florida - Lotto
+# Draws Wednesday and Saturday at 11:15 PM ET
+# Pick 6 numbers from 1-53
+
+state: FL
+name: "Florida Lotto"
+slug: fl-lotto
+url: "https://floridalottery.com/games/draw-games/florida-lotto"
+game_type: pool
+
+format:
+  main_count: 6
+  main_range: [1, 53]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: false
+
+schedule:
+  days: [wednesday, saturday]
+  times:
+    - time: "23:15"
+      label: null
+  timezone: "America/New_York"
+
+selectors:
+  # Florida Lottery uses dynamic content
+  all_numbers: ".winning-numbers span, .ball, .number, .draw-result span"
+  draw_date: ".draw-date, .date"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%m/%d/%Y"
+  split_main_bonus: false
+
+active: true

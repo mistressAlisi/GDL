@@ -1,0 +1,145 @@
+{#{% extends "lobby/dashboard/index.html" %}#}
+{% extends "minerve/pages/simple_dashboard/index.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block DYNAMIC_DASHBOARD_BODY %}
+
+<div class="position-absolute top-50 start-50 translate-middle text-white" id="gdl_loading_message">
+<h1 class="align-middle"><i class="fa-duotone fa-solid fa-spinner-third fa-spin mx-1"></i>{%  translate "Generating new Tickets..." %}</h1>
+</div>
+<div class="position-absolute top-50 start-50 translate-middle text-white" id="gdl_empty_message" style="z-index: 100;">
+<h2 class="align-middle"><i class="fa-duotone fa-solid fa-square-0 mx-1"></i>{%  translate "Oops! No tickets were generated with current settings!" %}</h2>
+<h3 class="align-middle"><i class="fa-duotone fa-solid fa-lightbulb-exclamation-on mx-1"></i> {% translate "Click below to change your settings and try again!" %}</h3>
+<button id="gdl_settings_ntk" class="btn btn-primary  p-2 m-2 me-4 btn-lg" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{% translate "Change Ticket settings" %}" data-bs-original-title="Settings"><i class="fa-duotone fa-solid fa-gear"></i> {% translate "Settings" %}</button>
+</div>
+<br/>
+
+
+<br/>
+
+<div class="w-100 h-100 row gx-0 ps-2 pe-0 me-0" id="gdl_play_area">
+
+
+</div>
+<div id="gdl_setup_card" class="card h-70 m-2 p-2" data-bs-theme="{{ MINERVE_BODY_THEME }}">
+
+    <div class="card-header">
+        <h1> <i class="fa-duotone fa-solid fa-gear"></i> &#160; {% translate "Ch!" %}</h1>
+        <h6 class="d-none d-lg-block" > {% translate "Your dream play starts here! Pick how much to risk, how much to win, and what events to include!" %}</h6>
+    </div>
+    <div class="card-body text-center w-100" id="basic_settings">
+        <form onsubmit="gdlapp.start(event); return false;" method="POST" action="#" data-post-url="generate/tickets" id="parameter_form" data-ruleset="'{{ ruleset }}'">
+        {% csrf_token %}
+        <input type="hidden" name="ruleset" id="ruleset" value="{{ ruleset }}" />
+        {% crispy setup_form %}
+
+        </form>
+    </div>
+    <div class="card-body text-left w-100" id="advanced_settings">
+        <form onsubmit="gdlapp.start(event); return false;" method="POST" action="#" data-post-url="generate/tickets" id="adv_parameter_form" data-ruleset="'{{ ruleset }}'">
+        {% csrf_token %}
+        <input type="hidden" name="ruleset" id="ruleset" value="{{ ruleset }}" />
+        <h6 class="d-none d-lg-block">{% translate "Basic Settings:" %}</h6>
+        <div class="row"> <div class="col row"> <div id="div_id_stake" class="mb-3"> <label for="id_stake" class="form-label requiredField">
+        {% translate "Risk:" %}<span class="asteriskField">*</span> </label> <input type="number" name="stake" value="1" min="1" max="1000" max_value="5" class="numberinput form-control" required="" id="id_stake"> </div> </div>
+        <div class="col row"> <div id="div_id_events" class="mb-3"> <label for="id_events" class="form-label requiredField">
+        {% translate "Events:" %}<span class="asteriskField">*</span> </label> <input type="number" name="events" value="7" min="1" max="20" class="numberinput form-control" required="" id="id_events"> </div> </div>
+        <div class="col row"> <div id="div_id_minwin" class="mb-3"> <label for="id_minwin" class="form-label requiredField">
+        {% translate "Win:" %}<span class="asteriskField">*</span> </label> <input type="number" name="minwin" value="5000" min="100" max="100000" class="numberinput form-control" required="" id="id_minwin"> </div> </div>
+        <div class="col row"> <div id="div_id_event_cutoff" class="mb-3"> <label for="id_event_cutoff" class="form-label requiredField">
+        {% translate "Time Frame:" %}<span class="asteriskField">*</span> </label> <select name="event_cutoff" class="select form-select" id="id_event_cutoff"><option value="36">{% translate "36 Hours" %}</option> <option value="24">{% translate "24 Hours" %}</option> <option value="12">{% translate "12 Hours" %}</option> <option value="6">{% translate "6 Hours" %}</option> <option value="3">{% translate "3 Hours" %}</option>
+
+        </select> </div> </div>
+
+
+        </div>
+        <hr class="border-2 border-opacity-50 d-none d-lg-block"/>
+        <h6  class="d-none d-lg-block">{% translate "Including Sports:" %}</h6>
+
+        {% for sport in filter_sports %}
+
+        <div class="form-check form-check-inline">
+          <input class="form-check-input sport-entry" type="checkbox" value="{{ sport.uuid }}" id="sport_{{ forloop.counter }}" name="sport_{{ forloop.counter }}" />
+          <label class="form-check-label" for="id_sport_{{ forloop.counter }}">
+            {% if sport.sport %}
+              {{ sport.sport.title }}
+            {% else %}
+              {{ sport.group.name }}
+            {% endif %}
+          </label>
+        </div>
+
+        {% endfor %}
+        <br/>
+        <button type="submit" class="btn btn-outline-success w-50 pt-2 pb-2" onclick='$(".sport-entry:not(:checked)").click();'>{% translate "Include All Sports" %}</button>
+        <br/>
+        <br/>
+        <input type="hidden" name="count" value="15" max="30"  id="id_count">
+        <button type="submit" class="btn btn-primary w-100 pt-2 pb-2" >{% translate "Get Tickets!" %}</button>
+        <br/><br/>
+        <button type="button" class="btn btn-outline-primary w-100 pt-2 pb-2" onclick="gdlapp._reset_mode();">{% translate "Back..." %}</button>
+        </form>
+
+    </div>
+    <div id="quick-picks" class="card-body text-left w-100">
+        <h3><i class="fa-duotone fa-solid fa-stars pe-1"></i>{% translate "Quick Picks!" %}</h3>
+        <p>{% translate "Quick picks are AI-chosen tickets on 4 events to win roughly 25 for 1 risked." %} </p>
+           <form onsubmit="gdlapp.start(event); return false;" method="POST" action="#" data-post-url="generate/quickpick" id="quick_pick_form" data-ruleset="'{{ ruleset }}'">
+        {% csrf_token %}
+        <input type="hidden" name="ruleset" id="ruleset" value="{{ ruleset }}" />
+        <input type="hidden" name="minwin" id="minwin" value="25" />
+        <input type="hidden" name="event_cutoff" id="event_cutoff" value="36" />
+        <input type="hidden" name="events" id="events" value="4" />
+        <input type="hidden" name="stake" id="stake" value="1" />
+        <div class="row"> <div class="col pt-3">
+            <h6>{% translate "Ticket Count:" %}</h6>
+        </div>
+        <div class="col">
+         <input type="number" name="count" value="5" min="5" max="100" class="numberinput form-control w-50" required="" id="id_count">
+        </div>
+        <div class="row"><div class="col pt-3">
+                <button type="submit" class="btn btn-primary w-100 pt-2 pb-2" >{% translate "Get Quick Picks!" %}</button>
+        </div></div>
+        <div class="row"><div class="col pt-3">
+                <button type="button" class="btn btn-outline-primary w-100 pt-2 pb-2" onclick="gdlapp._reset_mode();">{% translate "Back..." %}</button>
+        </div></div>
+        </div>
+       </form>
+
+
+    </div>
+</div>
+
+
+
+{% endblock %}
+{% block MINERVE_PAGE_FOOTER %}
+<div id="__modal_area"></div>
+<script type="text/javascript">
+$(".sport-entry:not(:checked)").click();
+</script>
+
+{% include "minerve/pages/dynamic_dashboard/loading_toast.html" %}
+
+{% include "gdlfront/dashboard/play_app/offcanvas_cart.html" %}
+{% include "gdlfront/dashboard/play_app/bet_form.html" %}
+    <script src="/static/minerve/js/components/dynamic_dashboard/helper.js"></script>
+    <script type="module" src="/static/gdlfront/js/loader.js"/>
+    {% include "lobby/dashboard/account/login/signup_modal.html" %}
+{#    <link rel="stylesheet" href="/static/frontend/lobby/themes/supernova/css/tickets.css"/>#}
+    <link rel="stylesheet" href="/static/frontend/lobby/themes/supernova/css/ticketmodals.css"/>
+    <link rel="stylesheet" href="/static/frontend/lobby/themes/supernova/css/minerve_theme.css"/>
+{% endblock %}
+{% block MINERVE_NAV_PAGE_NAME %}
+    <span class="d-none d-lg-block">
+    <span class="navbar-brand"><i class="fa-duotone fa-solid fa-dice" aria-hidden="true"></i> <span class="text-decoration-underline">{% translate "Play" %} Game Day Lotto!</span></span>
+    </span>
+    <span class="d-sm-inline d-md-inline d-lg-none d-xl-none d-xxl-none">
+        <ul class="nav">{% include "lobby/dashboard/account_widget_lis.html" %}</ul>
+    </span>
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY_FOOTER %}
+
+{% include "gdlfront/dashboard/play_app/play_controls.html" %}
+{% endblock %}

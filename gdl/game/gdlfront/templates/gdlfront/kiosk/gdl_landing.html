@@ -1,0 +1,88 @@
+{% extends "minerve/base/page.html" %}
+{% load humanize %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% block MINERVE_PAGE_BODY %}
+<div class="card w-100 h-70 m-2 p-2" data-bs-theme="{{ MINERVE_BODY_THEME }}">
+
+    <div class="card-header">
+        <div class="container-flex">
+        <div class="row">
+            <div class="col">
+                     <img src="https://solstic.ai/web/image/website/1/logo/Solstic%20Systems?unique=fcc5fdb" alt="Kiosk Logo" style="max-width: 150px;">
+            </div>
+        <div class="col-9">
+        <div class="container-fluid  w-100">
+        <div class="row">
+        <h4 class="">{% translate "Welcome back;" %} John Player! </h4>
+        <div class="col h3">Your level is: <span id="curr_level" class="text-success-emphasis">Platinum.</span></div>
+        </div>
+        <div class="row">
+        <div class="col h3">Your current points balance is: <span id="curr_balance_pts" class="text-success-emphasis">{{available_bonus|floatformat:1|intcomma:3}}</span>.</div>
+        </div>
+        <div class="row">
+        <div class="col h3">Your current cash balance is: $<span id="curr_balance_cash" class="text-success-emphasis">{{ available_balance|floatformat:1|intcomma:3 }}</span>.</div>
+        </div>
+        </div>
+
+        </div>
+        <div class="col">
+            <button onclick="location.href='/kiosk/logout'" class="btn btn-dark btn-outline-warning rounded-2 m-3 p-3" title="Logout" >
+            <i  class="fa-duotone fa-solid fa-person-to-door fa-3x"></i>
+            <h5  class="my-1">Logout</h5>
+        </button>
+        </div>
+        </div>
+
+        </div>
+
+    </div>
+
+    <div class="card-body text-left w-100" id="login_area">
+    <h2 class="text-info"><i class="fa-duotone fa-solid fa-stars"></i>Game Day Lotto:</h2>
+    <div id="games_button_area" class="play_games">
+    <button class="btn btn-dark btn-outline-primary rounded-2 m-3 p-3" title="Play GDL!"  onclick="location.href='/game/play';">
+    <i class="fa-duotone fa-solid fa-tickets-simple fa-3x"></i>
+    <h5  class="my-1">Play NOW: Get Tickets!</h5>
+    </button>
+    <button class="btn btn-dark btn-outline-primary rounded-2 m-3 p-3" title="Open tickets" onclick="location.href='/game/active/table';">
+    <i class="fa-duotone fa-solid fa-table fa-3x"></i>
+    <h5  class="my-1">Open Tickets</h5>
+    </button>
+    <button class="btn btn-dark btn-outline-primary rounded-2 m-3 p-3" title="Graded Tickets" onclick="location.href='/game/previous/table';">
+    <i class="fa-duotone fa-solid fa-hourglass-half fa-3x"></i>
+    <h5  class="my-1">Graded Tickets</h5>
+    </button>
+    </div>
+    <hr class="border-2 border-opacity-50 border-success"/>
+    <button onclick="location.href='/kiosk';" class="btn btn-outline-warning">Back to Main Menu</button>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block MINERVE_NAV_LOGIN_AREA %}
+    <div id="kiosk_balance_area">
+        <i class="fa-solid fa-user pe-2"></i><span id="bal_acctnum">{{ account.acctnum }}</span>
+        |
+        <i class="fa-duotone fa-solid fa-money-bill-wave pe-2"></i><span id="bal_amount">${{ available_balance|floatformat:1|intcomma:3 }}</span>
+        |
+        <i class="fa-duotone fa-solid fa-gift-card pe-2"></i><span id="bal_bonus">{{ available_bonus|floatformat:1|intcomma:3 }}</span>
+        |
+        <button id="kiosk_reset" onclick="location.href='/kiosk';" class="btn btn-outline-warning">Main Menu</button>
+    </div>
+{% endblock %}
+
+
+{% block MINERVE_COLOUR_MODE_SWITCH %}
+{% endblock %}
+
+{% block bootstrap5_title %}
+    {{ vdomain.website_name }}: GameDayLotto Main Menu
+{% endblock %}
+
+{% block MINERVE_PAGE_FOOTER %}
+{% include "kiosk/timeout_modal.html" %}
+{% include "minerve/pages/dynamic_dashboard/loading_toast.html" %}
+<script type="module" src="/static/kiosk/js/Kiosk/loader-timeout.js"></script>
+{% endblock %}

@@ -1,0 +1,308 @@
+ body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0614, #1a0a2e, #0f0a1e);
+            color: white;
+        }
+
+        .gradient-btn {
+            background: linear-gradient(to right, #10b981, #06b6d4, #3b82f6);
+            color: white;
+        }
+
+        .gradient-icon {
+            background: linear-gradient(to bottom right, #06b6d4, #8b5cf6);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+            border-radius: 1rem;
+        }
+
+        .sticky-top-blur {
+            backdrop-filter: blur(10px);
+            background-color: rgba(30, 30, 50, 0.8);
+            border-bottom: 1px solid rgba(128, 0, 128, 0.2);
+        }
+
+        .sidebar-card {
+            background-color: rgba(30, 30, 50, 0.5);
+            border: 1px solid rgba(128, 0, 128, 0.2);
+            border-radius: 1rem;
+            padding: 1rem;
+        }
+
+        .tips-card {
+            background: linear-gradient(to bottom right, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1));
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 2rem;
+            padding: 1rem;
+        }
+
+        .recent-activity {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .balance-widget {
+            background: linear-gradient(to bottom right, rgba(15, 10, 30, 0.9), rgba(128, 0, 128, 0.5));
+            border: 1px solid rgba(128, 0, 128, 0.2);
+            border-radius: 2rem;
+            padding: 1rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .balance-widget .card-item {
+            background-color: rgba(30, 30, 50, 0.5);
+            border: 1px solid rgba(128, 128, 128, 0.3);
+            border-radius: 1rem;
+            padding: 0.75rem;
+        }
+
+        .balance-widget .card-item .small {
+            color: #fff !important;
+            text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+        }
+
+        .deposit-banner {
+            position: relative;
+            overflow: hidden;
+            border-radius: 2rem;
+            border: 1px solid rgba(128, 0, 128, 0.3);
+            background: linear-gradient(to right, rgba(64, 0, 128, 0.8), rgba(138, 43, 226, 0.6), rgba(0, 128, 128, 0.8));
+            padding: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .deposit-banner .floating-coin {
+            position: absolute;
+            animation: bounce 2s infinite alternate;
+            pointer-events: none;
+        }
+
+        .deposit-banner .pulse-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(50px);
+            animation: pulse 3s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes bounce {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.3;
+            }
+        }
+
+        .quick-deposit-btn.active {
+            background: linear-gradient(to right, #06b6d4, #8b5cf6);
+            color: white;
+            box-shadow: 0 0.5rem 1rem rgba(6, 182, 212, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* visually disable gradient buttons while still using semantic disabled attribute */
+        button.gradient-btn:disabled,
+        button.gradient-btn[aria-disabled="true"] {
+            opacity: 0.45;
+            cursor: not-allowed;
+            pointer-events: none;
+            filter: grayscale(0.05);
+            box-shadow: none;
+        }
+
+        /* --- Topbar button universal styling --- */
+        .topbar-btn {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 0.6rem 0.9rem; /* larger click target */
+            border-radius: 1.25rem; /* MUCH larger corners */
+            font-size: 1.1rem; /* slightly bigger emoji */
+            transition: all 0.18s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .topbar-btn:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.45);
+            transform: scale(1.04);
+            box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.25);
+        }
+
+        /* Profile glass pill */
+        .topbar-profile {
+            border-radius: 2rem !important; /* more pill shape */
+            background: linear-gradient(
+                    to bottom right,
+                    rgba(30, 30, 50, 0.75),
+                    rgba(80, 0, 120, 0.55)
+            );
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(128, 0, 128, 0.35);
+            box-shadow: 0 0.75rem 1.25rem rgba(0, 0, 0, 0.35);
+        }
+
+        /* ===== Crypto selector: visual parity with main payment buttons ===== */
+
+        /* Container for the small crypto buttons — ensure enough spacing */
+        #cryptoOptions {
+            padding: 0.5rem;
+        }
+
+        /* Make crypto buttons match main buttons in height, typography and alignment */
+        .crypto-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 120px; /* responsive minimum width */
+            padding: 0.9rem 0.9rem; /* match main buttons' vertical rhythm */
+            border-radius: 1rem; /* match main card radius */
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+        }
+
+        /* small subtitle inside crypto button */
+        .crypto-btn small {
+            display: block;
+            font-weight: 500;
+            font-size: 0.72rem;
+            color: rgba(255, 255, 255, 0.55);
+            margin-top: 2px;
+        }
+
+        /* hover: slight lift and brighten */
+        .crypto-btn:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.035);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+        }
+
+        /* active selection — mirror visual style of selected payment-method */
+        .crypto-btn.active {
+            background: linear-gradient(to right, rgba(6, 182, 212, 0.12), rgba(139, 92, 246, 0.12));
+            border: 1px solid rgba(6, 182, 212, 0.28);
+            box-shadow: 0 10px 24px rgba(6, 182, 212, 0.06), inset 0 0 8px rgba(255, 255, 255, 0.02);
+            color: #eafcff;
+            transform: none;
+        }
+
+        /* keyboard accessibility: clear focus ring */
+        .crypto-btn:focus {
+            outline: 3px solid rgba(6, 182, 212, 0.16);
+            outline-offset: 3px;
+            box-shadow: 0 8px 20px rgba(6, 182, 212, 0.06);
+        }
+
+        /* Make the small symbol (BTC/ETH) stand out */
+        .crypto-btn .symbol {
+            font-weight: 800;
+            font-size: 1rem;
+            color: #f8fafc; /* near white for contrast */
+            min-width: 42px;
+            text-align: center;
+        }
+
+        /* If you want crypto buttons to wrap nicely on small widths */
+        #cryptoOptionsButtons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        /* General submenu button style (matches crypto style) */
+        .wallet-btn {
+            background: rgba(60, 60, 90, 0.35);
+            border: 1px solid rgba(128, 0, 128, 0.25);
+            border-radius: 1rem;
+            font-weight: 600;
+            color: #eee;
+            transition: all 0.15s ease-in-out;
+        }
+
+        /* Active state for wallet buttons (same visual behavior as crypto) */
+        .wallet-btn.active {
+            background: linear-gradient(to right, rgba(6, 182, 212, 0.45), rgba(139, 92, 246, 0.45));
+            border-color: rgba(6, 182, 212, 0.75);
+            box-shadow: 0 0 12px rgba(6, 182, 212, 0.35);
+            transform: scale(1.02);
+        }
+
+        /* Hover enhancement */
+        .wallet-btn:hover {
+            background: rgba(100, 100, 140, 0.55);
+            cursor: pointer;
+        }
+
+        /* ===== Profile avatar inside gradient icon ===== */
+        .profile-avatar-cashier {
+            width: 2.25rem;
+            height: 2.25rem;
+            padding: 2px; /* creates visible gradient ring */
+        }
+
+        .profile-avatar-cashier img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover; /* crop without distortion */
+            border-radius: 50%; /* circular crop */
+            background: #fff; /* prevents transparency artifacts */
+        }
+
+        .bonus-claimed {
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .bonus-claimed:hover {
+            filter: none;
+        }
+
+        .alert-item.unread {
+            background-color: rgba(59, 130, 246, 0.08);
+        }
+
+        .alert-item {
+            border-radius: 0.75rem;
+            padding: 0.75rem;
+        }
+
+ /* Shared selected state for payment submenus */
+ .payment-sub-option.active {
+     background: linear-gradient(135deg, #7c4dff, #5e35b1);
+     border-color: #7c4dff;
+     color: #ffffff;
+     box-shadow: 0 0 0 2px rgba(124, 77, 255, 0.35);
+ }
+
+ /* Make label text pop */
+ .payment-sub-option.active small {
+     color: #e0d7ff !important;
+ }
+
+ /* Hover clarity */
+ .payment-sub-option:hover {
+     background-color: rgba(124, 77, 255, 0.15);
+ }

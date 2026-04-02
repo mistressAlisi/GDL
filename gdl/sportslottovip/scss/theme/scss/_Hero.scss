@@ -1,0 +1,169 @@
+// ------------------------------
+// HERO V & GLASS TAGS RESPONSIVENESS
+// ------------------------------
+.hero-section {
+  text-align: center;
+  position: relative;
+  color: var(--bs-info) !important;
+  padding: 2rem 1rem;
+
+  @media (max-width: 768px) {
+    padding: 1.5rem 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem 0.5rem;
+  }
+}
+
+// HERO TITLES
+.hero-small {
+  font-size: 2rem;
+
+  @media (max-width: 768px) { font-size: 1.6rem; }
+  @media (max-width: 480px) { font-size: 1.3rem; }
+}
+
+.hero-title {
+  font-size: 3rem;
+
+  @media (max-width: 768px) { font-size: 2.2rem; }
+  @media (max-width: 480px) { font-size: 1.8rem; }
+}
+
+.hero-subline2 {
+  font-size: 1.5rem;
+
+  @media (max-width: 768px) { font-size: 1.2rem; }
+  @media (max-width: 480px) { font-size: 1rem; }
+}
+
+.promo-line {
+  font-size: 1.25rem;
+
+  @media (max-width: 768px) { font-size: 1.05rem; }
+  @media (max-width: 480px) { font-size: 0.9rem; }
+}
+
+.play-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.4rem;
+
+  border-radius: 999px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* 📱 Tablet & down — force separation */
+@media (max-width: 768px) {
+  #learnMoreBtn.play-icon,
+  #startNowTrigger.play-icon {
+    margin: 0.75rem 0.75rem; /* vertical + horizontal buffer */
+  }
+}
+
+/* 📱 Phones — NEVER TOUCH */
+@media (max-width: 576px) {
+  #learnMoreBtn.play-icon,
+  #startNowTrigger.play-icon {
+    display: block;          /* kills inline squeezing */
+    width: 100%;
+    max-width: 320px;        /* keeps them from looking huge */
+    margin: 0.75rem auto;    /* centers + spacing */
+    justify-content: center;
+  }
+}
+
+
+// TAG LIST
+.tag-list {
+  gap: 12px;
+  margin-top: 25px;
+  padding-bottom: 25px;
+
+  @media (max-width: 768px) {
+    gap: 10px;
+    margin-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 8px;
+    margin-top: 15px;
+    padding-bottom: 15px;
+  }
+}
+.tag {
+  padding: 0.45rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+
+  color: rgba(255, 255, 255, 0.95);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.18),
+      rgba(255, 255, 255, 0.05)
+    );
+
+  border-radius: 999px;
+
+  border: 1px solid rgba(255, 255, 255, 0.28);
+
+  backdrop-filter: blur(10px) saturate(130%);
+  -webkit-backdrop-filter: blur(10px) saturate(130%);
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+
+  transition: all 0.25s ease;
+}
+
+.tag:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 12px rgba(120, 255, 200, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.tag {
+  font-size: 1.5rem;
+  padding: 12px 24px;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+}
+
+// THEME CARDS
+.theme-card {
+  padding: 1.5rem;
+
+  @media (max-width: 768px) {
+    padding: 1.2rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+  }
+}
+
+// PARAGRAPHS (inside hero or card)
+p {
+  font-size: 1.2rem !important;
+
+  @media (max-width: 768px) { font-size: 1rem !important; }
+  @media (max-width: 480px) { font-size: 0.9rem !important; }
+}

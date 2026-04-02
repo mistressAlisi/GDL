@@ -1,0 +1,34 @@
+# Kansas - Super Kansas Cash
+# Draws Monday, Wednesday, and Saturday at 9:10 PM CT
+# Pick 5 numbers from 1-32 plus 1 Cash Ball from 1-25
+
+state: KS
+name: "Super Kansas Cash"
+slug: ks-super-kansas-cash
+url: "https://www.kslottery.com/kansas-cash/"
+game_type: bonus
+
+format:
+  main_count: 5
+  main_range: [1, 32]
+  bonus_count: 1
+  bonus_range: [1, 25]
+  is_positional: false
+
+schedule:
+  days: [monday, wednesday, saturday]
+  times:
+    - time: "21:10"
+      label: null
+  timezone: "America/Chicago"
+
+selectors:
+  all_numbers: ".winning-numbers span, .ball, .number"
+  draw_date: ".draw-date, .date"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%m/%d/%Y"
+  split_main_bonus: true
+
+active: true

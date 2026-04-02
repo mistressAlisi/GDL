@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "animate.css": "^4.1.1",
+
+    "browser-dtector": "^4.1.0",
+    "chartjs": "^0.3.24"
+  }
+}

@@ -1,0 +1,87 @@
+{% extends "lobby/dashboard/index.html" %}
+{% load django_bootstrap5 %}
+{% load humanize %}
+{% load mathfilters %}
+{% block MINERVE_PAGE_SUBTITLE %}: Cashier - Sell Tokens{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY %}
+<div class="card w-100 h-100 m-2 p-2" data-bs-theme="{{ MINERVE_BODY_THEME }}">
+<form id="confirm_withdrawal" method="POST" action="/cashier/exchange/step3" onsubmit="checkWallet(event);">
+{% csrf_token %}
+    <input type="hidden" id="wallet_address_1" name="wallet_address_1" value="{{ wallet_address_1 }}"/>
+    <input type="hidden" id="amount" name="amount" value="{{ withdrawal_amount }}"/>
+    <input type="hidden" id="dest_crypto" name="dest_crypto" value="{{ dest_crypto }}"/>
+    <div class="card-header">
+        <h1> <i class="fa-duotone fa-solid fa-books" style="color: #dd8fda;"></i> &#160; Sell Tokens:</h1>
+        <p>Please confirm the transaction below.</p>
+        {%  if not cryptoParams.crypto_enabled %}
+        <p>Cryptocurrency payments are disabled for this book; please contact support.</p>
+        {%  else %}
+                <div class="card-body">
+                 <h4>Confirm Withdrawal Request</h4>
+                        <table class="table table-striped table-responsive">
+                            <tr>
+                                <th>Base Exchange Ratio: </th>
+                                <td><h5>1 {{ cryptoParams.token_base_currency }}  = {{cryptoParams.token_base_currency_xrate }} token(s)</h5></td>
+                            </tr>
+                            <tr>
+                                <th>Requested Exchange Amount (in tokens):</th>
+                                <td>{{ withdrawal_amount|floatformat:2|intcomma:3 }}</td>
+                            </tr>
+                            <tr>
+                                <th>Requested Exchange Amount (in {{ cryptoParams.token_base_currency }}):</th>
+                                <td>{{ withdrawal_amount_bcrypto|floatformat:2|intcomma:3 }}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Requested Destination Token:</th>
+                                <td>{{ dest_crypto }}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Last 6 digits of typed destination address:</th>
+                                <td>{{ wallet_address_1_prev }}</td>
+                            </tr>
+
+                            </table>
+                              </div>
+                            <h5>Please Confirm your Destination Wallet Address (again):</h5>
+                                    <div class="input-group mb-3">
+                                      <span class="input-group-text">Wallet Address: </span>
+                                      <input type="text" id="wallet_address_2" name="wallet_address_2" class="form-control" aria-label="Please enter your wallet address once again." required/>
+
+                                    </div>
+                    <div class="d-flex">
+                        <button type="submit" class="btn btn-bd-primary w-100">Confirm Withdrawal</button>
+                    </div>
+
+                    </div>
+            </form>
+            </div>
+        <script>
+        function checkWallet(event) {
+            if ($("#wallet_address_2")[0].value !== $("#wallet_address_1")[0].value) {
+                $("#wallet_address_2").addClass('is-invalid');
+                event.stopPropagation();
+                event.preventDefault();
+            } else {
+                $("#wallet_address_2").removeClass('is-invalid');
+            }
+        }
+        </script>
+        {% endif %}
+
+
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+    <div class="row">
+    <div class="col pt-2 pb-2">
+    <a class="nav-link" href="/my/profile" title="My Account"><i class="fa-duotone fa-solid fa-circle-user pe-2"></i> #{{ account.acctnum }}</a>
+    </div>
+    <div class="col pt-2 pb-2">
+        <a href="#" onclick="{% if vdomain.demo_mode %}alert('Cashier disabled in Demo.') {% else %} cashier.start_deposit_modal() {% endif %}" id="balance-link" title="Available Balance">
+        <i class="fa-duotone fa-solid fa-coins pe-2"></i><span class="avail_balance">Balance: {{ available_balance |floatformat:2 }}</span></a>
+    </div>
+    </div>
+    <hr class="border-2 border-opacity-50 border-success"/>
+{% endblock %}

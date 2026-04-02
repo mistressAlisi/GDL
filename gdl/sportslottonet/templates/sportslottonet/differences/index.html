@@ -1,0 +1,799 @@
+{% extends "sportslottonet/base/page.html" %}
+
+{% load static %}
+{% block bootstrap5_title %} SPORTSLOTTO: Differences: Sports Lotto {% endblock %}
+{% block PAGE_BODY %}
+<style>
+
+
+    body {
+        background-color: var(--bs-secondary);
+        color: white;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    }
+
+    .gradient-text {
+        background: linear-gradient(to right, #667eea, #a855f7, #ec4899);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero-section {
+        position: relative;
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .hero-bg {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, var(--bs-secondary), rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.6));
+    }
+
+    .hero-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .badge-pill {
+        background: rgba(168, 85, 247, 0.2);
+        border: 1px solid rgba(168, 85, 247, 0.5);
+        border-radius: 50px;
+        padding: 12px 24px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .card-custom {
+        background: linear-gradient(135deg, #1a1a2e, #0f172a);
+        border: 2px solid rgba(168, 85, 247, 0.3);
+        border-radius: 24px;
+        transition: all 0.3s;
+    }
+
+    .card-custom:hover {
+        border-color: rgba(168, 85, 247, 0.6);
+    }
+
+    .card-lottery {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), #0f172a);
+        border: 2px solid rgba(16, 185, 129, 0.5);
+    }
+
+    .card-lottery:hover {
+        border-color: rgba(16, 185, 129, 0.8);
+    }
+
+    .card-betting {
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), #0f172a);
+        border: 2px solid rgba(239, 68, 68, 0.5);
+    }
+
+    .card-betting:hover {
+        border-color: rgba(239, 68, 68, 0.8);
+    }
+
+    .btn-toggle {
+        padding: 16px 32px;
+        border-radius: 12px;
+        font-weight: 900;
+        font-size: 18px;
+        border: none;
+        background: transparent;
+        color: #9ca3af;
+        transition: all 0.3s;
+    }
+
+    .btn-toggle:hover {
+        color: white;
+    }
+
+    .btn-toggle.active {
+        background: linear-gradient(to right, #9333ea, #ec4899);
+        color: white;
+        box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+    }
+
+    .toggle-container {
+        background: #1a1a2e;
+        border: 2px solid rgba(168, 85, 247, 0.3);
+        border-radius: 16px;
+        padding: 8px;
+        display: inline-flex;
+        gap: 8px;
+    }
+
+    .comparison-card {
+        background: #0f172a;
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        border-radius: 12px;
+        padding: 24px;
+    }
+
+    .comparison-card-betting {
+        border-color: rgba(239, 68, 68, 0.2);
+    }
+
+    .table-custom {
+        background: linear-gradient(135deg, #1a1a2e, #0f172a);
+        border: 2px solid rgba(168, 85, 247, 0.3);
+        border-radius: 24px;
+        overflow: hidden;
+    }
+
+    .table-header {
+        background: rgba(168, 85, 247, 0.1);
+        border-bottom: 1px solid rgba(168, 85, 247, 0.3);
+        padding: 24px;
+    }
+
+    .table-row {
+        padding: 24px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: background 0.3s;
+    }
+
+    .table-row:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .badge-success {
+        background: rgba(16, 185, 129, 0.2);
+        border: 1px solid rgba(16, 185, 129, 0.5);
+        color: var(--bs-success);
+        padding: 4px 12px;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .badge-danger {
+        background: rgba(239, 68, 68, 0.2);
+        border: 1px solid rgba(239, 68, 68, 0.5);
+        color: var(--bs-danger);
+        padding: 4px 12px;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* Mobile Color Coding for Table Rows */
+    @media (max-width: 767px) {
+        .table-header {
+            display: none;
+        }
+
+        .table-row .col-md-4:first-child {
+            background: rgba(168, 85, 247, 0.15);
+            padding: 12px;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 8px;
+        }
+
+        .table-row .col-md-4:nth-child(2) {
+            background: rgba(16, 185, 129, 0.15);
+            border-left: 3px solid rgba(16, 185, 129, 0.8);
+            padding: 12px;
+            margin-bottom: 4px;
+        }
+
+        .table-row .col-md-4:nth-child(2)::before {
+            content: "🎰 Sports Lottery: ";
+            font-weight: bold;
+            color: var(--bs-success);
+        }
+
+        .table-row .col-md-4:nth-child(3) {
+            background: rgba(239, 68, 68, 0.15);
+            border-left: 3px solid rgba(239, 68, 68, 0.8);
+            padding: 12px;
+            border-radius: 0 0 8px 8px;
+            margin-bottom: 16px;
+        }
+
+        .table-row .col-md-4:nth-child(3)::before {
+            content: "🎲 Sports Betting: ";
+            font-weight: bold;
+            color: var(--bs-danger);
+        }
+    }
+
+    .btn-cta {
+        background: linear-gradient(to right, #9333ea, #ec4899);
+        box-shadow: 0 0 40px rgba(168, 85, 247, 0.4);
+        transition: transform 0.3s;
+    }
+
+    .btn-cta:hover {
+        transform: scale(1.05);
+    }
+
+    .glow-purple {
+        width: 160px;
+        height: 160px;
+        background: rgba(168, 85, 247, 0.2);
+        border-radius: 50%;
+        filter: blur(60px);
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .glow-success {
+        background: rgba(16, 185, 129, 0.2);
+    }
+
+    .glow-danger {
+        background: rgba(239, 68, 68, 0.2);
+    }
+
+    @media (max-width: 768px) {
+        .display-1 {
+            font-size: 3rem;
+        }
+
+        .btn-toggle {
+            padding: 12px 20px;
+            font-size: 16px;
+        }
+
+        .toggle-container {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .btn-toggle {
+            width: 100%;
+        }
+
+        .table-header, .table-row {
+            padding: 16px;
+        }
+    }
+</style>
+
+<div class="pt-5">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="position-absolute w-100 h-100">
+            <div class="hero-bg"></div>
+        </div>
+
+        <div class="container position-relative text-center py-5">
+
+            <h1 class="display-1 fw-bold mb-4">
+                Sports Lottery<br>
+                <span class="gradient-text">vs Betting</span>
+            </h1>
+
+            <p class="lead fs-3 text-white px-3" style="max-width: 900px; margin: 0 auto;">
+                Both involve sporting events, but they <span class="text-purple fw-bold">operate very differently</span>.
+            </p>
+        </div>
+    </section>
+
+    <!-- Quick Overview with SVGs -->
+    <section class="py-5" style="background: linear-gradient(to bottom, var(--bs-secondary), var(--bs-dark));">
+        <div class="container px-3">
+            <div class="row g-4">
+                <!-- Sports Lottery Card -->
+                <div class="col-md-6">
+                    <div class="card-lottery p-4 h-100 position-relative" style="border-radius: 24px;">
+                        <div class="glow-success"></div>
+
+                        <div class="position-relative">
+                            <!-- SVG Illustration -->
+                            <div class="mb-4 text-center">
+                                <svg width="200" height="160" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Lottery Ticket -->
+                                    <rect x="30" y="30" width="140" height="100" rx="8" fill="url(#purpleGradient)" stroke="#a855f7" stroke-width="2"/>
+                                    <circle cx="30" cy="80" r="8" fill="#0f172a"/>
+                                    <circle cx="170" cy="80" r="8" fill="#0f172a"/>
+
+                                    <!-- Ticket Details -->
+                                    <rect x="50" y="50" width="100" height="8" rx="4" fill="#a855f7" opacity="0.6"/>
+                                    <rect x="50" y="65" width="80" height="8" rx="4" fill="#a855f7" opacity="0.4"/>
+                                    <rect x="50" y="80" width="60" height="8" rx="4" fill="#a855f7" opacity="0.3"/>
+
+                                    <!-- Stars/Points -->
+                                    <circle cx="60" cy="110" r="6" fill="#ec4899" opacity="0.8"/>
+                                    <circle cx="80" cy="110" r="6" fill="#ec4899" opacity="0.8"/>
+                                    <circle cx="100" cy="110" r="6" fill="#ec4899" opacity="0.8"/>
+                                    <circle cx="120" cy="110" r="6" fill="#ec4899" opacity="0.8"/>
+                                    <circle cx="140" cy="110" r="6" fill="#ec4899" opacity="0.8"/>
+
+                                    <!-- Sparkle -->
+                                    <path d="M180 20 L182 28 L190 30 L182 32 L180 40 L178 32 L170 30 L178 28 Z" fill="#ec4899"/>
+
+                                    <defs>
+                                        <linearGradient id="purpleGradient" x1="30" y1="30" x2="170" y2="130">
+                                            <stop offset="0%" stop-color="#a855f7" stop-opacity="0.2"/>
+                                            <stop offset="100%" stop-color="#a855f7" stop-opacity="0.05"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+
+                            <div class="text-center mb-4">
+                                <h3 class="h2 fw-bold mb-2">Sports Lottery</h3>
+                                <p class="small fw-bold" style="color: var(--bs-success);">ACCESSIBLE & CASUAL</p>
+                            </div>
+
+                            <div class="mb-4">
+                                <div class="d-flex gap-3 mb-3">
+                                    <svg width="20" height="20" fill="none" stroke="#10b981" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink: 0; margin-top: 2px;">
+                                        <polyline points="20 6 9 17 4 12"/>
+                                    </svg>
+                                    <p class="text-white mb-0">Free-to-play or points-based</p>
+                                </div>
+                                <div class="d-flex gap-3 mb-3">
+                                    <svg width="20" height="20" fill="none" stroke="#10b981" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink: 0; margin-top: 2px;">
+                                        <polyline points="20 6 9 17 4 12"/>
+                                    </svg>
+                                    <p class="text-white mb-0">Predefined combinations</p>
+                                </div>
+                                <div class="d-flex gap-3 mb-3">
+                                    <svg width="20" height="20" fill="none" stroke="#10b981" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink: 0; margin-top: 2px;">
+                                        <polyline points="20 6 9 17 4 12"/>
+                                    </svg>
+                                    <p class="text-white mb-0">Simple & entertaining</p>
+                                </div>
+                                <div class="d-flex gap-3">
+                                    <svg width="20" height="20" fill="none" stroke="#10b981" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink: 0; margin-top: 2px;">
+                                        <polyline points="20 6 9 17 4 12"/>
+                                    </svg>
+                                    <p class="text-white mb-0">Lower risk format</p>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <span class="badge-success">
+                                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                        <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
+                                    </svg>
+                                    OPEN TO EVERYONE
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sports Betting Card -->
+                <div class="col-md-6">
+                    <div class="card-betting p-4 h-100 position-relative" style="border-radius: 24px;">
+                        <div class="glow-danger"></div>
+
+                        <div class="position-relative">
+                            <!-- SVG Illustration -->
+                            <div class="mb-4 text-center">
+                                <svg width="200" height="160" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Betting Slip -->
+                                    <rect x="40" y="20" width="120" height="130" rx="6" fill="url(#redGradient)" stroke="#ef4444" stroke-width="2"/>
+
+                                    <!-- Dollar Signs -->
+                                    <text x="100" y="55" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#ef4444" text-anchor="middle">$$$</text>
+
+                                    <!-- Odds Lines -->
+                                    <rect x="55" y="70" width="50" height="12" rx="2" fill="#ef4444" opacity="0.6"/>
+                                    <text x="110" y="80" font-family="monospace" font-size="14" font-weight="bold" fill="#ef4444">-110</text>
+
+                                    <rect x="55" y="90" width="50" height="12" rx="2" fill="#ef4444" opacity="0.6"/>
+                                    <text x="110" y="100" font-family="monospace" font-size="14" font-weight="bold" fill="#ef4444">+150</text>
+
+                                    <rect x="55" y="110" width="50" height="12" rx="2" fill="#ef4444" opacity="0.6"/>
+                                    <text x="110" y="120" font-family="monospace" font-size="14" font-weight="bold" fill="#ef4444">-200</text>
+
+                                    <!-- Cash Stack -->
+                                    <rect x="15" y="100" width="30" height="18" rx="2" fill="#22c55e" opacity="0.3" stroke="#22c55e" stroke-width="1"/>
+                                    <rect x="15" y="95" width="30" height="18" rx="2" fill="#22c55e" opacity="0.5" stroke="#22c55e" stroke-width="1"/>
+                                    <rect x="15" y="90" width="30" height="18" rx="2" fill="#22c55e" opacity="0.7" stroke="#22c55e" stroke-width="1"/>
+
+                                    <!-- Credit Card -->
+                                    <rect x="160" y="90" width="35" height="22" rx="3" fill="#1f2937" stroke="#ef4444" stroke-width="1.5"/>
+                                    <rect x="165" y="95" width="10" height="8" rx="1" fill="#a855f7"/>
+                                    <line x1="165" y1="107" x2="190" y2="107" stroke="#ef4444" stroke-width="1" opacity="0.5"/>
+
+                                    <defs>
+                                        <linearGradient id="redGradient" x1="40" y1="20" x2="160" y2="150">
+                                            <stop offset="0%" stop-color="#ef4444" stop-opacity="0.2"/>
+                                            <stop offset="100%" stop-color="#ef4444" stop-opacity="0.05"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+
+                            <div class="text-center mb-4">
+                                <h3 class="h2 fw-bold mb-2">Sports Betting</h3>
+                                <p class="small fw-bold" style="color: var(--bs-danger);">REAL-MONEY WAGERING</p>
+                            </div>
+
+                            <div class="mb-4">
+                                <div class="d-flex gap-3 mb-3">
+                                    <svg width="20" height="20" fill="none" stroke="#ef4444" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink: 0; margin-top: 2px;">
+                                        <line x1="12" y1="1" x2="12" y2="23"/>
+                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                    </svg>
+                                    <p class="text-white mb-0">Monetary bets required</p>
+                                </div>
+                                <div class="d-flex gap-3 mb-3">
+                                    <svg width="20" height="20" fill="none" stroke="#ef4444" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink: 0; margin-top: 2px;">
+                                        <line x1="12" y1="1" x2="12" y2="23"/>
+                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                    </svg>
+                                    <p class="text-white mb-0">Odds set by sportsbooks</p>
+                                </div>
+                                <div class="d-flex gap-3 mb-3">
+                                    <svg width="20" height="20" fill="none" stroke="#ef4444" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink: 0; margin-top: 2px;">
+                                        <line x1="12" y1="1" x2="12" y2="23"/>
+                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                    </svg>
+                                    <p class="text-white mb-0">Complex betting options</p>
+                                </div>
+                                <div class="d-flex gap-3">
+                                    <svg width="20" height="20" fill="none" stroke="#ef4444" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink: 0; margin-top: 2px;">
+                                        <line x1="12" y1="1" x2="12" y2="23"/>
+                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                    </svg>
+                                    <p class="text-white mb-0">Direct wins/losses tied to money</p>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <span class="badge-danger">
+                                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                    </svg>
+                                    REQUIRES DEPOSITS
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Comparison Selector -->
+    <section class="py-5" style="background: var(--bs-dark);">
+        <div class="container px-3">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold mb-3">Side-by-Side Comparison</h2>
+                <p class="fs-5 text-white mb-4">Select a model to see how it works</p>
+
+                <div class="toggle-container">
+                    <button class="btn-toggle active" onclick="showModel('lottery')">
+                        🎟️ Sports Lottery
+                    </button>
+                    <button class="btn-toggle" onclick="showModel('betting')">
+                        💰 Sports Betting
+                    </button>
+                </div>
+            </div>
+
+            <!-- Comparison Content -->
+            <div class="card-custom p-4 p-md-5">
+                <!-- Sports Lottery Model -->
+                <div id="lottery-model">
+                    <div class="text-center pb-4 mb-5" style="border-bottom: 1px solid rgba(16, 185, 129, 0.3);">
+                        <h3 class="display-6 fw-bold mb-2" style="color: var(--bs-success);">Sports Lottery Model</h3>
+                        <p class="text-white">Accessible, simple, and entertainment-focused</p>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="comparison-card">
+                                <h4 class="h5 fw-bold mb-3" style="color: var(--bs-success);">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="me-2" style="display: inline-block; vertical-align: middle;">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                        <circle cx="9" cy="7" r="4"/>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                                    </svg>
+                                    Participation
+                                </h4>
+                                <p class="text-white">Typically <span class="fw-bold" style="color: var(--bs-success);">free-to-play or points-based</span> system. No real money required to participate.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="comparison-card">
+                                <h4 class="h5 fw-bold mb-3" style="color: var(--bs-success);">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="me-2" style="display: inline-block; vertical-align: middle;">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <circle cx="12" cy="12" r="6"/>
+                                        <circle cx="12" cy="12" r="2"/>
+                                    </svg>
+                                    Structure
+                                </h4>
+                                <p class="text-white"><span class="fw-bold" style="color: var(--bs-success);">Predefined combinations</span> of sporting events determine outcomes.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="comparison-card">
+                                <h4 class="h5 fw-bold mb-3" style="color: var(--bs-success);">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="me-2" style="display: inline-block; vertical-align: middle;">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                    </svg>
+                                    Risk Level
+                                </h4>
+                                <p class="text-white"><span class="fw-bold" style="color: var(--bs-success);">Lower risk, casual format</span> designed for entertainment and accessibility.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="comparison-card">
+                                <h4 class="h5 fw-bold mb-3" style="color: var(--bs-success);">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="me-2" style="display: inline-block; vertical-align: middle;">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                    </svg>
+                                    Value Exchange
+                                </h4>
+                                <p class="text-white">Rewards based on <span class="fw-bold" style="color: var(--bs-success);">points, prizes, or virtual currencies</span> rather than direct cash.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 p-4 text-center" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px;">
+                        <p class="fs-6 mb-0">
+                            <span class="fw-bold" style="color: var(--bs-success);">Perfect for</span> players who want to engage with sports in a <span class="fw-bold">lower-risk, more casual format</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Sports Betting Model -->
+                <div id="betting-model" style="display: none;">
+                    <div class="text-center pb-4 mb-5" style="border-bottom: 1px solid rgba(239, 68, 68, 0.3);">
+                        <h3 class="display-6 fw-bold mb-2" style="color: var(--bs-danger);">Sports Betting Model</h3>
+                        <p class="text-white">Real-money wagering with complex options</p>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="comparison-card comparison-card-betting">
+                                <h4 class="h5 fw-bold mb-3" style="color: var(--bs-danger);">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="me-2" style="display: inline-block; vertical-align: middle;">
+                                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                                        <line x1="1" y1="10" x2="23" y2="10"/>
+                                    </svg>
+                                    Participation
+                                </h4>
+                                <p class="text-white">Requires <span class="fw-bold" style="color: var(--bs-danger);">monetary deposits and payment methods</span>. Real money is wagered on outcomes.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="comparison-card comparison-card-betting">
+                                <h4 class="h5 fw-bold mb-3" style="color: var(--bs-danger);">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="me-2" style="display: inline-block; vertical-align: middle;">
+                                        <line x1="19" y1="5" x2="5" y2="19"/>
+                                        <circle cx="6.5" cy="6.5" r="2.5"/>
+                                        <circle cx="17.5" cy="17.5" r="2.5"/>
+                                    </svg>
+                                    Structure
+                                </h4>
+                                <p class="text-white">Players bet on <span class="fw-bold" style="color: var(--bs-danger);">specific outcomes, odds, or markets</span> set by sportsbooks.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="comparison-card comparison-card-betting">
+                                <h4 class="h5 fw-bold mb-3" style="color: var(--bs-danger);">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="me-2" style="display: inline-block; vertical-align: middle;">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <line x1="12" y1="8" x2="12" y2="12"/>
+                                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                                    </svg>
+                                    Risk Level
+                                </h4>
+                                <p class="text-white"><span class="fw-bold" style="color: var(--bs-danger);">Higher risk</span> as winnings and losses are directly tied to money risked.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="comparison-card comparison-card-betting">
+                                <h4 class="h5 fw-bold mb-3" style="color: var(--bs-danger);">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="me-2" style="display: inline-block; vertical-align: middle;">
+                                        <line x1="12" y1="1" x2="12" y2="23"/>
+                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                    </svg>
+                                    Value Exchange
+                                </h4>
+                                <p class="text-white"><span class="fw-bold" style="color: var(--bs-danger);">Direct cash transactions</span> — win or lose real money based on bet outcomes.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 p-4 text-center" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px;">
+                        <p class="fs-6 mb-0">
+                            <span class="fw-bold" style="color: var(--bs-danger);">Designed for</span> players seeking <span class="fw-bold">real-money wagering and complex betting options</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Differences Table -->
+    <section class="py-5" style="background: linear-gradient(to bottom, var(--bs-dark), var(--bs-secondary));">
+        <div class="container px-3">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold mb-3">Key Differences</h2>
+                <p class="fs-5 text-white">How they compare across critical factors</p>
+            </div>
+
+            <div class="table-custom">
+                <div class="row table-header g-0">
+                    <div class="col-md-4">
+                        <h3 class="h5 fw-bold text-purple mb-0">Factor</h3>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <h3 class="h5 fw-bold mb-0" style="color: var(--bs-success);">Sports Lottery</h3>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <h3 class="h5 fw-bold mb-0" style="color: var(--bs-danger);">Sports Betting</h3>
+                    </div>
+                </div>
+
+                <div class="row table-row g-0 align-items-center">
+                    <div class="col-md-4">
+                        <span class="fw-bold">💰 Cost to Play</span>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <span class="badge-success small">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Free or Points
+                        </span>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <span class="badge-danger small">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <line x1="12" y1="1" x2="12" y2="23"/>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                            Real Money
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row table-row g-0 align-items-center">
+                    <div class="col-md-4">
+                        <span class="fw-bold">⚡ Complexity</span>
+                    </div>
+                    <div class="col-md-4 text-center text-white">
+                        Simple & Predefined
+                    </div>
+                    <div class="col-md-4 text-center text-white">
+                        Complex Markets & Odds
+                    </div>
+                </div>
+
+                <div class="row table-row g-0 align-items-center">
+                    <div class="col-md-4">
+                        <span class="fw-bold">🛡️ Risk Level</span>
+                    </div>
+                    <div class="col-md-4 text-center text-white">
+                        Low to None
+                    </div>
+                    <div class="col-md-4 text-center text-white">
+                        Direct Financial Risk
+                    </div>
+                </div>
+
+                <div class="row table-row g-0 align-items-center">
+                    <div class="col-md-4">
+                        <span class="fw-bold">👥 Target Audience</span>
+                    </div>
+                    <div class="col-md-4 text-center text-white">
+                        Casual Sports Fans
+                    </div>
+                    <div class="col-md-4 text-center text-white">
+                        Serious Bettors
+                    </div>
+                </div>
+
+                <div class="row table-row g-0 align-items-center">
+                    <div class="col-md-4">
+                        <span class="fw-bold">💳 Deposits Required</span>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <svg width="20" height="20" fill="none" stroke="#10b981" stroke-width="2" viewBox="0 0 24 24">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <svg width="20" height="20" fill="none" stroke="#ef4444" stroke-width="2" viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="row table-row g-0 align-items-center" style="border-bottom: none;">
+                    <div class="col-md-4">
+                        <span class="fw-bold">🔓 Accessibility</span>
+                    </div>
+                    <div class="col-md-4 text-center text-white">
+                        Open to Everyone
+                    </div>
+                    <div class="col-md-4 text-center text-white">
+                        Age & Location Restricted
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Common Ground -->
+    <section class="py-5" style="background: var(--bs-secondary);">
+        <div class="container px-3">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold mb-3">What They Have in Common</h2>
+                <p class="fs-5 text-white">Both models share this foundation</p>
+            </div>
+
+            <div class="card-custom p-4 p-md-5">
+                <div class="d-flex align-items-center justify-content-center gap-4 mb-4 flex-column flex-md-row">
+                    <div style="width: 80px; height: 80px; background: rgba(168, 85, 247, 0.2); border: 2px solid rgba(168, 85, 247, 0.5); border-radius: 16px; display: flex; align-items: center; justify-content: center;">
+                        <svg width="40" height="40" fill="none" stroke="#a855f7" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="h2 fw-bold mb-0 text-center text-md-start">Based on Real Sporting Events</h3>
+                </div>
+                <p class="fs-5 text-white text-center px-3" style="max-width: 900px; margin: 0 auto;">
+                    Both sports lotteries and sports betting are tied to <span class="text-purple fw-bold">official outcomes of real sporting events</span>. The key difference lies in <span class="text-purple fw-bold">how players participate</span> and <span class="text-purple fw-bold">how value is exchanged</span>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-5" style="background: linear-gradient(to top, var(--bs-dark), var(--bs-secondary));">
+        <div class="container text-center px-3">
+            <h2 class="display-5 fw-bold mb-4">Choose Your Experience</h2>
+            <p class="fs-5 text-white mb-4">Sports lottery offers a more accessible, casual way to engage with sports</p>
+            <a href="#" class="btn btn-lg btn-cta btn-play text-white fw-bold px-5 py-3" style="border-radius: 12px; font-size: 20px;">
+                TRY SPORTS LOTTERY
+            </a>
+        </div>
+    </section>
+</div>
+
+<script>
+    function showModel(model) {
+        const lotteryModel = document.getElementById('lottery-model');
+        const bettingModel = document.getElementById('betting-model');
+        const buttons = document.querySelectorAll('.btn-toggle');
+
+        if (model === 'lottery') {
+            lotteryModel.style.display = 'block';
+            bettingModel.style.display = 'none';
+            buttons[0].classList.add('active');
+            buttons[1].classList.remove('active');
+        } else {
+            lotteryModel.style.display = 'none';
+            bettingModel.style.display = 'block';
+            buttons[0].classList.remove('active');
+            buttons[1].classList.add('active');
+        }
+    }
+
+    // Play Now login functionality
+    document.addEventListener("DOMContentLoaded", () => {
+        const playButton = document.querySelector(".btn-play");
+        const loginTrigger = document.getElementById("loginTrigger");
+
+        if (playButton && loginTrigger) {
+            playButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                loginTrigger.click();
+            });
+        }
+    });
+</script>
+{% endblock %}

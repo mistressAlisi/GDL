@@ -1,0 +1,34 @@
+# New Jersey - Jersey Cash 5
+# Draws daily at 10:57 PM ET
+# Pick 5 numbers from 1-45
+
+state: NJ
+name: "Jersey Cash 5"
+slug: nj-jersey-cash5
+url: "https://www.njlottery.com/en-us/drawgames/jerseycash.html"
+game_type: pool
+
+format:
+  main_count: 5
+  main_range: [1, 45]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: false
+
+schedule:
+  days: [daily]
+  times:
+    - time: "22:57"
+      label: null
+  timezone: "America/New_York"
+
+selectors:
+  all_numbers: ".winning-numbers span, .ball, .number"
+  draw_date: ".draw-date, .date"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%m/%d/%Y"
+  split_main_bonus: false
+
+active: true

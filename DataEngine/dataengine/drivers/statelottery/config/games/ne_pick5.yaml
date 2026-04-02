@@ -1,0 +1,34 @@
+# Nebraska - Pick 5
+# Draws daily at 9:00 PM CT
+# Pick 5 numbers from 1-40
+
+state: NE
+name: "Pick 5"
+slug: ne-pick5
+url: "https://nelottery.com/homeapp/lotto/31/gamedetail"
+game_type: pool
+
+format:
+  main_count: 5
+  main_range: [1, 40]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: false
+
+schedule:
+  days: [daily]
+  times:
+    - time: "21:00"
+      label: null
+  timezone: "America/Chicago"
+
+selectors:
+  all_numbers: ".winning-numbers span, .ball, .number"
+  draw_date: ".draw-date, .date"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%m/%d/%Y"
+  split_main_bonus: false
+
+active: true

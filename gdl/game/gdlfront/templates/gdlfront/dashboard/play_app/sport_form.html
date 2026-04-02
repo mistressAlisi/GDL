@@ -1,0 +1,130 @@
+    <div class="form-page-container">
+        <div class="form-page-wrapper">
+
+            <!-- Back Button -->
+            <a href="{% url 'menu' %}" class="btn back-btn mb-3">
+                <i class="fa-solid fa-arrow-left me-2"></i>
+                Back to Menu
+            </a>
+
+            <!-- Balance Card -->
+            <div class="balance-card mb-4">
+                <table class="table table-borderless text-white mb-0">
+                    <thead>
+                        <tr class="balance-header">
+                            <th class="pb-3">Balance</th>
+                            <th class="pb-3">Pending</th>
+                            <th class="pb-3">Avail.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="pt-3 balance-amount" id="balance-amount">$0.00</td>
+                            <td class="pt-3 pending-amount" id="pending-amount">$0.00</td>
+                            <td class="pt-3 available-amount" id="available-amount">$0.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Sport-Centric Form -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-card">
+                        <!-- Sport Header -->
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="sport-header-emoji">{{ sport_emoji }}</span>
+                            <h1 class="form-title gradient-text mb-0">
+                                {{ sport_name }} Tickets
+                            </h1>
+                        </div>
+                        <p class="form-subtitle mb-4">
+                            Get AI-generated tickets exclusively for {{ sport_name }} events on 4 teams to win roughly 20 for 1 risked.
+                        </p>
+
+                        <form method="post" action="{% url 'sport_form_submit' sport_id %}" id="sport-form" data-sport="{{ sport_id }}">
+                            {% csrf_token %}
+
+                            <!-- Hidden inputs for sport grouping -->
+                            <input type="hidden" name="sport_group" value="{{ sport_id }}">
+                            <input type="hidden" name="sport_uuid" value="{{ sport_uuid }}">
+                            <input type="hidden" name="depth" value="4">
+
+                            <div class="row g-4 mb-4">
+                                <!-- Ticket Count -->
+                                <div class="col-md-6">
+                                    <div class="input-container">
+                                        <label for="sport-ticket-count" class="form-label text-white fw-semibold">
+                                            <i class="fa-solid fa-ticket me-2"></i>
+                                            Ticket Count:
+                                        </label>
+                                        <input
+                                            type="number"
+                                            class="form-control input-enhanced"
+                                            id="sport-ticket-count"
+                                            name="ticket_count"
+                                            min="5"
+                                            max="9999"
+                                            value="5"
+                                        >
+                                    </div>
+                                </div>
+
+                                <!-- Risk Amount -->
+                                <div class="col-md-6">
+                                    <div class="input-container">
+                                        <label for="sport-risk-amount" class="form-label text-white fw-semibold">
+                                            <i class="fa-solid fa-dollar-sign me-2"></i>
+                                            Risk Amount:
+                                        </label>
+                                        <input
+                                            type="number"
+                                            class="form-control input-enhanced"
+                                            id="sport-risk-amount"
+                                            name="risk_amount"
+                                            min="1"
+                                            max="10"
+                                            value="1"
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sport Info Badge -->
+                            <div class="sport-info-badge mb-4" style="background: linear-gradient(135deg, {{ sport_color }}20, {{ sport_color }}30); border: 2px solid {{ sport_color }}40;">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <div class="text-center">
+                                        <div class="sport-badge-subtitle">Only {{ sport_name }} Events</div>
+                                        <div class="sport-badge-text">
+                                            <i class="fa-solid fa-filter me-2" style="color: {{ sport_color }};"></i>
+                                            4 teams per ticket
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Possible Returns Display -->
+                            <div class="return-display mb-4">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <span class="text-white fw-semibold">
+                                        <i class="fa-solid fa-trophy me-2 text-success"></i>
+                                        Possible Return (20 to 1):
+                                    </span>
+                                    <span class="return-amount" id="sport-possible-return">
+                                        $20.00
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn btn-gradient w-100 py-3 fs-5 fw-semibold">
+                                <i class="fa-solid fa-sparkles me-2"></i>
+                                Get {{ sport_name }} Tickets!
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>

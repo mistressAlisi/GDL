@@ -1,0 +1,34 @@
+# Georgia - Fantasy 5
+# Draws daily at 11:34 PM ET
+# Pick 5 numbers from 1-42
+
+state: GA
+name: "Fantasy 5"
+slug: ga-fantasy5
+url: "https://www.galottery.com/en-us/games/draw-games/fantasy-five.html"
+game_type: pool
+
+format:
+  main_count: 5
+  main_range: [1, 42]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: false
+
+schedule:
+  days: [daily]
+  times:
+    - time: "23:34"
+      label: null
+  timezone: "America/New_York"
+
+selectors:
+  all_numbers: ".lotto-numbers span i"
+  draw_date: ".draw-time-indicator .date"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%m/%d/%Y"
+  split_main_bonus: false
+
+active: true

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+{% load django_bootstrap5 %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE|default:'en' }}" class="h-100" data-bs-theme="{% if MINERVE_BODY_THEME %}{{MINERVE_BODY_THEME}}{% else %}dark{% endif %}">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Page title -->
+    <title>{% block bootstrap5_title %}
+        {{ apperance.site_name }}
+    {% endblock %}</title>
+    <!-- poppler !-->
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <!--     JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bs5-toast/dist/bs5-toast.js"></script>
+    <!-- Bootstrap CSS -->
+    {% bootstrap_css %}
+
+    <!-- Bootstrap JavaScript: !-->
+     {% bootstrap_javascript %}
+    <script src="/static/minerve/js/components/bootstrap/colour-modes.js"></script>
+
+    <!-- Font Awesome !-->
+    {% if FONT_AWESOME_KIT %}
+        <script src="https://kit.fontawesome.com/{{ FONT_AWESOME_KIT }}" crossorigin="anonymous"></script>
+    {% else %}
+        <script src="https://kit.fontawesome.com/52b95d724a.js" crossorigin="anonymous"></script>
+    {% endif %}
+
+    <!-- Fonts! -->
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Teko:wght@300..700&display=swap&family=Dancing+Script:wght@400..700&display=swap&family=Monoton&display=swap');
+    </style>
+    <!-- Custom styles for this template -->
+
+    {% for css in MINERVE_PAGE_CSS %}
+        <link href="/static/{{ css.css_file_path }}" rel="stylesheet">
+    {% endfor %}
+    {% block MINERVE_PAGE_HEADER_END %}
+    {% endblock %}
+  </head>
+  <body class="h-100 w-100 text-center" {% if MINERVE_BODY_THEME %} data-bs-theme="{{ MINERVE_BODY_THEME }}"{% endif %}>
+      <!-- custom body Scripts !-->
+    {%  for js in MINERVE_PAGE_JS %}
+    <script src='{{ js }}'></script>
+    {% endfor %}
+{% block MINERVE_COLOUR_MODE_SWITCH %}
+{% include "minerve/components/bootstrap/colour-mode-switch.html" %}
+{% endblock %}
+
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+{% block MINERVE_PAGE_HEADER %}
+  <header class="mb-auto">
+    <div>
+      <h3 class="float-md-start mb-0">{{ MINERVE_SITE_NAME }}</h3>
+      <nav class="nav nav-masthead justify-content-center float-md-end">
+          {%  for link in MINERVE_INDEX_LINKS %}
+        <a class="nav-link fw-bold py-1 px-0 {% if link.active %}active{% endif %}" href="{{ link.href }}">{{ link.title }}</a>
+          {% endfor %}
+      </nav>
+    </div>
+  </header>
+{% endblock %}
+{% block MINERVE_PAGE_NAV_HEADER %}
+  <!-- Top Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top border-bottom">
+      <div class="container-fluid">
+    <!-- Mobile Sidebar Toggle -->
+    <button class="btn btn-outline-light d-md-none me-2" id="toggleSidebarBtn" type="button">
+      <i class="bi bi-list"></i>
+    </button>
+      {% block MINERVE_PAGE_NAV_BRAND %}
+          <a class="navbar-brand d-flex align-items-center" href="/">
+      {% if vdomain.website_icon %}
+            <img src="{{ vdomain.website_icon.url }}" alt="icon" width="40" height="40" class=" d-none me-2 d-none  d-lg-block">
+      {% elif vhost.website_icon %}
+          <img src="{{ vhost.website_icon.url }}" alt="icon" width="40" height="40" class=" d-none me-2 d-lg-block">
+      {% endif %}
+      {% if vdomain.show_website_name %}
+        <span class="d-none d-md-inline">{{ vdomain.website_name }}</span>
+      {% endif %}
+
+      </a>
+      {% endblock %}
+      {% block MINERVE_NAV_PAGE_NAME %}
+          {# replace this block to add a unique page name in the dashboard. #}
+      {% endblock %}
+      <div class="collapse navbar-collapse justify-content-center">
+        <ul class="navbar-nav mb-2 mb-lg-0">
+        {% for entry in DYNAMIC_DASHBOARD_TOP_MENU %}
+          <li class="nav-item">
+
+            <a class="nav-link" href="{{ entry.url }}"
+                    {% if entry.onclick %} onclick="{{ entry.onclick }}"{% endif %}
+                    {%  if entry.active %} active="active"{% endif %}
+                    {% if entry.help_text %} title="{{ entry.help_text }}"{% endif %}>
+            {% if entry.icon %}
+                <i class="{{ entry.icon }}"></i>
+            {% endif %}
+                {{ entry.name }}
+            </a>
+          </li>
+        {% endfor %}
+
+        </ul>
+      </div>
+
+      <div class="">
+      {% block MINERVE_NAV_LOGIN_AREA %}
+        <button class="btn btn-outline-primary me-2">Login</button>
+        <button class="btn btn-primary">Sign Up</button>
+      {% endblock %}
+      </div>
+    </div>
+  </nav>
+{% endblock %}
+    {% block MINERVE_PAGE_BODY %}
+        This is the page body.
+    {% endblock %}
+
+  <footer class="mt-auto text-white-50">
+    {{ MINERVE_SITE_INDEX_FOOTER }}
+  </footer>
+
+</div>
+  {% block MINERVE_PAGE_FOOTER %}
+
+  {% endblock %}
+
+  </body>
+
+</html>

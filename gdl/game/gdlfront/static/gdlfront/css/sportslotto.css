@@ -1,0 +1,572 @@
+/* ========================================
+   SPORTSLOTTO - Custom Styles
+   ======================================== */
+
+/* ========================================
+   GLOBAL STYLES
+   ======================================== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* ========================================
+   MENU PAGE STYLES
+   ======================================== */
+.menu-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    /*background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);*/
+}
+
+.menu-wrapper {
+    width: 100%;
+    max-width: 56rem;
+}
+
+.menu-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    border: none;
+}
+
+.menu-header {
+    background: linear-gradient(to right, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.menu-icon {
+    font-size: 2.5rem;
+    color: #667eea;
+}
+
+.menu-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a2e;
+}
+
+/* Menu Buttons */
+.menu-btn {
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.quick-picks-btn {
+    background: linear-gradient(to right, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1));
+    color: #2563eb;
+}
+
+.custom-btn {
+    background: linear-gradient(to right, rgba(236, 72, 153, 0.1), rgba(249, 115, 22, 0.1));
+    color: #db2777;
+}
+
+.menu-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    color: inherit;
+}
+
+.menu-btn:active {
+    transform: translateY(-2px);
+}
+
+/* Sport Buttons */
+.sport-btn {
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.sport-emoji {
+    font-size: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.basketball-btn {
+    background: linear-gradient(to bottom right, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.25));
+    color: #22c55e;
+}
+
+.football-btn {
+    background: linear-gradient(to bottom right, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.25));
+    color: #10b981;
+}
+
+.baseball-btn {
+    background: linear-gradient(to bottom right, rgba(249, 115, 22, 0.15), rgba(249, 115, 22, 0.25));
+    color: #f97316;
+}
+
+.soccer-btn {
+    background: linear-gradient(to bottom right, rgba(37, 99, 235, 0.15), rgba(37, 99, 235, 0.25));
+    color: #2563eb;
+}
+
+.sport-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    color: inherit;
+}
+
+/* ========================================
+   FORM PAGE STYLES
+   ======================================== */
+.form-body {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+.form-page-container {
+    max-width: 72rem;
+    margin: 0 auto;
+}
+
+/* Back Button */
+.back-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    transform: translateX(-4px);
+}
+
+/* Balance Card */
+.balance-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    animation: slideInDown 0.6s ease-out;
+}
+
+.balance-header th {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.9;
+}
+
+.balance-amount,
+.pending-amount,
+.available-amount {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.available-amount {
+    color: #4ade80 !important;
+}
+
+.pending-amount {
+    opacity: 0.7;
+}
+
+/* Form Card */
+.form-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 2rem;
+    animation: fadeInUp 0.7s ease-out;
+    transition: all 0.3s ease;
+}
+
+.form-card:hover {
+    border-color: rgba(102, 126, 234, 0.4);
+    box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
+}
+
+.form-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.bouncing-icon {
+    animation: bounce 2s infinite;
+    display: inline-block;
+    color: #667eea !important;
+    -webkit-text-fill-color: #667eea !important;
+}
+
+.form-subtitle {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Input Container */
+.input-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.input-container.focused {
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+}
+
+.input-enhanced {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.input-enhanced:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+    outline: none;
+    transform: scale(1.02);
+    color: white;
+}
+
+.input-enhanced::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.input-enhanced option {
+    background: #1a1a2e;
+    color: white;
+}
+
+/* Sport Checkboxes */
+.sport-checkbox {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.sport-checkbox:hover {
+    background: rgba(102, 126, 234, 0.2);
+    border-color: #667eea;
+    transform: translateY(-2px);
+}
+
+.sport-checkbox.selected {
+    background: rgba(102, 126, 234, 0.3);
+    border-color: #667eea;
+}
+
+.sport-checkbox input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.sport-checkbox label {
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Return Display */
+.return-display {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(74, 222, 128, 0.2));
+    border: 2px solid rgba(34, 197, 94, 0.3);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.return-amount {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4ade80;
+}
+
+/* Sport-Specific Elements */
+.sport-header-emoji {
+    font-size: 3rem;
+    margin-right: 0.75rem;
+}
+
+.sport-info-badge {
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.sport-badge-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.sport-badge-text {
+    color: white;
+    font-weight: 600;
+}
+
+/* Buttons */
+.btn-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-gradient:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    color: white;
+}
+
+.btn-gradient:active {
+    transform: translateY(-1px);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid #667eea;
+    color: #667eea;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: transparent;
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.pulse-animation {
+    animation: pulse 0.3s ease-out;
+}
+
+/* Ripple Effect */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(0);
+    animation: ripple-animation 0.6s ease-out;
+    pointer-events: none;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Toast Notifications */
+.toast-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: translateX(400px);
+    transition: transform 0.3s ease-out;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+}
+
+.toast-notification.show {
+    transform: translateX(0);
+}
+
+.toast-notification.success {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.toast-notification.error {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 768px) {
+    .menu-title {
+        font-size: 1.5rem;
+    }
+
+    .menu-icon {
+        font-size: 2rem;
+    }
+
+    .form-title {
+        font-size: 2rem;
+    }
+
+    .sport-header-emoji {
+        font-size: 2.5rem;
+    }
+
+    .return-amount {
+        font-size: 1.5rem;
+    }
+
+    .balance-amount,
+    .pending-amount,
+    .available-amount {
+        font-size: 1.25rem;
+    }
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.section-divider {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(102, 126, 234, 0.5) 50%,
+        transparent 100%);
+}
+.account-balance-table .col-6 {
+    border-right: 1px solid rgba(255,255,255,0.12);
+}
+
+.account-balance-table .col-6:nth-child(2n) {
+    border-right: none;
+}
+
+@media (min-width: 768px) {
+    .account-balance-table .col-md-3 {
+        border-right: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .account-balance-table .col-md-3:last-child {
+        border-right: none;
+    }
+}
+
+
+.gdl-processing {
+    position: relative;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    filter: grayscale(75%) blur(3px);
+}
+
+.gdl-processing-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 30;
+    border-radius: 12px;
+}

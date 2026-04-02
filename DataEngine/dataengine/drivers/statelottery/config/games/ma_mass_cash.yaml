@@ -1,0 +1,34 @@
+# Massachusetts - Mass Cash
+# Draws daily at 9:00 PM ET
+# Pick 5 numbers from 1-35
+
+state: MA
+name: "Mass Cash"
+slug: ma-mass-cash
+url: "https://www.masslottery.com/games/draw-and-instants/mass-cash"
+game_type: pool
+
+format:
+  main_count: 5
+  main_range: [1, 35]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: false
+
+schedule:
+  days: [daily]
+  times:
+    - time: "21:00"
+      label: null
+  timezone: "America/New_York"
+
+selectors:
+  all_numbers: ".winning-numbers span, .ball, .number"
+  draw_date: ".draw-date, .date"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%m/%d/%Y"
+  split_main_bonus: false
+
+active: true

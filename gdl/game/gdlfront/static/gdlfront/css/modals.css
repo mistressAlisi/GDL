@@ -1,0 +1,292 @@
+/* SPORTSLOTTO Modals - Scoped to specific modal IDs */
+
+/* ===== NOT ENOUGH EVENTS MODAL ===== */
+
+#notEnoughEventsModal.modal-overlay,
+#loadingModal.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+}
+
+#notEnoughEventsModal .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+}
+
+#loadingModal .modal-backdrop-no-dismiss {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+    pointer-events: none;
+}
+
+#notEnoughEventsModal.show .modal-backdrop,
+#loadingModal.show .modal-backdrop-no-dismiss {
+    opacity: 1;
+}
+#notEnoughEventsModal .modal-container {
+    z-index: 10000 !important;
+}
+
+#notEnoughEventsModal .modal-container,
+#loadingModal .modal-container {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    pointer-events: none;
+}
+
+#notEnoughEventsModal .modal-content,
+#loadingModal .modal-content {
+    position: relative;
+    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    max-width: 28rem;
+    width: 100%;
+    pointer-events: auto;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.3s ease-out;
+}
+
+#notEnoughEventsModal.show .modal-content,
+#loadingModal.show .modal-content {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Close Button */
+#notEnoughEventsModal .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#notEnoughEventsModal .modal-close:hover {
+    color: white;
+}
+
+#notEnoughEventsModal .modal-close i {
+    width: 24px;
+    height: 24px;
+}
+
+/* Icon Section */
+#notEnoughEventsModal .modal-icon-wrapper,
+#loadingModal .modal-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+#notEnoughEventsModal .modal-icon-pulse {
+    position: absolute;
+    inset: 0;
+    background: rgba(250, 204, 21, 0.2);
+    border-radius: 50%;
+    filter: blur(40px);
+    animation: modal-pulse 2s ease-in-out infinite;
+}
+
+#loadingModal .modal-icon-pulse-purple {
+    position: absolute;
+    inset: 0;
+    background: rgba(168, 85, 247, 0.2);
+    border-radius: 50%;
+    filter: blur(40px);
+    animation: modal-pulse 2s ease-in-out infinite;
+}
+
+@keyframes modal-pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+#notEnoughEventsModal .modal-icon-container {
+    position: relative;
+    background: linear-gradient(135deg, rgba(250, 204, 21, 0.3), rgba(251, 146, 60, 0.3));
+    border-radius: 50%;
+    padding: 1.5rem;
+    border: 1px solid rgba(250, 204, 21, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#loadingModal .modal-icon-container-purple {
+    position: relative;
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(99, 102, 241, 0.3));
+    border-radius: 50%;
+    padding: 1.5rem;
+    border: 1px solid rgba(168, 85, 247, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#notEnoughEventsModal .modal-icon {
+    width: 48px;
+    height: 48px;
+    color: #fde047;
+    stroke-width: 2;
+}
+
+#loadingModal .modal-spinner {
+    width: 48px;
+    height: 48px;
+    color: #d8b4fe;
+    stroke-width: 2;
+    animation: spinner-rotate 1s linear infinite;
+}
+
+@keyframes spinner-rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Loading Dots */
+#loadingModal .loading-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+#loadingModal .loading-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    background: #a855f7;
+    border-radius: 50%;
+    animation: dot-bounce 0.6s ease-in-out infinite;
+}
+
+@keyframes dot-bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Text Content */
+#notEnoughEventsModal .modal-text,
+#loadingModal .modal-text {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#notEnoughEventsModal .modal-title,
+#loadingModal .modal-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+#notEnoughEventsModal .modal-message {
+    font-size: 1.125rem;
+    color: #f3e8ff;
+    line-height: 1.75;
+    margin-bottom: 0.75rem;
+}
+
+#notEnoughEventsModal .modal-submessage,
+#loadingModal .modal-submessage {
+    font-size: 1rem;
+    color: #e9d5ff;
+    line-height: 1.5;
+}
+
+/* Action Button */
+#notEnoughEventsModal .modal-button {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    background: linear-gradient(90deg, #a855f7 0%, #9333ea 100%);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+}
+
+#notEnoughEventsModal .modal-button:hover {
+    background: linear-gradient(90deg, #9333ea 0%, #7e22ce 100%);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
+}
+
+#notEnoughEventsModal .modal-button:active {
+    transform: scale(0.98);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    #notEnoughEventsModal .modal-content,
+    #loadingModal .modal-content {
+        padding: 1.5rem;
+    }
+
+    #notEnoughEventsModal .modal-title,
+    #loadingModal .modal-title {
+        font-size: 1.25rem;
+    }
+
+    #notEnoughEventsModal .modal-message {
+        font-size: 1rem;
+    }
+
+    #notEnoughEventsModal .modal-submessage,
+    #loadingModal .modal-submessage {
+        font-size: 0.875rem;
+    }
+
+    #notEnoughEventsModal .modal-icon,
+    #loadingModal .modal-spinner {
+        width: 40px;
+        height: 40px;
+    }
+
+    #notEnoughEventsModal .modal-icon-container,
+    #loadingModal .modal-icon-container-purple {
+        padding: 1.25rem;
+    }
+}

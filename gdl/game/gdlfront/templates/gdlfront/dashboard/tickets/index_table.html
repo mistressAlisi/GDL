@@ -1,0 +1,37 @@
+{% extends "minerve/pages/responsive_dashboard/index.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block DYNAMIC_DASHBOARD_PRE_BODY %}
+
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY %}
+
+<h1 class="text-info">{% translate "Open Tickets" %}</h1>
+
+<div class="w-100 vh-100 row gx-0 pe-0 me-0"
+     id="detail_item_card"
+     style="overflow-x: auto; overflow-y: auto;">
+</div>
+
+
+
+<script src="/static/minerve/js/components/dynamic_dashboard/helper.js"></script>
+<script type="module" src="/static/gdlfront/js/gdl_backend.js" type="module"></script>
+{% endblock %}
+{% block MINERVE_PAGE_FOOTER %}
+    {% include "lobby/dashboard/account/login/signup_modal.html" %}
+{% endblock %}
+{% block bootstrap5_title %}
+    {{ vdomain.website_name }}: Open Tickets
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+{% include "lobby/dashboard/components/account_sidebar_header.html" %}
+{% endblock %}
+
+
+
+{% block DYNAMIC_DASHBOARD_BODY_FOOTER %}
+    {% include "lobby/index/theme_switcher.html" %}
+ {% endblock %}

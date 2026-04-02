@@ -1,0 +1,86 @@
+{% load django_bootstrap5 %}
+{% load crispy_forms_tags %}
+<div class="card w-90 mx-1 my-1 mt-0">
+    <div class="card-header">
+        {% block card_header %}
+        <h1>The Card Header</h1>
+        {%  endblock %}
+    </div>
+    {%  block card_body %}
+    <div class="card-body table-card">
+        <h6 class="text-muted">
+        {% block table-muted-header %}
+            <i class="fa-duotone fa-solid fa-magnifying-glass text-purple"></i>Filter/search parameters:
+        {% endblock %}
+        </h6>
+        <div class="p-2 border border-primary border-opacity-50 rounded search-form-div">
+        <input type="hidden" id="paginator_url"  value="{{ paginator_url }}"/>
+        <input type="hidden" id="paginator_murl" value="{{ paginator_meta_url }}"/>
+        <form method="GET" action="#" onsubmit="window.agent.paginator.start(event); return false;" {% if pagination_filter_on_change_event %} onchange="{{ pagination_filter_on_change_event }}" {% endif %} class="form">
+        {%  crispy pagination_filter_form %}
+
+        </form>
+        </div>
+       </div>
+       <div id="table_placeholder" class="table_placeholder align-middle text-center text-muted opacity-50 p-5 m-5">
+       <h1><i class="fa-duotone fa-solid fa-file-chart-column fa-5x"></i></h1>
+       <br/>
+       <h4>Ready: Select Some Parameters above and click 'search'.</h4>
+       </div>
+       <div id="table_loading" class="table_loading align-middle text-center text-muted opacity-50 p-5 m-5">
+       <h1><i class="fa-duotone fa-solid fa-spinner-scale fa-spin-pulse fa-5x text-purple"></i></h1>
+       <br/>
+       <h4>Please wait: loading...</h4>
+       </div>
+       <div id="table_container">
+       </div>
+       </div>
+        {%  if edit_form %}
+            <div class="d-flex justify-content-end">
+                    <div class="p-2">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit_modal{{ edit_form_suffix }}">
+                            <i class="fa-regular fa-circle-plus"></i>&#160;Add New Record
+                        </button>
+                    </div>
+                </div>
+            <div class="modal fade" tabindex="-1" id="edit_modal{{ edit_form_suffix }}" data-bs-backdrop="false">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title"><i class="fa-regular fa-circle-plus text-primary"></i>&#160;Create/Edit Record</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="edit_form{{ edit_form_suffix }}" method="POST" onsubmit="{{ edit_form_onsubmit }}" data-post-url="{{  edit_post_url }}" data-get-url="{{ edit_get_url }}" data-delete-url="{{ edit_delete_url }}">
+            <div class="modal-body">
+            {%  csrf_token %}
+              {% if MINERVE_USE_CRISPY_FORMS %}
+                {% crispy edit_form %}
+            {% else %}
+                {% bootstrap_form edit_form %}
+            {% endif %}
+            </div>
+            <div class="modal-footer">
+                <div class="d-flex justify-content-end">
+                    <div class="p-2"><input type="reset" class="btn btn-primary" value="Reset Form"/></div>
+                    <div class="p-2"><input type="submit" class="btn btn-success" value="Save Changes"/></div>
+                </div>
+            </div>
+            </form>
+            </div>
+            </div>
+            </div>
+            <script>
+            window.agent.settings.edit_form_id = "#edit_form{{ edit_form_suffix }}";
+            window.agent.settings.modal_id = "#edit_modal{{ edit_form_suffix }}";
+            window.agent.settings.on_submit_complete = function(){$("#exec_paginator_search").trigger('click')};
+
+            </script>
+        {%  endif %}
+    {%  endblock %}
+    </div>
+    </div>
+</div>
+
+{% block footer %}
+
+{% endblock %}

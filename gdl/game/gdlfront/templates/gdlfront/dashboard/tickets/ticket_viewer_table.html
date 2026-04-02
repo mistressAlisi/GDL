@@ -1,0 +1,22 @@
+<h3>Risking {{ ticket.stake }} returns {{ ticket.returns }}:</h3>
+<h6>Number of Matches in ticket: {{ ticket.mlen }} - Ticket is {{ ticket.graded_outcome }}</h6>
+
+<hr class="border-2 opacity-50" style="border-color: var(--bs-success);"/>
+
+<hr class="border-2 opacity-50" style="border-color: var(--bs-success);"/>
+<div class="container-fluid d-flex" id="tvd{{ rootWagerObj.uuid }}">
+
+{% for matches in matches_batches %}
+<div class="col">
+    <ul class="list-group">
+    {% for match in matches %}
+    <li class="list-group-item border-opacity-50 border-primary border-1">
+    {% include  "gdlfront/dashboard/tickets/match_name.html" with match=match.1 wager=match.0  %}
+    </li>
+    {% endfor %}
+</ul>
+</div>
+{% endfor %}
+
+</div>
+

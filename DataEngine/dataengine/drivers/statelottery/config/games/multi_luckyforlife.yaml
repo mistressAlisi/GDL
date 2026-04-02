@@ -1,0 +1,36 @@
+# Lucky for Life
+# Draws daily at 10:38 PM ET
+# Pick 5 numbers from 1-48, plus 1 Lucky Ball from 1-18
+
+state: MULTI
+name: "Lucky for Life"
+slug: lucky-for-life
+url: "https://www.nhlottery.com/game/lucky-for-life"
+game_type: bonus
+
+format:
+  main_count: 5
+  main_range: [1, 48]
+  bonus_count: 1
+  bonus_range: [1, 18]
+  is_positional: false
+
+schedule:
+  days: [daily]
+  times:
+    - time: "22:38"
+      label: null
+  timezone: "America/New_York"
+
+selectors:
+  # NH Lottery displays numbers
+  all_numbers: ".winning-numbers__single-number"
+  bonus_numbers: ".winning-numbers__single-number--luckyball"
+  draw_date: ".winning-numbers__date"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%m/%d/%Y"
+  split_main_bonus: true
+
+active: true

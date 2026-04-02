@@ -1,0 +1,92 @@
+@use 'variables' ;
+@use 'theme-custom-core';
+#sportslotto-terms-v1 {
+  padding: 70px 5%;
+  background: rgba(0,0,0,0.35);
+  color: var(--text-primary);
+
+  .terms-card {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.06);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    box-shadow: 0 0 25px var(--shadow1);
+    padding: 50px 40px;
+    text-align: left;
+    font-size: 1.5rem ;
+
+    h1 { /* gradient/neon heading */ }
+    h2, h3 { /* subheadings */ }
+    p, li { /* text styling */ }
+  }
+}
+
+//// src/_form-fields.scss
+//
+//$form-bg: #182125; // 70% dark with transparency
+//$form-border: rgba(255, 255, 255, 0.15);
+//$form-focus-glow: $primary;
+//$form-text: var(--bs-text-white);
+//$form-placeholder: rgba(255, 255, 255, 0.4);
+//$form-help: var(--bs-soft-pink);
+//$form-error: #dc3545;
+//
+//input,
+//textarea,
+//select,
+//.form-control {
+//  background-color: $form-bg !important;
+//  color: $form-text !important;
+//  border: 1px solid $neon-orange !important;
+//  border-radius: 0.5rem;
+//  padding: 0.75rem 1rem;
+//  font-size: 1rem;
+//  font-family: 'Orbitron', sans-serif;
+//  transition: all 0.3s ease;
+//  box-shadow: none;
+//
+//
+//  backdrop-filter: blur(4px);
+//  -webkit-backdrop-filter: blur(4px);
+//
+//  &::placeholder {
+//    opacity: 0;
+//  }
+//
+//  &:focus {
+//    outline: none;
+//    border-color: $form-focus-glow !important;
+//    box-shadow:
+//      0 0 6px $form-focus-glow,
+//      0 0 12px $form-focus-glow !important;
+//  }
+//}
+//
+//// Help text
+//.form-text {
+//  color: $form-help !important;
+//  font-size: 0.85rem;
+//  text-shadow: 0 0 3px $form-help;
+//}
+//
+//// Invalid input glow
+//.is-invalid {
+//  border-color: $form-error !important;
+//  box-shadow:
+//    0 0 4px $form-error,
+//    0 0 8px $form-error !important;
+//  color: $form-error !important;
+//
+//  &::placeholder {
+//    color: lighten($form-error, 20%) !important;
+//  }
+//}
+//
+//.invalid-feedback {
+//  color: $form-error !important;
+//  font-size: 0.85rem;
+//  margin-top: 0.25rem;
+//  text-shadow: 0 0 3px $form-error;
+//}

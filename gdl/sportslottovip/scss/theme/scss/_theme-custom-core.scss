@@ -1,0 +1,414 @@
+$theme-ticket-styles: (
+        neon: (
+                0: (
+                        bg1: #0a0629, bg2: #100b25,
+                        glow1: #060a0b, glow2: #161b30,
+                        border: #02929e,
+                        shadow1: rgba(#090a25, 0.15), shadow2: rgba(#220e21, 0.10),
+
+                  // TICKET
+                        ticket-border: #0c0550,
+                        ticket-bg-1: #291bd5, ticket-bg-2: #03ea03,
+                        ticket-text: #dd1111,
+                        ticket-glow-outer: #430202,
+                        ticket-glow-inner: #046f78,
+                        ticket-text-glow: #9f18e4,
+                        ticket-text-glow-2: #045861,
+                        ticket-shadow: rgba(#32022f, 0.15),
+
+                  0// PRIZE: cool blue bg → opposite = hot magenta border/text
+                        prize-bg:#012e4c,
+                        prize-border:#320132,
+                        prize-text: #0572b1,
+                        prize-glow-1: #4c044c,
+                        prize-glow-2:#0e2529,
+
+                // These are for Bootstrap / core of the page UI:
+                        bs-primary:#221132,
+                        bs-secondary: #1b0433,
+                        bs-success: #1dd107,
+                        bs-info: #efeaea,
+                        bs-warning: #6f34ae,
+                        bs-danger: #ec0808,
+                        bs-light: #ede1e1,
+                        bs-dark: #491D78,
+                        bs-bg-body-secondary: #040021,
+                        bs-bg-body-tertiary: #290561,
+                        ////table variables///
+                        bs-table-bg: #7d18f3,
+                        bs-table-color-type: #ffffff,
+                        bs-table-striped-bg: #9706d5,
+                        bs-table-striped-color: #fde5e5,
+                        text-primary:#d14545
+                ),
+
+        ),
+
+
+
+
+  // ---------------- DARK ----------------
+  dark: (
+          0: (
+                  bg1:#1f2528, bg2:#121212,
+                  glow1:#09afed, glow2:#ea1b94,
+                  border:#32a0c6,
+                  shadow1:rgba(#07adec,0.25), shadow2:rgba(#e851a9,0.15),
+
+                  ticket-border:#730f2d,
+                  ticket-bg-1: #635c5c, ticket-bg-2: #4a495e,
+                  ticket-text:#373131,
+                  ticket-glow-outer:#1d93bd,
+                  ticket-glow-inner:#a81e6f,
+                  ticket-text-glow:#680000,
+                  ticket-text-glow-2:#fa0092,
+                  ticket-shadow:rgba(#87103e,0.15),
+
+                  prize-bg:#121717,
+                  prize-border:#23181d,
+                  prize-text:#5a6065,
+                  prize-glow-1:#392c2c,
+                  prize-glow-2:#423842,
+
+                // These are for Bootstrap / core of the page UI:
+                        bs-primary:#121212,
+                        bs-secondary: #000000,
+                        bs-success: #4bd13a,
+                        bs-info: #faf4f4,
+                        bs-warning: #2B2C2B,
+                        bs-danger: #f63e3e,
+                        bs-light: #f6dddd,
+                        bs-dark: #dc4848,
+                        bs-bg-body-secondary: #1f2326,
+                        bs-bg-body-tertiary: #010304,
+                  ////table variables///
+                        bs-table-bg: #1a1f51,
+                        bs-table-color-type: #ffffff,
+                        bs-table-striped-bg: #aa00ff,
+                        bs-table-striped-color: #fbfbfb
+          ),
+
+
+  ),
+
+  // ---------------- PINK ----------------
+        pink: (
+                0: (
+                        bg1:#1d0117, bg2:#370125,
+                        glow1:#962176, glow2:#9f1b73,
+                        border:#7a0f52,
+                        shadow1:rgba(#7a0b51,0.15), shadow2:rgba(#64194d,0.10),
+
+                        ticket-border:#af3782,
+                        ticket-bg-1: #d61ff6, ticket-bg-2: #af2683,
+                        ticket-text:#fdf8ff,
+                        ticket-glow-outer:#cc18a3,
+                        ticket-glow-inner:#871764,
+                        ticket-text-glow:#850097,
+                        ticket-text-glow-2:#a34aa3,
+                        ticket-shadow:rgba(#700555,0.10),
+
+                        prize-bg:#d1229c, prize-border:#7a0f52, prize-text:#d985e8,
+                        prize-glow-1:#cc33ff, prize-glow-2:#aa07e8,
+                         bs-primary:#6A1F65,
+                        bs-secondary: #ff00ee,
+                        bs-success: #24c511,
+                        bs-info: #ffffff,
+                        bs-warning:#A930A1,
+                        bs-danger: #ff0000,
+                        bs-light: #922A8B,
+                        bs-dark: #A3006D,
+                        bs-bg-body-secondary: #1b0016,
+                        bs-bg-body-tertiary: #BB34B2,
+                        ////table variables///
+                        bs-table-bg: #ff2eeb,
+                        bs-table-color-type: #ffffff,
+                        bs-table-striped-bg: #9d0dd1,
+                        bs-table-striped-color: #ffffff
+                ),
+
+
+        ),
+
+
+  // ---------------- ORANGE ----------------
+  orange: (
+          0: (
+                  bg1: #261106,
+                  bg2: rgba(60, 28, 0, 0.84),
+                  glow1:          #cc7a1f,          // deep warm amber
+                  glow2:          #9a4f00,          // darker secondary glow
+                  border:         #b86200,
+                  shadow1:        rgba(200, 110, 40, 0.15),
+                  shadow2:        rgba(154, 79, 0, 0.10),
+
+                  ticket-border:  #b86200,
+                    ticket-bg-1: #8c4f00,
+                  ticket-bg-2: #ae4400,         // darker mid tone
+                  ticket-text:    #ffffff,
+                  ticket-glow-outer:#ED7B42,        // subtle outer warm rim
+                  ticket-glow-inner:#cc7a1f,        // inner neon tone
+                  ticket-text-glow:#df723c,         // very soft warm text halo
+                  ticket-text-glow-2:#d36832,
+                  ticket-shadow: rgba(189, 99, 28, 0.1),
+
+                  prize-bg: #c67437,
+                  prize-border:   #9a4f00,
+                  prize-text: #e17500,
+                  prize-glow-1:   #553006,
+                  prize-glow-2:   #7a3f08,
+
+                // These are for Bootstrap / core of the page UI:
+                        bs-primary:#702903,
+                        bs-secondary: #7e3902,
+                        bs-success: #24c511,
+                        bs-info: #ffffff,
+                        bs-warning: #DD4E03,
+                        bs-danger: #ffc200,
+                        bs-light: #FE7B37,
+                        bs-dark: #8E3D0A,
+                        bs-bg-body-secondary: #200b02,
+                        bs-bg-body-tertiary: #682c03,
+                  ////table variables///
+                        bs-table-bg: #833c0b,
+                        bs-table-color-type: #ffffff,
+                        bs-table-striped-bg: #dd4208,
+                        bs-table-striped-color: #ffffff
+          ),
+
+
+  ),
+
+
+// ---------------- BLUE ----------------
+        blue: (
+                0: (
+                        bg1:#000b46,
+                        bg2:#011a30,
+                        glow1:#00a3a8,
+                        glow2:#009299,
+                        border:#22b8b8,
+                        shadow1:rgba(#00a3a8,0.15),
+                        shadow2:rgba(#009299,0.10),
+
+                        ticket-border:#009ea3,
+                        ticket-bg-1: #2045cf, ticket-bg-2: #082591,
+                        ticket-text:#ffffff,
+                        ticket-glow-outer:#22b8b8,
+                        ticket-glow-inner:#33d7d7,
+                        ticket-text-glow:#00e0e0,
+                        ticket-text-glow-2:#22b8b8,
+                        ticket-shadow:rgba(#008c8c,0.8),
+
+                        prize-bg:#040fea,
+                        prize-border:#22b8b8,
+                        prize-text:#14c1a1,
+                        prize-glow-1:#074e4e,
+                        prize-glow-2:#083c3c,
+
+                // These are for Bootstrap / core of the page UI:
+                        bs-primary:#222689,
+                        bs-secondary: #0005cc,
+                        bs-success: #24c511,
+                        bs-info: #ffffff,
+                        bs-warning: #686CDD,
+                        bs-danger: #ff0000,
+                        bs-light: #9194E7,
+                        bs-dark: #3F44D2,
+                        bs-bg-body-secondary: #000a3d,
+                        bs-bg-body-tertiary: #00134c,
+                        ////table variables///
+                        bs-table-bg: #056770,
+                        bs-table-color-type: #ffffff,
+                        bs-table-striped-bg: #101e43,
+                        bs-table-striped-color: #ffffff
+                ),
+
+
+        ),
+
+
+// ---------------- GREEN ----------------
+
+        green: (
+                0: (
+                        bg1:#010e09, bg2:#0c2900,
+                        glow1:#12a15a, glow2:#078741,
+                        border:#2dbd66,
+                        shadow1:rgba(#1a8f55,0.15), shadow2:rgba(#0e6a36,0.10),
+
+                        ticket-border:#097e38,
+                        ticket-bg-1: #205c25, ticket-bg-2: #004500,
+                        ticket-text:#ffffff,
+                        ticket-glow-outer:#2fd32d,
+                        ticket-glow-inner:#114F10,
+                        ticket-text-glow:#2dbd66,
+                        ticket-text-glow-2:#1a8f55,
+                        ticket-shadow:rgba(#2dbd66,0.10),
+
+                        prize-bg:#035024,
+                        prize-border:#065525,
+                        prize-text:#6fdd67,
+                        prize-glow-1:#16492e,
+                        prize-glow-2:#254a33,
+
+
+                // These are for Bootstrap / core of the page UI:
+                        bs-primary:#152B0D,
+                        bs-secondary: #084005,
+                        bs-success: #0f6800,
+                        bs-info: #bfaeae,
+                        bs-warning: #0b7814,
+                        bs-danger: #ff0000,
+                        bs-light: #4CA32D,
+                        bs-dark: #275218,
+                        bs-bg-body-secondary: #000b09,
+                        bs-bg-body-tertiary: #08751f,
+                        ////table variables///
+                        bs-table-bg: #056e02,
+                        bs-table-color-type: #ffffff,
+                        bs-table-striped-bg: #26630c,
+                        bs-table-striped-color: #ffffff
+                ),
+
+
+        ),
+
+
+// ---------------- PURPLE ----------------
+        purple: (
+                0: (
+                        bg1:#10023a, bg2:#1C0230,
+                        glow1:#7317c9, glow2:#8a1edb,
+                        border:#a23ceb,
+                        shadow1:rgba(#7317c9,0.15), shadow2:rgba(#8a1edb,0.10),
+
+                        ticket-border:#9230e5,
+                        ticket-bg-1: #9f5fff, ticket-bg-2: #260061,
+                        ticket-text:#ffffff,
+                        ticket-glow-outer:#7a0ebf,
+                        ticket-glow-inner:#570989,
+                        ticket-text-glow:#a45bd8,
+                        ticket-text-glow-2:#a23ceb,
+                        ticket-shadow:rgba(#9230e5,0.8),
+
+                        prize-bg:#8a1edb,
+                        prize-border:#a23ceb,
+                        prize-text:#4600b3,
+                        prize-glow-1:#b84fff,
+                        prize-glow-2:#c866ff,
+
+                // These are for Bootstrap / core of the page UI:
+                        bs-primary:#220148,
+                        bs-secondary: #110124,
+                        bs-success: #24c511,
+                        bs-info: #ffffff,
+                        bs-warning: #5401B5,
+                        bs-danger: #ff0000,
+                        bs-light: #6501DA,
+                        bs-dark: #430290,
+                        bs-bg-body-secondary: #000000,
+                        bs-bg-body-tertiary: #32026C,
+                        ////table variables///
+                        bs-table-bg: #6514b1,
+                        bs-table-color-type: #ffffff,
+                        bs-table-striped-bg: #400359,
+                        bs-table-striped-color: #ffffff
+                ),
+
+
+        ),
+
+
+  // ---------------- FIRE ----------------
+fire: (
+        0: (
+                bg1:#3e070b,
+                bg2:#870703,
+                glow1:#f62e00,
+                glow2:#ff5500,
+                border:#cc6600,
+                shadow1:#6C0202,
+                shadow2:#240101,
+
+                ticket-border:#D6020F,
+                        ticket-bg-1: #b10000, ticket-bg-2: #cd2500,
+
+                ticket-text:#ffffff,
+                ticket-glow-outer:#C8231A,
+                ticket-glow-inner:#9A1C15,
+                ticket-text-glow:#ec8080,
+                ticket-text-glow-2:#ff2200,
+                ticket-shadow:#C50405,
+
+                prize-bg:#700b11,
+                prize-border:#cc131e,
+                prize-text:#ea0101,
+                prize-glow-1:#e63d00,
+                prize-glow-2:#7c020e,
+
+                // These are for Bootstrap / core of the page UI:
+                        bs-primary:#7e030b,
+                        bs-secondary: #570303,
+                        bs-success: #24c511,
+                        bs-info: #ffffff,
+                        bs-warning: #9D0602,
+                        bs-danger: #ff8000,
+                        bs-light: #F30701,
+                        bs-dark: #490301,
+                        bs-bg-body-secondary: #280509,
+                        bs-bg-body-tertiary: #650402,
+                ////table variables///
+                        bs-table-bg: #d84a00,
+                        bs-table-color-type: #ffffff,
+                        bs-table-striped-bg: #a8031c,
+                        bs-table-striped-color: #ffffff
+        ),
+
+
+),
+
+ice: (
+                0: (
+                        bg1:#041432, bg2:#172950,
+                        glow1:#0c8f9b, glow2:#0c6269,
+                        border:#2a7d86,
+                        shadow1:rgba(#0f6b73,0.18), shadow2:rgba(#117e87,0.18),
+
+                        ticket-border:#1f7680,
+                        ticket-bg-1: #26b6b6, ticket-bg-2: #002842,
+                        ticket-text:#ffffff,
+                        ticket-glow-outer:#3a878f,
+                        ticket-glow-inner:#08a2b1,
+                        ticket-text-glow:#00e2ff,
+                        ticket-text-glow-2:#085057,
+                        ticket-shadow:rgba(#093f42,0.18),
+
+                        prize-bg:#1465A9,
+                        prize-border:#04525a,
+                        prize-text:#43cfc0,
+                        prize-glow-1:#076a5f,
+                        prize-glow-2:#125a5a,
+
+                // These are for Bootstrap / core of the page UI:
+                        bs-primary:#012f98,
+                        bs-secondary: #045CAC,
+                        bs-success: #24c511,
+                        bs-info: #ffffff,
+                        bs-warning: #005a8f,
+                        bs-danger: #ff3e00,
+                        bs-light: #4065BF,
+                        bs-dark: #054BCE,
+                        bs-bg-body-secondary: #000f2f,
+                        bs-bg-body-tertiary: #395AA9,
+                        ////table variables///
+                        bs-table-bg: #084147,
+                        bs-table-color-type: #ffffff,
+                        bs-table-striped-bg: #1fcbdc,
+                        bs-table-striped-color: #ffffff
+                ),
+
+
+)
+);
+

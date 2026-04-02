@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+{% load django_bootstrap5 %}
+{% load i18n %}
+{% load static %}
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE|default:'en' }}" class="h-100" data-bs-theme="{% if BODY_THEME %}{{ BODY_THEME }}{% else %}dark{% endif %}">
+<head>
+
+    <!-- Bootstrap JS -->
+    {% bootstrap_javascript %}
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+
+    <!-- bs5-toast -->
+    <script src="https://unpkg.com/bs5-toast/dist/bs5-toast.js"></script>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="/static/frontend/lobby/img/icon.png">
+    <!-- Page title -->
+    <title>{% block bootstrap5_title %}
+        {{ vdomain.website_name }}
+    {% endblock %}</title>
+
+    <!-- Bootstrap CSS -->
+    {% bootstrap_css %}
+
+    <!-- Optional Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Teko:wght@300..700&family=Dancing+Script:wght@400..700&family=Monoton&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Rajdhani:wght@600&family=Poppins:wght@400;600;800&display=swap">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Font Awesome -->
+    {% if FONT_AWESOME_KIT %}
+        <script src="https://kit.fontawesome.com/{{ FONT_AWESOME_KIT }}" crossorigin="anonymous"></script>
+    {% else %}
+        <script src="https://kit.fontawesome.com/52b95d724a.js" crossorigin="anonymous"></script>
+    {% endif %}
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/sportslottonet/css/index.css"/>
+
+    <!-- SportsLotto VIP Gambling Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "GamblingGame",
+      "name": "SportsLotto VIP",
+      "alternateName": "SPORTSLOTTO.VIP",
+      "description": "A paid sports gaming platform where users pick tickets, track scores, and claim real-money rewards.",
+      "url": "https://sportslotto.vip",
+      "gamePlatform": "Web",
+      "operatingSystem": "All",
+      "applicationCategory": "CasinoGame",
+      "isAccessibleForFree": false,
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "SportsLotto VIP"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 18
+      }
+    }
+    </script>
+
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body class="h-100 w-100 text-center" {% if BODY_THEME %}data-bs-theme="{{ BODY_THEME }}"{% endif %}>
+
+<!-- ============================= -->
+<!--          HEADER               -->
+<!-- ============================= -->
+{% block PAGE_HEADER %}
+<header class="site-header">
+    {% include "sportslottovip/base/header.html" with theme=BODY_THEME %}
+    {% include "sportslottovip/base/topbar.html" with theme=BODY_THEME %}
+    {% include "sportslottovip/base/sticky_nav.html" with theme=BODY_THEME %}
+</header>
+{% endblock %}
+
+<!-- ============================= -->
+<!--          MAIN CONTENT         -->
+<!-- ============================= -->
+<div class="cover-container d-flex w-100 min-vh-100 p-3 mx-auto flex-column">
+    <main class="flex-grow-1">
+        {% block PAGE_BODY %}
+        <!-- Replace with page-specific content -->
+        {% endblock %}
+    </main>
+
+    <!-- ============================= -->
+    <!--          FOOTER              -->
+    <!-- ============================= -->
+    {% block PAGE_FOOTER %}
+        {% include "sportslottovip/base/footer.html" %}
+    {% endblock %}
+</div>
+
+<!-- ============================= -->
+<!--         SCRIPTS               -->
+<!-- ============================= -->
+
+
+
+<!-- Popper (for tooltips / dropdowns) -->
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+
+
+
+<!-- Login Modal & Header JS -->
+<script src="{% static 'sportslottovip/js/login_modal.js' %}" defer></script>
+
+{% block extra_js %}{% endblock %}
+
+</body>
+</html>

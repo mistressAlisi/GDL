@@ -1,0 +1,780 @@
+{% extends "sportslottovip/base/page.html" %}
+
+{% load static %}
+{% block bootstrap5_title %} SPORTSLOTTO.VIP:  How to win {% endblock %}
+{% block PAGE_BODY %}
+<style>
+    body {
+        background-color: var(--bs-secondary);
+        color: white;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    }
+
+    .gradient-text {
+        background: linear-gradient(90deg, #fbbf24, #f59e0b, #fbbf24);
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradient-flow 8s ease infinite;
+    }
+
+    @keyframes gradient-flow {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    .hero-section {
+        position: relative;
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .hero-bg {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, var(--bs-secondary), rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.6));
+    }
+
+    .badge-pill {
+        background: rgba(251, 191, 36, 0.2);
+        border: 1px solid rgba(251, 191, 36, 0.5);
+        border-radius: 50px;
+        padding: 12px 24px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .card-custom {
+        background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+        border: 2px solid rgba(251, 191, 36, 0.3);
+        border-radius: 24px;
+        transition: all 0.3s;
+    }
+
+    .card-custom:hover {
+        border-color: rgba(251, 191, 36, 0.6);
+        transform: translateY(-4px);
+    }
+
+    .card-step {
+        background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), #0a0a0a);
+        border: 2px solid rgba(251, 191, 36, 0.5);
+        border-radius: 24px;
+        padding: 32px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card-step:hover {
+        border-color: rgba(251, 191, 36, 0.8);
+    }
+
+    .step-number {
+        position: absolute;
+        top: -20px;
+        right: 20px;
+        font-size: 120px;
+        font-weight: 900;
+        color: rgba(251, 191, 36, 0.1);
+        line-height: 1;
+    }
+
+    .icon-circle {
+        width: 80px;
+        height: 80px;
+        background: rgba(251, 191, 36, 0.2);
+        border: 2px solid rgba(251, 191, 36, 0.5);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px;
+    }
+
+    .btn-cta {
+        background: linear-gradient(to right, #fbbf24, #f59e0b);
+        box-shadow: 0 0 40px rgba(251, 191, 36, 0.4);
+        transition: transform 0.3s;
+        color: black !important;
+    }
+
+    .btn-cta:hover {
+        transform: scale(1.05);
+        color: black !important;
+    }
+
+    .text-gold {
+        color: #fbbf24;
+    }
+
+    .highlight-box {
+        background: rgba(251, 191, 36, 0.1);
+        border-left: 4px solid #fbbf24;
+        padding: 24px;
+        border-radius: 8px;
+    }
+
+    .process-arrow {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+    }
+
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+    }
+
+    .feature-card {
+        background: #1a1a1a;
+        border: 1px solid rgba(251, 191, 36, 0.3);
+        border-radius: 16px;
+        padding: 24px;
+        transition: all 0.3s;
+    }
+
+    .feature-card:hover {
+        border-color: rgba(251, 191, 36, 0.6);
+        background: rgba(251, 191, 36, 0.05);
+    }
+
+    .ticket-example {
+        background: linear-gradient(135deg, #1a1a1a, #0f172a);
+        border: 2px solid rgba(251, 191, 36, 0.4);
+        border-radius: 16px;
+        padding: 24px;
+    }
+
+    .ticket-row {
+        padding: 12px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .ticket-row:last-child {
+        border-bottom: none;
+    }
+
+    @media (max-width: 768px) {
+        .display-1 {
+            font-size: 3rem;
+        }
+        
+        .step-number {
+            font-size: 80px;
+            top: -10px;
+        }
+        
+        .card-step {
+            padding: 24px;
+        }
+    }
+</style>
+
+<div class="pt-5">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="position-absolute w-100 h-100">
+            <div class="hero-bg"></div>
+        </div>
+
+        <div class="container position-relative text-center py-5">
+            <div class="badge-pill mb-4">
+                <svg width="20" height="20" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                <span class="fw-bold text-gold">THE WINNING SYSTEM</span>
+            </div>
+
+            <h1 class="display-1 fw-bold mb-4">
+                How to Win<br>
+                <span class="gradient-text">on SportsLotto.vip</span>
+            </h1>
+
+            <p class="lead fs-3 text-white px-3" style="max-width: 900px; margin: 0 auto;">
+                Master the <span class="text-gold fw-bold">structured sports lottery system</span> that rewards strategy and sports knowledge
+            </p>
+        </div>
+    </section>
+
+    <!-- Quick Overview -->
+    <section class="py-5" style="background: linear-gradient(to bottom, var(--bs-secondary), var(--bs-dark));">
+        <div class="container px-3">
+            <div class="card-custom p-4 p-md-5">
+                <div class="text-center mb-4">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="40" cy="40" r="38" stroke="#fbbf24" stroke-width="2" fill="rgba(251, 191, 36, 0.1)"/>
+                        <path d="M40 15L45 30L60 32L50 42L53 57L40 49L27 57L30 42L20 32L35 30L40 15Z" fill="#fbbf24"/>
+                        <circle cx="40" cy="40" r="20" stroke="#f59e0b" stroke-width="2" fill="none"/>
+                    </svg>
+                </div>
+                <h2 class="text-center display-6 fw-bold mb-4">A Simple, Structured System</h2>
+                <p class="fs-5 text-white text-center px-3" style="max-width: 900px; margin: 0 auto;">
+                    Winning on SportsLotto.vip is built around a <span class="text-gold fw-bold">simple, structured sports lottery system</span> that combines real sporting events with lottery-style payouts. Instead of placing individual bets, players create a ticket by selecting multiple teams or events and aiming to <span class="text-gold fw-bold">match the outcomes</span> based on official results.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Three-Step Process -->
+    <section class="py-5" style="background: var(--bs-dark);">
+        <div class="container px-3">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold mb-3">The Winning Process</h2>
+                <p class="fs-5 text-white">Three simple steps to start winning</p>
+            </div>
+
+            <div class="row g-4 mb-4">
+                <!-- Step 1 -->
+                <div class="col-md-4">
+                    <div class="card-step h-100">
+                        <div class="step-number">1</div>
+                        <div class="position-relative">
+                            <div class="icon-circle">
+                                <svg width="40" height="40" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                                    <line x1="12" y1="1" x2="12" y2="23"/>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-center fw-bold mb-3">Choose Your Payout</h3>
+                            <p class="text-white text-center">
+                                Select your <span class="text-gold fw-bold">desired payout amount</span> to determine your ticket structure
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="col-md-4">
+                    <div class="card-step h-100">
+                        <div class="step-number">2</div>
+                        <div class="position-relative">
+                            <div class="icon-circle">
+                                <svg width="40" height="40" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                                    <rect x="3" y="3" width="7" height="7"/>
+                                    <rect x="14" y="3" width="7" height="7"/>
+                                    <rect x="14" y="14" width="7" height="7"/>
+                                    <rect x="3" y="14" width="7" height="7"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-center fw-bold mb-3">Select Your Events</h3>
+                            <p class="text-white text-center">
+                                Pick the number of <span class="text-gold fw-bold">teams or events</span> to include on your ticket
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="col-md-4">
+                    <div class="card-step h-100">
+                        <div class="step-number">3</div>
+                        <div class="position-relative">
+                            <div class="icon-circle">
+                                <svg width="40" height="40" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-center fw-bold mb-3">Match Official Results</h3>
+                            <p class="text-white text-center">
+                                All selected outcomes must be <span class="text-gold fw-bold">correct</span> for your ticket to win
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Process Flow Arrows (Mobile Hidden) -->
+            <div class="d-none d-md-flex justify-content-center align-items-center gap-4 mb-5">
+                <div style="width: 100px; height: 2px; background: rgba(251, 191, 36, 0.3);"></div>
+                <svg width="24" height="24" fill="#fbbf24" viewBox="0 0 24 24">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+                <div style="width: 100px; height: 2px; background: rgba(251, 191, 36, 0.3);"></div>
+                <svg width="24" height="24" fill="#fbbf24" viewBox="0 0 24 24">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+                <div style="width: 100px; height: 2px; background: rgba(251, 191, 36, 0.3);"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deep Dive: Step 1 -->
+    <section class="py-5" style="background: linear-gradient(to bottom, var(--bs-dark), var(--bs-secondary));">
+        <div class="container px-3">
+            <div class="row align-items-center g-5 justify-content-center">
+                <div class="col-lg-8">
+                    <div class="badge-pill mb-3">
+                        <span class="fw-bold text-gold">STEP 1</span>
+                    </div>
+                    <h2 class="display-5 fw-bold mb-4">Choose Your Payout Amount</h2>
+                    <p class="fs-5 text-white mb-4">
+                        Start by selecting the <span class="text-gold fw-bold">payout amount</span> you're targeting. This determines the structure of your ticket and the number of teams you'll need to select.
+                    </p>
+                    <div class="highlight-box">
+                        <p class="mb-0 text-white">
+                            <svg width="20" height="20" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24" class="me-2" style="display: inline-block; vertical-align: middle;">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="12" y1="16" x2="12" y2="12"/>
+                                <line x1="12" y1="8" x2="12.01" y2="8"/>
+                            </svg>
+                            <span class="fw-bold">Pro Tip:</span> Higher payout amounts typically require more events to be correct, but offer larger potential returns.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deep Dive: Step 2 -->
+    <section class="py-5" style="background: var(--bs-secondary);">
+        <div class="container px-3">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6 order-lg-2">
+                    <div class="badge-pill mb-3">
+                        <span class="fw-bold text-gold">STEP 2</span>
+                    </div>
+                    <h2 class="display-5 fw-bold mb-4">Select Your Events</h2>
+                    <p class="fs-5 text-white mb-4">
+                        Choose the <span class="text-gold fw-bold">number of teams or events</span> you want to include on a single ticket. The platform automatically generates ticket options that match your criteria.
+                    </p>
+                    <div class="highlight-box mb-4">
+                        <p class="mb-0 text-white">
+                            <svg width="20" height="20" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24" class="me-2" style="display: inline-block; vertical-align: middle;">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                            <span class="fw-bold">Key Point:</span> The more events included, the higher the potential payout — but all outcomes must be correct.
+                        </p>
+                    </div>
+                    <ul class="list-unstyled">
+                        <li class="mb-3 d-flex gap-3">
+                            <svg width="24" height="24" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink: 0;">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <span class="text-white">Review the listed sporting events</span>
+                        </li>
+                        <li class="mb-3 d-flex gap-3">
+                            <svg width="24" height="24" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink: 0;">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <span class="text-white">Evaluate matchups and outcomes</span>
+                        </li>
+                        <li class="d-flex gap-3">
+                            <svg width="24" height="24" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink: 0;">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <span class="text-white">Purchase the ticket you believe has the best chance</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="ticket-example">
+                        <div class="text-center mb-3">
+                            <h4 class="fw-bold text-gold mb-2">Sample 5-Event Ticket</h4>
+                            <p class="small text-white-50">All outcomes must be correct</p>
+                        </div>
+                        <div class="ticket-row">
+                            <span class="text-white"><u>Lakers</u> vs Celtics</span>
+                            <span class="badge" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.5);">Lakers Win</span>
+                        </div>
+                        <div class="ticket-row">
+                            <span class="text-white"><u>Cowboys</u> vs Eagles</span>
+                            <span class="badge" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.5);">Cowboys Win</span>
+                        </div>
+                        <div class="ticket-row">
+                            <span class="text-white"><u>Yankees</u> vs Red Sox</span>
+                            <span class="badge" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.5);">Yankees Win</span>
+                        </div>
+                        <div class="ticket-row">
+                            <span class="text-white"><u>Liverpool</u> vs Arsenal</span>
+                            <span class="badge" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.5);">Liverpool Win</span>
+                        </div>
+                        <div class="ticket-row">
+                            <span class="text-white">Maple Leafs vs <u>Bruins</u></span>
+                            <span class="badge" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.5);">Bruins Win</span>
+                        </div>
+                        <div class="mt-4 p-3 text-center" style="background: rgba(251, 191, 36, 0.1); border-radius: 8px;">
+                            <div class="text-white-50 small mb-1">Potential Payout</div>
+                            <div class="text-gold fw-bold fs-4">$500</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deep Dive: Step 3 -->
+    <section class="py-5" style="background: linear-gradient(to bottom, var(--bs-secondary), var(--bs-dark));">
+        <div class="container px-3">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <div class="badge-pill mb-3">
+                        <span class="fw-bold text-gold">STEP 3</span>
+                    </div>
+                    <h2 class="display-5 fw-bold mb-4">Match Official Results</h2>
+                    <p class="fs-5 text-white mb-4">
+                        Tickets are graded using <span class="text-gold fw-bold">verified game results</span>. All selected outcomes on your ticket must be correct for the ticket to win.
+                    </p>
+                    <div class="highlight-box mb-4">
+                        <p class="mb-0 text-white">
+                            <svg width="20" height="20" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24" class="me-2" style="display: inline-block; vertical-align: middle;">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                            <span class="fw-bold">Transparent Results:</span> Winning tickets are credited directly to your account based on official outcomes.
+                        </p>
+                    </div>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="mb-2">
+                                <svg width="24" height="24" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                    <path d="M9 12l2 2 4-4"/>
+                                </svg>
+                            </div>
+                            <h5 class="fw-bold mb-2">Official Results</h5>
+                            <p class="text-white-50 small mb-0">Based on verified game outcomes</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="mb-2">
+                                <svg width="24" height="24" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12 6 12 12 16 14"/>
+                                </svg>
+                            </div>
+                            <h5 class="fw-bold mb-2">Real-Time Grading</h5>
+                            <p class="text-white-50 small mb-0">Tickets graded after games conclude</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="mb-2">
+                                <svg width="24" height="24" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                                </svg>
+                            </div>
+                            <h5 class="fw-bold mb-2">Direct Credit</h5>
+                            <p class="text-white-50 small mb-0">Winnings paid to your account</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card-custom p-4">
+                        <div class="text-center mb-4">
+                            <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Ticket -->
+                                <rect x="20" y="30" width="80" height="60" rx="8" fill="rgba(251, 191, 36, 0.1)" stroke="#fbbf24" stroke-width="2"/>
+                                <circle cx="20" cy="60" r="6" fill="#0a0a0a"/>
+                                <circle cx="100" cy="60" r="6" fill="#0a0a0a"/>
+
+                                <!-- Checkmarks -->
+                                <polyline points="35,45 40,50 50,40" stroke="#22c55e" stroke-width="3" fill="none"/>
+                                <polyline points="35,60 40,65 50,55" stroke="#22c55e" stroke-width="3" fill="none"/>
+                                <polyline points="35,75 40,80 50,70" stroke="#22c55e" stroke-width="3" fill="none"/>
+
+                                <!-- Trophy -->
+                                <path d="M70 45h-5v-5h20v5h-5v5c0 5-5 8-5 8v5h10v3H65v-3h10v-5s-5-3-5-8v-5Z" fill="#fbbf24"/>
+                                <rect x="70" y="70" width="10" height="3" fill="#fbbf24"/>
+
+                                <!-- Sparkles -->
+                                <path d="M105 25 L107 30 L112 32 L107 34 L105 39 L103 34 L98 32 L103 30 Z" fill="#fbbf24"/>
+                                <path d="M15 75 L17 80 L22 82 L17 84 L15 89 L13 84 L8 82 L13 80 Z" fill="#fbbf24"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-center fw-bold mb-3 text-gold">Winning Example</h3>
+                        <p class="text-white text-center mb-4">
+                            A 5-event ticket with <span class="text-gold fw-bold">all correct outcomes</span> wins the full payout amount
+                        </p>
+                        <div class="p-3 text-center" style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 8px;">
+                            <div class="small text-white-50 mb-1">5/5 Events Correct</div>
+                            <div class="text-success fw-bold fs-3">$500 WIN! 🎉</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Winning Formula -->
+    <section class="py-5" style="background: var(--bs-dark);">
+        <div class="container px-3">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold mb-3">The Winning Formula</h2>
+                <p class="fs-5 text-white">Success comes from smart strategy</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card-custom p-4 h-100">
+                        <div class="icon-circle" style="width: 60px; height: 60px; margin-bottom: 20px;">
+                            <svg width="30" height="30" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h4 class="fw-bold mb-3">Sports Knowledge</h4>
+                        <p class="text-white mb-0">
+                            Understanding <span class="text-gold fw-bold">team matchups, trends, and conditions</span> helps you make informed selections
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card-custom p-4 h-100">
+                        <div class="icon-circle" style="width: 60px; height: 60px; margin-bottom: 20px;">
+                            <svg width="30" height="30" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                            </svg>
+                        </div>
+                        <h4 class="fw-bold mb-3">Strategic Selection</h4>
+                        <p class="text-white mb-0">
+                            Choose tickets with <span class="text-gold fw-bold">favorable combinations</span> and realistic outcome scenarios
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card-custom p-4 h-100">
+                        <div class="icon-circle" style="width: 60px; height: 60px; margin-bottom: 20px;">
+                            <svg width="30" height="30" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                                <line x1="12" y1="1" x2="12" y2="23"/>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                        </div>
+                        <h4 class="fw-bold mb-3">Smart Wagering</h4>
+                        <p class="text-white mb-0">
+                            Balance <span class="text-gold fw-bold">payout potential with realistic expectations</span> for your ticket selections
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Points Summary -->
+    <section class="py-5" style="background: linear-gradient(to bottom, var(--bs-dark), var(--bs-secondary));">
+        <div class="container px-3">
+            <div class="card-custom p-4 p-md-5">
+                <h2 class="text-center display-5 fw-bold mb-5">Key Points to Remember</h2>
+
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="d-flex gap-3 mb-4">
+                            <div style="width: 40px; height: 40px; background: rgba(251, 191, 36, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <svg width="20" height="20" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-2">Multi-Event Structure</h5>
+                                <p class="text-white-50 mb-0">Every ticket combines multiple sporting events into one wager</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="d-flex gap-3 mb-4">
+                            <div style="width: 40px; height: 40px; background: rgba(251, 191, 36, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <svg width="20" height="20" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-2">Lottery-Style Payouts</h5>
+                                <p class="text-white-50 mb-0">Higher potential returns through multi-event combinations</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="d-flex gap-3 mb-4">
+                            <div style="width: 40px; height: 40px; background: rgba(251, 191, 36, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <svg width="20" height="20" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-2">Official Results Only</h5>
+                                <p class="text-white-50 mb-0">Tickets graded using verified, official game outcomes</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="d-flex gap-3 mb-4">
+                            <div style="width: 40px; height: 40px; background: rgba(251, 191, 36, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <svg width="20" height="20" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-2">Smaller Wagers</h5>
+                                <p class="text-white-50 mb-0">Wager smaller amounts with potential for larger returns</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="d-flex gap-3 mb-4">
+                            <div style="width: 40px; height: 40px; background: rgba(251, 191, 36, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <svg width="20" height="20" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-2">Direct Account Credit</h5>
+                                <p class="text-white-50 mb-0">Winning tickets credited directly to your player account</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="d-flex gap-3 mb-4">
+                            <div style="width: 40px; height: 40px; background: rgba(251, 191, 36, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <svg width="20" height="20" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-2">Consolation Payouts</h5>
+                                <p class="text-white-50 mb-0">Not every game has to win — view our <a href="/slv/consolation_payout_table" class="text-gold" style="text-decoration: none;">consolation payout structure</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why This System Works -->
+    <section class="py-5" style="background: var(--bs-secondary);">
+        <div class="container px-3">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold mb-3">Why This System Works</h2>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="highlight-box h-100">
+                        <div class="d-flex align-items-start gap-3">
+                            <svg width="32" height="32" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink: 0;">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                <path d="M9 12l2 2 4-4"/>
+                            </svg>
+                            <div>
+                                <h4 class="fw-bold mb-3">Rewards Sports Knowledge</h4>
+                                <p class="text-white mb-0">
+                                    This system rewards players who understand the sports they're playing. Your ability to <span class="text-gold fw-bold">analyze matchups and predict outcomes</span> directly impacts your success.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="highlight-box h-100">
+                        <div class="d-flex align-items-start gap-3">
+                            <svg width="32" height="32" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink: 0;">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                            <div>
+                                <h4 class="fw-bold mb-3">Bigger Payout Potential</h4>
+                                <p class="text-white mb-0">
+                                    By combining multiple events on one ticket, players can achieve <span class="text-gold fw-bold">higher payout potential</span> with smaller wager amounts compared to single-event betting.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="highlight-box h-100">
+                        <div class="d-flex align-items-start gap-3">
+                            <svg width="32" height="32" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink: 0;">
+                                <rect x="3" y="8" width="18" height="12" rx="2"/>
+                                <circle cx="3" cy="14" r="1" fill="#fbbf24"/>
+                                <circle cx="21" cy="14" r="1" fill="#fbbf24"/>
+                            </svg>
+                            <div>
+                                <h4 class="fw-bold mb-3">Simple & Structured</h4>
+                                <p class="text-white mb-0">
+                                    No need to navigate complex betting markets. The <span class="text-gold fw-bold">ticket-based structure</span> makes it easy to understand exactly what you're playing and what you could win.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="highlight-box h-100">
+                        <div class="d-flex align-items-start gap-3">
+                            <svg width="32" height="32" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink: 0;">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                            <div>
+                                <h4 class="fw-bold mb-3">Real-Time Excitement</h4>
+                                <p class="text-white mb-0">
+                                    Follow <span class="text-gold fw-bold">live sporting events</span> as your ticket plays out. Every game matters, creating sustained excitement throughout the day.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-5" style="background: linear-gradient(to top, var(--bs-secondary), var(--bs-dark));">
+        <div class="container text-center px-3">
+            <div class="mb-4">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="40" cy="40" r="38" stroke="#fbbf24" stroke-width="2" fill="rgba(251, 191, 36, 0.1)"/>
+                    <path d="M40 15L45 30L60 32L50 42L53 57L40 49L27 57L30 42L20 32L35 30L40 15Z" fill="#fbbf24"/>
+                </svg>
+            </div>
+            <h2 class="display-5 fw-bold mb-4">Ready to Win?</h2>
+            <p class="fs-5 text-white mb-4" style="max-width: 700px; margin: 0 auto;">
+                Put your sports knowledge to the test with structured multi-event tickets and lottery-style payouts
+            </p>
+            <div class="d-flex flex-column flex-md-row gap-3 justify-content-center align-items-center">
+                <a href="#" class="btn btn-lg btn-cta fw-bold px-5 py-3" style="border-radius: 12px; font-size: 20px; text-transform: uppercase; letter-spacing: 1px;">
+                    START PLAYING NOW
+                </a>
+                <a href="/slv/differences" class="btn btn-lg fw-bold px-5 py-3" style="border-radius: 12px; font-size: 20px; text-transform: uppercase; letter-spacing: 1px; background: transparent; border: 2px solid #fbbf24; color: #fbbf24; transition: all 0.3s;">
+                    SEE THE DIFFERENCE
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    // Keep your existing Play Now login functionality
+    document.addEventListener("DOMContentLoaded", () => {
+        const playButton = document.querySelector(".btn-cta");
+        const loginTrigger = document.getElementById("loginTrigger");
+
+        if (playButton && loginTrigger) {
+            playButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                loginTrigger.click();
+            });
+        }
+    });
+</script>
+{% endblock %}

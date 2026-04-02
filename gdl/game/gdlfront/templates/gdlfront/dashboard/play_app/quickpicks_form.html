@@ -1,0 +1,170 @@
+{#{% extends "lobby/dashboard/index.html" %}#}
+{% extends "minerve/pages/responsive_dashboard/index.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% block MINERVE_PAGE_NAV_HEADER_POST_MENU %}
+<div class="col">
+    <button id="gdl_buy_now" class="btn btn-success  p-2 m-2 rounded-3"   data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{% translate "Buy selected tickets" %}" title="{% translate "Buy now!" %}"><i class="fa-duotone fa-solid fa-shopping-cart "></i> {% translate "Cart" %} <span id="gdl_active_cnt" class="badge rounded-pill text-bg-success">{{ gdl_count }}</span></button>
+    <a id="cart" class="btn btn-danger p-2 m-2 rounded-3"  href="/cashier/deposit"><i class="fa-duotone fa-solid fa-cash-register"></i>Cashier</a>
+</div>
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_PRE_BODY %}
+{#{% include "gdlfront/dashboard/play_app/param_form.html" %}#}
+{% endblock %}
+{% block bootstrap5_title %}
+    {{ vdomain.website_name }}: Get Quick Picks!
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY %}
+
+{% include "minerve/pages/dynamic_dashboard/loading_toast.html" %}
+{% include "gdlfront/dashboard/play_app/offcanvas_cart.html" %}
+<script src="https://unpkg.com/lucide@latest"></script>
+<form method="POST" action="#" data-post-url="tickets/confirm" id="confirm_form" onsubmit="window.quickPicksForm._save_tickets(event);">
+    {% csrf_token %}
+    <input type="hidden" id="gdl_data"  name="gdl_data" value="{{ bet.id }}">
+    <input type="hidden" id="use_bonus_input" name="use_bonus" value="false">
+</form>
+<link rel="stylesheet" href="/static/gdlfront/css/sportslotto.css"/>
+<div class="form-page-container">
+        <div class="form-page-wrapper">
+
+            <!-- Back Button -->
+            <a href="/game/play" class="btn back-btn mb-3 mt-3">
+                <i class="fa-solid fa-arrow-left me-2"></i>
+                {% translate "Back to Menu" %}
+            </a>
+
+            <!-- Balance Card -->
+            <div class="balance-card mb-4">
+                <table class="table table-borderless text-white mb-0">
+                    <thead>
+                        <tr class="balance-header">
+                            <th class="pb-3">{% translate "Balance" %}</th>
+                            <th class="pb-3">{% translate "Pending" %}</th>
+                            <th class="pb-3">{% translate "Free Play" %}</th>
+                            <th class="pb-3">{% translate "Avail." %}</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="pt-3 balance-amount" id="balance-amount">0.00</td>
+                            <td class="pt-3 pending-amount" id="pending-amount">0.00</td>
+                            <td class="pt-3 balance-amount bonus-amount bonus-balance" id="available-bonus">0.00</td>
+                            <td class="pt-3 available-amount" id="available-amount">0.00</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Quick Picks Form -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-card">
+                        <h1 class="form-title  mb-2">
+                            <i class="fa-solid fa-stars me-2 bouncing-icon"></i>
+                            {% if quick_pick_name %}{{ quick_pick_name }}{% endif %} Quick Picks!
+                        </h1>
+                        <p class="form-subtitle mb-4">
+                            {% translate "Quick picks are AI-chosen tickets on 4 events to win roughly 20 for 1 risked. (Minimum purchase 5 tickets.)" %}
+                        </p>
+
+                        <form method="post" onsubmit="return window.quickPicksForm.start(event);" action="#playnow" id="quickpicks-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="ruleset" id="ruleset" value="{{ ruleset }}" />
+                            <input type="hidden" name="min_payout" id="min_payout" value="20" />
+                            <input type="hidden" name="events_within" id="events_within" value="129600" />
+                            <input type="hidden" name="vhost" id="vhost" value="{{ vhost.uuid }}" />
+                            <input type="hidden" name="vdomain" id="vdomain" value="{{ vdomain.uuid }}" />
+                            <input type="hidden" name="account" id="account" value="{{ account.uuid }}" />
+                            <input type="hidden" name="depth" id="depth" value="4" />
+                            {% for group in filter_groups %}
+                                <input class="sport-entry" type="hidden" value="{% if group %}{{ group.uuid }}{% else %}{{ group.uuid }}{% endif %}" id="group_{{ forloop.counter }}" name="group_{{ forloop.counter }}" checked />
+                            {% endfor %}
+                            {% for sport in filter_sports %}
+                                <input class="sport-entry" type="hidden" value="{{ sport.uuid }}" id="sport_{{ forloop.counter }}" name="sport_{{ forloop.counter }}" checked />
+                            {% endfor %}
+                            <div class="row g-4 mb-4">
+                                <!-- Ticket Count -->
+                                <div class="col-md-6">
+                                    <div class="input-container">
+                                        <label for="count" class="form-label text-white fw-semibold">
+                                            <i class="fa-solid fa-ticket me-2"></i>
+                                            {% translate "Ticket Count:" %}
+                                        </label>
+                                        <input
+                                            type="number"
+                                            class="form-control input-enhanced"
+                                            id="count"
+                                            name="count"
+                                            min="5"
+                                            max="9999"
+                                            value="5"
+                                        >
+                                    </div>
+                                </div>
+
+                                <!-- Risk Amount -->
+                                <div class="col-md-6">
+                                    <div class="input-container">
+                                        <label for="stake" class="form-label text-white fw-semibold">
+                                            <i class="fa-solid fa-dollar-sign me-2"></i>
+                                            {% translate "Risk Amount:" %}
+                                        </label>
+                                        <input
+                                            type="number"
+                                            class="form-control input-enhanced"
+                                            id="stake"
+                                            name="stake"
+                                            min="1"
+                                            max="100"
+                                            value="1"
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Possible Returns Display -->
+                            <div class="return-display mb-4">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <span class="text-white fw-semibold">
+                                        <i class="fa-solid fa-trophy me-2 text-success"></i>
+                                        {% translate "Possible Return per ticket (20 to 1):" %}
+                                    </span>
+                                    <span class="return-amount" id="possible-return">
+                                        $20.00
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn btn-gradient w-100 py-3 fs-5 fw-semibold">
+                                <i class="fa-solid fa-sparkles me-2"></i>
+                                {% translate "Get Quick Picks!" %}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script type="module">
+        import {QuickPicksForm} from "/static/gdlfront/js/GDLv2/qp.js";
+        // Initialize Quick Picks Form
+        $(document).ready(function() {
+            window.quickPicksForm = new QuickPicksForm('quickpicks-form');
+        });
+    </script>
+{%  endblock %}
+{% block MINERVE_PAGE_FOOTER %}
+{% include "lobby/index/theme_switcher.html" %}
+{% include "gdlfront/dashboard/play_app/modals.html" %}
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+{% include "lobby/dashboard/components/account_sidebar_header.html" %}
+{% endblock %}

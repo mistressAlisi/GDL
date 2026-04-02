@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+}
+
+@layer base {
+  * {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+  }
+
+  html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    /* Better text scaling on small screens */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    font-size: var(--font-size);
+  }
+
+  #root {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  /* Responsive scaling for smaller viewports */
+  @media (max-width: 1024px) and (min-width: 768px) {
+    html {
+      font-size: 15px;
+    }
+  }
+
+  @media (max-width: 767px) and (min-width: 640px) {
+    html {
+      font-size: 14px;
+    }
+  }
+
+  /* Prevent text from being too small on mobile */
+  @media (max-width: 639px) {
+    html {
+      font-size: 14px;
+    }
+  }
+}
+
+/* Hide scrollbar but allow scrolling */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Thin scrollbar for better UX on tablet/laptop */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Add support for touch manipulation */
+.touch-manipulation {
+  touch-action: manipulation;
+}

@@ -1,0 +1,3 @@
+run_id,total_wagered,total_paid_out,total_hold,hold_pct,total_bettors,total_wins,total_losses
+1,1180000.0,1165960.0,14040.0,1.1898305084745762,118000,745,117255
+2,1120000.0,972580.0,147420.0,13.1625,112000,571,111429

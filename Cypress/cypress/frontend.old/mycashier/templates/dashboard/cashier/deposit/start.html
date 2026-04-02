@@ -1,0 +1,16 @@
+{% load humanize %}
+{% load i18n %}
+{% load mathfilters %}
+
+<div class="text-start">
+    <p> {% translate "Processors open in a separate tab/window to capture your payment information." %}</p>
+
+    <div class="iframe-container" style="position: relative; width: 100%; padding-bottom: 100%; overflow: auto;">
+        <iframe
+            src="{{ iframe_url }}"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+            allow="payment; geolocation"
+        ></iframe>
+    </div>
+</div>
+

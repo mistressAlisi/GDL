@@ -1,0 +1,73 @@
+{% load i18n %}
+<div>
+
+ <h6>
+{#   {% if match.sport.group.icon %}#}
+{#       <i class="{{ match.sport.group.icon }}"> - </i>#}
+{#   {% endif %}#}
+     {{ match.sport.key }} -
+{#{{ wager.uuid }}#}
+
+ {% if DEV_SHOW_UUIDS %}
+ <p>Wager: {{ wager.uuid }}</p>
+ <p>Match: {{ match.uuid }}</p>
+ {% endif %}
+ {%  if DEV_SHOW_WDATA %}
+ WUUID: {{ wager.uuid }} Status: {{ wager.status }} GRADE: {{ wager.grade_outcome }} GRADE at: {{ wager.graded_at }}
+ {% endif %}
+ {% if type == "home" or match.home_team == wager.team_1 %}
+    <span class="text-decoration-underline text-success" >{{ match.home_team.get_name }}</span>
+{% elif type == "away" or match.away_team == wager.team_1 %}
+    <span class="text-decoration-underline text-success">{{ match.away_team.get_name }}</span>
+ {% elif type == "draw" or match.for_draw == true %}
+    <span class="text-muted">{{ match.away_team.get_name }}</span>
+{% endif %}
+vs
+{% if type == "away" or match.away_team == wager.team_1 %}
+    <span>{{ match.home_team.get_name }}</span>
+{% elif type == "home" or match.home_team == wager.team_1 %}
+    <span>{{ match.away_team.get_name }}</span>
+{% elif type == "draw" or match.for_draw == true %}
+    <span class="text-muted">{{ match.home_team.get_name }}</span>
+{% else %}
+    {{ match.home_team.get_name }}
+{% endif %}
+ </h6>
+{% if home_score >= 0 and away_score >= 0  %}
+{% if type == "home" or match.home_team == wager.team_1 %}
+<h6>{{ home_score|floatformat:0 }} - {{ away_score|floatformat:0 }}</h6>
+{% else %}
+<h6>{{ away_score|floatformat:0 }} - {{ home_score|floatformat:0 }}</h6>
+{% endif %}
+{% endif %}
+{% if type == "draw" %} <h6>FOR DRAW</h6>{% endif %}
+<p>
+{#{{ wager.uuid }}#}
+{#{{wager.status}}#}
+{#{{ wager.match.uuid }}#}
+{% if match.in_play %}
+
+ <span class="badge rounded-pill bg-primary text-light d-inline"><i class="fa-duotone fa-solid fa-timer pe-1"></i>{% translate "Match in-progress!" %}</span>
+
+{%  elif wager.status == "L" %}
+<span class="badge rounded-pill bg-danger text-light d-inline"><i class="fa-duotone fa-solid fa-xmark pe-1"></i>{% translate "Lost!" %}</span>
+{%  elif wager.status == "W" %}
+<span class="badge rounded-pill bg-success  text-light d-inline"><i class="fa-duotone fa-solid fa-star pe-1"></i>{% translate "Won!" %}</span>
+{% elif match.status_short == "PPD" %}
+<span class="badge rounded-pill bg-warning-subtle  text-light d-inline"><i class="fa-duotone fa-solid fa-clock pe-1"></i>{% translate "Postponed" %}</span>
+{% elif match.status_short == "CANC" %}
+<span class="badge rounded-pill bg-warning-subtle  text-light d-inline"><i class="fa-duotone fa-solid fa-clock pe-1"></i>{% translate "Cancelled" %}</span>
+{% elif status == "Upcoming" %}
+<span class="badge rounded-pill bg-secondary  text-light d-inline"><i class="fa-duotone fa-solid fa-clock pe-1"></i>{{ match.commence_time }}</span>
+{% elif status == "Not Started" or status == "1" or not status %}
+    <span class="badge rounded-pill bg-secondary  text-light d-inline"><i class="fa-duotone fa-solid fa-clock pe-1"></i>{{ match.commence_time }}</span>
+{% else %}
+<span class="badge rounded-pill bg-secondary  text-light d-inline"><i class="fa-duotone fa-solid fa-clock pe-1"></i>{{ status }}</span>
+
+{% endif %}
+</p>
+{% if DEV_SHOW_UUIDS %}
+<hr class="border-success border-opacity-50 border-2"/>
+{% endif %}
+</div>
+

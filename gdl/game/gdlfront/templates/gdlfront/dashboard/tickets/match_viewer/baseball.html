@@ -1,0 +1,225 @@
+<div class="container-fluid">
+<h3>
+    {% if home_score.score > away_score.score %}
+    <span class="text-success text-decoration-underline">
+    {% endif %}
+    {{ home_score.team.get_name }} : {{ home_score.score }}
+    {% if home_score.score > away_score.score %}
+    </span>
+    {% endif %}
+    -
+    {% if home_score.score < away_score.score %}
+    <span class="text-success text-decoration-underline">
+    {% endif %}
+    {{ away_score.score }} : {{ away_score.team.get_name }}
+    {% if home_score.score < away_score.score %}
+    </span>
+    {% endif %}
+</h3>
+{% if home_score.score_data and away_score.score_data %}
+    <table class="table table-responsive table-striped-columns table-hover table-info">
+        <tbody>
+        <tr>
+            <td>
+                {% if match.home_team.card_logo %}
+                    <img src="{{ match.home_team.card_logo.url }}" alt="Logo" class="rounded mx-auto d-block img-fluid pe-1" style="max-width: 60px; max-height: 60px;"/>
+                {% else %}
+                {% endif %}
+                {{ match.home_team.get_name }}
+            </td>
+            <td>
+                {% if home_score.score_data.inning_1 > away_score.score_data.inning_1 %}
+                    <strong>
+                {% endif %}
+                {{ home_score.score_data.inning_1 }}
+                {% if home_score.score_data.inning_1 > away_score.score_data.inning_1 %}
+                    </strong>
+                {% endif %}
+            </td>
+            <td>
+                {% if home_score.score_data.inning_2 > away_score.score_data.inning_2 %}
+                    <strong>
+                {% endif %}
+                {{ home_score.score_data.inning_2 }}
+                {% if home_score.score_data.inning_2 > away_score.score_data.inning_2 %}
+                    </strong>
+                {% endif %}
+            </td>
+            <td>
+                {% if home_score.score_data.inning_3 > away_score.score_data.inning_3 %}
+                    <strong>
+                {% endif %}
+                {{ home_score.score_data.inning_3 }}
+                {% if home_score.score_data.inning_3 > away_score.score_data.inning_3 %}
+                    </strong>
+                {% endif %}
+            </td>
+            <td>
+                {% if home_score.score_data.inning_4 > away_score.score_data.inning_4 %}
+                    <strong>
+                {% endif %}
+                {{ home_score.score_data.inning_4 }}
+                {% if home_score.score_data.inning_4 > away_score.score_data.inning_4 %}
+                    </strong>
+                {% endif %}
+            </td>
+            <td>
+                {% if home_score.score_data.inning_5 > away_score.score_data.inning_5 %}
+                    <strong>
+                {% endif %}
+                {{ home_score.score_data.inning_5 }}
+                {% if home_score.score_data.inning_5 > away_score.score_data.inning_5 %}
+                    </strong>
+                {% endif %}
+            </td>
+            <td>
+                {% if home_score.score_data.inning_6 > away_score.score_data.inning_6 %}
+                    <strong>
+                {% endif %}
+                {{ home_score.score_data.inning_6 }}
+                {% if home_score.score_data.inning_6 > away_score.score_data.inning_6 %}
+                    </strong>
+                {% endif %}
+            </td>
+            <td>
+                {% if home_score.score_data.inning_7 > away_score.score_data.inning_7 %}
+                    <strong>
+                {% endif %}
+                {{ home_score.score_data.inning_7 }}
+                {% if home_score.score_data.inning_7 > away_score.score_data.inning_7 %}
+                    </strong>
+                {% endif %}
+            </td>
+            <td>
+                {% if home_score.score_data.inning_8 > away_score.score_data.inning_8 %}
+                    <strong>
+                {% endif %}
+                {{ home_score.score_data.inning_8 }}
+                {% if home_score.score_data.inning_8 > away_score.score_data.inning_8 %}
+                    </strong>
+                {% endif %}
+            </td>
+            <td>
+                {% if home_score.score_data.inning_9 > away_score.score_data.inning_9 %}
+                    <strong>
+                {% endif %}
+                {{ home_score.score_data.inning_9 }}
+                {% if home_score.score_data.inning_9 > away_score.score_data.inning_9 %}
+                    </strong>
+                {% endif %}
+            </td>
+            <td>{{ home_score.score_data.extra }}</td>
+            <td>{{ home_score.score_data.hits }}</td>
+        </tr>
+        <tr>
+            <td><strong>Home <i class="fa-duotone fa-solid fa-up-to-line pe-2"></i><i class="fa-duotone fa-solid fa-down-to-line ps-2"></i> Away  </strong></td>
+            <td><strong>I1</strong></td>
+            <td><strong>I2</strong></td>
+            <td><strong>I3</strong></td>
+            <td><strong>I4</strong></td>
+            <td><strong>I5</strong></td>
+            <td><strong>I6</strong></td>
+            <td><strong>I7</strong></td>
+            <td><strong>I8</strong></td>
+            <td><strong>I9</strong></td>
+            <td><strong>EX</strong></td>
+            <td><strong>HITS</strong></td>
+        </tr>
+        <tr>
+            <td>
+                {% if match.away_team.card_logo %}
+                    <img src="{{ match.away_team.card_logo.url }}" alt="Logo" class="rounded mx-auto d-block img-fluid pe-1" style="max-width: 60px; max-height: 60px;"/>
+                {% else %}
+                {% endif %}
+                {{ match.away_team.get_name }}
+            </td>
+         <td>
+                {% if home_score.score_data.inning_1 < away_score.score_data.inning_1 %}
+                    <strong>
+                {% endif %}
+                {{ away_score.score_data.inning_1 }}
+                {% if home_score.score_data.inning_1 < away_score.score_data.inning_1 %}
+                    </strong>
+                {% endif %}
+            </td>
+            <td>
+                {% if home_score.score_data.inning_2 < away_score.score_data.inning_2 %}
+                    <strong>
+                {% endif %}
+                {{ away_score.score_data.inning_2 }}
+                {% if away_score.score_data.inning_2 < away_score.score_data.inning_2 %}
+                    </strong>
+                {% endif %}
+            </td>
+            <td>
+                {% if home_score.score_data.inning_3 < away_score.score_data.inning_3 %}
+                    <strong>
+                {% endif %}
+                {{ away_score.score_data.inning_3 }}
+                {% if home_score.score_data.inning_3 < away_score.score_data.inning_3 %}
+                    </strong>
+                {% endif %}
+            </td>
+            <td>
+                {% if home_score.score_data.inning_4 < away_score.score_data.inning_4 %}
+                    <strong>
+                {% endif %}
+                {{ away_score.score_data.inning_4 }}
+                {% if home_score.score_data.inning_4 < away_score.score_data.inning_4 %}
+                    </strong>
+                {% endif %}
+            </td>
+            <td>
+                {% if home_score.score_data.inning_5 < away_score.score_data.inning_5 %}
+                    <strong>
+                {% endif %}
+                {{ away_score.score_data.inning_5 }}
+                {% if home_score.score_data.inning_5 < away_score.score_data.inning_5 %}
+                    </strong>
+                {% endif %}
+            </td>
+            <td>
+                {% if home_score.score_data.inning_6 < away_score.score_data.inning_6 %}
+                    <strong>
+                {% endif %}
+                {{ away_score.score_data.inning_6 }}
+                {% if home_score.score_data.inning_6 < away_score.score_data.inning_6 %}
+                    </strong>
+                {% endif %}
+            </td>
+            <td>
+                {% if home_score.score_data.inning_7 < away_score.score_data.inning_7 %}
+                    <strong>
+                {% endif %}
+                {{ away_score.score_data.inning_7 }}
+                {% if away_score.score_data.inning_7 < away_score.score_data.inning_7 %}
+                    </strong>
+                {% endif %}
+            </td>
+            <td>
+                {% if home_score.score_data.inning_8 < away_score.score_data.inning_8 %}
+                    <strong>
+                {% endif %}
+                {{ away_score.score_data.inning_8 }}
+                {% if away_score.score_data.inning_8 < away_score.score_data.inning_8 %}
+                    </strong>
+                {% endif %}
+            </td>
+            <td>
+                {% if home_score.score_data.inning_9 < away_score.score_data.inning_9 %}
+                    <strong>
+                {% endif %}
+                {{ away_score.score_data.inning_9 }}
+                {% if home_score.score_data.inning_9 < away_score.score_data.inning_9 %}
+                    </strong>
+                {% endif %}
+            </td>
+            <td>{{ away_score.score_data.extra }}</td>
+            <td>{{ away_score.score_data.hits }}</td>
+        </tr>
+        </tbody>
+    </table>
+{% else %}
+
+{% endif %}
+</div>

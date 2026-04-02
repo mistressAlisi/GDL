@@ -1,0 +1,601 @@
+{% extends "sportslottonet/base/page.html" %}
+
+{% load static %}
+{% block bootstrap5_title %} SPORTSLOTTO: How to Play {% endblock %}
+{% block PAGE_BODY %}
+<style>
+
+    .gradient-text {
+        background: linear-gradient(to right, #fbbf24, #ef4444, #fbbf24);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .card-custom {
+        background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+        border: 2px solid rgba(251, 191, 36, 0.3);
+        border-radius: 24px;
+        transition: all 0.3s;
+    }
+
+    .card-custom:hover {
+        border-color: rgba(251, 191, 36, 0.6);
+    }
+
+    .badge-pill {
+        background: rgba(251, 191, 36, 0.2);
+        border: 1px solid rgba(251, 191, 36, 0.5);
+        border-radius: 50px;
+        padding: 12px 24px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .ticket-glow-outer {
+        position: absolute;
+        inset: -2px;
+        border-radius: 24px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+
+    .ticket-glow-inner {
+        position: absolute;
+        inset: 0;
+        border-radius: 24px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+
+    .position-relative:hover .ticket-glow-outer {
+        opacity: 0.4;
+    }
+
+    .position-relative:hover .ticket-glow-inner {
+        opacity: 0.15;
+    }
+
+    .icon-box {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+    }
+
+    .conversion-box {
+        background: linear-gradient(to right, rgba(251, 191, 36, 0.2), rgba(249, 115, 22, 0.2));
+        border: 2px solid rgba(251, 191, 36, 0.5);
+        border-radius: 16px;
+        padding: 24px;
+    }
+
+    .small-card-box {
+        background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+        border-radius: 12px;
+        padding: 16px;
+        height: 100%;
+    }
+
+    .section-bg-primary {
+        background: radial-gradient(ellipse at center, rgba(var(--bs-primary-rgb), 0.2) 0%, rgba(var(--bs-primary-rgb), 0.05) 40%, rgba(0, 0, 0, 1) 80%);
+    }
+
+    .section-bg-dark {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(30, 30, 30, 1) 100%);
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            opacity: 0.3;
+        }
+        50% {
+            opacity: 0.5;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .display-1 {
+            font-size: 3rem;
+        }
+    }
+
+    .hero-section {
+        background: rgba(var(--bs-dark-rgb), 0.7);
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: transparent;
+        pointer-events: none;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+        .hero-section {
+            min-height: 50vh;
+        }
+    }
+</style>
+
+<div class="pt-5">
+    <!-- Header -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="container text-center px-3">
+                <h1 class="display-1 fw-bold mb-4">
+                    <span class="gradient-text">HOW TO PLAY</span>
+                </h1>
+                <p class="fs-4 text-white-50" style="max-width: 900px; margin: 0 auto;">
+                    SportsLotto is designed to be simple, accessible, and free to play. Follow these three steps to get started and participate in game-day events using points instead of money.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Step 1: Create Account -->
+    <section class="py-4 py-md-5">
+        <div class="container px-3">
+            <div class="row g-4 g-md-5 align-items-center">
+                <div class="col-lg-6">
+                    <div class="badge-pill mb-4">
+                        <svg width="16" height="16" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        <span class="fw-bold" style="color: #fbbf24;">STEP 1</span>
+                    </div>
+
+                    <h2 class="display-4 fw-bold mb-4">
+                        Create Your Free Account
+                    </h2>
+
+                    <p class="fs-5 text-white mb-4">
+                        To begin, register for a free SportsLotto account by clicking <span class="fw-bold" style="color: #fbbf24;">Play Now</span> or <span class="fw-bold" style="color: #fbbf24;">Register</span>. Enter your email address and phone number, then complete the verification process.
+                    </p>
+
+                    <p class="fs-5 text-white mb-4">
+                        Once your account is verified, you will receive <span class="fw-bold" style="color: #fbbf24;">free points</span> that allow you to participate in game-day events.
+                    </p>
+
+                    <div class="p-4 rounded" style="background: rgba(34, 197, 94, 0.2); border-left: 4px solid #22c55e;">
+                        <p class="mb-0 fw-bold" style="color: #22c55e;">
+                            No payment or deposit is required at any time. SportsLotto operates using a points-based system.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="position-relative">
+                        <div class="ticket-glow-outer" style="background: linear-gradient(to right, #fbbf24, #ef4444, #fbbf24);"></div>
+                        <div class="ticket-glow-inner" style="background: linear-gradient(to right, #fbbf24, #ef4444, #fbbf24);"></div>
+                        <div class="card-custom p-5 position-relative">
+                            <div class="icon-box mb-4" style="background: rgba(251, 191, 36, 0.2); border: 2px solid #fbbf24;">
+                                <svg width="40" height="40" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-center h3 fw-bold mb-4">Free Registration</h3>
+                            <div class="text-center">
+                                <div class="d-flex align-items-center justify-content-center gap-3 mb-3">
+                                    <div style="width: 8px; height: 8px; background: #fbbf24; border-radius: 50%;"></div>
+                                    <span>Email verification</span>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-center gap-3 mb-3">
+                                    <div style="width: 8px; height: 8px; background: #fbbf24; border-radius: 50%;"></div>
+                                    <span>Phone verification</span>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-center gap-3">
+                                    <div style="width: 8px; height: 8px; background: #fbbf24; border-radius: 50%;"></div>
+                                    <span>Receive free points</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Step 2: Select Events -->
+    <section class="py-4 py-md-5 section-bg-primary">
+        <div class="container px-3">
+            <!-- Section Header -->
+            <div class="text-center mb-4 mb-md-5">
+                <div class="badge-pill mb-4 d-inline-flex" style="background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.5);">
+                    <svg width="16" height="16" fill="none" stroke="#ef4444" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    <span class="fw-bold" style="color: #ef4444;">STEP 2</span>
+                </div>
+
+                <h2 class="display-4 fw-bold mb-4">Choose Your Play Style</h2>
+
+                <p class="fs-5 text-white-50 mx-auto" style="max-width: 900px;">
+                    Three ways to play — pick the style that fits your vibe. Mix and match sports yourself, let the system surprise you, or ride the season's hottest action.
+                </p>
+            </div>
+
+            <!-- Three Ticket Types -->
+            <div class="row g-4">
+                <!-- Custom Tickets -->
+                <div class="col-lg-4">
+                    <div class="position-relative h-100">
+                        <div class="ticket-glow-outer" style="background: linear-gradient(to right, #fbbf24, #f59e0b, #fbbf24); filter: blur(12px);"></div>
+                        <div class="ticket-glow-inner" style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(245, 158, 11, 0.1));"></div>
+
+                        <div class="card-custom p-4 h-100" style="border-color: rgba(251, 191, 36, 0.3);">
+                            <div class="text-center mb-4">
+                                <div class="icon-box mb-3" style="width: 64px; height: 64px; background: rgba(251, 191, 36, 0.2); border: 2px solid #fbbf24;">
+                                    <svg width="32" height="32" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                                        <path d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 0 0-2 2v3a2 2 0 1 1 0 4v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3a2 2 0 1 1 0-4V7a2 2 0 0 0-2-2H5z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="h4 fw-bold mb-2" style="color: #fbbf24;">CUSTOM TICKETS</h3>
+                                <p class="small text-uppercase" style="color: #9ca3af; letter-spacing: 2px;">Total Control</p>
+                            </div>
+
+                            <p class="text-center mb-4 text-white-50">
+                                Mix and match all the madness. You're the architect.
+                            </p>
+
+                            <div class="mb-3">
+                                <div class="d-flex align-items-start gap-2 mb-3">
+                                    <div style="width: 8px; height: 8px; background: #fbbf24; border-radius: 50%; margin-top: 8px; flex-shrink: 0;"></div>
+                                    <span class="text-white-50"><span class="fw-bold" style="color: #fbbf24;">Choose sports</span> - Basketball, Soccer, American Football, Tennis, Hockey, Baseball</span>
+                                </div>
+                                <div class="d-flex align-items-start gap-2 mb-3">
+                                    <div style="width: 8px; height: 8px; background: #fbbf24; border-radius: 50%; margin-top: 8px; flex-shrink: 0;"></div>
+                                    <span class="text-white-50"><span class="fw-bold" style="color: #fbbf24;">Number of events</span> - From 2 to 20 games</span>
+                                </div>
+                                <div class="d-flex align-items-start gap-2 mb-3">
+                                    <div style="width: 8px; height: 8px; background: #fbbf24; border-radius: 50%; margin-top: 8px; flex-shrink: 0;"></div>
+                                    <span class="text-white-50"><span class="fw-bold" style="color: #fbbf24;">Ticket count</span> - How many tickets to generate</span>
+                                </div>
+                                <div class="d-flex align-items-start gap-2">
+                                    <div style="width: 8px; height: 8px; background: #fbbf24; border-radius: 50%; margin-top: 8px; flex-shrink: 0;"></div>
+                                    <span class="text-white-50"><span class="fw-bold" style="color: #fbbf24;">Risk amount</span> - Points per ticket</span>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 pt-4" style="border-top: 1px solid rgba(251, 191, 36, 0.2);">
+                                <p class="text-center small mb-0 fst-italic" style="color: rgba(251, 191, 36, 0.8);">
+                                    Perfect for strategists who want full control
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Picks -->
+                <div class="col-lg-4">
+                    <div class="position-relative h-100">
+                        <div class="ticket-glow-outer" style="background: linear-gradient(to right, #ef4444, #dc2626, #ef4444); filter: blur(12px);"></div>
+                        <div class="ticket-glow-inner" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));"></div>
+
+                        <div class="card-custom p-4 h-100" style="border-color: rgba(239, 68, 68, 0.3);">
+                            <div class="text-center mb-4">
+                                <div class="icon-box mb-3" style="width: 64px; height: 64px; background: rgba(239, 68, 68, 0.2); border: 2px solid #ef4444;">
+                                    <svg width="32" height="32" fill="none" stroke="#ef4444" stroke-width="2" viewBox="0 0 24 24">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="h4 fw-bold mb-2" style="color: #ef4444;">QUICK PICKS</h3>
+                                <p class="small text-uppercase" style="color: #9ca3af; letter-spacing: 2px;">Instant Action</p>
+                            </div>
+
+                            <p class="text-center mb-4 text-white-50">
+                                Zero effort, maximum chaos. Let the system cook.
+                            </p>
+
+                            <div class="mb-3">
+                                <div class="d-flex align-items-start gap-2 mb-3">
+                                    <div style="width: 8px; height: 8px; background: #ef4444; border-radius: 50%; margin-top: 8px; flex-shrink: 0;"></div>
+                                    <span class="text-white-50"><span class="fw-bold" style="color: #ef4444;">Auto-generated</span> - System picks everything</span>
+                                </div>
+                                <div class="d-flex align-items-start gap-2 mb-3">
+                                    <div style="width: 8px; height: 8px; background: #ef4444; border-radius: 50%; margin-top: 8px; flex-shrink: 0;"></div>
+                                    <span class="text-white-50"><span class="fw-bold" style="color: #ef4444;">Random sports</span> - Surprise matchups</span>
+                                </div>
+                                <div class="d-flex align-items-start gap-2 mb-3">
+                                    <div style="width: 8px; height: 8px; background: #ef4444; border-radius: 50%; margin-top: 8px; flex-shrink: 0;"></div>
+                                    <span class="text-white-50"><span class="fw-bold" style="color: #ef4444;">Ticket count</span> - How many tickets to generate</span>
+                                </div>
+                                <div class="d-flex align-items-start gap-2">
+                                    <div style="width: 8px; height: 8px; background: #ef4444; border-radius: 50%; margin-top: 8px; flex-shrink: 0;"></div>
+                                    <span class="text-white-50"><span class="fw-bold" style="color: #ef4444;">Risk amount</span> - Points per ticket</span>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 pt-4" style="border-top: 1px solid rgba(239, 68, 68, 0.2);">
+                                <p class="text-center small mb-0 fst-italic" style="color: rgba(239, 68, 68, 0.8);">
+                                    Perfect for players who want instant action
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seasonal Picks -->
+                <div class="col-lg-4">
+                    <div class="position-relative h-100">
+                        <div class="ticket-glow-outer" style="background: linear-gradient(to right, #a855f7, #8b5cf6, #a855f7); filter: blur(12px);"></div>
+                        <div class="ticket-glow-inner" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(139, 92, 246, 0.1));"></div>
+
+                        <div class="card-custom p-4 h-100" style="border-color: rgba(168, 85, 247, 0.3);">
+                            <div class="text-center mb-4">
+                                <div class="icon-box mb-3" style="width: 64px; height: 64px; background: rgba(168, 85, 247, 0.2); border: 2px solid #a855f7;">
+                                    <svg width="32" height="32" fill="none" stroke="#a855f7" stroke-width="2" viewBox="0 0 24 24">
+                                        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                                        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                                        <path d="M4 22h16"/>
+                                        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                                        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                                        <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="h4 fw-bold mb-2" style="color: #a855f7;">SEASONAL PICKS</h3>
+                            </div>
+
+                            <p class="text-center mb-4 text-white-50">
+                                Ride the season's momentum with curated high-stakes matchups.
+                            </p>
+
+                            <div class="mb-3">
+                                <div class="d-flex align-items-start gap-2 mb-3">
+                                    <div style="width: 8px; height: 8px; background: #a855f7; border-radius: 50%; margin-top: 8px; flex-shrink: 0;"></div>
+                                    <span class="text-white-50"><span class="fw-bold" style="color: #a855f7;">Trending events</span> - Hottest games right now</span>
+                                </div>
+                                <div class="d-flex align-items-start gap-2 mb-3">
+                                    <div style="width: 8px; height: 8px; background: #a855f7; border-radius: 50%; margin-top: 8px; flex-shrink: 0;"></div>
+                                    <span class="text-white-50"><span class="fw-bold" style="color: #a855f7;">Playoff focus</span> - High-stakes matchups</span>
+                                </div>
+                                <div class="d-flex align-items-start gap-2 mb-3">
+                                    <div style="width: 8px; height: 8px; background: #a855f7; border-radius: 50%; margin-top: 8px; flex-shrink: 0;"></div>
+                                    <span class="text-white-50"><span class="fw-bold" style="color: #a855f7;">Ticket count</span> - How many tickets to generate</span>
+                                </div>
+                                <div class="d-flex align-items-start gap-2">
+                                    <div style="width: 8px; height: 8px; background: #a855f7; border-radius: 50%; margin-top: 8px; flex-shrink: 0;"></div>
+                                    <span class="text-white-50"><span class="fw-bold" style="color: #a855f7;">Risk amount</span> - Points per ticket</span>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 pt-4" style="border-top: 1px solid rgba(168, 85, 247, 0.2);">
+                                <p class="text-center small mb-0 fst-italic" style="color: rgba(168, 85, 247, 0.8);">
+                                    Perfect for riding the season's biggest moments
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Common Features -->
+            <div class="text-center mt-5">
+                <div class="d-inline-block p-4 rounded" style="background: rgba(59, 130, 246, 0.2); border-left: 4px solid #3b82f6;">
+                    <p class="mb-0 fw-bold fs-5" style="color: #3b82f6;">
+                        All ticket types use points only — review, adjust, or remove tickets before confirming
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Step 3: Follow & Earn -->
+    <section class="py-4 py-md-5">
+        <div class="container px-3">
+            <div class="row g-4 g-md-5 align-items-center">
+                <div class="col-12">
+                    <div class="badge-pill mb-4" style="background: rgba(34, 197, 94, 0.2); border-color: rgba(34, 197, 94, 0.5);">
+                        <svg width="16" height="16" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        <span class="fw-bold" style="color: #22c55e;">STEP 3</span>
+                    </div>
+
+                    <h2 class="display-4 fw-bold mb-4">
+                        Follow the Games and Earn Rewards
+                    </h2>
+
+                    <p class="fs-5 text-white mb-4">
+                        Once your ticket is confirmed, follow the included sporting events as they take place. Tickets are graded based on official game results. Points are awarded according to the outcomes of the events on your ticket.
+                    </p>
+
+                    <p class="fs-5 text-white mb-4">
+                        Earned points can be redeemed for rewards, such as <span class="fw-bold" style="color: #22c55e;">Amazon gift cards</span>, subject to platform terms and regional availability.
+                    </p>
+
+                    <div class="p-4 rounded mb-4" style="background: rgba(168, 85, 247, 0.2); border-left: 4px solid #a855f7;">
+                        <p class="mb-0 fw-bold text-white">
+                            Results are typically finalized shortly after games conclude, and your account updates automatically.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <!-- Track & Win Box Centered -->
+                    <div class="row g-4 justify-content-center">
+                        <!-- Track & Win Box -->
+                        <div class="col-md-6">
+                            <div class="card-custom p-5 h-100" style="border: 2px solid rgba(34, 197, 94, 0.3);">
+                                <div class="text-center mb-4">
+                                    <div class="icon-box mb-3" style="width: 80px; height: 80px; background: rgba(34, 197, 94, 0.2); border: 2px solid #22c55e;">
+                                        <svg width="40" height="40" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24">
+                                            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                                            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                                            <path d="M4 22h16"/>
+                                            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                                            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                                            <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/>
+                                        </svg>
+                                    </div>
+                                    <h3 class="h3 fw-bold mb-2" style="color: #22c55e;">Track & Win</h3>
+                                </div>
+                                <div class="text-center">
+                                    <div class="d-flex align-items-center justify-content-center gap-3 mb-3">
+                                        <div style="width: 8px; height: 8px; background: #22c55e; border-radius: 50%; flex-shrink: 0;"></div>
+                                        <span class="text-white-50">Follow live games</span>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center gap-3 mb-3">
+                                        <div style="width: 8px; height: 8px; background: #22c55e; border-radius: 50%; flex-shrink: 0;"></div>
+                                        <span class="text-white-50">Auto-grading system</span>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center gap-3 mb-3">
+                                        <div style="width: 8px; height: 8px; background: #22c55e; border-radius: 50%; flex-shrink: 0;"></div>
+                                        <span class="text-white-50">Earn points on wins</span>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center gap-3">
+                                        <div style="width: 8px; height: 8px; background: #22c55e; border-radius: 50%; flex-shrink: 0;"></div>
+                                        <span class="text-white-50">Redeem for rewards</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Earn Points -->
+    <section class="py-4 py-md-5 section-bg-primary">
+        <div class="container px-3" style="max-width: 1000px;">
+            <div class="text-center mb-4 mb-md-5">
+                <div class="badge-pill mb-4 d-inline-flex">
+                    <svg width="16" height="16" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 6v6l4 2"/>
+                    </svg>
+                    <span class="fw-bold" style="color: #fbbf24;">HOW IT WORKS</span>
+                </div>
+
+                <h2 class="display-4 fw-bold">How to Earn Points</h2>
+            </div>
+
+            <div class="card-custom p-4 p-md-5">
+                <p class="fs-5 text-white mb-4">
+                    Players earn points on SportsLotto by participating in daily game-day events and selecting tickets that include real sporting events. Each ticket is built around one or more games, and points are awarded based on how those selected events perform once the games are completed.
+                </p>
+
+                <p class="fs-5 text-white mb-4">
+                    The objective is to make accurate selections across multiple events. Players can choose smaller point amounts while selecting more games on a ticket, creating a <span class="fw-bold" style="color: #fbbf24;">lottery-style structure</span> where correctly predicting several outcomes can result in higher point rewards. Tickets may include up to ten events, allowing players to balance risk and reward based on their preferences.
+                </p>
+
+                <p class="fs-5 text-white mb-4">
+                    Points are awarded after tickets are graded using official game results. The more successful the selections on a ticket, the more points can be earned.
+                </p>
+
+                <div class="p-4 rounded" style="background: rgba(34, 197, 94, 0.2); border-left: 4px solid #22c55e;">
+                    <p class="mb-0 fw-bold" style="color: #22c55e;">
+                        All participation uses points only, and no deposits or payments are required at any time.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Redeem Gift Cards -->
+    <section class="py-4 py-md-5">
+        <div class="container px-3" style="max-width: 1000px;">
+            <div class="text-center mb-4 mb-md-5">
+                <div class="badge-pill mb-4 d-inline-flex" style="background: rgba(168, 85, 247, 0.2); border-color: rgba(168, 85, 247, 0.5);">
+                    <svg width="16" height="16" fill="none" stroke="#a855f7" stroke-width="2" viewBox="0 0 24 24">
+                        <polyline points="20 12 20 22 4 22 4 12"/>
+                        <rect x="2" y="7" width="20" height="5"/>
+                        <line x1="12" y1="22" x2="12" y2="7"/>
+                        <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/>
+                        <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+                    </svg>
+                    <span class="fw-bold" style="color: #a855f7;">REWARDS</span>
+                </div>
+
+                <h2 class="display-4 fw-bold">How to Redeem Amazon Gift Cards</h2>
+            </div>
+
+            <div class="card-custom p-4 p-md-5" style="border-color: rgba(168, 85, 247, 0.3);">
+                <p class="fs-5 text-white mb-4">
+                    SportsLotto allows players to redeem earned points for real Amazon gift cards with real monetary value. Gift cards are issued electronically and delivered at no charge once redemption requirements are met.
+                </p>
+
+                <div class="conversion-box text-center mb-4">
+                    <p class="display-5 fw-bold mb-2" style="color: #fbbf24;">
+                        100 Points = $1 USD
+                    </p>
+                    <p class="text-white-50 mb-0">
+                        Example: 1,000 points = $10 Amazon gift card
+                    </p>
+                </div>
+
+                <p class="fs-5 text-white mb-4">
+                    Gift cards are provided digitally and can be used in accordance with Amazon's terms and conditions.
+                </p>
+
+                <div class="p-4 rounded mb-4" style="background: rgba(59, 130, 246, 0.2); border-left: 4px solid #3b82f6;">
+                    <p class="mb-0 fw-bold" style="color: #3b82f6;">
+                        To be eligible for redemption, players must first participate in gameplay using at least one ticket after receiving their initial registration points.
+                    </p>
+                </div>
+
+                <p class="fs-5 text-white mb-4">
+                    This helps ensure fair participation and platform integrity. Once eligible, players can submit a redemption request through their account, and approved gift cards are sent electronically.
+                </p>
+
+                <div class="p-4 rounded" style="background: rgba(34, 197, 94, 0.2); border-left: 4px solid #22c55e;">
+                    <p class="mb-0 fw-bold" style="color: #22c55e;">
+                        All redemptions are processed using points only. No deposits or payments are required at any time.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-4 py-md-5 section-bg-primary">
+        <div class="container text-center px-3" style="max-width: 800px;">
+            <h2 class="display-5 fw-bold mb-4">Ready to Get Started?</h2>
+            <p class="fs-4 text-white-50 mb-4 mb-md-5">
+                Create your free account and start playing today!
+            </p>
+            <a href="#" class="btn btn-lg btn-play fw-bold px-4 px-md-5 py-3" style="background: linear-gradient(to right, #fbbf24, #f59e0b); color: black; border-radius: 12px; box-shadow: 0 0 30px rgba(251, 191, 36, 0.5);">
+                PLAY NOW - IT'S FREE
+            </a>
+        </div>
+    </section>
+</div>
+
+<script>
+    // Play Now login functionality
+    document.addEventListener("DOMContentLoaded", () => {
+        const playButton = document.querySelector(".btn-play");
+        const loginTrigger = document.getElementById("loginTrigger");
+
+        if (playButton && loginTrigger) {
+            playButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                loginTrigger.click();
+            });
+        }
+    });
+</script>
+{% endblock %}

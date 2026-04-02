@@ -1,0 +1,73 @@
+{% extends "minerve/pages/responsive_dashboard/index.html" %}
+{% load i18n %}
+{% load django_bootstrap5 %}
+{% load humanize %}
+{% block bootstrap5_title %}
+    {{ vdomain.website_name }}: My Balance
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_BODY %}
+<div class="w-100 flex-container"
+     data-bs-theme="{{ MINERVE_BODY_THEME }}"
+     style="position: relative; min-height: 100dvh;">    <div class="card-header">
+        <h1> <i class="fa-duotone fa-solid fa-books" style="color: #dd8fda;"></i> &#160; {% translate "Available Balance:" %}</h1>
+
+       <div class="card-body text-center">
+    <div class="d-flex justify-content-center">
+    {% if not account.account_level.fiat_enabled %}
+    <div class="d-flex justify-content-center w-100">
+    <div class="text-center p-2  w-100">
+
+     <h3>{%  translate "Your current balances:" %} </h3>
+
+                <div class="row">
+                <div class="col">
+                    <h4 class="text-success">{% translate "Current Balance:" %}</h4>
+                      <h2>{{ current_balance|floatformat:2|intcomma:3 }}</h2>
+                </div>
+
+                <div class="col">
+                    <h4 class="text-success">{% translate "Pending:" %}</h4>
+                      <h2>{{pending_balance|floatformat:2|intcomma:3 }}</h2>
+                </div>
+                {% if pending_wdl > 0 %}
+                <div class="col-4">
+                    <h4 class="text-success">{% translate "Pending Withdrawals:" %}</h4>
+                      <h2>{{ pending_wdl|floatformat:2|intcomma:3 }}</h2>
+                </div>
+                {% endif %}
+                <div class="col-4">
+                    <h4 class="text-success">{% translate "Available Balance:" %}</h4>
+                      <h2>{{ available|floatformat:2|intcomma:3 }}</h2>
+                </div>
+                </div>
+
+
+
+    {% endif %}
+    </div>
+</div>
+</div>
+<hr class="opacity-50 border-2 border-success">
+<div class="d-flex justify-content-center">
+    {%  if balance.pending_rollovers  > 0 %}
+        <h4>{% translate "You have a pending rollover of" %} {{ balance.pending_rollovers|floatformat:0|intcomma:3 }}.</h4>
+
+
+    {% elif available > 0 %}
+    {% include cashier_withdrawal_page %}
+    {% endif %}
+</div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+{% include "lobby/dashboard/components/account_sidebar_header.html" %}
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY_FOOTER %}
+    {% include "lobby/index/theme_switcher.html" %}
+ {% endblock %}

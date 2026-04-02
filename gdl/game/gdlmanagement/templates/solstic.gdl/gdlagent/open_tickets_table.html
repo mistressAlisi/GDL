@@ -1,0 +1,35 @@
+{% load i18n %}
+{% load django_bootstrap5 %}
+{% load crispy_forms_tags %}
+<div class="">
+    <div class="card-header">
+        <h3 class="text-muted"><i class="fa-duotone fa-solid fa-table text-purple"></i>{%  translate "GDL - Open Tickets:" %}</h3>
+    </div>
+    {%  block card_body %}
+    <div class="card-body table-card">
+{#        <div class="p-2 border border-primary border-opacity-50 rounded search-form-div">#}
+{#        <form method="GET" action="#" onsubmit="window.agent.paginator.start(event); return false;" class="form">#}
+{#        </form>#}
+{#        </div>#}
+       <div style="min-height: 40vh;">
+       <div id="table_placeholder" class="table_placeholder align-middle text-center text-muted opacity-50 p-5 m-5">
+       <h1><i class="fa-duotone fa-solid fa-file-chart-column fa-5x"></i></h1>
+       <br/>
+       <h4>{%  translate "Ready: Select Some Parameters above and click 'search'." %}</h4>
+       </div>
+       <div id="table_container">
+       </div>
+       </div>
+    {%  endblock %}
+    </div>
+</div>
+<script type="module">
+    import {DynamicTableApp} from "/static/minerve/js/TableApp/DynamicTableApp.js";
+    let dtable = new DynamicTableApp()
+
+    $("#table_container").append(dtable.dom_con)
+    $(dtable.dom_con).on("table_start",function(){
+        $("#table_placeholder").hide();
+    });
+    dtable.start("management/game/tickets/open/meta");
+</script>

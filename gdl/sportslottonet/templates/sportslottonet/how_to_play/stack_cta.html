@@ -1,0 +1,33 @@
+<section style="
+  margin-top: clamp(2rem, 6vh, 4rem);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px 5%;
+  background:rgba(var(--theme-bg-rgb,17,17,17),0.02);
+  flex-direction:column;
+  gap:20px;
+">
+  <div class="theme-card">
+    <div class="shine"></div>
+    <div class="prize-box">Stack The Odds!</div>
+    <p>
+      Behind every ticket: thousands of real-time data points,<br>
+      crunched to deliver high-potential plays.<br>
+      All you have to do is pick.
+    </p>
+    <div class="sparkles"></div>
+  </div>
+</section>
+<div style="height:32px;"></div>
+  <a href="javascript:void(0)" id="howToPlayCTA" class="topbar-btn register neon-btn">
+    Play Now
+  </a>
+</section>
+
+<script>
+  // Trigger the same modal as topbar "Register"
+  document.getElementById('howToPlayCTA').addEventListener('click', function(){
+    document.querySelector('#loginTrigger').click();
+  });
+</script>

@@ -1,0 +1,8 @@
+{% load crispy_forms_tags %}
+
+<form id="loss_limit_form" method="POST" href="#" data-post-url="limits/losses/set" onsubmit="cashier.set_application_limit(event);">
+    {% csrf_token %}
+
+    {% crispy modal_form %}
+</form>
+

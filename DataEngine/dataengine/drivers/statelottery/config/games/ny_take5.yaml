@@ -1,0 +1,42 @@
+# New York Take 5
+# Draws twice daily - Midday (2:30 PM) and Evening (10:30 PM) ET
+# Pick 5 numbers from 1-39 (pool game, no bonus)
+
+state: NY
+name: "Take 5"
+slug: ny-take5
+url: "https://nylottery.ny.gov/draw-game?game=take5"
+game_type: pool
+
+format:
+  main_count: 5
+  main_range: [1, 39]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: false
+
+schedule:
+  days: [daily]
+  times:
+    - time: "14:30"
+      label: "midday"
+    - time: "22:30"
+      label: "evening"
+  timezone: "America/New_York"
+
+selectors:
+  # Page shows both draws - 10 balls total
+  # First 5 = Midday, Last 5 = Evening
+  all_numbers: "div[class*='BallContainer'] div[class*='Headline__Ball']"
+  draw_date: "[class*='date']"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%a %m/%d/%y"
+  multi_draw: true
+  draws_per_page: 2
+  balls_per_draw: 5
+  # Order on page: midday first, evening second (opposite of Win4)
+  draw_order: ["midday", "evening"]
+
+active: true

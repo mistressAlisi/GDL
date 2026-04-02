@@ -1,0 +1,34 @@
+# Rhode Island - Wild Money
+# Draws daily at 7:29 PM ET
+# Pick 5 numbers from 1-38 (plus Extra Ball drawn from remaining)
+
+state: RI
+name: "Wild Money"
+slug: ri-wild-money
+url: "https://www.rilot.com/en-us/wild-money.html"
+game_type: pool
+
+format:
+  main_count: 5
+  main_range: [1, 38]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: false
+
+schedule:
+  days: [daily]
+  times:
+    - time: "19:29"
+      label: null
+  timezone: "America/New_York"
+
+selectors:
+  all_numbers: ".winning-numbers span, .ball, .number"
+  draw_date: ".draw-date, .date"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%m/%d/%Y"
+  split_main_bonus: false
+
+active: true

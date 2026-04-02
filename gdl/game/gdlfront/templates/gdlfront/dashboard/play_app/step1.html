@@ -1,0 +1,46 @@
+{% extends "lobby/dashboard/index.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% block MINERVE_COLOUR_MODE_SWITCH %}
+{% endblock %}
+{% block bootstrap5_title %}
+    {% if vdomain.website_name %}
+        {{ vdomain.website_name }}
+    {% else %}
+        {{ apperance.site_name }}
+    {% endif %}
+    {% block MINERVE_PAGE_SUBTITLE %} {% endblock %}
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_PRE_BODY %}
+{#{% include "gdlfront/dashboard/play_app/param_form.html" %}#}
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY %}
+
+
+<div class="position-absolute top-50 start-50 translate-middle text-white" id="gdl_loading_message">
+<h1 class="align-middle"><i class="fa-duotone fa-solid fa-spinner-third fa-spin mx-1"></i>{%  translate "Crunching the odds..." %}</h1>
+
+</div>
+<div class="w-100 row gx-0 ps-2 pe-0 me-0"
+     id="gdl_play_area"
+     style="height: 100vh;">
+
+
+</div>
+    {% include "gdlfront/dashboard/play_app/confirm_modal.html" %}
+    {% include "gdlfront/dashboard/play_app/bet_slip_toggle.html" %}
+    {% include "gdlfront/dashboard/play_app/bet_form.html" %}
+</div>
+<script src="/static/minerve/js/components/dynamic_dashboard/helper.js"></script>
+<script type="module" src="/static/gdlfront/js/loader.js"/>
+{% endblock %}
+{% block MINERVE_PAGE_FOOTER %}
+    {% include "lobby/dashboard/account/login/signup_modal.html" %}
+{#    <link rel="stylesheet" href="/static/frontend/lobby/themes/supernova/css/tickets.css"/>#}
+{#    <link rel="stylesheet" href="/static/frontend/lobby/themes/supernova/css/ticketmodals.css"/>#}
+    <link rel="stylesheet" href="/static/frontend/lobby/themes/supernova/css/minerve_theme.css"/>
+{% endblock %}
+{% block MINERVE_NAV_PAGE_NAME %}
+    <span class="navbar-brand"><i class="fa-duotone fa-solid fa-dice" aria-hidden="true"></i> <span class="text-decoration-underline">{% translate "Play" %} Game Day Lotto!</span></span>
+{% endblock %}

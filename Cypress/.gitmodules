@@ -1,0 +1,3 @@
+[submodule "cypress/minerve"]
+	path = cypress/minerve
+	url = ssh://git@git.solstic.ai/Solstic/minerve.git

@@ -1,0 +1,495 @@
+{% extends "sportslottonet/base/page.html" %}
+
+{% load static %}
+{% block bootstrap5_title %} SPORTSLOTTO: About Us {% endblock %}
+{% block PAGE_BODY %}
+
+<style>
+    /* Animated Gradient Text */
+    .gradient-text {
+        background: linear-gradient(90deg, var(--bs-light), var(--bs-primary), var(--bs-dark), var(--bs-primary), var(--bs-light));
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradient-flow 8s ease infinite;
+    }
+
+    @keyframes gradient-flow {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    /* Hero Section */
+    .hero-section {
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        min-height: 25vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+        pointer-events: none;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+        .hero-section {
+            min-height: 50vh;
+        }
+    }
+
+    /* Card Custom */
+    .card-custom {
+        background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+        border: 2px solid rgba(251, 191, 36, 0.3);
+        border-radius: 24px;
+        transition: all 0.3s;
+        padding: 3rem;
+    }
+
+    .card-custom:hover {
+        border-color: rgba(251, 191, 36, 0.6);
+        transform: translateY(-4px);
+    }
+
+    /* Badge Pill */
+    .badge-pill-custom {
+        background: rgba(251, 191, 36, 0.2);
+        border: 1px solid rgba(251, 191, 36, 0.5);
+        border-radius: 50px;
+        padding: 12px 24px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* Icon Box */
+    .icon-box {
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid;
+        margin: 0 auto;
+    }
+
+    /* Section Backgrounds */
+    .section-bg-primary {
+        background: transparent;
+    }
+
+    .cta-section {
+        background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+        border-radius: 24px;
+        padding: 4rem 2rem;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .cta-title {
+        text-shadow: none;
+    }
+
+    /* Step Cards */
+    .step-card {
+        background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+        border: 2px solid rgba(251, 191, 36, 0.3);
+        border-radius: 16px;
+        padding: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        transition: all 0.3s;
+        margin-bottom: 1.5rem;
+    }
+
+    .step-card:hover {
+        border-color: rgba(251, 191, 36, 0.6);
+        transform: translateX(8px);
+    }
+
+    .step-number {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: rgba(251, 191, 36, 0.2);
+        border: 3px solid #fbbf24;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #fbbf24;
+        flex-shrink: 0;
+        transition: all 0.3s;
+    }
+
+    .step-card:hover .step-number {
+        transform: scale(1.1);
+        box-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
+    }
+
+    .step-number.bg-red {
+        background: rgba(239, 68, 68, 0.2);
+        border-color: #ef4444;
+        color: #ef4444;
+    }
+
+    .step-number.bg-purple {
+        background: rgba(168, 85, 247, 0.2);
+        border-color: #a855f7;
+        color: #a855f7;
+    }
+
+    .step-number.bg-blue {
+        background: rgba(59, 130, 246, 0.2);
+        border-color: #3b82f6;
+        color: #3b82f6;
+    }
+
+    .step-number.bg-green {
+        background: rgba(34, 197, 94, 0.2);
+        border-color: #22c55e;
+        color: #22c55e;
+    }
+
+    .step-content {
+        flex: 1;
+    }
+
+    .step-content h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .step-content p {
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 0;
+    }
+
+    @media (max-width: 768px) {
+        .step-card {
+            flex-direction: column;
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .step-number {
+            width: 64px;
+            height: 64px;
+            font-size: 2rem;
+        }
+    }
+
+    /* Button */
+    .btn-play {
+        background: linear-gradient(to right, #fbbf24, #f59e0b);
+        color: black !important;
+        font-weight: 700;
+        padding: 1.25rem 3rem;
+        border-radius: 12px;
+        border: none;
+        font-size: 1.25rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-play:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 50px rgba(251, 191, 36, 0.8);
+        color: black !important;
+    }
+
+    /* Utility Classes */
+    .text-gold {
+        color: #fbbf24;
+    }
+
+    .border-gold {
+        border-color: rgba(251, 191, 36, 0.5) !important;
+    }
+
+    .border-purple {
+        border-color: rgba(168, 85, 247, 0.5) !important;
+    }
+
+    .bg-gold {
+        background: rgba(251, 191, 36, 0.2);
+    }
+
+    .bg-purple {
+        background: rgba(168, 85, 247, 0.2);
+    }
+
+    .text-white-90 {
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .text-white-80 {
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .text-white-70 {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .leading-relaxed {
+        line-height: 1.8;
+    }
+</style>
+
+<!-- Hero Section -->
+<section class="hero-section" style="background-image: url({% static 'sportslottonet/images/hero-background.jpg' %});">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center hero-content">
+                <h1 class="display-1 mb-0 text-white">
+                    <span class="d-block mb-2">Sports excitement reimagined</span>
+                    <span class="d-block mb-2">through free-to-play, lottery style</span>
+                    <span class="d-block">jackpot experience</span>
+                </h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About SportsLotto -->
+<section class="py-5 my-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="text-center mb-5">
+                    <h2 class="display-2">About SportsLotto</h2>
+                </div>
+                <div class="card-custom border-gold">
+                    <p class="fs-5 text-white-90 leading-relaxed mb-4">
+                        At SportsLotto, we believe sports fans deserve a new way to engage with the games they love. SportsLotto was created to combine the excitement of live sporting events with a modern, accessible, lottery-style experience that is free to play and easy to understand. Built on decades of industry knowledge and product development experience, SportsLotto introduces a fresh approach to game-day participation.
+                    </p>
+                    <p class="fs-5 text-white-90 leading-relaxed mb-4">
+                        Our platform is designed around real sporting events, allowing players to take part using a points-based system rather than traditional wagering. By removing deposits and focusing on participation, SportsLotto creates an environment where fans can enjoy the thrill of competition without the barriers often associated with traditional gaming platforms.
+                    </p>
+                    <p class="fs-5 text-white-90 leading-relaxed mb-0">
+                        Our mission is simple: to make sports more engaging, more interactive, and more rewarding for players everywhere. We focus on transparency, responsible play, and innovation, while continuously improving the experience through technology and automation. As a growing platform, SportsLotto is committed to building a trusted and enjoyable destination where sports, entertainment, and accessibility come together.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="py-5 my-5 section-bg-primary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="text-center mb-5">
+                    <div class="badge-pill-custom mb-4 d-inline-flex">
+                        <svg width="20" height="20" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                        <span class="fw-bold text-gold">THE PROCESS</span>
+                    </div>
+                    <h2 class="display-2 mb-4">How It Works</h2>
+                    <p class="fs-5 text-white-80 mx-auto mb-0 leading-relaxed" style="max-width: 900px;">
+                        SportsLotto.net is a free-to-play sports lottery game where players predict sports outcomes, earn points, and redeem those points for Amazon gift cards. No purchase is required.
+                    </p>
+                </div>
+
+                <div class="col-lg-10 mx-auto">
+                    <!-- Step 1 -->
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Choose the number of events</h3>
+                            <p>Select how many games you want on your ticket</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="step-card">
+                        <div class="step-number bg-red">2</div>
+                        <div class="step-content">
+                            <h3>Choose how much to risk on each ticket</h3>
+                            <p>Decide your stake level for maximum control</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="step-card">
+                        <div class="step-number bg-purple">3</div>
+                        <div class="step-content">
+                            <h3>Choose how much you want to win</h3>
+                            <p>Set your target payout based on your selections</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="step-card">
+                        <div class="step-number bg-blue">4</div>
+                        <div class="step-content">
+                            <h3>Watch the Action</h3>
+                            <p>Follow along as real-world sports results unfold</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="step-card">
+                        <div class="step-number bg-green">5</div>
+                        <div class="step-content">
+                            <h3>Win Big</h3>
+                            <p>Match the right outcomes and win BIG</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- What Makes Us Different -->
+<section class="py-5 my-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="text-center mb-5">
+                    <h2 class="display-2">What Makes SportsLotto Different</h2>
+                </div>
+
+                <div class="col-lg-10 mx-auto">
+                    <div class="card-custom border-gold">
+                        <p class="fs-5 text-white-90 leading-relaxed mb-4">
+                            SportsLotto was built to offer an alternative to traditional sports wagering and gaming platforms. Instead of requiring deposits or real-money bets, SportsLotto operates using a points-based model that allows players to participate without financial risk. This approach makes the platform more accessible while maintaining the excitement tied to real sporting events.
+                        </p>
+                        <p class="fs-5 text-white-90 leading-relaxed mb-4">
+                            Unlike standard lottery or betting sites, SportsLotto connects gameplay directly to live sports schedules and outcomes, creating an engaging game-day experience that feels familiar to fans while remaining easy to use. Players can review ticket options, make selections, and participate using points earned through registration and platform activity.
+                        </p>
+                        <p class="fs-5 text-white-90 leading-relaxed mb-0">
+                            SportsLotto also emphasizes transparency and responsible play. By removing deposits and focusing on participation, the platform encourages entertainment-first engagement rather than high-risk behavior. Combined with modern technology, automation, and customer support, SportsLotto is designed to scale responsibly while delivering a consistent and enjoyable experience for players worldwide.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Trusted Team -->
+<section class="py-5 my-5 section-bg-primary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card-custom border-gold">
+                    <div class="text-center mb-5">
+                        <div class="icon-box mb-4 bg-gold border-gold">
+                            <svg width="48" height="48" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                                <path d="M4 22h16"/>
+                                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                                <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/>
+                            </svg>
+                        </div>
+                        <h2 class="display-3 mb-4">A Trusted Team with Real Experience</h2>
+                    </div>
+                    <p class="fs-5 text-white-90 text-center leading-relaxed mb-4">
+                        SportsLotto was created by a team with decades of experience across sports gaming, product development, and customer operations. Our background spans multiple areas of the sports and online gaming industry, giving us a deep understanding of what players value most: clarity, fairness, and reliability.
+                    </p>
+                    <p class="fs-5 text-white-90 text-center leading-relaxed mb-0">
+                        Our focus is on building an enjoyable and transparent platform that puts the player experience first. Rather than simply creating games, we design systems that emphasize ease of use, responsible participation, and long-term trust. Every feature is developed with the goal of delivering a consistent, secure, and engaging experience for our community.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Community -->
+<section class="py-5 my-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="text-center mb-5">
+                    <div class="icon-box mb-4 bg-purple border-purple">
+                        <svg width="56" height="56" fill="none" stroke="#a855f7" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <h2 class="display-3 mb-4">More Than a Game—A Community</h2>
+                </div>
+                <div class="card-custom border-purple">
+                    <p class="fs-5 text-white-90 text-center leading-relaxed mb-4">
+                        SportsLotto is built around more than just gameplay. It is a platform designed for sports fans who enjoy competition, strategy, and shared experiences around live sporting events. Our community brings together players who follow the same games, engage in game-day events, and participate in a points-based experience centered on real sports.
+                    </p>
+                    <p class="fs-5 text-white-90 text-center leading-relaxed mb-0">
+                        By focusing on accessibility, interaction, and responsible participation, SportsLotto encourages a sense of connection among players. Whether you are following a major matchup or exploring new events, the platform is designed to create an inclusive environment where fans can engage, compete, and enjoy sports together.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="py-5 my-5 cta-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <h2 class="display-2 mb-4 cta-title">
+                    <span class="gradient-text">Join the Action!</span>
+                </h2>
+                <p class="fs-5 text-white-70 mx-auto mb-5 leading-relaxed" style="max-width: 900px;">
+                    Whether you want to test your sports knowledge, enjoy game-day excitement, or explore a new way to participate in sports entertainment, SportsLotto offers a free-to-play, points-based experience built around real sporting events. With no deposits required, players can join, participate, and engage with the games they love in a simple and accessible way. SportsLotto is where game-day interaction begins.
+                </p>
+                <button class="btn-play">PLAY NOW - IT'S FREE</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Play Now login functionality
+    document.addEventListener("DOMContentLoaded", () => {
+        const playButton = document.querySelector(".btn-play");
+        const loginTrigger = document.getElementById("loginTrigger");
+
+        if (playButton && loginTrigger) {
+            playButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                loginTrigger.click();
+            });
+        }
+    });
+</script>
+
+{% endblock %}

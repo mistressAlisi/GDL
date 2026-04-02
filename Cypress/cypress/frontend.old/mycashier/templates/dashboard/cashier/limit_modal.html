@@ -1,0 +1,8 @@
+{% load crispy_forms_tags %}
+
+<form id="application_limit_form" method="POST" href="#" data-post-url="limits/applications/set" onsubmit="cashier.set_application_limit(event);">
+    {% csrf_token %}
+    <h2>Application: {{ application.name }}</h2>
+    {% crispy modal_form %}
+</form>
+

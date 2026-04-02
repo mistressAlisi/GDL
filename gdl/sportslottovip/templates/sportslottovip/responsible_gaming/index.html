@@ -1,0 +1,295 @@
+{% extends "sportslottovip/base/page.html" %}
+{% block bootstrap5_title %} SPORTSLOTTO.VIP: Responsible Gaming {% endblock %}
+{% load static %}
+{% block PAGE_BODY %}
+
+    <style>
+        body {
+            background: var(--bs-secondary);
+            min-height: 100vh;
+        }
+
+        /* Glassmorphism effect matching Tailwind backdrop-blur-xl */
+        .backdrop-blur-xl {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+
+        .backdrop-blur-sm {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        /* Main glass card */
+        .glass-main {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Inner glass card */
+        .glass-inner {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Special contact card */
+        .glass-contact {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(16, 185, 129, 0.2));
+            border: 1px solid rgba(74, 222, 128, 0.3);
+        }
+
+        .glass-contact-inner {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Rounded corners matching Tailwind */
+        .rounded-3xl {
+            border-radius: 1.5rem;
+        }
+
+        .rounded-2xl {
+            border-radius: 1rem;
+        }
+
+        .rounded-xl {
+            border-radius: 0.75rem;
+        }
+
+        /* Text opacity utilities */
+
+        /* Background colors for icon boxes */
+        .bg-green-gradient {
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.2), rgba(52, 211, 153, 0.2));
+            border: 1px solid rgba(74, 222, 128, 0.3);
+        }
+
+        .bg-blue-icon {
+            background: rgba(96, 165, 250, 0.2);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+        }
+
+        .bg-purple-icon {
+            background: rgba(192, 132, 252, 0.2);
+            border: 1px solid rgba(192, 132, 252, 0.3);
+        }
+
+        .bg-pink-icon {
+            background: rgba(244, 114, 182, 0.2);
+            border: 1px solid rgba(244, 114, 182, 0.3);
+        }
+
+        .bg-yellow-icon {
+            background: rgba(251, 191, 36, 0.2);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        /* Bullet points */
+        .bullet-red {
+            width: 8px;
+            height: 8px;
+            background: #f87171;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* Icon sizing */
+        .icon-lg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .icon-md {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Spacing utilities to match Tailwind */
+        .gap-6 {
+            gap: 1.5rem;
+        }
+
+        .space-y-3 > * + * {
+            margin-top: 0.75rem;
+        }
+
+        .space-y-4 > * + * {
+            margin-top: 1rem;
+        }
+
+        .space-y-6 > * + * {
+            margin-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="py-5">
+        <div class="container" style="max-width: 896px;">
+            <!-- Header -->
+            <div class="backdrop-blur-xl glass-main rounded-3xl p-4 p-md-5 mb-4">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <div class="p-3 rounded-2xl bg-green-gradient">
+                        <i data-lucide="shield" class="icon-lg text-green-300"></i>
+                    </div>
+                    <h1 class="text-white mb-0">Responsible Gaming</h1>
+                </div>
+                <p class="text-white-80 mb-0">
+                    Your well-being is our priority. We're committed to providing a safe and enjoyable gaming experience for all our players.
+                </p>
+            </div>
+
+            <!-- Gaming Guidelines -->
+            <div class="backdrop-blur-xl glass-main rounded-3xl p-4 p-md-5 mb-4">
+                <h2 class="text-white mb-4">Gaming Guidelines</h2>
+                <div class="row g-4 gx-3">
+                    <div class="col-md-6">
+                        <div class="backdrop-blur-sm glass-inner rounded-2xl p-4 h-100">
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="p-2 rounded-xl bg-blue-icon flex-shrink-0">
+                                    <i data-lucide="clock" class="icon-md text-blue-300"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-white h5 mb-2">Set Time Limits</h3>
+                                    <p class="text-white-70 mb-0">Play for entertainment, not as a way to make money. Set time limits for your gaming sessions and take regular breaks.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="backdrop-blur-sm glass-inner rounded-2xl p-4 h-100">
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="p-2 rounded-xl bg-purple-icon flex-shrink-0">
+                                    <i data-lucide="lock" class="icon-md text-purple-300"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-white h5 mb-2">Budget Management</h3>
+                                    <p class="text-white-70 mb-0">Only play with money you can afford to lose. Set deposit limits and stick to your budget.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="backdrop-blur-sm glass-inner rounded-2xl p-4 h-100">
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="p-2 rounded-xl bg-pink-icon flex-shrink-0">
+                                    <i data-lucide="heart" class="icon-md text-pink-300"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-white h5 mb-2">Balance is Key</h3>
+                                    <p class="text-white-70 mb-0">Gaming should be one of many activities you enjoy. Maintain a healthy balance with other aspects of your life.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="backdrop-blur-sm glass-inner rounded-2xl p-4 h-100">
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="p-2 rounded-xl bg-yellow-icon flex-shrink-0">
+                                    <i data-lucide="alert-triangle" class="icon-md text-yellow-300"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-white h5 mb-2">Know the Signs</h3>
+                                    <p class="text-white-70 mb-0">Be aware of problem gambling warning signs. If gaming stops being fun, it's time to take a break.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Warning Signs -->
+            <div class="backdrop-blur-xl glass-main rounded-3xl p-4 p-md-5 mb-4">
+                <h2 class="text-white mb-4">Warning Signs of Problem Gambling</h2>
+                <div class="space-y-3">
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="bullet-red mt-1"></div>
+                        <p class="text-white-80 mb-0">Spending more money or time on gaming than you can afford</p>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="bullet-red mt-1"></div>
+                        <p class="text-white-80 mb-0">Having arguments with family or friends about your gaming habits</p>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="bullet-red mt-1"></div>
+                        <p class="text-white-80 mb-0">Chasing losses or trying to win back money you've lost</p>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="bullet-red mt-1"></div>
+                        <p class="text-white-80 mb-0">Neglecting work, school, or family obligations to play</p>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="bullet-red mt-1"></div>
+                        <p class="text-white-80 mb-0">Feeling anxious, depressed, or irritable when not playing</p>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="bullet-red mt-1"></div>
+                        <p class="text-white-80 mb-0">Borrowing money or selling possessions to fund gaming</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Self-Exclusion Tools -->
+            <div class="backdrop-blur-xl glass-main rounded-3xl p-4 p-md-5 mb-4">
+                <h2 class="text-white mb-4">Self-Exclusion & Control Tools</h2>
+                <p class="text-white-80 mb-4">
+                    We offer various tools to help you maintain control over your gaming activities:
+                </p>
+                <div class="space-y-4">
+                    <div class="backdrop-blur-sm glass-inner rounded-xl p-3">
+                        <h4 class="text-white h6 mb-2">Deposit Limits</h4>
+                        <p class="text-white-70 mb-0">Set daily, weekly, or monthly deposit limits on your account.</p>
+                    </div>
+                    <div class="backdrop-blur-sm glass-inner rounded-xl p-3">
+                        <h4 class="text-white h6 mb-2">Time-Out Periods</h4>
+                        <p class="text-white-70 mb-0">Take a break from gaming for 24 hours, 7 days, or 30 days.</p>
+                    </div>
+                    <div class="backdrop-blur-sm glass-inner rounded-xl p-3">
+                        <h4 class="text-white h6 mb-2">Self-Exclusion</h4>
+                        <p class="text-white-70 mb-0">Temporarily or permanently exclude yourself from all gaming activities.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Get Help -->
+            <div class="backdrop-blur-xl glass-contact rounded-3xl p-4 p-md-5">
+                <div class="d-flex align-items-center gap-3 mb-4">
+                    <i data-lucide="phone" class="icon-md text-green-300"></i>
+                    <h2 class="text-white mb-0">Need Help?</h2>
+                </div>
+                <p class="text-white-90 mb-4">
+                    If you or someone you know is struggling with problem gambling, help is available 24/7:
+                </p>
+                <div class="space-y-4">
+                    <div class="backdrop-blur-sm glass-contact-inner rounded-xl p-3">
+                        <h4 class="text-white h6 mb-1">National Problem Gambling Helpline</h4>
+                        <p class="text-green-300 mb-0">1-800-522-4700</p>
+                    </div>
+                    <div class="backdrop-blur-sm glass-contact-inner rounded-xl p-3">
+                        <h4 class="text-white h6 mb-1">National Council on Problem Gambling</h4>
+                        <p class="text-green-300 mb-0">www.ncpgambling.org</p>
+                    </div>
+                    <div class="backdrop-blur-sm glass-contact-inner rounded-xl p-3">
+                        <h4 class="text-white h6 mb-1">Gamblers Anonymous</h4>
+                        <p class="text-green-300 mb-0">www.gamblersanonymous.org</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Age Restriction Notice -->
+            <div class="mt-4 text-center">
+                <p class="text-white-60 mb-0">
+                    You must be 18 years or older to participate. Gaming should be entertaining, not a source of income.
+                </p>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+{% endblock %}

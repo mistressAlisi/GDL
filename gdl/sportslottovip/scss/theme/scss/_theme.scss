@@ -1,0 +1,173 @@
+@use 'variables' as *;
+@use "theme-custom-core" as *;
+
+
+
+html, body {
+  margin:0; padding:0; width:100%; min-height:100%;
+   background: var(--bs-secondary);
+  background-size:cover; background-attachment:fixed; color:#fff;
+  font-family: "Inter", Arial, sans-serif !important;
+}
+
+/* ===============================
+   FORM ELEMENT OVERRIDES (THEME)
+   =============================== */
+
+/* --- Theme switcher button & modal (keeps your existing visual but driven by vars) --- */
+#theme-switcher { position: fixed; bottom: 25px; left: 25px; z-index: 9999; display:flex; flex-direction:column; align-items:center; }
+#theme-btn {
+background: linear-gradient(135deg, var(--glow1, #0ff), var(--bg2, #001020));
+color: var(--text, #fff);
+font-size: 1.6rem; border: none; border-radius: 50%; width:56px; height:56px; cursor:pointer;
+box-shadow: 0 0 15px var(--glow1, #0ff);
+transition: all 0.3s ease;
+}
+#theme-btn:hover { transform: scale(1.1); box-shadow: 0 0 25px var(--glow1, #0ff); }
+.theme-modal {
+position: absolute; bottom:70px; left:0; display:none; flex-direction:column; align-items:center; gap:.6rem; padding:1rem; border-radius:1rem;
+}
+.theme-option { width:42px; height:42px; border-radius:50%; cursor:pointer; }
+.theme-option:hover { transform: scale(1.15); }
+
+
+/* --- Second Sidebar active link gradient (converted to theme-driven) --- */
+#secondSidebar .list-group .nav-link.active,
+#secondSidebar .list-group .nav-link:hover,
+#secondSidebar .list-group .nav-link:focus {
+
+}
+
+
+/* --- Cashier list / items --- */
+.cashier-list-group-item {
+border-radius: 1rem; margin-top: .5em; margin-bottom: .5em;
+font-family: 'Orbitron', sans-serif; transition: all 0.25s ease-in-out; padding: .6rem 1.25rem;
+}
+.cashier-list-group-item:hover {
+text-decoration: underline;
+transform: scale(1.015); cursor: pointer; border: 2px solid var(--success-hover, var(--glow2));
+}
+.cashier-list-group { padding: 10px; border: 1px solid var(--neon-rose, rgba(255,60,140,0.12)); list-style:none; border-radius:2em; }
+
+
+/* modal overrides - keep sizing, but colors reactive */
+.cashier-modal .modal { width: 650px; }
+.cashier-modal .modal-dialog { max-height:95%; overflow-y:auto; width:674px !important; max-width:100%; overflow-x:hidden; }
+
+
+/* --- Avatar / profile --- */
+.avatar { max-width:150px; max-height:150px; }
+.profile-avatar {
+max-width:65px; max-height:65px; border-radius:50%; border: thin solid var(--neon-cyan, #00ffff);
+box-shadow: 3px 2px 10px rgba(0,0,0,0.6);
+margin-left: 2px;
+}
+.profile-link-text { display:inline-block; position:relative; top:15px; text-align:start; padding-left:6px; }
+.profile-link-text.upside { top:-4px; }
+
+
+/* --- small responsive tweaks --- */
+@media (max-width:576px) { #dashboardNavbar { background-color: rgba(0,0,0,0.7); } }
+@media screen and (max-width:650px) and (orientation:portrait) { #mainSidebar { display:none !important; } }
+@media screen and (max-width:650px) and (orientation:landscape) { #mainSidebar { display:block; } }
+
+
+/* --- Animations --- */
+@keyframes slideFadeIn { from { opacity:0; transform: translateX(100px);} to { opacity:1; transform: translateX(0);} }
+
+
+  .iti {
+    --iti-border-color: #5b5b5b;
+    --iti-dialcode-color: #999999;
+    --iti-dropdown-bg: #0d1117;
+    --iti-arrow-color: #aaaaaa;
+    --iti-hover-color: #30363d;
+    //--iti-path-globe-1x: url("path/to/globe_light.webp");
+    //--iti-path-globe-2x: url("path/to/globe_light@2x.webp");
+  }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media screen and (max-width: 650px)  and (orientation: portrait) {
+  #mainSidebar {
+    display: none !important;
+  }
+}
+@media screen and (max-width: 650px)  and (orientation: landscape) {
+  #mainSidebar {
+    display: block;
+  }
+  /* --- Glowing input (driven by theme variables) --- */
+  .glowing-input input[type="number"] {
+    background: rgba(0, 0, 0, 0.6);
+    color: var(--bs-body-color);
+    border: 1px solid var(--bs-form-control-border-color, var(--glow1));
+    box-shadow: 0 0 6px var(--bs-form-control-border-color, var(--glow1)), inset 0 0 4px var(--bs-form-control-border-color, var(--glow1));
+    transition: all 0.2s ease;
+    font-weight: 700;
+    padding: .5rem .75rem;
+  }
+  .glowing-input input[type="number"]:focus {
+    outline: none;
+    border-color: var(--bs-form-control-focus-border-color);
+    box-shadow: 0 0 8px var(--bs-form-control-focus-border-color), inset 0 0 4px var(--bs-form-control-focus-border-color);
+  }
+  .glowing-input .btn-outline-primary {
+    border-color: var(--bs-primary, var(--glow1));
+    color: var(--bs-primary, var(--glow1));
+    box-shadow: 0 0 6px var(--bs-primary, var(--glow1));
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .glowing-input .btn-outline-primary:hover {
+    background: var(--bs-primary, var(--glow1));
+    color: var(--bs-dark, #000);
+    box-shadow: 0 0 10px var(--bs-primary, var(--glow1));
+  }
+
+
+  /* --- Bootstrap 5 Theme Customization mapping (top-level btns) --- */
+  .btn-primary {
+    background-color: var(--bs-primary, var(--glow1));
+    border-color: var(--bs-primary, var(--glow1));
+    color: var(--bs-btn-color, var(--text));
+  }
+  .btn-secondary {
+    background-color: var(--bs-secondary, rgba(255, 255, 255, 0.06));
+    color: var(--bs-btn-color);
+  }
+  .btn-success {
+    background-color: var(--bs-primary, var(--glow2));
+    color: var(--bs-btn-color);
+  }
+  .btn-danger {
+    background-color: var(--bs-danger, rgba(255, 50, 50, 0.9));
+    color: var(--bs-btn-color);
+  }
+  .btn-warning {
+    background-color: var(--bs-warning, rgba(255, 200, 0, 0.9));
+    color: var(--bs-btn-color);
+  }
+  .btn-info {
+    background-color: var(--bs-info, var(--glow1));
+    color: var(--bs-btn-color);
+  }
+
+
+  /* --- Utility / misc --- */
+  #advanced_switch_btn {
+    display: none;
+  }
+
+
+  /* End of theme-reactive-upgrade.scss */
+}
+
+img[alt=icon] {
+  max-width: 250px;
+  min-height: 50px;
+  width: 200px;
+  height: 58px;
+}

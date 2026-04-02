@@ -1,0 +1,50 @@
+{% load i18n %}
+{% load humanize %}
+{% load mathfilters %}
+<br/>
+<br/>
+
+{% if available > 5000 %}
+<div class="card w-50">
+    <div class="card-header">
+        <h3>{% translate "Withdraw Funds:" %}</h3>
+    </div>
+    <div class="card-body">
+        <p>
+            {% translate "To initiate a withdrawal to a digital Amazon Gift Card; please enter the desired amount to withdraw below: Points convert at 100 points to $1 USD." %}
+        <br/>
+            {% translate "Withdrawals are processed within 3 hours of being requested; and are delivered directly to your account's registered email." %}
+        </p>
+        <form id="withdrawal_request" method="POST" onsubmit="cashier.generic_post_form_v2({'event':event})" data-post-url="withdraw/validate">
+            {% csrf_token %}
+            <input type="hidden" name="provider" id="id-provider" value="cashier.providers.giftcards">
+            <input type="hidden" name="symbol" id="id-symbol" value="_AMGC">
+            <h4>{% translate "Maximum Available to Withdraw:" %} ${{ wd_avail|floatformat:2|intcomma:3 }}</h4>
+            <h6>{% translate "The gift card will be sent to:" %} <span class="text-decoration-underline">{{ account.email1 }}</span>.</h6>
+            <label for="withdrawal_amount" class="form-label">{% translate "Withdrawal Amount:" %}</label>
+            <input type="number" id="id-amount" name="amount" min="50" value="{{ wd_avail|floatformat:2|intcomma:3 }}" max="{{ wd_avail|floatformat:2|intcomma:3 }}" class="form-control" aria-describedby="passwordHelpBlock" required="required"/>
+            <div id="" class="form-text p-2">
+              {% translate "Enter the desired withdrawal amount, from $50 to" %} ${{ wd_avail|floatformat:2|intcomma:3 }}
+            </div>
+            <label for="acct_passwd" class="form-label">{% translate "Your Password:" %}</label>
+            <input type="password" name="acct_passwd" id="id-acct_passwd" class="form-control" aria-describedby="passwordHelpBlock" required="required"/>
+            <div id="" class="form-text p-2">
+              {% translate "Please enter your password to confirm the Withdrawal." %}
+            </div>
+            <button type="submit" class="btn btn-primary">{% translate "Confirm Withdrawal" %}</button>
+
+
+        </form>
+    </div>
+</div>
+{% else %}
+<div class="card">
+
+    <div class="card-body">
+        <p>
+            {% translate "You don't have a minimum of 5000 available balance to initiate a gift card withdrawal." %}
+        </p>
+
+    </div>
+</div>
+{% endif %}

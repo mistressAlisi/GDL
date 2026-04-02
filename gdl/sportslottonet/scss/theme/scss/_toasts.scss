@@ -1,0 +1,266 @@
+.glossary-section {
+  padding: 2rem 1rem;
+}
+
+.glossary-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+/* =========================
+   GLOSSARY HEADER
+   ========================= */
+
+.glossary-title,
+.glossary-intro {
+  text-align: center;
+}
+
+.glossary-intro {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 760px;
+}
+
+/* =========================
+   GLOSSARY SEARCH NAV
+   ========================= */
+
+.glossary-search {
+  display: block;
+  width: 100%;
+  max-width: 460px;
+
+  margin: 1.5rem auto 2.5rem;
+  padding: 0.7rem 1rem;
+
+  font-size: 0.95rem;
+  line-height: 1.2;
+
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.18);
+
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(10px);
+
+  color: inherit;
+  outline: none;
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+/* Placeholder */
+.glossary-search::placeholder {
+  opacity: 0.6;
+}
+
+/* Focus / active state */
+.glossary-search:focus {
+  border-color: var(--glow1, rgba(150,120,255,0.7));
+  background: rgba(255,255,255,0.1);
+  box-shadow: 0 0 0 3px rgba(150,120,255,0.25);
+}
+
+/* =========================
+   MOBILE TWEAK
+   ========================= */
+
+@media (max-width: 640px) {
+  .glossary-search {
+    max-width: 100%;
+    font-size: 0.9rem;
+  }
+}
+
+/* =========================
+   GLOSSARY GRID
+   ========================= */
+
+.glossary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.glossary-item {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) 1fr;
+  gap: 1.25rem;
+
+  padding: 1rem 1.25rem;
+  border-radius: 14px;
+
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(8px);
+
+  border: 1px solid rgba(255,255,255,0.08);
+}
+/* =========================
+   TERM (LEFT COLUMN)
+   ========================= */
+
+.glossary-item h3 {
+  margin: 0;
+  font-size: 1.15rem;       // larger than body
+  font-weight: 700;         // bold
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* =========================
+   DEFINITION (RIGHT COLUMN)
+   ========================= */
+
+.glossary-item p {
+  margin: 0;
+  font-size: 0.95rem;       // smaller than term
+  font-weight: 400;
+  line-height: 1.55;
+  opacity: 0.85;
+}
+
+
+/* =========================
+   MOBILE FALLBACK
+   ========================= */
+
+@media (max-width: 640px) {
+  .glossary-item {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .glossary-item h3 {
+    font-size: 0.95rem;
+  }
+}
+.glossary-row {
+  display: grid;
+  grid-template-columns: minmax(160px, 240px) 1fr;
+  gap: 1.25rem;
+
+  padding: 1.1rem 1.4rem;
+  margin-bottom: 0.9rem;
+
+  background: rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(10px);
+  border-radius: 14px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.055);
+    transform: translateY(-1px);
+    box-shadow: 0 0 0 1px var(--glow1, rgba(0, 255, 255, 0.3));
+  }
+}
+
+/* LEFT: TERM */
+.glossary-term {
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+
+  color: var(--bs-info);
+
+  padding-right: 1.25rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+
+  display: flex;
+  align-items: center;
+}
+
+/* RIGHT: DEFINITION */
+.glossary-definition {
+  font-size: 0.95rem;
+  line-height: 1.65;
+
+  color: var(--bs-info);
+
+  display: flex;
+  align-items: center;
+}
+
+/* =========================
+   MOBILE STACK (important)
+   ========================= */
+@media (max-width: 768px) {
+  .glossary-row {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  .glossary-term {
+    border-right: none;
+    padding-right: 0;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+}
+//@use 'variables' as *;
+//
+//// src/_toasts.scss
+//
+//$toast-bg: rgba(13, 10, 43, 0.85); // dark with transparency
+//$toast-border: rgba(255, 255, 255, 0.1);
+//$toast-text: var(--bs-text-white);
+//$toast-shadow: var(--bs-success-hover);
+//$toast-radius: 0.75rem;
+//$toast-blur: 6px;
+//
+//$toast-error: #dc3545;
+//$toast-info: #00f0ff;
+//$toast-success: #00ff99;
+//
+//.toast {
+//  background-color: $toast-bg !important;
+//  border: 1px solid $toast-border;
+//  border-radius: $toast-radius;
+//  color: $toast-text;
+//  font-family: 'Orbitron', sans-serif;
+//  box-shadow:
+//    0 0 6px $toast-shadow,
+//    0 0 12px $toast-shadow;
+//  backdrop-filter: blur($toast-blur);
+//  -webkit-backdrop-filter: blur($toast-blur);
+//  overflow: hidden;
+//
+//  .toast-header {
+//    background: transparent;
+//    border-bottom: 1px solid $toast-border;
+//    color: $toast-text;
+//    font-weight: 600;
+//    font-size: 1rem;
+//    text-shadow: 0 0 4px $toast-shadow;
+//
+//    .btn-close {
+//      filter: invert(1);
+//      opacity: 0.8;
+//    }
+//  }
+//
+//  .toast-body {
+//    font-size: 0.9rem;
+//    color: $toast-text;
+//    text-shadow: 0 0 3px var(--bs-soft-pink);
+//  }
+//}
+//
+//// Utility text colors
+//.text-error {
+//  color: $toast-error !important;
+//  //text-shadow: 0 0 4px $toast-error;
+//}
+//
+//.text-success {
+//  color: $success !important;
+//  //text-shadow: 0 0 4px $success;
+//}
+//
+//.text-info {
+//  color: $info !important;
+//  //text-shadow: 0 0 4px $info;
+//}

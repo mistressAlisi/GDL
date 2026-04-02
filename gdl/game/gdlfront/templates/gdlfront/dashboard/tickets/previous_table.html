@@ -1,0 +1,69 @@
+{% extends "minerve/pages/responsive_dashboard/index.html" %}
+{% load i18n %}
+{% load  fa_box_boolean %}
+
+{% block DYNAMIC_DASHBOARD_BODY %}
+
+<h1><i class="fa-duotone fa-solid fa-hourglass text-primary"></i>&#160;{% translate "Graded tickets Report:" %}</h1>
+
+
+
+
+<form id="detail_select_form" method="POST" target="#" data-detail-url="{{ detail_view_url }}">
+<div class="row">
+   <div class="col">
+    {% translate "Begin:" %} <input class="form-control" type="date"  id="id-start" name="start" value="{{ today }}"/>
+    </div>
+    <div class="col">
+    {% translate "End:" %} <input class="form-control" type="date"  id="id-end" name="end" value="{{ today }}"/>
+    </div>
+    <div class="col">
+    {% translate "Outcome:" %}
+        <select class="form-select" id="id-outcome" name="outcome">
+            <option value="a">{% translate "All" %}</option>
+            <option value="W">{% translate "Won" %}</option>
+            <option value="L">{% translate "Lost" %}</option>
+        </select>
+
+
+    </select>
+    </div>
+    <div class="col pt-2">
+        <input type="submit" class="btn btn-success mt-4" value="{% translate "Go!" %}"/>
+    </div>
+</div>
+</form>
+ <hr class="border-success border-2 border-opacity-50">
+<div id="detail_item_card"></div>
+
+{##}
+{#<script>#}
+{#function show_mdl_ev(event) {#}
+{#    let edt = $(event.target);#}
+{#    let url = "reports/view/ticket/"+edt.data("target")#}
+{#    let acct = edt.data("acct");#}
+{#    event.preventDefault();#}
+{#    event.stopPropagation();#}
+{#    manager.generic_ajax_modal_dialogue("Ticket Details",url,false,"95%",true);#}
+{##}
+{#}#}
+{#</script>#}
+
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+{% include "lobby/dashboard/components/account_sidebar_header.html" %}
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_BODY_FOOTER %}
+    {% include "lobby/dashboard/account/login/signup_modal.html" %}
+    {% include "minerve/pages/dynamic_dashboard/loading_toast.html" %}
+        {% include "lobby/index/theme_switcher.html" %}
+    <script src="/static/minerve/js/components/dynamic_dashboard/helper.js"></script>
+    <script src="/static/gdlfront/js/gdl_backend-prev.js" type="module"></script>
+{% endblock %}
+{% block MINERVE_NAV_PAGE_NAME %}
+    <span class="navbar-brand"><i class="fa-duotone fa-solid fa-table-list" aria-hidden="true"></i> <span class="text-decoration-underline">Graded Tickets</span></span>
+{% endblock %}
+{% block bootstrap5_title %}
+    {{ vdomain.website_name }}: Graded Tickets
+{% endblock %}

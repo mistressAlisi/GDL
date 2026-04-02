@@ -1,0 +1,1112 @@
+{% extends "sportslottonet/base/page.html" %}
+{% block bootstrap5_title %} SPORTSLOTTO: FAQs {% endblock %}
+{% block PAGE_BODY %}
+<section id="sportslotto-faq" style="
+  font-family:'Poppins','Segoe UI','Roboto',sans-serif;
+  overflow:hidden;
+">
+
+  <header style="max-width:1100px;margin:0 auto;text-align:center;">
+    <h2 style="font-size:clamp(1.8rem,4.5vw,2.6rem);
+               font-weight:700;
+               text-transform:uppercase;
+               -webkit-background-clip:text;
+               margin:0 0 6px;">
+      Frequently Asked Questions
+    </h2>
+    <p style="margin:0 0 20px;
+              opacity:0.85;">
+      Everything you need to know before you play.
+    </p>
+    <div id="faq-search-wrap" style="width:100%;
+                max-width:900px;
+                margin:0 auto;
+                padding:10px;
+                border-radius:14px;
+                background:var(--bs-card-bg); /* theme-reactive search box */
+                box-shadow:0 8px 30px rgba(0,0,0,0.28);
+                backdrop-filter:blur(12px);
+                display:flex;
+                gap:8px;
+                align-items:center;
+                justify-content:center;">
+      <input
+  id="faq-search"
+  type="search"
+  placeholder="Search FAQs — try 'withdraw', 'tickets', 'account'"
+  aria-label="Search FAQs"
+  style="
+    flex: 1;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Rajdhani', sans-serif;
+    background: rgba(var(--bs-card-bg-rgb, 30,30,40), 0.18); /* slightly more opaque */
+    color: var(--bs-info);
+    box-shadow: inset 0 -1px 0 rgba(255,255,255,0.02);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  ">
+
+      <button id="faq-clear" aria-label="Clear search" style="padding:10px 14px;
+                     border-radius:10px;
+                     border:none;
+                     cursor:pointer;
+                     color:#fff;
+                     font-weight:700;
+                     font-family:'Rajdhani',sans-serif;">
+        Clear
+      </button>
+    </div>
+  </header>
+<div class="faq-background">
+  <div class="faq-content" style="
+    max-width:900px;
+    margin:40px auto 0;
+  /* theme-reactive container */
+    border-radius:20px;
+    backdrop-filter:blur(20px);
+    padding:40px 35px;
+  ">
+  <div class="faq-container" style="max-width:1100px;margin:18px auto 0;display:flex;flex-direction:column;gap:12px;">
+    <div class="faq-item" data-search="what is sportslotto">
+      <button class="faq-question" aria-expanded="false"> What is SportsLotto?</button>
+      <div class="faq-answer" aria-hidden="true"><p>A: SportsLotto is a new way to bet that combines the thrill of sports with the high payouts of lottery.</p></div>
+    </div>
+
+    <div class="faq-item" data-search="how do i create the account">
+      <button class="faq-question" aria-expanded="false"> How do I create the account?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Click on Play Now or Register and enter your account information such as your Name, email address, phone number. Then you will get an email verification, check your Spam or Junk folder if you don’t see it in your inbox. Come back to the site, enter the verification and you are set.  Points are awarded for a verified email (1500) and a verified phone number (2500).  If you verify your phone using Telegram then an extra 1000 points will be applied.
+</p></div>
+    </div>
+
+    <div class="faq-item" data-search="what are the eligibility requirements">
+      <button class="faq-question" aria-expanded="false"> What are the eligibility requirements?</button>
+      <div class="faq-answer" aria-hidden="true"><p> You must be of legal age in your jurisdiction (for example, 18+ or 21+ depending on local law). You must not be excluded from gambling or lottery participation under the law in your jurisdiction. You may need to reside in a country or region where the service is allowed. You must provide accurate personal information and complete any required verification processes.</p></div>
+    </div>
+    <div class="faq-item" data-search="is sportslotto legal and regulated">
+      <button class="faq-question" aria-expanded="false"> Is SportsLotto legal and regulated?</button>
+      <div class="faq-answer" aria-hidden="true"><p> The legality depends on your local laws and the jurisdiction from which you participate. SportsLotto operates under its Terms and Conditions, which you must agree to, and its operations comply with the legal framework laid out on its site. It is your responsibility to ensure you are eligible and that participating in online lottery or draw games is permitted in your location.</p></div>
+    </div>
+    <div class="faq-item" data-search="how do i know the games are fair and draws are legitimate">
+      <button class="faq-question" aria-expanded="false"> How do I know the games are fair and draws are legitimate?</button>
+      <div class="faq-answer" aria-hidden="true"><p> The events are based on sporting events being played around the world. A ticket is generated based on a player's choices: risk amount, win amount, and number of events.</p></div>
+    </div>
+    <div class="faq-item" data-search="what if i have trouble logging in or accessing my account">
+      <button class="faq-question" aria-expanded="false"> What if I have trouble logging in or accessing my account?</button>
+      <div class="faq-answer" aria-hidden="true"><p> First verify you have entered the correct username/email and password.
+If you forgot your password, select “Forgot password” on the login page and follow the steps to reset.
+Ensure your browser is updated, cookies and JavaScript are enabled, and there are no connectivity issues.
+Ensure that you clean your cookies and temporary cached files for  at least 24 hours and try again.
+If issues persist, contact the site’s customer support via the “Contact Us” or “Support” link.
+</p></div>
+    </div>
+    <div class="faq-item" data-search="how do i withdraw funds">
+      <button class="faq-question" aria-expanded="false"> How do I withdraw funds?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Log into your account and go to the "Cashier," then click on "Withdraw Funds." Select the amount you wish to withdraw (subject to minimum and maximum withdrawal limits). Points convert at 100 points = $1 for Amazon gift cards, with a $50 minimum withdrawal. Amazon gift cards will be delivered electronically.</p></div>
+    </div>
+    <div class="faq-item" data-search="what about responsible gambling">
+      <button class="faq-question" aria-expanded="false"> What about responsible gambling?</button>
+      <div class="faq-answer" aria-hidden="true"><p> SportsLotto encourages responsible participation.</p></div>
+    </div>
+    <div class="faq-item" data-search="what are the terms and conditions i agree to">
+      <button class="faq-question" aria-expanded="false"> What are the Terms and Conditions I agree to?</button>
+      <div class="faq-answer" aria-hidden="true"><p> When you register and play on SportsLotto you agree to its Terms and Conditions. The Terms and Conditions cover your participation rights, how draws are conducted, how winnings are paid, how disputes are resolved, your obligations, the site's rights, limitation of liability, jurisdiction, and more. Always read the Terms and Conditions fully before playing.</p></div>
+    </div>
+    <div class="faq-item" data-search="how long have you been in business">
+      <button class="faq-question" aria-expanded="false"> How long have you been in business?</button>
+      <div class="faq-answer" aria-hidden="true"><p> We are a new site, but our team has been in the industry since 1983.</p></div>
+    </div>
+    <div class="faq-item" data-search="how do i change my password">
+      <button class="faq-question" aria-expanded="false"> How do I change my password?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Click on Log In, then below the username and password fields you will see "Forgot Password/Account." Use that flow to reset your password or go to the main page of the site for further instructions.</p></div>
+    </div>
+    <div class="faq-item" data-search="how do i get tickets">
+      <button class="faq-question" aria-expanded="false"> How do I get tickets?</button>
+      <div class="faq-answer" aria-hidden="true"><p> To place a wager, click on Get Tickets. Choose your ‘Risk’ Amount and the number of events and the win amount. The more you want to win the odds will shift, the less the amount of the win, and your odds will increase towards your favor. Then click on Get Tickets. Here you will see a list of Tickets to choose from, you can choose CLICK to Reveal details! And you will see the Details, click there and you will see the events and time, click Accept then go to Cart and click Buy Tickets! And confirm the purchase.</p></div>
+    </div>
+    <div class="faq-item" data-search="what are quick picks">
+      <button class="faq-question" aria-expanded="false"> What are Quick Picks?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Picks where your events are chosen by AI with the following filters: 4 events to win roughly 25 for 1 Risked. You will get five tickets, and you can delete the tickets you do not want. Once satisfied with your picks, then click on Buy Tickets! Then Complete the Purchase.</p></div>
+    </div>
+    <div class="faq-item" data-search="when will tickets be graded">
+      <button class="faq-question" aria-expanded="false"> When will tickets be graded?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Tickets are typically graded within one hour after the conclusion of each match. All tickets remain pending until all legs have been graded.</p></div>
+    </div>
+    <div class="faq-item" data-search="who or what makes the picks">
+      <button class="faq-question" aria-expanded="false"> Who or what makes the picks?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Our unique algorithm takes your requirements (events, risk, win) and finds combinations that meet those parameters. Players can accept or delete generated tickets. Accepted tickets go into your cart and deleted tickets will be replaced by other options.</p></div>
+    </div>
+    <div class="faq-item" data-search="are there any bonuses or promotions available for new players">
+      <button class="faq-question" aria-expanded="false"> Are there any bonuses or promotions available for new players?</button>
+      <div class="faq-answer" aria-hidden="true"><p> SportsLotto.net is a free game and players are awarded points in exchange for providing a verified email and phone number. Points can be played and, once they have been rolled one time, can be exchanged for Amazon gift cards at the rate of 100 points = $1. Withdrawals have a $50 minimum.</p></div>
+    </div>
+    <div class="faq-item" data-search="can i try games for free before playing for real money">
+      <button class="faq-question" aria-expanded="false"> Can I try games for free before playing for real money?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Yes. At sportslotto.net you can enjoy our games for free. It is a great way to explore the game and develop a strategy while only risking points. You get points by registering your email and phone number upon signing up.</p></div>
+    </div>
+    <div class="faq-item" data-search="how can i contact customer support if i have questions or issues">
+      <button class="faq-question" aria-expanded="false"> How can I contact customer support if I have questions or issues?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Our customer support team is available around the clock by calling Toll-Free 1-888-416-5875 for help with any questions or issues. You can contact us through live chat, email, or phone, and our experienced agents will provide quick and reliable assistance.</p></div>
+    </div>
+    <div class="faq-item" data-search="where can i find my tickets">
+      <button class="faq-question" aria-expanded="false"> Where can I find my tickets?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Find either "Open Tickets" or "Graded Tickets." If you have games that are not finished or graded, they will appear in Open. If the games are completed and graded, they will be in the Graded section. Tickets remain open until all legs have been graded.</p></div>
+    </div>
+<div class="faq-item" data-search="do all events have to win to collect">
+  <button class="faq-question" aria-expanded="false">
+     Do all events have to win to collect?
+  </button>
+  <div class="faq-answer" aria-hidden="true">
+    <p>
+       No. Consolation payouts are available for any ticket with six picks or more.
+      The ticket will be recalculated with the losing event removed and the payout adjusted accordingly.
+    </p>
+    <div class="consolation-payout-table payout-table-wrapper">
+      <style>
+        .payout-table-wrapper {
+          backdrop-filter: blur(12px);
+          border-radius: 16px;
+          padding: 1.5rem;
+          margin-top: 1.5rem;
+          transition: all 0.4s ease;
+        }
+
+        .payout-table-wrapper h1 {
+          text-align: center;
+          font-family: 'Orbitron', sans-serif;
+          margin-bottom: 0.75rem;
+        }
+
+        .payout-table-wrapper hr {
+          border: none;
+          height: 2px;
+          margin-bottom: 1.5rem;
+        }
+
+        /* 🔹 Scroll setup for payout table only */
+        .consolation-payout-table {
+          max-height: 340px;
+          overflow-y: auto;
+          scrollbar-width: thin;
+          border-radius: 12px;
+        }
+
+        .consolation-payout-table::-webkit-scrollbar {
+          width: 8px;
+        }
+
+        .consolation-payout-table::-webkit-scrollbar-thumb {
+          border-radius: 4px;
+        }
+
+        .consolation-payout-table::-webkit-scrollbar-track {
+        }
+
+        table.styled-table {
+          border-collapse: collapse;
+          width: 100%;
+          font-family: 'Rajdhani', 'Teko', sans-serif;
+          font-size: 0.95rem;
+          border-radius: 12px;
+          overflow: hidden;
+          transition: background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .styled-table thead th {
+          color: #fff;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          padding: 0.75rem;
+        }
+
+        .styled-table th,
+        .styled-table td {
+          padding: 0.6rem 0.8rem;
+          text-align: center;
+          transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .styled-table tbody tr:nth-child(even) {
+        }
+
+        .styled-table tbody tr:nth-child(odd) {
+        }
+
+        .styled-table tbody tr:hover {
+        }
+
+        .styled-table th:nth-child(even),
+        .styled-table td:nth-child(even) {
+        }
+
+        /* Smooth theme transitions */
+        .payout-table-wrapper,
+        .styled-table,
+        .styled-table th,
+        .styled-table td {
+          transition: all 0.4s ease;
+        }
+      </style>
+
+      <h1>Consolation Payout Table</h1>
+      <hr>
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Events</th>
+            <th>Maximum Losses</th>
+            <th>Minimum Bet</th>
+            <th>Maximum Bet</th>
+            <th>Players Percentage</th>
+            <th>Maximum Payout</th>
+          </tr>
+        </thead>
+        <tbody>
+    <tr>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1000</td>
+      <td>100</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>500</td>
+      <td>100</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td>100</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td>100</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td>100</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td>100</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100</td>
+      <td>85</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td>100</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100</td>
+      <td>90</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td>100</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100</td>
+      <td>90</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td>100</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100</td>
+      <td>90</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td>100</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100</td>
+      <td>90</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td>100</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100</td>
+      <td>90</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>2</td>
+      <td>1</td>
+      <td>100</td>
+      <td>80</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td>100</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100</td>
+      <td>90</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>2</td>
+      <td>1</td>
+      <td>100</td>
+      <td>80</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td>100</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100</td>
+      <td>90</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>2</td>
+      <td>1</td>
+      <td>100</td>
+      <td>80</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td>100</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100</td>
+      <td>90</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>2</td>
+      <td>1</td>
+      <td>100</td>
+      <td>80</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>3</td>
+      <td>1</td>
+      <td>100</td>
+      <td>70</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td>100</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100</td>
+      <td>90</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>2</td>
+      <td>1</td>
+      <td>100</td>
+      <td>80</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td>100</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100</td>
+      <td>90</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>2</td>
+      <td>1</td>
+      <td>100</td>
+      <td>80</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>3</td>
+      <td>1</td>
+      <td>100</td>
+      <td>70</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td>100</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100</td>
+      <td>90</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2</td>
+      <td>1</td>
+      <td>100</td>
+      <td>80</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>3</td>
+      <td>1</td>
+      <td>100</td>
+      <td>70</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>4</td>
+      <td>1</td>
+      <td>100</td>
+      <td>60</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td>100</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100</td>
+      <td>90</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>2</td>
+      <td>1</td>
+      <td>100</td>
+      <td>80</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>3</td>
+      <td>1</td>
+      <td>100</td>
+      <td>70</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>4</td>
+      <td>1</td>
+      <td>100</td>
+      <td>60</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td>100</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100</td>
+      <td>90</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>2</td>
+      <td>1</td>
+      <td>100</td>
+      <td>80</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>3</td>
+      <td>1</td>
+      <td>100</td>
+      <td>70</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>4</td>
+      <td>1</td>
+      <td>100</td>
+      <td>60</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>5</td>
+      <td>1</td>
+      <td>100</td>
+      <td>50</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td>100</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100</td>
+      <td>90</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>2</td>
+      <td>1</td>
+      <td>100</td>
+      <td>80</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>3</td>
+      <td>1</td>
+      <td>100</td>
+      <td>70</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>4</td>
+      <td>1</td>
+      <td>100</td>
+      <td>60</td>
+      <td>100000</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>4</td>
+      <td>1</td>
+      <td>100</td>
+      <td>50</td>
+      <td>100000</td>
+          </tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+    <div class="faq-item" data-search="what types of drawings do you offer">
+      <button class="faq-question" aria-expanded="false"> What types of drawings do you offer?</button>
+      <div class="faq-answer" aria-hidden="true"><p> We use most sporting events in our algorithm, though players can filter out sports they do not want included.</p></div>
+    </div>
+    <div class="faq-item" data-search="what should i do if i have a duplicate ticket">
+      <button class="faq-question" aria-expanded="false"> What should I do if I have a duplicate ticket?</button>
+      <div class="faq-answer" aria-hidden="true"><p>A ticket is considered a duplicate only if it matches exactly in pick, hour, state, and amount, with no more than a 15-second time difference. If this occurs contact our Customer Service Team to go over a possible duplicate ticket.  Any error reported and verified will receive 1000 free points </p></div>
+    </div>
+    <div class="faq-item" data-search="i havent received payment for my ticket">
+      <button class="faq-question" aria-expanded="false"> I haven't received payment for my ticket</button>
+      <div class="faq-answer" aria-hidden="true"><p>Please wait at least one hour after the last game has finished to give us time to grade it. If it has been more than one hour, please contact our Customer Service team via e-mail to: support@sportslotto.net, our Toll-Free Number 1-888-416-5875 or this chat for us to fix the issue.</p></div>
+    </div>
+    <div class="faq-item" data-search="what is the maximum payout for a ticket">
+      <button class="faq-question" aria-expanded="false"> What is the maximum payout for a ticket?</button>
+      <div class="faq-answer" aria-hidden="true"><p> The maximum payout for a ticket is 100,000 points.</p></div>
+    </div>
+    <div class="faq-item" data-search="what is the maximum i can bet per ticket">
+      <button class="faq-question" aria-expanded="false"> What is the maximum I can bet per ticket?</button>
+      <div class="faq-answer" aria-hidden="true"><p> The maximum bet per ticket is 1,000 points.</p></div>
+    </div>
+    <div class="faq-item" data-search="what is the minimum i can bet per ticket">
+      <button class="faq-question" aria-expanded="false"> What is the minimum I can bet per ticket?</button>
+      <div class="faq-answer" aria-hidden="true"><p> The minimum bet per ticket is 1 point.</p></div>
+    </div>
+        <div class="faq-item" data-search="What is the maximum I can bet on a Quick Pick">
+      <button class="faq-question" aria-expanded="false"> What is the maximum I can bet on a Quick Pick?</button>
+      <div class="faq-answer" aria-hidden="true"><p>The maximum amount you can bet on a Quick Pick is 10 per ticket, regardless of the sport selected. This limit helps keep Quick Picks simple and consistent across all sports.</p></div>
+    </div>
+    <div class="faq-item" data-search="what do i do if i win how do i claim my prize">
+      <button class="faq-question" aria-expanded="false"> What do I do if I win? How do I claim my prize?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Visit our payout webpage for details on paying out your funds. Points convert at 100 points = $1 for Amazon gift cards. All prizes are awarded as Amazon gift cards. Points have no cash value.</p></div>
+    </div>
+    <div class="faq-item" data-search="is there a limit to how many tickets i can buy">
+      <button class="faq-question" aria-expanded="false"> Is there a limit to how many tickets I can buy?</button>
+      <div class="faq-answer" aria-hidden="true"><p> There is no limit on how many tickets you can buy; however, there are limits on how much each ticket pays out.</p></div>
+    </div>
+
+    <div class="faq-item" data-search="what should i do if i havent received my payout">
+      <button class="faq-question" aria-expanded="false"> What should I do if I haven't received my payout?</button>
+      <div class="faq-answer" aria-hidden="true"><p> If you have not received your payout within the expected timeframe, please contact our customer support team with your ticket information and they will assist you.</p></div>
+    </div>
+    <div class="faq-item" data-search="Can I continue playing if I’m outside my country of registration if I am away for vacation or work">
+      <button class="faq-question" aria-expanded="false"> Can I continue playing if I’m outside my country of registration if I am away for vacation or work? </button>
+      <div class="faq-answer" aria-hidden="true"><p> Yes, you can continue playing while traveling for vacation or work. However, please let our Customer Service team know before you travel so we can adjust your account’s security settings accordingly. This ensures uninterrupted access and allows us to configure your profile based on your travel location and expected return date.</p></div>
+    </div>
+    <div class="faq-item" data-search="whats the maximum payout">
+      <button class="faq-question" aria-expanded="false"> What's the maximum payout?</button>
+      <div class="faq-answer" aria-hidden="true"><p> One hundred thousand (100,000) points is the most that can be cashed in at one time.</p></div>
+    </div>
+    <div class="faq-item" data-search="can i cancel a wager">
+      <button class="faq-question" aria-expanded="false"> Can I cancel a wager?</button>
+      <div class="faq-answer" aria-hidden="true"><p> All bets are final and cannot be voided. Please double-check your bet slip before confirming your ticket.</p></div>
+    </div>
+    <div class="faq-item" data-search="what happens if a game i bet on is postponed or delayed">
+      <button class="faq-question" aria-expanded="false"> What happens if a game I bet on is postponed or delayed?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Handling varies by sport and product. Canceled games will reduce the value of the ticket but it remains valid. A five-event ticket with a canceled game will be recalculated based on the remaining four events. If a game is delayed, the event remains open until a final score is posted.</p></div>
+    </div>
+    <div class="faq-item" data-search="what happens if my bet is graded as canceled">
+      <button class="faq-question" aria-expanded="false"> What happens if my bet is graded as canceled?</button>
+      <div class="faq-answer" aria-hidden="true"><p> A canceled bet occurs when one or more conditions for action are not met, resulting in a no-action status for that wager. This will occur only if there is an error in the creation of the ticket. The risk amount is then credited back to your account balance.</p></div>
+    </div>
+    <div class="faq-item" data-search="what happens if my bet is graded incorrectly">
+      <button class="faq-question" aria-expanded="false"> What happens if my bet is graded incorrectly?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Contact customer service via phone, chat, or email to review and regrade your wager if needed.</p></div>
+    </div>
+    <div class="faq-item" data-search="what should i do if my settled wagers are still pending">
+      <button class="faq-question" aria-expanded="false"> What should I do if my settled wagers are still pending?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Please wait 60 minutes after the last wager is graded. If it is not credited to your balance after that time, contact our Customer Service team via chat or email and provide the ticket number to support@sportslotto.net.</p></div>
+    </div>
+    <div class="faq-item" data-search="where can i find a wagers ticket number">
+      <button class="faq-question" aria-expanded="false"> Where can I find a wager's ticket number?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Log into the site, click on Open Tickets, and on the right you will see the ticket ID. It is a long alphanumeric string that includes the time created, outcome, and bet/win amount.</p></div>
+    </div>
+    <div class="faq-item" data-search="can i receive a report from my tickets transactions">
+      <button class="faq-question" aria-expanded="false"> Can I receive a report from my tickets or transactions?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Yes. You can view reports by visiting the Graded or Open tickets sections, or contact support for a custom report.</p></div>
+    </div>
+
+
+
+
+    <div class="faq-item" data-search="it says my account is restricted what should i do">
+      <button class="faq-question" aria-expanded="false"> It says my account is restricted. What should I do?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Please contact Customer Service for assistance.</p></div>
+    </div>
+
+    <div class="faq-item" data-search="am i eligible for a free payout">
+      <button class="faq-question" aria-expanded="false"> Am I eligible for a free payout?</button>
+      <div class="faq-answer" aria-hidden="true"> All SportsLotto.net payouts are free. Amazon gift cards are delivered electronically.</div>
+    </div>
+    <div class="faq-item" data-search="do i need to verify my account for a payout">
+      <button class="faq-question" aria-expanded="false"> Do I need to verify my account for a payout?</button>
+      <div class="faq-answer" aria-hidden="true"><p> No. Accounts are verified at sign up.</p></div>
+    </div>
+    <div class="faq-item" data-search="how do i request a payout">
+      <button class="faq-question" aria-expanded="false"> How do I request a payout?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Log into your account and click the "Cashier" button at the top of the website. On the next page, you will see your available point balance.  You can cash in a minimum of 5000 ($50) to a maximum of 100,000 ($1000) points.  This will convert to a Gift card value (100:1) and you can request a gift card.  The card will be delivered electronically to the email you have on record.
+</p></div>
+    </div>
+    <div class="faq-item" data-search="how long does it take for my payout to be processed">
+      <button class="faq-question" aria-expanded="false"> How long does it take for my payout to be processed?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Payouts are reviewed within 24 hours, and gift cards will be delivered electronically once approved.</p></div>
+    </div>
+    <div class="faq-item" data-search="is there a limit on how much i can withdraw">
+      <button class="faq-question" aria-expanded="false"> Is there a limit on how much I can withdraw?</button>
+      <div class="faq-answer" aria-hidden="true"><p> A maximum of 100,000 points per day can be converted to gift cards.</p></div>
+    </div>
+
+    <div class="faq-item" data-search="my payout is on hold why">
+      <button class="faq-question" aria-expanded="false"> My payout is on hold. Why?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Please contact Customer Service by phone, chat, or email for an update on your payout status.</p></div>
+    </div>
+    <div class="faq-item" data-search="what happens if my payout gets delayed">
+      <button class="faq-question" aria-expanded="false"> What happens if my payout gets delayed?</button>
+      <div class="faq-answer" aria-hidden="true"><p> If the delay is longer than 24 hours, please contact us by phone, chat, or email to check the status of your payout.</p></div>
+    </div>
+    <div class="faq-item" data-search="why do i have to lower my payout amount">
+      <button class="faq-question" aria-expanded="false"> Why do I have to lower my payout amount?</button>
+      <div class="faq-answer" aria-hidden="true"><p> We have a daily maximum of 100,000 points that can be converted to gift cards.</p></div>
+    </div>
+    <div class="faq-item" data-search="will i have to report taxes on my withdrawal">
+      <button class="faq-question" aria-expanded="false"> Will I have to report taxes on my withdrawal?</button>
+      <div class="faq-answer" aria-hidden="true"><p> We do not offer tax advice or provide tax-related forms, as we are not based in the United States. Consult a tax professional in your jurisdiction for guidance.</p></div>
+    </div>
+    <div class="faq-item" data-search="can i close my account permanently">
+      <button class="faq-question" aria-expanded="false"> Can I close my account permanently?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Accounts can be closed upon request, although they are not permanently deleted. You may request to have your account reopened at any time.</p></div>
+    </div>
+    <div class="faq-item" data-search="can i continue playing if im outside my country of registration for vacation or work">
+      <button class="faq-question" aria-expanded="false"> Can I continue playing if I’m outside my country of registration if I am away for vacation or work?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Yes, you can continue playing while traveling for vacation or work. However, please let our Customer Service team know before you travel so we can adjust your account’s security settings accordingly. This ensures uninterrupted access and allows us to configure your profile based on your travel location and expected return date.</p></div>
+    </div>
+    <div class="faq-item" data-search="can i create a new account if i have an existing one">
+      <button class="faq-question" aria-expanded="false"> Can I create a new account if I have an existing one?</button>
+      <div class="faq-answer" aria-hidden="true"><p> No. Each household is limited to one account. You are not permitted to create multiple accounts.</p></div>
+    </div>
+    <div class="faq-item" data-search="can i delete my account">
+      <button class="faq-question" aria-expanded="false"> Can I delete my account?</button>
+      <div class="faq-answer" aria-hidden="true"><p> We do not permanently delete accounts, but we can close your account upon request.</p></div>
+    </div>
+    <div class="faq-item" data-search="can i get a courtesy bonus">
+      <button class="faq-question" aria-expanded="false"> Can I get a courtesy bonus?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Courtesy bonuses are available only with Customer Service approval and are awarded for finding verified bugs or otherwise assisting to improve the player experience.</p></div>
+    </div>
+    <div class="faq-item" data-search="can i play if i am outside of the us">
+      <button class="faq-question" aria-expanded="false"> Can I play if I am outside of the United States?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Yes, players from around the world are welcome, provided that online gaming is permitted in their country. We also have security measures in place, so if you’re unable to register, it may be due to certain verification restrictions that prevent access to our site.</p></div>
+    </div>
+    <div class="faq-item" data-search="do you offer an irs form or a tax statement at the end of the year">
+      <button class="faq-question" aria-expanded="false"> Do you offer an IRS form or a tax statement at the end of the year?</button>
+      <div class="faq-answer" aria-hidden="true"><p> We do not provide tax advice or tax-related forms, as we are not based in the United States.</p></div>
+    </div>
+    <div class="faq-item" data-search="how can i change my personal information">
+      <button class="faq-question" aria-expanded="false"> How can I change my personal information?</button>
+      <div class="faq-answer" aria-hidden="true"><p> To change your email, provide a valid ID if your balance is over 5,000. For name changes, submit legal documentation and a photo ID. Other updates can be made once account details are verified.</p></div>
+    </div>
+    <div class="faq-item" data-search="how do i request a bonus">
+      <button class="faq-question" aria-expanded="false"> How do I request a bonus?</button>
+      <div class="faq-answer" aria-hidden="true"><p> SportsLotto.net does not typically offer bonuses. Bonuses may be awarded for finding verified bugs or providing assistance that improves the player experience.</p></div>
+    </div>
+    <div class="faq-item" data-search="i tried to register it says my information is linked to an existing account">
+      <button class="faq-question" aria-expanded="false"> I tried to register, but it says my information is linked to an existing account.</button>
+      <div class="faq-answer" aria-hidden="true"><p> If you have an existing account, you will need to use that account. We can send you a recovery link to update your account details.</p></div>
+    </div>
+
+    <div class="faq-item" data-search="what are the referral bonus rules">
+      <button class="faq-question" aria-expanded="false"> What are the referral bonus rules?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Existing accounts that refer a friend are eligible to receive 2,500 points for a successful referral. Terms and conditions apply.</p></div>
+    </div>
+    <div class="faq-item" data-search="what is a rollover">
+      <button class="faq-question" aria-expanded="false"> What is a rollover?</button>
+      <div class="faq-answer" aria-hidden="true"><p> A rollover is the amount of play-through required on your account before you can request a payout. At SportsLotto.net, you must play through your initial points and any courtesy points one time.</p></div>
+    </div>
+    <div class="faq-item" data-search="does sportslotto support responsible gambling">
+      <button class="faq-question" aria-expanded="false"> Does SportsLotto.net support responsible gambling?</button>
+      <div class="faq-answer" aria-hidden="true"><p>SportsLotto.net is firmly dedicated to promoting responsible gambling as a core aspect of its operations. The platform ensures that no real money is involved in gameplay, helping to maintain a safe and recreational environment for all users.
+If you or someone you know is experiencing difficulties related to gambling, SportsLotto.net recommends reaching out to reputable support organizations. These include:
+    • Gamblers Anonymous
+    • Website: gamblersanonymous.org
+    • International Resources: gamblersanonymous.org/recovery-program/
+Gambling Therapy
+Website: gamblingtherapy.org
+International Support: gamblingtherapy.org/support/support-forums/
+These organizations offer confidential advice, emotional support, and guidance around the clock to anyone affected by problem gambling.
+SportsLotto.net is committed to ensuring that gaming remains a fun, secure, and balanced experience for every player.</p></div>
+    </div>
+
+    <div class="faq-item" data-search="does it cost me anything to become an affiliate">
+      <button class="faq-question" aria-expanded="false"> Does it cost me anything to become an affiliate?</button>
+      <div class="faq-answer" aria-hidden="true"><p>To get more information about becoming an affiliate, please send your email to: support@sportslotto.net, and they will assist you with your questions.</p></div>
+    </div>
+
+
+  <style>
+    #sportslotto-faq h2 {
+      margin-bottom:20px;
+    }
+
+    #sportslotto-faq p {
+      line-height:1.7;
+      opacity:0.95;
+      margin-bottom:20px;
+    }
+
+    #sportslotto-faq .faq-content p,
+    #sportslotto-faq .faq-content li {
+      line-height:1.7;
+      opacity:0.95;
+      margin-bottom:16px;
+    }
+
+    #sportslotto-faq .faq-content h3 {
+      font-weight:700;
+      margin-top:25px;
+      margin-bottom:10px;
+    }
+
+    #sportslotto-faq .faq-content:hover {
+      transition:all 0.3s ease;
+    }
+
+    @media(max-width:768px){
+      #sportslotto-faq {
+        padding:40px 5%;
+      }
+      #sportslotto-faq .faq-content {
+        padding:25px 20px;
+      }
+      #sportslotto-faq h2 {
+        font-size:1.8rem;
+      }
+      #sportslotto-faq .faq-content h3 {
+        font-size:1.2rem;
+      }
+    }
+  </style>
+
+</div></div></div></section>
+
+
+
+<style>
+  /* === FAQ Visuals === */
+  .faq-container {
+    gap: 12px;
+  }
+
+  .faq-item {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: all 0.32s ease;
+    backdrop-filter: blur(14px);
+    position: relative;
+  }
+
+  .faq-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.45s ease;
+  }
+
+  .faq-item:hover::after {
+    opacity: 0.18;
+  }
+
+  .faq-item.active::after {
+    opacity: 0.36;
+    animation: faqPulse 2.6s ease-in-out infinite alternate;
+  }
+
+  .faq-question {
+    width: 100%;
+    background: transparent;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: left;
+    padding: 14px 18px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+      color: var(--bs-info);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.46s cubic-bezier(.2, .9, .2, 1), padding 0.26s ease;
+    padding: 0 18px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.03));
+  }
+
+  .faq-answer p {
+    margin: 0;
+    padding: 12px 0 18px;
+    white-space: pre-wrap;
+    line-height: 1.5;
+    font-size: 0.98rem;
+  }
+
+  .faq-item.active {
+  }
+
+  .faq-item.active .faq-answer {
+    max-height: 520px;
+    padding: 0 18px 14px;
+  }
+
+  @keyframes faqPulse {
+    0% { box-shadow: 0 0 18px rgba(0, 0, 0, 0.0); }
+    100% { box-shadow: 0 0 60px rgba(0, 0, 0, 0.12); }
+  }
+
+  @media (max-width: 768px) {
+    #sportslotto-faq { padding: 36px 5%; }
+    .faq-question { font-size: 0.98rem; padding: 12px 14px; }
+    .faq-answer p { font-size: 0.95rem; }
+  }
+</style>
+
+<script>
+(function initFAQ() {
+  const faqItems = document.querySelectorAll('.faq-item');
+  if (!faqItems.length) {
+    // 🕓 Retry if Odoo hasn't rendered yet
+    return setTimeout(initFAQ, 200);
+  }
+
+  const searchInput = document.getElementById('faq-search');
+  const clearBtn = document.getElementById('faq-clear');
+
+  // Toggle open/close
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+    if (!question || !answer) return;
+
+    question.addEventListener('click', () => {
+      const isActive = item.classList.contains('active');
+      faqItems.forEach(i => {
+        i.classList.remove('active');
+        const q = i.querySelector('.faq-question');
+        const a = i.querySelector('.faq-answer');
+        if (q) q.setAttribute('aria-expanded', 'false');
+        if (a) a.setAttribute('aria-hidden', 'true');
+      });
+      if (!isActive) {
+        item.classList.add('active');
+        question.setAttribute('aria-expanded', 'true');
+        answer.setAttribute('aria-hidden', 'false');
+      }
+    });
+  });
+
+  // 🔍 Search filter
+  function applyFilter(term) {
+    const q = (term || '').toLowerCase();
+    faqItems.forEach(item => {
+      const match = item.innerText.toLowerCase().includes(q);
+      item.style.display = match ? '' : 'none';
+      if (!match) item.classList.remove('active');
+    });
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', e => applyFilter(e.target.value));
+  }
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      applyFilter('');
+      searchInput.focus();
+    });
+  }
+})();
+</script>{% endblock %}

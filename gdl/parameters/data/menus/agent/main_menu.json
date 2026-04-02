@@ -1,0 +1,252 @@
+[
+  {
+    "on_click": "",
+    "url": "ledgers/per_agent/weekly_figures",
+    "ordering_key": 1,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-light fa-calendar-week",
+    "name": "Weekly Figures",
+    "help_text": "Weekly Figures Current Report",
+    "active": true
+  },
+  {
+    "on_click": "",
+    "url": "accounts/table/index",
+    "ordering_key": 2,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-solid fa-user-pen",
+    "name": "Customer Admin",
+    "help_text": "Administer your customers ;)",
+    "active": true
+  },
+  {
+    "on_click": "",
+    "url": "wagers/open",
+    "ordering_key": 3,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-solid fa-envelope-open",
+    "name": "Open Bets",
+    "help_text": "Currently Open Bets",
+    "active": true
+  },
+  {
+    "on_click": "",
+    "url": "wagers/reports/qualified/index",
+    "ordering_key": 5,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-solid fa-check-double",
+    "name": "Qualified Bets",
+    "help_text": "Qualified and Closed Bets report",
+    "active": true
+  },
+  {
+    "on_click": "",
+    "url": "sports/matches/table/index",
+    "ordering_key": 5,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-regular fa-medal",
+    "name": "Match Admin",
+    "help_text": "",
+    "active": true
+  },
+  {
+    "on_click": "",
+    "url": "agents/position/index",
+    "ordering_key": 6,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-regular fa-chart-scatter-bubble",
+    "name": "Agent Position",
+    "help_text": "Current Agent Position Report",
+    "active": true
+  },
+  {
+    "on_click": "",
+    "url": "agents/position/index",
+    "ordering_key": 6,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-solid fa-chart-user",
+    "name": "Agent Performance",
+    "help_text": "",
+    "active": true
+  },
+  {
+    "on_click": "",
+    "url": "accounts/bulk_trans/index",
+    "ordering_key": 7,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-solid fa-books",
+    "name": "Enter Transactions",
+    "help_text": "Bulk Transaction Capture",
+    "active": true
+  },
+  {
+    "on_click": "",
+    "url": "accounts/create",
+    "ordering_key": 8,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-regular fa-user-plus",
+    "name": "Add Customer",
+    "help_text": "",
+    "active": true
+  },
+  {
+    "on_click": "",
+    "url": "agents/online",
+    "ordering_key": 9,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-solid fa-globe-wifi",
+    "name": "Online Agents",
+    "help_text": "",
+    "active": true
+  },
+    {
+    "on_click": "",
+    "url": "metrics/agent_history/index",
+    "ordering_key": 10,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-solid fa-chart-network",
+    "name": "Agent Activity Report",
+    "help_text": "",
+    "active": true
+  },
+    {
+    "on_click": "",
+    "url": "metrics/agent_sessions/index",
+    "ordering_key": 11,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-solid fa-rectangle-history-circle-user",
+    "name": "Agent IP Report",
+    "help_text": "",
+    "active": true
+  },
+  {
+    "on_click": "",
+    "url": "sports/matches/scores/today",
+    "ordering_key": 12,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-solid fa-hundred-points",
+    "name": "Scores",
+    "help_text": "",
+    "active": true
+  },
+  {
+    "on_click": "",
+    "url": "#",
+    "ordering_key": 13,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-solid fa-file-chart-column",
+    "name": "Agent Billing",
+    "help_text": "",
+    "active": true
+  },
+  {
+    "on_click": "",
+    "url": "system/live_view/index",
+    "ordering_key": 14,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-solid fa-heart-pulse",
+    "name": "Live View",
+    "help_text": "",
+    "active": true
+  },
+  {
+    "on_click": "",
+    "url": "#",
+    "ordering_key": 15,
+    "permission": "",
+    "font_awesome": "fa-regular fa-chart-mixed-up-circle-dollar",
+    "name": "Active Lines",
+    "help_text": "",
+    "active": true
+  },
+  {
+    "on_click": "",
+    "url": "#",
+    "ordering_key": 17,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-regular fa-tickets",
+    "name": "Place Bets",
+    "help_text": "",
+    "active": true
+  },
+  {
+    "on_click": "",
+    "url": "accounts/bulk_trans/index",
+    "ordering_key": 18,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-solid fa-scale-balanced",
+    "name": "Settle Figures",
+    "help_text": "",
+    "active": true
+  },
+  {
+    "on_click": "",
+    "url": "agents/all",
+    "ordering_key": 19,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-solid fa-users-gear",
+    "name": "Agent Management",
+    "help_text": "",
+    "active": true
+  },
+  {
+    "on_click": "",
+    "url": "ledgers/transactions/",
+    "ordering_key": 20,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-regular fa-files",
+    "name": "Main Ledger",
+    "help_text": "",
+    "active": true
+  },
+  {
+    "on_click": "",
+    "url": "ledgers/transactions/freeplay",
+    "ordering_key": 21,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-solid fa-money-bill",
+    "name": "Free Play Ledger",
+    "help_text": "",
+    "active": true
+  },
+  {
+    "on_click": "",
+    "url": "accounts/online",
+    "ordering_key": 22,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-regular fa-globe-wifi",
+    "name": "Online Accounts",
+    "help_text": "",
+    "active": true
+  },
+    {
+    "on_click": "",
+    "url": "accounts/ledger",
+    "ordering_key": 23,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-regular fa-books",
+    "name": " Account Ledger",
+    "help_text": "",
+    "active": true
+  },
+    {
+    "on_click": "",
+    "url": "accounts/trans/index",
+    "ordering_key": 24,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-regular fa-chart-user",
+    "name": " Account Transactions",
+    "help_text": "",
+    "active": true
+  },
+      {
+    "on_click": "",
+    "url": "main",
+    "ordering_key": 25,
+    "permission": "",
+    "font_awesome": "fa-duotone fa-solid fa-gauge-circle-plus",
+    "name": "Dashboard",
+    "help_text": "",
+    "active": true
+  }
+]

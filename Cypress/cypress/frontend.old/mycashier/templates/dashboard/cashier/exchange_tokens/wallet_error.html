@@ -1,0 +1,18 @@
+{% extends "lobby/dashboard/index.html" %}
+{% load django_bootstrap5 %}
+{% load humanize %}
+{% load mathfilters %}
+{% block MINERVE_PAGE_SUBTITLE %}: Cashier - Wallet Error!{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY %}
+<div class="card w-100 h-100 m-2 p-2" data-bs-theme="{{ MINERVE_BODY_THEME }}">
+    <div class="card-header">
+         <div class="alert alert-warning">
+        <h4><i class="fa-duotone fa-solid fa-ban"></i>Invalid Wallet Confirmation!</h4>
+        <br/>
+         The confirmation address and the original wallet address do not match. Please press 'back' and correct.
+
+    </div>
+    </div>
+</div>
+
+{% endblock %}

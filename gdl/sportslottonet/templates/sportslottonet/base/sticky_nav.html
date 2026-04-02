@@ -1,0 +1,491 @@
+{% load static %}
+
+<!-- Bootstrap CSS (if not already included) -->
+
+<!-- 🩶 TOP STATIC HEADER -->
+<nav class="navbar sportslotto-navbar sticky-top">
+  <div class="container-fluid sportslotto-topbar">
+    <!-- Logo -->
+    <a class="navbar-brand topbar-title-link" href="/sln/home">
+      <img id="site-logo" src="{% static 'sportslottonet/img/purple.png' %}" alt="Sports Lotto" class="site-logo">
+    </a>
+
+    <!-- Desktop Navigation Links (Hidden on Mobile) - CENTERED -->
+    <div class="d-none d-lg-flex sportslotto-nav-desktop">
+      <a href="/sln/home" class="nav-link">Home</a>
+      <a href="/sln/how-to-play" class="nav-link">How to Play</a>
+        <a href="/sln/what_is_sportslotto" class="nav-link">What Is Sportslotto?</a>
+       <a href="/sln/differences" class="nav-link">Sports lotto vs Betting</a>
+      <a href="/sln/about_us" class="nav-link">About Us</a>
+      <a href="/sln/faq" class="nav-link">FAQ</a>
+      <a href="/sln/terms_conditions" class="nav-link">T&C</a>
+
+
+    </div>
+
+    <!-- Desktop Auth Buttons (Hidden on Mobile) -->
+    <div class="d-none d-lg-flex auth-buttons-desktop">
+      <a href="#" class="topbar-btn" id="loginTrigger">Login</a>
+      <a href="https://play.sportslotto.net/register/" class="topbar-btn register">Register</a>
+    </div>
+
+    <!-- Mobile Hamburger Button -->
+    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress"></div>
+</nav>
+
+<!-- 🏁 MOBILE OFFCANVAS SIDEBAR -->
+<div class="offcanvas offcanvas-end sportslotto-offcanvas" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+  <!-- Offcanvas Header -->
+  <div class="offcanvas-header">
+<a class="navbar-brand topbar-title-link" href="/sln/home">
+  MENU
+</a>
+
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+
+  <!-- Offcanvas Body -->
+  <div class="offcanvas-body">
+    <!-- Navigation Links -->
+    <ul class="navbar-nav sportslotto-nav-mobile flex-grow-1">
+      <li class="nav-item">
+        <a class="nav-link" href="/sln/home">
+          <i class="bi bi-house-door"></i> Home
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/sln/how-to-play">
+          <i class="bi bi-controller"></i> How to Play
+        </a>
+      </li>
+         <li class="nav-item">
+        <a class="nav-link" href="/sln/what_is_sportslotto">
+          <i class="bi bi-shield-lock"></i> What is Sportslotto?
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/sln/differences">
+          <i class="bi bi-exclamation-triangle"></i> Sportslotto vs Betting
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/sln/about_us">
+          <i class="bi bi-info-circle"></i> About Us
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/sln/faq">
+          <i class="bi bi-question-circle"></i> FAQ
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/sln/terms_conditions">
+          <i class="bi bi-file-text"></i> T&C
+        </a>
+      </li>
+
+    </ul>
+
+    <!-- Mobile Auth Buttons -->
+    <div class="auth-buttons-mobile mt-auto">
+      <a href="#" class="btn topbar-btn-mobile w-100 mb-3" id="mobileLoginTrigger">
+        <i class="bi bi-box-arrow-in-right"></i> Login
+      </a>
+      <a href="https://play.sportslotto.net/register/" class="btn topbar-btn-mobile register w-100">
+        <i class="bi bi-person-plus"></i> Register
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+/* ============================================
+   MAIN NAVBAR STYLES
+   ============================================ */
+
+/* Main Navbar Container */
+.sportslotto-navbar {
+  background: var(--bs-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  padding: 0;
+  z-index: 1030;
+}
+
+/* Topbar Inner Styling */
+.sportslotto-topbar {
+  padding: 0.75rem 1.5rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo */
+.topbar-title-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  z-index: 2;
+}
+.navbar-brand.topbar-title-link,
+.navbar-brand.topbar-title-link:hover,
+.navbar-brand.topbar-title-link:focus {
+  color: #fff !important;
+}
+
+.site-logo {
+  height: 50px;
+  width: auto;
+  transition: transform 0.3s ease;
+}
+
+.site-logo:hover {
+  transform: scale(1.05);
+}
+
+/* Desktop Navigation - CENTERED */
+.sportslotto-nav-desktop {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  z-index: 1;
+}
+
+.sportslotto-nav-desktop .nav-link {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  padding: 0.625rem 1rem;
+  border-radius: 0.375rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.sportslotto-nav-desktop .nav-link:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sportslotto-nav-desktop .nav-link.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Desktop Auth Buttons */
+.auth-buttons-desktop {
+  display: flex;
+  gap: 0.75rem;
+  z-index: 2;
+}
+
+.topbar-btn {
+  display: inline-block;
+  padding: 0.625rem 1.5rem;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.topbar-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+.topbar-btn.register {
+  background: linear-gradient(135deg, #8b5cf6, #d946ef);
+  border: none;
+  font-weight: 600;
+}
+
+.topbar-btn.register:hover {
+  background: linear-gradient(135deg, #7c3aed, #c026d3);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+}
+
+/* Scroll Progress Bar */
+.scroll-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #8b5cf6, #d946ef, #ec4899);
+  width: 0%;
+  transition: width 0.1s ease;
+  z-index: 1031;
+}
+
+/* ============================================
+   MOBILE HAMBURGER BUTTON
+   ============================================ */
+
+.navbar-toggler {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 0.5rem;
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+  outline: none;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  width: 24px;
+  height: 24px;
+}
+
+/* ============================================
+   OFFCANVAS SIDEBAR STYLES
+   ============================================ */
+
+/* Offcanvas Container */
+.sportslotto-offcanvas {
+  background: var(--bs-primary);
+  backdrop-filter: blur(20px);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  width: 320px !important;
+}
+
+/* Offcanvas Header */
+.sportslotto-offcanvas .offcanvas-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.offcanvas-logo {
+  height: 40px;
+  width: auto;
+}
+
+.btn-close-white {
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.btn-close-white:hover {
+  opacity: 1;
+}
+
+/* Offcanvas Body */
+.sportslotto-offcanvas .offcanvas-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Mobile Navigation Links */
+.sportslotto-nav-mobile {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sportslotto-nav-mobile .nav-item {
+  margin-bottom: 0.5rem;
+}
+
+.sportslotto-nav-mobile .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.sportslotto-nav-mobile .nav-link:hover,
+.sportslotto-nav-mobile .nav-link.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateX(5px);
+}
+
+.sportslotto-nav-mobile .nav-link i {
+  font-size: 1.25rem;
+  width: 24px;
+  text-align: center;
+}
+
+/* Mobile Auth Buttons */
+.auth-buttons-mobile {
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.topbar-btn-mobile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.topbar-btn-mobile:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+.topbar-btn-mobile.register {
+  background: linear-gradient(135deg, #8b5cf6, #d946ef);
+  border: none;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.topbar-btn-mobile.register:hover {
+  background: linear-gradient(135deg, #7c3aed, #c026d3);
+  box-shadow: 0 6px 16px rgba(139, 92, 246, 0.5);
+  transform: translateY(-3px);
+}
+
+.topbar-btn-mobile i {
+  font-size: 1.125rem;
+}
+
+/* Offcanvas Backdrop */
+.offcanvas-backdrop {
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+/* Mobile Adjustments */
+@media (max-width: 991.98px) {
+  .site-logo {
+    height: 40px;
+  }
+
+  .sportslotto-topbar {
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* Tablet Adjustments */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .sportslotto-nav-desktop .nav-link {
+    padding: 0.625rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .topbar-btn {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Extra Small Screens */
+@media (max-width: 575.98px) {
+  .sportslotto-offcanvas {
+    width: 280px !important;
+  }
+
+  .sportslotto-nav-mobile .nav-link {
+    padding: 0.875rem 1rem;
+    font-size: 0.95rem;
+  }
+}
+</style>
+
+<!-- Optional: Bootstrap Icons CDN for icons (if not already included) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Theme Switcher -->
+    {% include "sportslottonet/theme_switcher.html" %}
+    <script type="module" src="{% static 'sportslottonet/js/ThemeSwitcher/loader.js' %}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Scroll progress bar
+  const progressBar = document.querySelector('.scroll-progress');
+
+  window.addEventListener('scroll', function() {
+    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (window.scrollY / windowHeight) * 100;
+    if (progressBar) {
+      progressBar.style.width = scrolled + '%';
+    }
+  });
+
+  // Auto-close offcanvas when nav link is clicked
+  const offcanvasElement = document.getElementById('offcanvasNavbar');
+  const navLinks = document.querySelectorAll('.sportslotto-nav-mobile .nav-link');
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+      if (offcanvas) {
+        offcanvas.hide();
+      }
+    });
+  });
+
+  // Set active link based on current page
+  const currentPath = window.location.pathname;
+  const allNavLinks = document.querySelectorAll('.nav-link');
+
+  allNavLinks.forEach(link => {
+    if (link.getAttribute('href') === currentPath) {
+      link.classList.add('active');
+    }
+  });
+
+  // Mobile login trigger - mirrors desktop login functionality
+  const mobileLoginTrigger = document.getElementById('mobileLoginTrigger');
+  const desktopLoginTrigger = document.getElementById('loginTrigger');
+
+  if (mobileLoginTrigger && desktopLoginTrigger) {
+    mobileLoginTrigger.addEventListener('click', function(e) {
+      e.preventDefault();
+
+      // Close offcanvas
+      const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+      if (offcanvas) {
+        offcanvas.hide();
+      }
+
+      // Trigger desktop login action after a small delay to allow offcanvas to close
+      setTimeout(() => {
+        desktopLoginTrigger.click();
+      }, 300);
+    });
+  }
+});
+</script>
+
+<!-- Bootstrap JS (if not already included) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

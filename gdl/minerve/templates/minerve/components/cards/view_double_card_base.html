@@ -1,0 +1,86 @@
+{% load django_bootstrap5 %}
+<div class="card w-90 mx-1 my-1">
+    <div class="card-header">
+        {% block card_header %}
+        <h1>The Card Header</h1>
+        {%  endblock %}
+    </div>
+    <div class="card-body mx-2 my-2 px-1 py-1">
+        {% block card_body %}
+            {% block card_intro %}
+            {% endblock %}
+        {% if card_form %}
+            <form id="edit_form" method="POST" onsubmit="{{ card_form_onsubmit }}" data-post-url="{{  card_form_post_url }}">
+            {%  csrf_token %}
+            {% bootstrap_form card_form %}
+            <div class="card-footer">
+                <div class="d-flex justify-content-end">
+                    <div class="p-2"><input type="reset" class="btn btn-primary" value="Reset Form"/></div>
+                    <div class="p-2"><input type="submit" class="btn btn-success" value="Save Changes"/></div>
+                </div>
+            </div>
+            </form>
+
+        {% else %}
+            <p>Empty Card Body. Replace <strong>card_body</strong> template tag or include a <strong>card_form</strong> Form.</p>
+        {%  endif %}
+        {%  endblock %}
+    </div>
+</div>
+<br/>
+<div class="card w-90 mx-1 my-1">
+    <div class="card-header">
+        {% block card_snd_header %}
+        <h1>The 2nd Card Header</h1>
+        {%  endblock %}
+    </div>
+    <div class="card-body mx-2 my-2 px-1 py-1">
+        {% block card_snd_body %}
+            {% block card_snd_intro %}
+            {% endblock %}
+        {% if card_snd_form %}
+            <form id="edit_form_snd" method="POST" onsubmit="{{ card_form_snd_onsubmit }}" data-post-url="{{  card_form_snd_post_url }}">
+            {%  csrf_token %}
+            {% bootstrap_form card_snd_form %}
+            <div class="card-footer">
+                <div class="d-flex justify-content-end">
+                    <div class="p-2"><input type="reset" class="btn btn-primary" value="Reset Form"/></div>
+                    <div class="p-2"><input type="submit" class="btn btn-success" value="Save Changes"/></div>
+                </div>
+            </div>
+            </form>
+
+        {% else %}
+            <p>Empty Card Body. Replace <strong>card_snd_body</strong> template tag or include a <strong>card_snd_form</strong> Form.</p>
+        {%  endif %}
+        {%  endblock %}
+    </div>
+</div>
+
+    {% block edit_modal %}
+        <div class="modal" tabindex="-1" id="edit_modal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">{% block  edit_modal_title %}<i class="fa-regular fa-circle-plus text-primary" aria-hidden="true"></i>&#160;Edit Modal title {% endblock %}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  {% block edit_modal_contents %}
+                <p>Modal body text goes here.</p>
+                  {% endblock %}
+              </div>
+              <div class="modal-footer">
+                  {% block edit_modal_footer %}
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="">Save changes</button>
+                  {% endblock %}
+              </div>
+            </div>
+          </div>
+        </div>
+    {% endblock %}
+
+{% block post_card %}
+
+{% endblock %}

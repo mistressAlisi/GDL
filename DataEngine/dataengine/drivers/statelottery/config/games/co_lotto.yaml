@@ -1,0 +1,35 @@
+# Colorado - Lotto+
+# Draws Monday, Wednesday, and Saturday at 7:35 PM MT
+# Pick 6 numbers from 1-40
+
+state: CO
+name: "Colorado Lotto+"
+slug: co-lotto
+url: "https://www.coloradolottery.com/games/lotto/"
+game_type: pool
+
+format:
+  main_count: 6
+  main_range: [1, 40]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: false
+
+schedule:
+  days: [monday, wednesday, saturday]
+  times:
+    - time: "19:35"
+      label: null
+  timezone: "America/Denver"
+
+selectors:
+  # Colorado Lottery displays numbers in .drawNumber elements
+  all_numbers: ".drawNumber"
+  draw_date: ".drawDate"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%m/%d/%Y"
+  split_main_bonus: false
+
+active: true

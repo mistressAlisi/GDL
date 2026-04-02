@@ -1,0 +1,87 @@
+{% extends "lobby/dashboard/index.html" %}
+{% load django_bootstrap5 %}
+{% load mathfilters %}
+{% load humanize %}
+{% block MINERVE_PAGE_SUBTITLE %}: Cashier - Deposit / Purchase Token(s){% endblock %}
+
+{% block DYNAMIC_DASHBOARD_BODY %}
+<div class="card w-100 h-100 m-2 p-2" data-bs-theme="{{ MINERVE_BODY_THEME }}">
+    <div class="card-header">
+        <input type="hidden" id="ef1" name="ef1" value="{{ cryptoParams.cpay_exchange_fee }}"/>
+        <h1> <i class="fa-duotone fa-solid fa-books" style="color: #dd8fda;"></i> &#160; Deposit / Buy Tokens:</h1>
+        <p>You can use this interface to purchase tokens with your favourite cryptocurrency.</p>
+        {%  if not cryptoParams.crypto_enabled %}
+        <p>Cryptocurrency payments are disabled for this book; please contact support.</p>
+        {%  else %}
+                <div class="card-body">
+                 <h4>Token to Crypto Exchange Information:</h4>
+                        <table class="table table-striped table-responsive">
+                            <tr>
+                                <th>Base Exchange Ratio: </th>
+                                <td><h5>1 {{ cryptoParams.token_base_currency }}  = {{cryptoParams.token_base_currency_xrate }} token(s)</h5></td>
+                            </tr>
+                            <tr>
+                                <th>Cryptocurrencies Accepted: </th>
+                                <td>25+ coins including BTC, LTC, XMR, USDT, USDC, ETH</td>
+                            </tr>
+                            <tr>
+                                <th>Cryptocurrency Exchange Fee:</th>
+                                <td>{{ cryptoParams.cpay_exchange_fee|mul:100|floatformat:1 }}%</td>
+                            </tr>
+                            </table>
+                                <h4>1. Enter desired amount of {{ cryptoParams.token_base_currency }} to exchange: </h4>
+                                <p>You will be able to select the specific Cryptocurrency of your choice in the payment screen.</p>
+                                    <div class="input-group mb-3">
+                                       <input type="hidden" id="xrate" name="xrate" value="{{ cryptoParams.token_base_currency_xrate }}"/>
+                                      <span class="input-group-text">$</span>
+                                      <input type="number" id="xchange_amount" name="xchange_amount" class="form-control" aria-label="Amount to exchange" value="0" onchange="update_totals();"/>
+                                      <span class="input-group-text">{{ cryptoParams.token_base_currency }}</span>
+                                    </div>
+
+
+                        <div class="d-flex justify-content-end">
+                           <form action="https://www.coinpayments.net/index.php" method="post" target="_blank">
+                                <input type="hidden" id="cmd" name="cmd" value="_pay">
+                                <input type="hidden" id="reset" name="reset" value="1">
+                                <input type="hidden" id="merchant" name="merchant" value="{{ cryptoParams.cpay_merchantid }}">
+                                <input type="hidden" id="item_name" name="item_name" value="{{ apperance.site_name }} token(s) Exchange">
+                                <input type="hidden" name="invoice" id="invoice" value="{{ account.uuid }}">
+                                <input type="hidden" name="currency" value="{{ cryptoParams.token_base_currency }}">
+                                <input type="hidden" id="amountf" name="amountf" value="0">
+                                <input type="hidden" id="quantity" name="quantity" value="1">
+                                <input type="hidden" name="allow_quantity" value="0">
+                                <input type="hidden" name="want_shipping" value="0">
+                                <input type="hidden" name="allow_extra" value="0">
+                                <input type="image" src="https://www.coinpayments.net/images/pub/buynow-wide-yellow.png" alt="Buy Now with CoinPayments.net">
+                            </form>
+                        </div>
+
+                </div>
+                </div>
+            </div>
+            <script>
+                let uuid = '{{ account.uuid }}';
+                function update_totals() {
+                    let rate = 1 + parseFloat($("#ef1")[0].value);
+                    let total = ($("#xchange_amount")[0].value * rate).toFixed(1);
+                    $("#amountf")[0].value = total;
+                    $("#invoice")[0].value = uuid+":::"+total;
+                }
+            </script>
+        {% endif %}
+
+
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+    <div class="row">
+    <div class="col pt-2 pb-2">
+    <a class="nav-link" href="/my/profile" title="My Account"><i class="fa-duotone fa-solid fa-circle-user pe-2"></i> #{{ account.acctnum }}</a>
+    </div>
+    <div class="col pt-2 pb-2">
+        <a href="#" onclick="{% if vdomain.demo_mode %}alert('Cashier disabled in Demo.') {% else %} cashier.start_deposit_modal() {% endif %}" id="balance-link" title="Available Balance">
+        <i class="fa-duotone fa-solid fa-coins pe-2"></i><span class="avail_balance">Balance: {{ available_balance |floatformat:2 }}</span></a>
+    </div>
+    </div>
+    <hr class="border-2 border-opacity-50 border-success"/>
+{% endblock %}

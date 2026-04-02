@@ -1,0 +1,37 @@
+# 2by2
+# Draws daily
+# Pick 2 Red numbers from 1-26, plus 2 White numbers from 1-26
+# Available in Kansas, Nebraska, North Dakota, Wyoming
+
+state: MULTI
+name: "2by2"
+slug: 2by2
+url: "https://www.powerball.com/2by2"
+game_type: bonus
+
+format:
+  # 2 red balls + 2 white balls
+  main_count: 2
+  main_range: [1, 26]
+  bonus_count: 2
+  bonus_range: [1, 26]
+  is_positional: false
+
+schedule:
+  days: [daily]
+  times:
+    - time: "21:30"
+      label: null
+  timezone: "America/Chicago"
+
+selectors:
+  # 2by2 on powerball.com displays 4 numbers (2 red, 2 white)
+  all_numbers: ".card-body .red-balls span, .card-body .white-balls span"
+  draw_date: ".card-body .draw-date, .card-header"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%a, %b %d, %Y"
+  split_main_bonus: true
+
+active: true

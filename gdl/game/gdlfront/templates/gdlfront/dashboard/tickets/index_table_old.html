@@ -1,0 +1,37 @@
+{% extends "minerve/pages/responsive_dashboard/index.html" %}
+{% load crispy_forms_tags %}
+
+{% block DYNAMIC_DASHBOARD_PRE_BODY %}
+
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY %}
+
+<h1 class="text-info">Open Tickets</h1>
+<div class="w-100 h-100 row gx-0 pe-0 me-0" id="anchor" style="overflow-x: auto; overflow-y: auto;">
+
+
+</div>
+
+
+<script src="/static/minerve/js/components/dynamic_dashboard/helper.js"></script>
+<script type="module" src="/static/gdlfront/js/gdl_backend.js" type="module"/>
+{% endblock %}
+{% block MINERVE_PAGE_FOOTER %}
+    {% include "lobby/dashboard/account/login/signup_modal.html" %}
+{% endblock %}
+{% block bootstrap5_title %}
+    {{ vdomain.website_name }}: Open Tickets
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+    <div class="row">
+    <div class="col pt-2 pb-2">
+    <a class="nav-link" href="/my/profile" title="My Account"><i class="fa-duotone fa-solid fa-circle-user pe-2"></i> #{{ account.acctnum }}</a>
+    </div>
+    <div class="col pt-2 pb-2">
+        <a href="#" onclick="{% if vdomain.demo_mode %}alert('Cashier disabled in Demo.') {% else %} cashier.start_deposit_modal() {% endif %}" id="balance-link" title="Available Balance">
+        <i class="fa-duotone fa-solid fa-coins pe-2"></i><span class="avail_balance">Balance: {{ available_balance |floatformat:2 }}</span></a>
+    </div>
+    </div>
+    <hr class="border-2 border-opacity-50 border-success"/>
+{% endblock %}

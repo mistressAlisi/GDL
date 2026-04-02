@@ -1,0 +1,17 @@
+{
+    "name":"GameDayLotto",
+    "version":"1.0",
+    "studio":"Solstic Systems",
+    "studio_slug":"solstic",
+    "slug":"gamedaylotto",
+    "backend":"game.gdl.gdlcore",
+    "frontend":"game.gdl.gdlfront",
+    "agent": "game.gdl.gdlagent",
+    "management": "game.gdl.gdlmanagement",
+    "grader":"game.gdl.gdlcore.grader.modules.gdl_grader",
+    "card_image":"data/info/gdl_card1.png",
+    "card_logo":"data/info/gdl_card_logo.png",
+
+    "url_root": "game/",
+    "uses_channels": true
+}

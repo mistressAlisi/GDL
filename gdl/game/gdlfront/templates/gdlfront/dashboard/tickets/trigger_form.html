@@ -1,0 +1,5 @@
+    <form onsubmit="gdlapp.start(event); return false;" method="POST" action="#" data-post-url="tickets/open" id="parameter_form">
+        {% csrf_token %}
+        <input type="hidden" id="id_count" name="count" value="0"/>
+        <input type="hidden" id="id_page" name="page" value="0"/>
+    </form>

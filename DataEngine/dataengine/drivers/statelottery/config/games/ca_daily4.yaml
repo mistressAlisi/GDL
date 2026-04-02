@@ -1,0 +1,34 @@
+# California Daily 4
+# Draws daily after 6:30 PM PT
+# Pick 4 digits from 0-9 (positional game)
+
+state: CA
+name: "California Daily 4"
+slug: ca-daily4
+url: "https://www.calottery.com/en/draw-games/daily-4"
+game_type: positional
+
+format:
+  main_count: 4
+  main_range: [0, 9]
+  bonus_count: 0
+  is_positional: true
+
+schedule:
+  days: [daily]
+  times:
+    - time: "18:30"
+      label: null
+  timezone: "America/Los_Angeles"
+
+selectors:
+  # Page shows past results too, scraper limits to main_count
+  all_numbers: ".winning-numbers li"
+  draw_date: "[class*='date']"
+  draw_number: "[class*='draw']"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%a/%b %d, %Y"
+
+active: true

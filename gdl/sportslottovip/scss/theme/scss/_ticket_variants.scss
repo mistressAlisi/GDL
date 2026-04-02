@@ -1,0 +1,109 @@
+//@use "variables" as *;
+//@use "theme-custom-core" as *;
+///// === UNIFIED TICKET MIXIN — THEME REACTIVE ===
+//@mixin ticket-variant-unified($props) {
+//  // Main ticket background & glow
+//  --ticket-bg-1: #{map-get($props, 'ticket-bg-1')};
+//  --ticket-bg-2: #{map-get($props, 'ticket-bg-2')};
+//  --ticket-border: #{map-get($props, 'ticket-border')};
+//  --ticket-text: #{map-get($props, 'text-color')};
+//  --ticket-glow-inner: #{map-get($props, 'ticket-glow-inner')};
+//  --ticket-glow-outer: #{map-get($props, 'ticket-glow-outer')};
+//
+//
+//  // Prize box
+//  .prize-box {
+//    background: var(--prize-bg, #{map-get($props, 'prize-bg')});
+//    color: var(--prize-text, #{map-get($props, 'prize-text')});
+//    box-shadow:
+//      0 0 6px var(--prize-glow-1, #{map-get($props, 'prize-glow-1')}),
+//      inset 0 0 10px var(--prize-glow-2, #{map-get($props, 'prize-glow-2')});
+//    border-radius: 6px;
+//    text-align: center;
+//    font-weight: bold;
+//  }
+//
+//  // Buttons (use ticket variables)
+//  .reject-btn {
+//    background: var(--ticket-bg-1);
+//    border: 1px solid var(--ticket-border);
+//    color: var(--ticket-text);
+//    box-shadow:
+//      0 0 8px var(--ticket-glow-outer),
+//      inset 0 0 15px var(--ticket-glow-inner);
+//    border-radius: 5px;
+//    position: relative;
+//    right: 2rem;
+//    cursor: pointer;
+//  }
+//
+//  .accept-btn {
+//    background: var(--ticket-bg-2);
+//    border: 1px solid var(--ticket-border);
+//    color: var(--ticket-text);
+//    box-shadow:
+//      0 0 8px var(--ticket-glow-outer),
+//      inset 0 0 15px var(--ticket-glow-inner);
+//    border-radius: 5px;
+//    position: relative;
+//    left: 2rem;
+//    cursor: pointer;
+//  }
+//}
+//
+//
+//
+//
+//
+///* ============================================================
+//   APPLY TO ALL TICKETS
+//============================================================ */
+//
+//.gdl-ticket-card {
+//  background: var(--bg2);
+//  border-radius: 20px;
+//
+//  &.flipped .flip-card-inner {
+//    transform: rotateY(180deg);
+//  }
+////}
+////
+/////* ============================================================
+////   THEME VARIANT OUTPUT
+////============================================================ */
+/////* ============================================================
+////   THEME VARIANT OUTPUT
+////============================================================ */
+//@each $theme, $variants in $theme-ticket-styles {
+////  @each $i, $props in $variants {
+////
+////    $selector: ".gdl-ticket-card.ticket-#{$theme}-#{$i}";
+////
+////    #{$selector} {
+////      // Apply all ticket & prize styles in one unified mixin
+////      @include ticket-variant-unified($props);
+////
+////      // Export CSS variables for fallback / JS theme switches
+////      --bg1: #{map-get($props, 'bg1')};
+////      --bg2: #{map-get($props, 'bg2')};
+////      --glow1: #{map-get($props, 'glow1')};
+////      --glow2: #{map-get($props, 'glow2')};
+////      --ticket-border: #{map-get($props, 'ticket-border')};
+////      --ticket-glow-inner: #{map-get($props, 'ticket-glow-inner')};
+////      --ticket-glow-outer: #{map-get($props, 'ticket-glow-outer')};
+////      --ticket-text: #{map-get($props, 'ticket-text')};
+////      --ticket-text-glow: #{map-get($props, 'ticket-text-glow')};
+////      --ticket-text-glow-2: #{map-get($props, 'ticket-text-glow-2')};
+////      --prize-bg: #{map-get($props, 'prize-bg')};
+////      --prize-border: #{map-get($props, 'prize-border')};
+////      --prize-text: #{map-get($props, 'prize-text')};
+////      --prize-glow-1: #{map-get($props, 'prize-glow-1')};
+////      --prize-glow-2: #{map-get($props, 'prize-glow-2')};
+////      --accept-bg-1: #{map-get($props, 'ticket-bg-1')};
+////      --accept-bg-2: #{map-get($props, 'ticket-bg-2')};
+////      --reject-ticket-bg-1: #{map-get($props, 'ticket-bg-1')};
+////      --reject-ticket-bg-2: #{map-get($props, 'ticket-bg-2')};
+////    }
+////  }
+////}
+////

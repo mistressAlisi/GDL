@@ -1,0 +1,34 @@
+# South Dakota - Dakota Cash
+# Draws Wednesday and Saturday
+# Pick 5 numbers from 1-35
+
+state: SD
+name: "Dakota Cash"
+slug: sd-dakota-cash
+url: "https://lottery.sd.gov/games/lottogames/dakotacash/"
+game_type: pool
+
+format:
+  main_count: 5
+  main_range: [1, 35]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: false
+
+schedule:
+  days: [wednesday, saturday]
+  times:
+    - time: "21:00"
+      label: null
+  timezone: "America/Chicago"
+
+selectors:
+  all_numbers: ".winning-numbers span, .ball, .number"
+  draw_date: ".draw-date, .date"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%m/%d/%Y"
+  split_main_bonus: false
+
+active: true

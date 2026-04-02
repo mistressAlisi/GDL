@@ -1,0 +1,688 @@
+{% extends "sportslottovip/base/page.html" %}
+{% block bootstrap5_title %} SPORTSLOTTO.VIP: FAQs {% endblock %}
+{% block PAGE_BODY %}
+<section id="sportslotto-faq" style="
+  font-family:'Poppins','Segoe UI','Roboto',sans-serif;
+  color:var(--color-text);
+  background: rgba(var(--bs-body-rgb,0,0,0),0.35); /* darker theme-reactive background */  padding:60px 5%;
+  overflow:hidden;
+">
+
+  <header style="max-width:1100px;margin:0 auto;text-align:center;">
+    <h2 style="font-size:clamp(1.8rem,4.5vw,2.6rem);
+               font-weight:700;
+               color: var(--bs-info);
+               text-transform:uppercase;
+               -webkit-background-clip:text;
+               margin:0 0 6px;">
+      Frequently Asked Questions
+    </h2>
+    <p style="margin:0 0 20px;
+              opacity:0.85;">
+      Everything you need to know before you play.
+    </p>
+    <div id="faq-search-wrap" style="width:100%;
+                max-width:900px;
+                margin:0 auto;
+                padding:10px;
+                border-radius:14px;
+                background:var(--bs-card-bg); /* theme-reactive search box */
+                box-shadow:0 8px 30px rgba(0,0,0,0.28);
+                backdrop-filter:blur(12px);
+                display:flex;
+                gap:8px;
+                align-items:center;
+                justify-content:center;">
+      <input id="faq-search" type="search" placeholder="Search FAQs — try 'withdraw', 'tickets', 'account'" aria-label="Search FAQs" style="flex:1;
+                    padding:12px 14px;
+                    border-radius:10px;
+                    border:none;
+                    background:transparent;
+                    color:var(--color-text);
+                    outline:none;
+                    font-size:1rem;
+                    font-weight:600;
+                    box-shadow:inset 0 -1px 0 rgba(255,255,255,0.02);">
+      <button id="faq-clear" aria-label="Clear search" style="padding:10px 14px;
+                     border-radius:10px;
+                     border:none;
+                     cursor:pointer;
+                     background:linear-gradient(90deg,var(--color-primary),var(--color-accent));
+                     color:#fff;
+                     font-weight:700;
+                     font-family:'Rajdhani',sans-serif;">
+        Clear
+      </button>
+    </div>
+  </header>
+
+  <div class="faq-content" style="
+    max-width:900px;
+    margin:40px auto 0;
+    background:var(--bs-card-bg); /* theme-reactive container */
+    border-radius:20px;
+    backdrop-filter:blur(20px);
+    padding:40px 35px;
+  ">
+  <div class="faq-container" style="max-width:1100px;margin:18px auto 0;display:flex;flex-direction:column;gap:12px;">
+
+    <div class="faq-item" data-search="Is SportsLotto gambling">
+      <button class="faq-question" aria-expanded="false"> Is SportsLotto gambling?</button>
+      <div class="faq-answer" aria-hidden="true"><p>Yes. SportsLotto.vip offers real-money wagering on sporting events through a lottery-style format. Players place bets by selecting multiple sporting events, and outcomes are determined by official game results. Because wagers involve real money and payouts are based on performance, SportsLotto.vip is considered a form of sports gambling where permitted by law. </p></div>
+    </div>
+   <div class="faq-item" data-search="Is SportsLotto legal in the United States">
+      <button class="faq-question" aria-expanded="false"> Is SportsLotto legal in the United States?</button>
+      <div class="faq-answer" aria-hidden="true"><p> SportsLotto.vip operates as a real-money sports gaming platform where permitted by law. Gambling regulations in the United States vary by state, and availability depends on local laws and regulatory requirements. Players are responsible for confirming that online sports wagering is allowed in their jurisdiction before placing bets.
+</p></div>
+    </div>
+
+     <div class="faq-item" data-search="Do I need to pay to play">
+      <button class="faq-question" aria-expanded="false"> Do I need to pay to play?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Yes. SportsLotto.vip is a real-money platform. To place bets and participate, players must fund their account by making a deposit using one of the available payment methods. Wagers are placed with real money, and winnings are based on the outcomes of selected sporting events.</p></div>
+    </div>
+    <div class="faq-item" data-search="How do I earn funds">
+      <button class="faq-question" aria-expanded="false"> How do I earn funds?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Players earn funds on SportsLotto.vip by placing real-money wagers on sporting events and winning those bets based on official game results. When a ticket is settled as a winner, the winnings are credited directly to your account balance and can be used to place additional bets or withdrawn, subject to platform terms.</p></div>
+    </div>
+    <div class="faq-item" data-search="How are deposits funded">
+      <button class="faq-question" aria-expanded="false"> How are deposits funded?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Deposits on SportsLotto.vip are funded directly by players using approved payment methods. Available options may include debit or credit cards, cryptocurrency, and peer-to-peer money transfer services. All deposits are credited to your account balance and can be used to place real-money wagers. Available payment methods may vary by location and are subject to platform terms.</p></div>
+    </div>
+    <div class="faq-item" data-search="Is this skill-based or random">
+      <button class="faq-question" aria-expanded="false"> Is this skill-based or random?</button>
+      <div class="faq-answer" aria-hidden="true"><p> SportsLotto combines elements of skill and chance. Outcomes are based on game-day events and participant selections, with results determined by real sporting events rather than random number generation.</p></div>
+    </div>
+    <div class="faq-item" data-search="What is Sportslotto">
+      <button class="faq-question" aria-expanded="false"> What is Sportslotto?</button>
+      <div class="faq-answer" aria-hidden="true"><p>Sportslotto.vip is a free-to-play sports lottery game where players predict sports outcomes, earn points, and redeem those points for Amazon gift cards. No purchase is required.
+</p></div>
+    </div>
+    <div class="faq-item" data-search="How do I create the account">
+      <button class="faq-question" aria-expanded="false"> How do I create the account.</button>
+      <div class="faq-answer" aria-hidden="true"><p> To create an account on SportsLotto, click Play Now or Register and enter your name, email address, and phone number. You will receive a verification email. If you do not see it, please check your spam or  junk folder. Return to the site, enter the verification code, and your account will be activated.
+</p></div>
+    </div>
+      <div class="faq-item" data-search="How do I change my password">
+  <button class="faq-question" aria-expanded="false">
+     How do I change my password.
+  </button>
+
+  <div class="faq-answer" aria-hidden="true">
+    <p>
+      Click on Log In, then below the Username and Password you will see ‘Forgot Password/Account
+Go to the main page of the site.
+
+    </p>
+
+    </div>
+  </div>
+
+
+
+      <div class="faq-item" data-search="How do I buy tickets">
+      <button class="faq-question" aria-expanded="false"> How do I buy tickets?</button>
+      <div class="faq-answer" aria-hidden="true"><p> To get tickets on SportsLotto, click Get Tickets and select your preferred risk level, number of events, and potential win amount. As these selections change, the odds adjust automatically. Once selected, click Get Tickets to view available ticket options. You can click Reveal Details to see the included events and times. When ready, click Accept, proceed to the cart, and confirm your ticket selection.</p></div>
+    </div>
+         <div class="faq-item" data-search="What are Quick Picks">
+      <button class="faq-question" aria-expanded="false"> What are Quick Picks?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Quick Picks are automatically generated ticket selections created by SportsLotto’s system. When using Quick Picks, events are selected for you based on preset criteria, allowing you to participate quickly without making manual selections. You can review the ticket details, remove or adjust tickets in your cart if needed, and then confirm your selection to complete the process. </p></div>
+    </div>
+          <div class="faq-item" data-search="When will bets be graded">
+      <button class="faq-question" aria-expanded="false"> When will bets be graded?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Tickets are typically graded within 1 hour after the conclusion of each match. All tickets remain pending until all legs have been graded.</p></div>
+    </div>
+        <div class="faq-item" data-search="Who or what makes the picks">
+      <button class="faq-question" aria-expanded="false"> Who or what makes the picks?</button>
+      <div class="faq-answer" aria-hidden="true"><p> SportsLotto.vip uses an automated algorithm to generate ticket options based on the preferences you select, such as the number of events, risk level, and potential win range. The system identifies combinations that match those criteria and presents them to you. You can review the tickets, accept the ones you like, or remove them. Accepted tickets are added to your cart, and removed tickets
+may be replaced with alternative options.
+</p></div>
+    </div>
+     <div class="faq-item" data-search="Can I try games for free before playing for real money">
+      <button class="faq-question" aria-expanded="false"> Can I try games for free before playing for real money?</button>
+      <div class="faq-answer" aria-hidden="true"><p> No. SportsLotto.vip is a real-money platform, and participation requires placing wagers with deposited funds. Free-play or demo modes are not available. Players must fund their account to place bets and participate in lottery-style sports tickets.</p></div>
+    </div>
+      <div class="faq-item" data-search="Do all events have to win to collect">
+      <button class="faq-question" aria-expanded="false"> Do all events have to win to collect?</button>
+      <div class="faq-answer" aria-hidden="true"><p> No. Consolation payouts are available for any ticket with Six picks or more. The ticket will be reduced by the losing event and then discounted.  See table below.  <br>   <a href='/slv/consolation_payout_table' class="nav-link">Consolation Payout</a>
+ </p></div>
+    </div>
+          <div class="faq-item" data-search="How can I contact customer support if I have questions or issues">
+      <button class="faq-question" aria-expanded="false"> How can I contact customer support if I have questions or issues?</button>
+      <div class="faq-answer" aria-hidden="true"><p> SportsLotto.vip customer support is available 24/7. You can contact our support team by calling our toll-free number at 1-888-660-3050, using live chat on the website, or emailing support@sportslotto.vip. Our support agents are available to assist with any questions or issues. </p></div>
+    </div>
+      <div class="faq-item" data-search="Where can I find my tickets">
+      <button class="faq-question" aria-expanded="false"> Where can I find my tickets?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Find either “Open Tickets” or “Graded Tickets”. If you have games that are not finished or graded they will appear on the option OPEN if the games are completed and graded, they will be in the GRADED section.  </p></div>
+    </div>
+     <div class="faq-item" data-search="What types of drawings do you offer">
+      <button class="faq-question" aria-expanded="false"> What types of drawings do you offer?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Daily sporting events.</p></div>
+    </div>
+        <div class="faq-item" data-search="What should I do if I have a duplicate ticket">
+      <button class="faq-question" aria-expanded="false"> What should I do if I have a duplicate ticket?</button>
+      <div class="faq-answer" aria-hidden="true"><p> A ticket is considered a duplicate only if it matches exactly in pick, hour, state, and amount, with no more than a 15-second time difference. If this occurs contact our Customer Service Team to go over a possible duplicate ticket.
+</p></div>
+    </div>
+       <div class="faq-item" data-search="I haven't received payment for my ticket">
+      <button class="faq-question" aria-expanded="false"> I haven't received payment for my ticket.</button>
+      <div class="faq-answer" aria-hidden="true"><p> Please Wait one hour after the last game is over for us to have time to grade it, if it has been more than 60 minutes since the last game finished, please contact our Customer Service Team via our Toll-Free number, chat or send us an email to support@sportslotto.vip</p></div>
+    </div>
+       <div class="faq-item" data-search="What is the maximum payout for a ticket">
+      <button class="faq-question" aria-expanded="false"> What is the maximum payout for a ticket?</button>
+      <div class="faq-answer" aria-hidden="true"><p>  $100,000 USD  </p></div>
+    </div>
+         <div class="faq-item" data-search="What is the maximum I can bet per ticket">
+      <button class="faq-question" aria-expanded="false"> What is the maximum I can bet per ticket?</button>
+      <div class="faq-answer" aria-hidden="true"><p> $1000 USD</p></div>
+    </div>
+          <div class="faq-item" data-search="What is the minimum I can bet per ticket">
+      <button class="faq-question" aria-expanded="false"> What is the minimum I can bet per ticket?</button>
+      <div class="faq-answer" aria-hidden="true"><p>$1.00 USD</p></div>
+    </div>
+        <div class="faq-item" data-search="What is the maximum I can bet on a Quick Pick">
+      <button class="faq-question" aria-expanded="false"> What is the maximum I can bet on a Quick Pick?</button>
+      <div class="faq-answer" aria-hidden="true"><p>The maximum amount you can bet on a Quick Pick is $10 per ticket, regardless of the sport selected. This limit helps keep Quick Picks simple and consistent across all sports.</p></div>
+    </div>
+     <div class="faq-item" data-search="Is there a limit to how many tickets I can buy">
+      <button class="faq-question" aria-expanded="false">Is there a limit to how many tickets I can buy?</button>
+      <div class="faq-answer" aria-hidden="true"><p> There is no limit on how many tickets you can buy, there is a $100,000 USD win limit on how much each ticket pays out. </p></div>
+    </div>
+         <div class="faq-item" data-search="Can I pick my own sporting events">
+      <button class="faq-question" aria-expanded="false"> Can I pick my own sporting events?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Yes. The system automatically allows you to select from predetermented sports such as Football, Yes. SportsLotto.vip allows players to select their own sporting events from a range of available sports, including football, basketball, baseball, hockey, racing, tennis, and soccer. Using the platform’s filters, you can choose the specific games and events you want to include on your ticket based on your preferences.</p></div>
+    </div>
+         <div class="faq-item" data-search="What should I do if I haven't received my payout after 24-hours">
+      <button class="faq-question" aria-expanded="false"> What should I do if I haven't received my payout after 24-hours?</button>
+      <div class="faq-answer" aria-hidden="true"><p> If your payout has not been processed within 24 hours after your request has been made, please contact SportsLotto.vip customer support. Provide your ticket number and account details so the support team can review the transaction and assist you promptly.
+</p></div>
+    </div>
+         <div class="faq-item" data-search="I am located outside of the United States. Can I still play">
+      <button class="faq-question" aria-expanded="false"> I am located outside of the United States. Can I still play?</button>
+      <div class="faq-answer" aria-hidden="true"><p>Yes. SportsLotto.vip is available to international players in many regions where online sports wagering is permitted by law. Availability may vary depending on local regulations and verification requirements. Players are responsible for ensuring that participation is legal in their country before placing bets. </p></div>
+    </div>
+      <div class="faq-item" data-search="What's the maximum payout">
+      <button class="faq-question" aria-expanded="false"> What's the maximum payout?</button>
+      <div class="faq-answer" aria-hidden="true"><p>  SportsLotto.vip allows withdrawals of up to $1,000 per transaction, with a maximum withdrawal limit of $5,000 per day. Withdrawal availability and processing times may vary based on payment method, account verification status, and applicable platform terms.
+</p></div>
+    </div>
+       <div class="faq-item" data-search="Can I cancel a ticket">
+      <button class="faq-question" aria-expanded="false"> Can I cancel a ticket?</button>
+      <div class="faq-answer" aria-hidden="true"><p> No. Once a ticket has been confirmed, all bets are final and cannot be canceled or voided. Please review your ticket details carefully before confirming your wager to ensure all selections are correct.
+</p></div>
+    </div>
+         <div class="faq-item" data-search="What happens if a game I bet on is postponed or delayed">
+      <button class="faq-question" aria-expanded="false"> What happens if a game I bet on is postponed or delayed?</button>
+      <div class="faq-answer" aria-hidden="true"><p> If a game included on your ticket is postponed or canceled, the ticket will be recalculated using the remaining valid events and will remain active. For example, if one event on a five-event ticket is canceled, the ticket will be adjusted based on the remaining four events. If a game is delayed, the event will stay open until an official final result is posted.
+</p></div>
+    </div>
+         <div class="faq-item" data-search="What happens if my bet is graded as canceled if one game is voided/no action/delayed">
+      <button class="faq-question" aria-expanded="false"> What happens if my bet is graded as canceled if one game is voided/no action/delayed?</button>
+      <div class="faq-answer" aria-hidden="true"><p> A bet may be graded as canceled or no action if required conditions are not met or if there is an issue during ticket creation. In these cases, the wager will not be settled, and the original stake will be credited back to your account balance. No winnings or losses will be applied to canceled or no-action bets.</p></div>
+    </div>
+      <div class="faq-item" data-search="What should I do if my settled wagers are still pending">
+      <button class="faq-question" aria-expanded="false"> What should I do if my settled wagers are still pending?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Please allow up to 60 minutes after the final wager on your ticket has been graded for your account balance to update. If the wager is still pending after that time, contact SportsLotto.vip customer support via live chat or email your ticket number to support@sportslotto.vip for assistance.</p></div>
+    </div>
+      <div class="faq-item" data-search="What happens if my bet is graded incorrectly">
+      <button class="faq-question" aria-expanded="false"> What happens if my bet is graded incorrectly?</button>
+      <div class="faq-answer" aria-hidden="true"><p> If you believe a bet has been graded incorrectly, please contact SportsLotto.vip customer support as soon as possible. You can reach the support team by phone, live chat, or email. Provide your ticket number and relevant details so the wager can be reviewed and regraded if necessary based on official game results.</p></div>
+    </div>
+      <div class="faq-item" data-search=" Where can I find a wager's ticket number">
+      <button class="faq-question" aria-expanded="false"> Where can I find a wager's ticket number?</button>
+      <div class="faq-answer" aria-hidden="true"><p> To find your ticket number, log in to your SportsLotto.vip account and click on Open Tickets. Each ticket displays a unique ID made up of alphanumeric characters. The ticket details also show the time it was created, the selected events, the outcome, and the wager and potential win amounts.</p></div>
+    </div>
+       <div class="faq-item" data-search=" Can I receive a report from my tickets or transactions">
+      <button class="faq-question" aria-expanded="false"> Can I receive a report from my tickets or transactions?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Yes. You can view detailed information about your tickets and transactions directly within your SportsLotto.vip account. By visiting the Open Tickets and Graded Tickets sections, you can see ticket IDs, wager amounts, outcomes, and transaction details. If additional assistance is needed, customer support can help review your account activity.
+</p></div>
+    </div>
+       <div class="faq-item" data-search="Can I fund my account using a prepaid card">
+      <button class="faq-question" aria-expanded="false"> Can I fund my account using a prepaid card?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Prepaid cards are generally not recommended, as many do not support international or online gaming transactions. If your prepaid card allows international purchases, you may attempt to use it; however, successful processing is not guaranteed. Availability depends on the card issuer and applicable payment restrictions.
+</p></div>
+    </div>
+       <div class="faq-item" data-search="Can I get a report of my deposits">
+      <button class="faq-question" aria-expanded="false"> Can I get a report of my deposits?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Yes. SportsLotto.vip can provide a report of your deposit activity for the past 30 days. To request a deposit report, please contact customer support through any available support channel, and our team will assist you.
+</p></div>
+    </div>
+      <div class="faq-item" data-search=" Can I make a deposit through you">
+      <button class="faq-question" aria-expanded="false"> Can I make a deposit through you?</button>
+      <div class="faq-answer" aria-hidden="true"><p> No. SportsLotto.vip customer support cannot make deposits on your behalf. All deposits must be completed directly by the player through the Cashier section of the website, where available payment options are displayed. Customer support can assist with general questions about the deposit process but cannot process payments.</p></div>
+    </div>
+      <div class="faq-item" data-search="Can I request to increase my card deposit limits">
+      <button class="faq-question" aria-expanded="false"> Can I request to increase my card deposit limits?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Yes. Players may request an increase to their card deposit limits. Deposit limits are reviewed based on account history, verification status, and payment activity. Building a consistent deposit history may allow limits to increase over time, subject to platform policies and approval. </p></div>
+    </div>
+      <div class="faq-item" data-search="Can I use someone else's card to fund my account">
+      <button class="faq-question" aria-expanded="false"> Can I use someone else's card to fund my account?</button>
+      <div class="faq-answer" aria-hidden="true"><p> No. Deposits on SportsLotto.vip must be made using payment cards registered in the account holder’s name. Company cards, shared cards, or third-party cards are not permitted. This policy helps ensure account security and compliance with payment regulations. </p></div>
+    </div>
+     <div class="faq-item" data-search="Can I use someone else’s bank account to fund my account">
+      <button class="faq-question" aria-expanded="false"> Can I use someone else’s bank account to fund my account?</button>
+      <div class="faq-answer" aria-hidden="true"><p> No. Deposits must be made from your personal bank account. Deposits must be made from a bank account registered in your own name. Bank accounts belonging to other individuals or companies are not permitted. This requirement helps protect account security and ensures compliance with payment and verification policies.</p></div>
+    </div>
+        <div class="faq-item" data-search="Can I use the same wallet address to make deposits in my account">
+      <button class="faq-question" aria-expanded="false"> Can I use the same wallet address to make deposits in my account?</button>
+      <div class="faq-answer" aria-hidden="true"><p> No. Each cryptocurrency deposit on SportsLotto.vip requires a unique wallet address. Reusing a previously issued address may result in processing delays of up to 24 hours. To ensure timely and accurate crediting of your deposit, always generate and use a new wallet address for each transaction.</p></div>
+    </div>
+      <div class="faq-item" data-search="Do you charge any fees to deposit with cards">
+      <button class= "faq-question" aria-expanded="false"> Do you charge any fees to deposit with cards?</button>
+      <div class="faq-answer" aria-hidden="true"><p> No. SportsLotto.vip does not charge any fees for card deposits. However, your bank or card issuer may apply currency conversion or foreign transaction fees if your card is billed in a currency other than USD. These fees are determined by your bank and are outside our control.</p></div>
+    </div>
+      <div class="faq-item" data-search="How do I make a deposit">
+      <button class="faq-question" aria-expanded="false"> How do I make a deposit?</button>
+      <div class="faq-answer" aria-hidden="true"><p> To make a deposit, log in to your SportsLotto.vip account and navigate to the Cashier section. Select Deposit Funds, then choose your preferred payment method, such as debit card, cryptocurrency, or other available options. Follow the on-screen instructions to complete your deposit. Available payment methods may vary by location and are subject to change.</p></div>
+    </div>
+       <div class="faq-item" data-search="How long does it take to make a deposit using a card">
+      <button class="faq-question" aria-expanded="false"> How long does it take to make a deposit using a card?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Card deposits on SportsLotto.vip are typically processed in real time and are credited to your account immediately. In some cases, processing times may vary due to bank authorization or security checks.</p></div>
+    </div>
+       <div class="faq-item" data-search="How will the charges appear on my bank statement">
+      <button class="faq-question" aria-expanded="false"> How will the charges appear on my bank statement?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Deposits made on SportsLotto.vip may appear on your bank statement under a third-party name associated with our payment processor. The exact descriptor can be found on your transaction receipt. If you see a charge you do not recognize but believe it is related to SportsLotto.vip, please contact customer support by email with the transaction date, amount, and descriptor. Please allow 24 to 48 hours for review and resolution.</p></div>
+    </div>
+      <div class="faq-item" data-search=" I deposited $100 with crypto, why did I receive less money">
+      <button class="faq-question" aria-expanded="false"> I deposited $100 with crypto, why did I receive less money?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Cryptocurrency deposits are subject to network transaction fees, often called miner or network fees, which are set by the blockchain and not by SportsLotto.vip. These fees are deducted at the time the transaction is sent from your wallet. In addition, cryptocurrency exchange rates can fluctuate between the time you initiate the transfer and when it is confirmed on the network. As a result, the credited amount may be slightly lower than the original amount sent.</p></div>
+    </div>
+    <div class="faq-item" data-search="I used a card I no longer have. What do I do">
+      <button class="faq-question" aria-expanded="false"> I used a card I no longer have. What do I do?</button>
+      <div class="faq-answer" aria-hidden="true"><p> If the card used for a deposit is lost, expired, or no longer active, please contact SportsLotto.vip customer support and provide one of the following documents: a copy of the replacement card, a recent bank statement showing your name and the transaction, or a letter from your bank confirming the card is no longer in service. Email the documentation to support@sportslotto.vip and allow 1 to 2 business days for review and resolution.</p></div>
+    </div>
+      <div class="faq-item" data-search="I was charged international transaction fees. Do you reimburse those">
+      <button class="faq-question" aria-expanded="false"> I was charged international transaction fees. Do you reimburse those?</button>
+      <div class="faq-answer" aria-hidden="true"><p> We do not cover any additional fees charged by your bank for international transactions. </p></div>
+    </div>
+       <div class="faq-item" data-search="I'm outside the country, and it's not letting me deposit">
+      <button class="faq-question" aria-expanded="false"> I'm outside the country, and it's not letting me deposit?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Deposit availability may be restricted when you are outside your country of residence due to payment provider or security controls. If you are traveling, please contact SportsLotto.vip customer support and provide your current location and expected return date. In some cases, account settings may be adjusted to allow deposits while you are abroad, subject to verification and platform policies.</p></div>
+    </div>
+      <div class="faq-item" data-search="Is it safe to use my credit/debit card on your site">
+      <button class="faq-question" aria-expanded="false"> Is it safe to use my credit/debit card on your site?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Yes. SportsLotto.vip uses industry-standard security measures, including TLS encryption, to protect your personal and payment information. This technology securely encrypts data during transmission, helping ensure your card details remain protected from unauthorized access. Our security standards are comparable to those used by major financial institutions and payment processors.</p></div>
+    </div>
+      <div class="faq-item" data-search="It says my account is restricted. What should I do">
+      <button class="faq-question" aria-expanded="false"> It says my account is restricted. What should I do?</button>
+      <div class="faq-answer" aria-hidden="true"><p> If your SportsLotto.vip account is marked as restricted, please contact customer support for assistance. Account restrictions may occur due to verification requirements, security checks, payment issues, or regulatory controls. Our support team will review your account, explain the reason for the restriction, and guide you through any steps needed to restore full access.</p></div>
+    </div>
+      <div class="faq-item" data-search=" What deposit methods are available">
+      <button class="faq-question" aria-expanded="false"> What deposit methods are available?</button>
+      <div class="faq-answer" aria-hidden="true"><p> SportsLotto.vip supports multiple deposit methods, including credit and debit cards, cryptocurrency, and select digital wallets such as Apple Pay and PayPal. Available payment options may vary by location and are subject to change based on payment provider availability.</p></div>
+    </div>
+      <div class="faq-item" data-search="What does -Do not honor- mean when I try to deposit with my card">
+      <button class="faq-question" aria-expanded="false"> What does "Do not honor" mean when I try to deposit with my card?</button>
+      <div class="faq-answer" aria-hidden="true"><p> “Do Not Honor” is a response from your bank indicating that the transaction was declined by the card issuer. This is often due to security controls or international transaction restrictions. Please contact your bank to authorize online or international payments, then wait a few minutes and try the deposit again. </p></div>
+    </div>
+      <div class="faq-item" data-search=" Why is my crypto deposit taking so long">
+      <button class="faq-question" aria-expanded="false"> Why is my crypto deposit taking so long?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Cryptocurrency deposits may take longer than expected due to blockchain network congestion, confirmation requirements, or the specific processing speed of the cryptocurrency being used. Each blockchain has different confirmation times, and delays are more common during periods of high network activity. SportsLotto.vip credits deposits once the required network confirmations are completed. </p></div>
+    </div>
+      <div class="faq-item" data-search="Why was my card charged as cash advance">
+      <button class="faq-question" aria-expanded="false"> Why was my card charged as cash advancec?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Some banks classify online gaming deposits as cash advance transactions rather than standard purchases. This classification is determined by your card issuer, not by SportsLotto.vip. Any cash advance fees or interest charges applied are set by your bank and are outside our control. For details, please contact your card issuer directly.</p></div>
+    </div>
+    <div class="faq-item" data-search="Am I eligible for a free payout">
+      <button class="faq-question" aria-expanded="false"> Am I eligible for a free payout?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Yes. SportsLotto.vip does not charge any fees for processing payouts. All eligible payouts are issued free of charge. Please note that external fees, such as bank charges or cryptocurrency network fees, may apply depending on the withdrawal method used. </p></div>
+    </div>
+      <div class="faq-item" data-search="Can I receive a report from all my payouts">
+      <button class="faq-question" aria-expanded="false"> Can I receive a report from all my payouts?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Yes. SportsLotto.vip can provide a report of payouts that have been processed on your account. To request a payout report, please contact customer support through any available support channel, and our team will assist you with your request.</p></div>
+    </div>
+       <div class="faq-item" data-search="Do Bitcoin payouts require any verification">
+      <button class="faq-question" aria-expanded="false"> Do Bitcoin payouts require any verification?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Yes. Bitcoin payouts may require verification of the account details on file, such as your email address or phone number, for security purposes. If verification is requested, it must be completed within 48 hours. Failure to complete verification within this timeframe may result in the payout being rejected.</p></div>
+    </div>
+       <div class="faq-item" data-search="Do I need to verify my account for a payout">
+      <button class="faq-question" aria-expanded="false"> Do I need to verify my account for a payout?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Yes. Account verification is required for payouts if you funded your account using a card. To complete verification, please submit a valid photo ID, a recent utility bill, and a partial image of the card used (showing the first six digits, last four digits, and the cardholder’s name only). Send the documents to support@sportslotto.vip. Verification is typically completed within 72 hours.
+</p></div>
+    </div>
+       <div class="faq-item" data-search="How do I request a payout">
+      <button class="faq-question" aria-expanded="false"> How do I request a payout?</button>
+      <div class="faq-answer" aria-hidden="true"><p> To request a payout, log in to your SportsLotto.vip account and click the Cashier button at the top of the website. Select Withdraw Funds to view the available payout methods, limits, and estimated processing times. Follow the on-screen instructions to submit your withdrawal request.</p></div>
+    </div>
+      <div class="faq-item" data-search="How long does it take for my payout to be processed">
+      <button class="faq-question" aria-expanded="false"> How long does it take for my payout to be processed?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Payout requests are typically reviewed within 24 hours. Once approved, delivery times depend on the withdrawal method selected. Bitcoin payouts are usually processed within 1 to 2 hours after approval, while other payout methods may take longer depending on provider availability and processing requirements.</p></div>
+    </div>
+       <div class="faq-item" data-search="Is there a limit on how much I can withdraw">
+      <button class="faq-question" aria-expanded="false"> Is there a limit on how much I can withdraw?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Yes. Withdrawal limits on SportsLotto.vip vary by payout method. Instant withdrawals are available up to $1,000 per transaction. Bitcoin withdrawals are available up to $5,000, and bank wire withdrawals are available up to $9,500. Limits may be subject to verification requirements and applicable platform terms.</p></div>
+    </div>
+      <div class="faq-item" data-search="My payout is on hold. Why">
+      <button class="faq-question" aria-expanded="false"> My payout is on hold. Why?</button>
+      <div class="faq-answer" aria-hidden="true"><p> A payout may be placed on hold for several reasons, including account verification requirements, security checks, payment method review, or regulatory compliance procedures. If your payout is on hold, please contact SportsLotto.vip customer support through any available channel to receive an update on your withdrawal status and guidance on any required next steps.</p></div>
+    </div>
+       <div class="faq-item" data-search="What happens if my payout gets delayed">
+      <button class="faq-question" aria-expanded="false"> What happens if my payout gets delayed?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Payouts may be delayed due to verification requirements, security reviews, payment provider processing times, or additional compliance checks. If your payout has not been completed within the expected timeframe, please contact SportsLotto.vip customer support through any available channel. Our team will review your request and provide an update on the status of your withdrawal.</p></div>
+    </div>
+      <div class="faq-item" data-search="Why do I have to lower my payout amount">
+      <button class="faq-question" aria-expanded="false"> Why do I have to lower my payout amount?</button>
+      <div class="faq-answer" aria-hidden="true"><p> You may be required to lower your payout amount if a portion of your balance is subject to a hold period, such as bonus or promotional conditions. In these cases, the deposit or bonus funds must remain in your account until the applicable requirements or time conditions are met. Any eligible balance outside the hold period may still be withdrawn.</p></div>
+    </div>
+       <div class="faq-item" data-search="Will I have to report taxes on my withdrawal">
+      <button class="faq-question" aria-expanded="false"> Will I have to report taxes on my withdrawal?</button>
+      <div class="faq-answer" aria-hidden="true"><p> SportsLotto.vip does not provide tax advice or issue tax-related forms. Tax reporting requirements vary by country and jurisdiction, and players are responsible for understanding and complying with any applicable tax obligations related to their withdrawals. As the platform is not based in the United States, no U.S. tax forms are provided.</p></div>
+    </div>
+       <div class="faq-item" data-search="Can I close my account permanently">
+      <button class="faq-question" aria-expanded="false"> Can I close my account permanently?</button>
+      <div class="faq-answer" aria-hidden="true"><p> SportsLotto.vip does not permanently delete accounts. However, you may request that your account be closed at any time by contacting customer support. Closed accounts remain inactive and can be reopened in the future at your request, subject to platform policies.</p></div>
+    </div>
+       <div class="faq-item" data-search="Can I continue playing if I’m outside my country of registration for vacation or work">
+      <button class="faq-question" aria-expanded="false"> Can I continue playing if I’m outside my country of registration for vacation or work?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Yes. Players may continue using SportsLotto.vip while traveling for vacation or work, subject to local regulations and security controls. We recommend notifying customer support before traveling so account security settings can be adjusted as needed. This helps ensure uninterrupted access and proper account monitoring during your time abroad.</p></div>
+    </div>
+       <div class="faq-item" data-search="Can I create a new account if I have an existing one">
+      <button class="faq-question" aria-expanded="false"> Can I create a new account if I have an existing one?</button>
+      <div class="faq-answer" aria-hidden="true"><p> No. SportsLotto.vip allows one account per household. Creating or operating multiple accounts is not permitted. Accounts found to be duplicated may be restricted or closed in accordance with platform policies.
+</p></div>
+    </div>
+       <div class="faq-item" data-search="Can I delete my account">
+      <button class="faq-question" aria-expanded="false"> Can I delete my account?</button>
+      <div class="faq-answer" aria-hidden="true"><p> We do not permanently delete accounts, but we can close your account upon request.</p></div>
+    </div>
+       <div class="faq-item" data-search="Can I get a courtesy bonus">
+      <button class="faq-question" aria-expanded="false"> Can I get a courtesy bonus?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Courtesy bonuses may be granted at the discretion of SportsLotto.vip customer support and are subject to approval. In addition, the platform may offer a $20 bonus for verified bug reports, which is issued with a one-time playthrough requirement. All bonuses are subject to applicable terms and eligibility review.</p></div>
+    </div>
+      <div class="faq-item" data-search="Can I play if I am outside of the US">
+      <button class="faq-question" aria-expanded="false"> Can I play if I am outside of the US?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Yes. SportsLotto.vip is available to players in many countries where online sports gaming is permitted by law. Access may be restricted in certain regions due to local regulations or verification requirements. If you are unable to register or access the platform, it may be related to security or compliance controls.
+</p></div>
+    </div>
+      <div class="faq-item" data-search="Do you offer an IRS form or a tax statement at the end of the year">
+      <button class="faq-question" aria-expanded="false"> Do you offer an IRS form or a tax statement at the end of the year?</button>
+      <div class="faq-answer" aria-hidden="true"><p> No. SportsLotto.vip does not provide IRS forms or tax statements and does not offer tax advice. The platform is not based in the United States, and players are responsible for understanding and complying with any tax reporting requirements that may apply in their country or jurisdiction.
+</p></div>
+    </div>
+       <div class="faq-item" data-search="How can I change my personal information">
+      <button class="faq-question" aria-expanded="false"> How can I change my personal information?</button>
+      <div class="faq-answer" aria-hidden="true"><p> To update personal information on your SportsLotto.vip account, additional verification may be required. If your account balance exceeds $50, you must provide a valid government-issued photo ID before changes can be made. Name changes require legal documentation along with a selfie holding your ID. Other updates can be completed once your account details are fully verified.</p></div>
+    </div>
+       <div class="faq-item" data-search="How do I request a bonus">
+      <button class="faq-question" aria-expanded="false">How do I request a bonus?</button>
+      <div class="faq-answer" aria-hidden="true"><p> SportsLotto.vip automatically applies a 20% match bonus to all eligible deposits. No bonus code or manual request is required. All bonuses are issued with a one-time rollover requirement and are subject to standard bonus terms and eligibility conditions.
+</p></div>
+    </div>
+       <div class="faq-item" data-search="If I request a Payout, can I still request Bonuses">
+      <button class="faq-question" aria-expanded="false">If I request a Payout, can I still request Bonuses?</button>
+      <div class="faq-answer" aria-hidden="true"><p> No. Once a payout has been requested, bonus eligibility is paused. To become eligible for bonuses again, you must redeposit an amount equal to or greater than the payout requested. Bonus eligibility is restored only after a new qualifying deposit is made, subject to standard bonus terms.
+</p></div>
+    </div>
+        <div class="faq-item" data-search="Is there a birthday bonus">
+      <button class="faq-question" aria-expanded="false"> Is there a birthday bonus?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Yes. SportsLotto.vip may offer a birthday bonus to eligible players whose accounts have been active within the past 30 days. To request a birthday bonus, please contact customer support. Birthday bonuses are subject to approval and applicable terms.</p></div>
+    </div>
+       <div class="faq-item" data-search="Is there non-deposit bonus to try out the site">
+      <button class="faq-question" aria-expanded="false"> Is there non-deposit bonus to try out the site?</button>
+      <div class="faq-answer" aria-hidden="true"><p> No. SportsLotto.vip does not currently offer a non-deposit bonus. However, players can get started with a minimum deposit of $50 and receive a 20% cash bonus with a one-time rollover. Multiple secure payment methods are available to make funding your account quick and easy.</p></div>
+    </div>
+        <div class="faq-item" data-search="What are the Referral bonuses">
+      <button class="faq-question" aria-expanded="false"> What are the Referral bonuses?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Players with active SportsLotto.vip accounts may earn a referral bonus when they invite a friend to join. Eligible referrals earn 10% of the referred player’s initial deposit, subject to minimum and maximum limits ranging from $25 to $250. Referral bonuses are subject to verification and applicable terms and conditions.</p></div>
+    </div>
+    <div class="faq-item" data-search="What bonus programs do you offer">
+      <button class="faq-question" aria-expanded="false"> What bonus programs do you offer?</button>
+      <div class="faq-answer" aria-hidden="true"><p>SportsLotto.vip currently offers the following bonus programs:
+    • 20% Deposit Bonus: A cash bonus match applied to each eligible deposit with a 1x rollover requirement and no maximum cashout.
+    • Loyalty Rewards: Players earn loyalty points based on the number of tickets purchased and overall activity on the platform.
+Each bonus program is subject to its own terms and conditions, which must be reviewed and accepted before participation.</p></div>
+    </div>
+
+    <div class="faq-item" data-search="What is a rollover">
+      <button class="faq-question" aria-expanded="false"> What is a rollover?</button>
+      <div class="faq-answer" aria-hidden="true"><p> Rollover is the amount of action required on your account before you can withdraw bonus funds. For the 20% Cash Bonus Match, the rollover is 1x the deposit and bonus amount.</p></div>
+    </div>
+
+    <div class="faq-item" data-search="Does Sportslotto.vip support responsible gaming">
+      <button class="faq-question" aria-expanded="false"> Does Sportslotto.vip support responsible gaming?</button>
+      <div class="faq-answer" aria-hidden="true"><p>Yes. SportsLotto.vip is committed to promoting responsible gaming as a core part of its operations. The platform provides tools and safeguards designed to help players manage their activity responsibly, including account controls, limits, and support access. SportsLotto.vip encourages players to participate responsibly and only wager amounts they can afford.
+If you or someone you know is experiencing difficulties related to gambling, we strongly recommend seeking support from trusted organizations such as:
+Gamblers Anonymous
+Website: gamblersanonymous.org
+International Resources: gamblersanonymous.org/recovery-program/
+Gambling Therapy
+Website: gamblingtherapy.org
+International Support: gamblingtherapy.org/support/support-forums/
+These organizations provide confidential guidance and support 24 hours a day. SportsLotto.vip is dedicated to maintaining a safe, secure, and balanced gaming environment for all players.
+</p></div>
+    </div>
+<div class="faq-item" data-search="Does it cost me anything to become an affiliate">
+      <button class="faq-question" aria-expanded="false"> Does it cost me anything to become an affiliate?</button>
+      <div class="faq-answer" aria-hidden="true"><p> No. Joining the SportsLotto.vip affiliate program is completely free. There are no setup fees or membership costs to participate. Approved affiliates earn commissions based on qualifying player activity in accordance with the affiliate program terms.
+</p></div>
+    </div>
+      <div class="faq-item" data-search="How often do I get paid as an affiliate">
+      <button class="faq-question" aria-expanded="false"> How often do I get paid as an affiliate?</button>
+      <div class="faq-answer" aria-hidden="true"><p> SportsLotto.vip affiliates are paid on a weekly basis. Commission payouts can be requested via cryptocurrency, subject to affiliate account approval and applicable payout terms. Payment timing may vary based on verification and payout method requirements.
+</p></div>
+    </div>
+      <div class="faq-item" data-search="How will I know if my affiliate application has been approved">
+      <button class="faq-question" aria-expanded="false"> How will I know if my affiliate application has been approved?</button>
+      <div class="faq-answer" aria-hidden="true"><p> After submitting your affiliate application, please allow up to 48 hours for review by an affiliate manager. You will receive an email notification with your approval status and, if approved, instructions on the next steps to get started.
+</p></div>
+    </div>
+       <div class="faq-item" data-search="What happens if my account shows negative net earnings">
+      <button class="faq-question" aria-expanded="false"> What happens if my account shows negative net earnings?</button>
+      <div class="faq-answer" aria-hidden="true"><p> If your affiliate account shows negative net earnings, it means that players referred by you have won more than they have wagered during that period. In this case, no commission is earned for that cycle. The negative balance will carry over to the next payment period, and commission earnings will resume once the account returns to a positive balance.
+</p></div>
+    </div>
+       <div class="faq-item" data-search="What methods can I withdrawal funds">
+      <button class="faq-question" aria-expanded="false"> What methods can I withdrawal funds?</button>
+      <div class="faq-answer" aria-hidden="true"><p> SportsLotto.vip currently supports withdrawals via Bitcoin and bank wire transfer. Available withdrawal methods may vary based on account verification status, location, and platform terms. Processing times and limits depend on the selected payout method.
+</p></div>
+    </div>
+</div></div></section>
+
+  <style>
+    #sportslotto-faq h2 {
+      margin-bottom:20px;
+    }
+
+    #sportslotto-faq p {
+      line-height:1.7;
+      opacity:0.95;
+      margin-bottom:20px;
+    }
+
+    #sportslotto-faq .faq-content p,
+    #sportslotto-faq .faq-content li {
+      line-height:1.7;
+      opacity:0.95;
+      margin-bottom:16px;
+    }
+
+    #sportslotto-faq .faq-content h3 {
+      font-weight:700;
+      margin-top:25px;
+      margin-bottom:10px;
+    }
+
+    #sportslotto-faq .faq-content:hover {
+      transition:all 0.3s ease;
+    }
+.faq-search {
+  max-width: 520px;
+  margin: 0 auto 2rem;
+
+  input,
+  .form-control {
+    width: 100%;
+  }
+
+  // 📱 Mobile fixes
+  @media (max-width: 576px) {
+    max-width: 100%;
+    padding: 0 1rem;
+
+    input,
+    .form-control {
+      font-size: 1rem;
+      padding: 0.75rem 1rem;
+    }
+  }
+}
+
+    @media(max-width:768px){
+      #sportslotto-faq {
+        padding:40px 5%;
+      }
+      #sportslotto-faq .faq-content {
+        padding:25px 20px;
+      }
+      #sportslotto-faq h2 {
+        font-size:1.8rem;
+      }
+      #sportslotto-faq .faq-content h3 {
+        font-size:1.2rem;
+      }
+    }
+  </style>
+
+</div></div></div></section>
+
+
+<style>
+  /* === FAQ Visuals === */
+  .faq-container {
+    gap: 12px;
+  }
+
+  .faq-item {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: all 0.32s ease;
+    backdrop-filter: blur(14px);
+    position: relative;
+  }
+
+  .faq-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.45s ease;
+  }
+
+  .faq-item:hover::after {
+    opacity: 0.18;
+  }
+
+  .faq-item.active::after {
+    opacity: 0.36;
+    animation: faqPulse 2.6s ease-in-out infinite alternate;
+  }
+
+  .faq-question {
+    width: 100%;
+    background: transparent;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: left;
+    padding: 14px 18px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+      color: var(--bs-info);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.46s cubic-bezier(.2, .9, .2, 1), padding 0.26s ease;
+    padding: 0 18px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.03));
+  }
+
+  .faq-answer p {
+    margin: 0;
+    padding: 12px 0 18px;
+    white-space: pre-wrap;
+    line-height: 1.5;
+    font-size: 0.98rem;
+  }
+
+  .faq-item.active {
+  }
+
+  .faq-item.active .faq-answer {
+    max-height: 520px;
+    padding: 0 18px 14px;
+  }
+
+  @keyframes faqPulse {
+    0% { box-shadow: 0 0 18px rgba(0, 0, 0, 0.0); }
+    100% { box-shadow: 0 0 60px rgba(0, 0, 0, 0.12); }
+  }
+
+  @media (max-width: 768px) {
+    #sportslotto-faq { padding: 36px 5%; }
+    .faq-question { font-size: 0.98rem; padding: 12px 14px; }
+    .faq-answer p { font-size: 0.95rem; }
+  }
+</style>
+
+<script>
+(function initFAQ() {
+  const faqItems = document.querySelectorAll('.faq-item');
+  if (!faqItems.length) {
+    // 🕓 Retry if Odoo hasn't rendered yet
+    return setTimeout(initFAQ, 200);
+  }
+
+  const searchInput = document.getElementById('faq-search');
+  const clearBtn = document.getElementById('faq-clear');
+
+  // Toggle open/close
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+    if (!question || !answer) return;
+
+    question.addEventListener('click', () => {
+      const isActive = item.classList.contains('active');
+      faqItems.forEach(i => {
+        i.classList.remove('active');
+        const q = i.querySelector('.faq-question');
+        const a = i.querySelector('.faq-answer');
+        if (q) q.setAttribute('aria-expanded', 'false');
+        if (a) a.setAttribute('aria-hidden', 'true');
+      });
+      if (!isActive) {
+        item.classList.add('active');
+        question.setAttribute('aria-expanded', 'true');
+        answer.setAttribute('aria-hidden', 'false');
+      }
+    });
+  });
+
+  // 🔍 Search filter
+  function applyFilter(term) {
+    const q = (term || '').toLowerCase();
+    faqItems.forEach(item => {
+      const match = item.innerText.toLowerCase().includes(q);
+      item.style.display = match ? '' : 'none';
+      if (!match) item.classList.remove('active');
+    });
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', e => applyFilter(e.target.value));
+  }
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      applyFilter('');
+      searchInput.focus();
+    });
+  }
+})();
+</script>{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "lobby/dashboard/index.html" %}
+{% load django_bootstrap5 %}
+{% load humanize %}
+{% load mathfilters %}
+{% block MINERVE_PAGE_SUBTITLE %}: Cashier - Sell Tokens{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY %}
+<div class="card w-100 h-100 m-2 p-2" data-bs-theme="{{ MINERVE_BODY_THEME }}">
+<div class="card w-90 m-2">
+    <div class="card-header">
+         <div class="alert alert-success">
+        <h4><i class="fa-duotone fa-solid fa-check"></i>Transaction Confirmed!</h4>
+        <br/>
+         The transaction has been scheduled for disbursement. You will receive an email when it is completed.
+         <br/>
+         You can find the status of your exchange in the Cashier->Pending Exchanges page.
+    </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+    <div class="row">
+    <div class="col pt-2 pb-2">
+    <a class="nav-link" href="/my/profile" title="My Account"><i class="fa-duotone fa-solid fa-circle-user pe-2"></i> #{{ account.acctnum }}</a>
+    </div>
+    <div class="col pt-2 pb-2">
+        <a href="#" onclick="{% if vdomain.demo_mode %}alert('Cashier disabled in Demo.') {% else %} cashier.start_deposit_modal() {% endif %}" id="balance-link" title="Available Balance">
+        <i class="fa-duotone fa-solid fa-coins pe-2"></i><span class="avail_balance">Balance: {{ available_balance |floatformat:2 }}</span></a>
+    </div>
+    </div>
+    <hr class="border-2 border-opacity-50 border-success"/>
+{% endblock %}

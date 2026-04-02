@@ -1,0 +1,49 @@
+{% extends "sportslottonet/base/page.html" %}
+{% block bootstrap5_title %} Sports Lotto {% endblock %}
+
+{% load static %}
+
+{% block PAGE_BODY %}
+<meta name="description" content="Play Sports Lotto free! Pick teams, track live scores, and win rewards. Earn free points for signup and cash out with Amazon gift cards.">
+<meta name="keywords" content="sports lotto free sports lotto play sports lotto online sports lotto rewards lotto sports game free sports lotto points  redeem sports lotto for gift cards  real-time sports lotto scores online sports lotto strategy sports lotto cash rewards">
+{% include "sportslottonet/svg/sports-icons.sprite.svg" %}
+
+  {# ✅ Include SVG sprite once at the top #}
+  {# Vertical background rails: 4 stacked rails, scrolling behind content #}
+      {% include 'sportslottonet/home/hero_section.html' %}
+
+  <main class="homepage" style="position: relative; z-index: 1;">
+
+    <!-- Hero Section -->
+    {% include "sportslottonet/home/partials/tube_hero.html" with theme=BODY_THEME %}
+
+    <!-- Stats Bar Section -->
+    {% include "sportslottonet/home/stats_bar.html" %}
+
+    <!-- Stats JS -->
+    <script type="module" src="{% static 'sportslottonet/js/statsRender.js' %}"></script>
+
+    <!-- Accordion Section -->
+    <section class="info-section container my-5">
+      <div class="accordion" id="infoAccordion">
+        <!-- JS will insert items -->
+      </div>
+    </section>
+
+    <!-- Accordion JS -->
+    <script type="module" src="{% static 'sportslottonet/js/accordionRender.js' %}"></script>
+   <!-- Winners Table !-->
+    <section class="info-section container my-5">
+        <div  id="winnerboard">
+
+        </div>
+        <script>
+            $(document).ready(function() {
+                {#$("#winnerboard").load("https://winners.slsapi.lat/get/winnerboard")#}
+            });
+        </script>
+    </section>
+  </main>
+
+{% include "sportslottonet/home/tawkto.html" %}
+{% endblock %}

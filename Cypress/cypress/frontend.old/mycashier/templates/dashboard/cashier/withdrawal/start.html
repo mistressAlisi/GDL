@@ -1,0 +1,105 @@
+{% extends "minerve/pages/responsive_dashboard/index.html" %}
+{% load humanize %}
+{% load i18n %}
+{% load mathfilters %}
+{% load django_bootstrap5 %}
+{% block bootstrap5_title %}
+    {{ vdomain.website_name }}: Withdraw - ionBlock Payment
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY %}
+<div class="text-start">
+<h4><i class="fa-duotone fa-solid fa-money-from-bracket"></i> {% translate "Cashier Withdrawal" %}</h4>
+<h5>{% translate "Provider:" %} {{ provider.name }}</h5>
+<h6>{% translate "Min Withdrawal:" %} ${{ provider.wdl_min|intcomma:3 }} {% translate "Max Withdrawal:" %} ${{ provider.wdl_max|intcomma:3 }}</h6>
+<h6>{% translate "Your Level Fees:" %} {{ account.account_level.withl_fee_pct_cryp|floatformat:0 }}% {% translate "Processor Fees:" %} {{ provider.wdl_fees|floatformat:0 }}%</h6>
+{% if is_fiat %}
+    <h6>{% translate "Exchange Rate for Crypto to Fiat: " %} </h6>
+{%  else %}
+    <h6>{% translate "Exchange Rate for Crypto to Tokens: " %} {{ account.account_level.get_base_rate|floatformat:2 }} {%  translate " tokens for 1 " %} {{ account.account_level.get_base_crypto }}</h6>
+{% endif %}
+</div>
+<form id="payment_amount_form" onsubmit="return cashier._validate_withdrawal(event);" method="POST" action="#" data-post-url="withdraw/validate">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+        <input type="hidden" name="provider" id="provider" value="{{ provider.module_name }}">
+        <input type="hidden" id="total_fees" value="{{ provider.wdl_fees|add:account.account_level.withl_fee_pct_cryp|div:100 }}"/>
+        {% if is_fiat %}
+        {% else %}
+            {% if withdrawal_exchange_rate %}
+                <input type="hidden" id="exchange_rate" value="{{ withdrawal_exchange_rate }}" />
+            {% else %}
+                <input type="hidden" id="exchange_rate" value="{{ account.account_level.get_base_rate }}" />
+            {% endif %}
+        {% endif %}
+        <div class="mb-3">
+          <label for="dep-amount" class="form-label">{% translate "You Withdraw:" %}</label>
+          <div class="input-group">
+           {% if is_fiat %}
+            <span class="input-group-text" id="basic-addon3">$</span>
+           {% else %}
+            <span class="input-group-text" id="basic-addon3"><i class="fa-duotone fa-solid fa-coins p-2"></i>$USD:</span>
+          {% endif %}
+            {% if provider.module_name == "cashier.providers.ionBlock" or provider.module_name == "cashier.providers.hotwallet" %}
+                <input type="number" class="form-control" name="amount" id="amount" onchange="cashier._handle_wdl_change(event)" aria-describedby="basic-addon3 basic-addon4" min="{{ provider.wdl_min }}" max="{{ provider.wdl_max }}" step="1" value="{{ provider.wdl_min }}">
+          </div>
+          <div class="form-text" id="basic-addon4">{% translate "Enter any amount from" %} {{ provider.wdl_min|floatformat:0|intcomma:3 }} {% translate "to" %} {{ provider.wdl_max|floatformat:1|intcomma:3 }}.</div>
+            {% else %}
+                <input type="number" class="form-control" name="amount" id="amount" onchange="cashier._handle_wdl_change(event)" aria-describedby="basic-addon3 basic-addon4" min="{{ provider.wdl_min }}" max="{{ provider.wdl_max|mul:cashier.get_exchange_rate|floatformat:0 }}" step="1" value="{{ provider.wdl_min|mul:cashier.get_exchange_rate }}">
+          </div>
+          <div class="form-text" id="basic-addon4">{% translate "Enter any amount from" %} {{ provider.wdl_min|mul:cashier.get_exchange_rate|floatformat:0|intcomma:3 }} {% translate "to" %} {{ provider.wdl_max|mul:cashier.get_exchange_rate|floatformat:1|intcomma:3 }}.</div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+          <label for="dep-amount" class="form-label">{% translate "You Receive:" %}</label>
+          <div class="input-group">
+           {% if is_fiat %}
+            <span class="input-group-text" id="basic-addon6">$</span>
+           {% else %}
+            <span class="input-group-text" id="basic-addon6"><i class="fa-brands fa-ethereum pe-2"></i> {{ account.account_level.get_base_crypto }}:</span>
+          {% endif %}
+            <input type="text" class="form-control" name="final_amount" id="final_amount" readonly="readonly" aria-readonly="readonly" aria-describedby="basic-addon6 basic-addon8" min="{{ provider.wdl_min }}" max="{{ provider.wdl_max }}" step="1" value="{{ provider.wdl_min }}">
+          </div>
+        {% if is_fiat %}
+        {% else %}
+          <div class="form-text" id="basic-addon8">{% translate "The deposit amount that you'll get after fees (in Crypto)" %}</div>
+        {% endif %}
+        </div>
+        {% if provider.module_name == "cashier.providers.ionBlock" or provider.module_name == "cashier.providers.hotwallet" %}
+        <div class="mb-3">
+          <label for="withdrawal_address" class="form-label">{% translate "Withdrawal Address:" %}</label>
+          <div class="input-group">
+            <span class="input-group-text" id="basic-addon9"><i class="fa-duotone fa-solid fa-wallet pe-2"></i></span>
+            <input type="text" class="form-control" name="address" id="withdrawal_address" aria-describedby="basic-addon9 basic-addon10" placeholder="0x..." required>
+          </div>
+          <div class="form-text" id="basic-addon10">{% translate "Enter your crypto wallet address where you want to receive funds (prefix with 0x)" %}</div>
+        </div>
+        <div class="mb-3">
+          <label for="network" class="form-label">{% translate "Network:" %}</label>
+          <div class="input-group">
+            <span class="input-group-text" id="basic-addon11"><i class="fa-duotone fa-solid fa-network-wired pe-2"></i></span>
+            <select class="form-select" name="network" id="network" required>
+              <option value="ETH" selected>Ethereum (ETH)</option>
+              <option value="ERC20">Ethereum (ERC-20)</option>
+            </select>
+          </div>
+          <div class="form-text" id="basic-addon12">{% translate "Ethereum network for ETH withdrawals" %}</div>
+        </div>
+        {% endif %}
+        <div class="mb-3">
+          <label for="acct_passwd" class="form-label">{% translate "Account Password:" %}</label>
+          <div class="input-group">
+            <span class="input-group-text" id="basic-addon13"><i class="fa-duotone fa-solid fa-lock pe-2"></i></span>
+            <input type="password" class="form-control" name="acct_passwd" id="acct_passwd" aria-describedby="basic-addon13 basic-addon14" required>
+          </div>
+          <div class="form-text" id="basic-addon14">{% translate "Enter your account password to confirm this withdrawal" %}</div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="{% translate "Continue Withdrawal" %}">
+</form>
+
+{% include "minerve/pages/dynamic_dashboard/loading_toast.html" %}
+{% include "lobby/index/theme_switcher.html" %}
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+{% include "lobby/dashboard/components/account_sidebar_header.html" %}
+{% endblock %}

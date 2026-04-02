@@ -1,0 +1,533 @@
+{% extends "sportslottovip/base/page.html" %}
+
+{% load static %}
+{% block bootstrap5_title %} SPORTSLOTTO.VIP: About Us {% endblock %}
+{% block PAGE_BODY %}
+
+<style>
+    /* Animated Gradient Text */
+    .gradient-text {
+        background: linear-gradient(90deg, var(--bs-light), var(--bs-primary), var(--bs-dark), var(--bs-primary), var(--bs-light));
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradient-flow 8s ease infinite;
+    }
+
+    @keyframes gradient-flow {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    /* Hero Section */
+    .hero-section {
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+        pointer-events: none;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+        .hero-section {
+            min-height: 50vh;
+            padding: 4rem 0;
+        }
+    }
+
+    /* Card Custom */
+    .card-custom {
+        background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+        border: 2px solid rgba(251, 191, 36, 0.3);
+        border-radius: 24px;
+        transition: all 0.3s;
+        padding: 3rem;
+    }
+
+    .card-custom:hover {
+        border-color: rgba(251, 191, 36, 0.6);
+        transform: translateY(-4px);
+    }
+
+    /* Badge Pill */
+    .badge-pill-custom {
+        background: rgba(251, 191, 36, 0.2);
+        border: 1px solid rgba(251, 191, 36, 0.5);
+        border-radius: 50px;
+        padding: 12px 24px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* Icon Box */
+    .icon-box {
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid;
+        margin: 0 auto;
+    }
+
+    /* Section Backgrounds */
+    .section-bg-primary {
+        background: transparent;
+    }
+
+    .cta-section {
+        background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+        border-radius: 24px;
+        padding: 4rem 2rem;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .cta-title {
+        text-shadow: none;
+    }
+
+    /* Step Cards */
+    .step-card {
+        background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+        border: 2px solid rgba(251, 191, 36, 0.3);
+        border-radius: 16px;
+        padding: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        transition: all 0.3s;
+        margin-bottom: 1.5rem;
+    }
+
+    .step-card:hover {
+        border-color: rgba(251, 191, 36, 0.6);
+        transform: translateX(8px);
+    }
+
+    .step-number {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: rgba(251, 191, 36, 0.2);
+        border: 3px solid #fbbf24;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #fbbf24;
+        flex-shrink: 0;
+        transition: all 0.3s;
+    }
+
+    .step-card:hover .step-number {
+        transform: scale(1.1);
+        box-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
+    }
+
+    .step-number.bg-red {
+        background: rgba(239, 68, 68, 0.2);
+        border-color: #ef4444;
+        color: #ef4444;
+    }
+
+    .step-number.bg-purple {
+        background: rgba(168, 85, 247, 0.2);
+        border-color: #a855f7;
+        color: #a855f7;
+    }
+
+    .step-number.bg-blue {
+        background: rgba(59, 130, 246, 0.2);
+        border-color: #3b82f6;
+        color: #3b82f6;
+    }
+
+    .step-number.bg-green {
+        background: rgba(34, 197, 94, 0.2);
+        border-color: #22c55e;
+        color: #22c55e;
+    }
+
+    .step-content {
+        flex: 1;
+    }
+
+    .step-content h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .step-content p {
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 0;
+    }
+
+    @media (max-width: 768px) {
+        .step-card {
+            flex-direction: column;
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .step-number {
+            width: 64px;
+            height: 64px;
+            font-size: 2rem;
+        }
+    }
+
+    /* Feature Cards */
+    .feature-card {
+        background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+        border: 2px solid rgba(251, 191, 36, 0.3);
+        border-radius: 20px;
+        padding: 2.5rem;
+        transition: all 0.3s;
+        height: 100%;
+    }
+
+    .feature-card:hover {
+        border-color: rgba(251, 191, 36, 0.6);
+        transform: translateY(-8px);
+    }
+
+    .feature-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .feature-card p {
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 0;
+    }
+
+    /* Button */
+    .btn-play {
+        background: linear-gradient(to right, #fbbf24, #f59e0b);
+        color: black !important;
+        font-weight: 700;
+        padding: 1.25rem 3rem;
+        border-radius: 12px;
+        border: none;
+        font-size: 1.25rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-play:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 50px rgba(251, 191, 36, 0.8);
+        color: black !important;
+    }
+
+    /* Utility Classes */
+    .text-gold {
+        color: #fbbf24;
+    }
+
+    .border-gold {
+        border-color: rgba(251, 191, 36, 0.5) !important;
+    }
+
+    .border-purple {
+        border-color: rgba(168, 85, 247, 0.5) !important;
+    }
+
+    .bg-gold {
+        background: rgba(251, 191, 36, 0.2);
+    }
+
+    .bg-purple {
+        background: rgba(168, 85, 247, 0.2);
+    }
+
+    .text-white-90 {
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .text-white-80 {
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .text-white-70 {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .leading-relaxed {
+        line-height: 1.8;
+    }
+</style>
+
+<!-- Hero Section -->
+<section class="hero-section" style="background-image: url({% static 'sportslottovip/images/hero-background.jpg' %});">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center hero-content">
+                <h1 class="display-1 mb-4 text-white">About Us</h1>
+                <p class="fs-4 text-white-80 mx-auto" style="max-width: 900px;">
+                    Sports excitement reimagined through real-money, lottery-style wagering on live sporting events.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About SportsLotto.vip -->
+<section class="py-5 my-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="text-center mb-5">
+                    <h2 class="display-2">About SportsLotto.vip</h2>
+                </div>
+                <div class="card-custom border-gold">
+                    <p class="fs-5 text-white-90 leading-relaxed mb-4">
+                        At SportsLotto.vip, we believe sports fans deserve a more dynamic and rewarding way to engage with the games they follow. SportsLotto.vip was built to combine real-money sports wagering with a lottery-style format that offers the potential for larger payouts through carefully selected sporting events.
+                    </p>
+                    <p class="fs-5 text-white-90 leading-relaxed mb-4">
+                        Our platform is centered around live sports and real outcomes. Players place real-money wagers by selecting multiple sporting events on a single ticket, creating a structured experience that blends sports knowledge, strategy, and high-impact payout potential. This hybrid sports lottery model delivers an alternative to traditional sportsbooks while maintaining transparency and clear rules.
+                    </p>
+                    <p class="fs-5 text-white-90 leading-relaxed mb-4">
+                        SportsLotto.vip is backed by extensive industry experience and modern technology, designed to provide a secure, efficient, and user-focused betting environment. We support multiple payment methods, fast payouts, and a streamlined wagering process to meet the expectations of today's global players.
+                    </p>
+                    <p class="fs-5 text-white-90 leading-relaxed mb-0">
+                        Our mission is simple: to deliver a premium sports lottery experience that is engaging, fair, and built for scale. We prioritize responsible gaming, operational integrity, and continuous innovation as we expand into new markets and introduce new features. SportsLotto.vip is committed to becoming a trusted destination where real-money sports action and lottery-style excitement come together.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How to Play -->
+<section class="py-5 my-5 section-bg-primary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="text-center mb-5">
+                    <div class="badge-pill-custom mb-4 d-inline-flex">
+                        <svg width="20" height="20" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                        <span class="fw-bold text-gold">THE PROCESS</span>
+                    </div>
+                    <h2 class="display-2 mb-4">How to Play SportsLotto.vip</h2>
+                    <p class="fs-5 text-white-80 mx-auto mb-0 leading-relaxed" style="max-width: 900px;">
+                        SportsLotto.vip combines real-money sports wagering with a lottery-style ticket format. Follow these simple steps to get started.
+                    </p>
+                </div>
+
+                <div class="col-lg-10 mx-auto">
+                    <!-- Step 1 -->
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Register and Deposit</h3>
+                            <p>Create your SportsLotto.vip account, verify your details, and fund your balance using cards, cryptocurrency, or bank transfer. All gameplay on SportsLotto.vip uses real money.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="step-card">
+                        <div class="step-number bg-red">2</div>
+                        <div class="step-content">
+                            <h3>Build Your Ticket</h3>
+                            <p>Select a sport and choose multiple real sporting events on one ticket. The more events you add, the higher the potential payout, creating a lottery-style wagering experience.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="step-card">
+                        <div class="step-number bg-purple">3</div>
+                        <div class="step-content">
+                            <h3>Follow Results and Withdraw</h3>
+                            <p>Tickets are graded using official game results. Winning wagers are credited to your account, and funds can be withdrawn using the available payout methods.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why SportsLotto.vip Is Different -->
+<section class="py-5 my-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="text-center mb-5">
+                    <h2 class="display-2">Why SportsLotto.vip Is Different</h2>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Feature 1 -->
+                    <div class="col-md-6">
+                        <div class="feature-card">
+                            <h3 class="text-gold">Hybrid Sports Lottery Model</h3>
+                            <p>SportsLotto.vip goes beyond traditional sportsbooks by offering lottery-style tickets tied to real sporting events, creating the opportunity for bigger payouts through multi-event selections.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="col-md-6">
+                        <div class="feature-card">
+                            <h3 class="text-gold">Real-Money Action with Clear Rules</h3>
+                            <p>All wagers are placed with real money, using transparent terms, defined payout limits, and straightforward grading based on official game results.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="col-md-6">
+                        <div class="feature-card">
+                            <h3 class="text-gold">Built for Performance and Scale</h3>
+                            <p>Our platform supports multiple payment methods, fast processing, and automation-driven operations designed to deliver a smooth experience for players worldwide.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="col-md-6">
+                        <div class="feature-card">
+                            <h3 class="text-gold">Responsible Gaming First</h3>
+                            <p>We prioritize responsible gaming with account controls, security checks, and access to support resources, ensuring a balanced and safe betting environment.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 5 -->
+                    <div class="col-md-12">
+                        <div class="feature-card">
+                            <h3 class="text-gold">Global, Modern, and Player-Focused</h3>
+                            <p>Designed for North American and international players, SportsLotto.vip is built to grow across markets while maintaining trust, integrity, and innovation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Trusted Team -->
+<section class="py-5 my-5 section-bg-primary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card-custom border-gold">
+                    <div class="text-center mb-5">
+                        <div class="icon-box mb-4 bg-gold border-gold">
+                            <svg width="48" height="48" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                                <path d="M4 22h16"/>
+                                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                                <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/>
+                            </svg>
+                        </div>
+                        <h2 class="display-3 mb-4">A Trusted Team with Real Experience</h2>
+                    </div>
+                    <p class="fs-5 text-white-90 text-center leading-relaxed mb-4">
+                        SportsLotto.vip is built by a team with extensive experience in sports wagering, digital gaming platforms, and customer operations. Our background across multiple sectors of the online sports gaming industry gives us a practical understanding of what players expect from a real-money platform: transparency, security, and dependable performance.
+                    </p>
+                    <p class="fs-5 text-white-90 text-center leading-relaxed mb-0">
+                        We focus on creating a player-first environment that balances innovation with responsibility. Rather than simply offering wagering options, we develop structured systems designed for clarity, ease of use, and long-term trust. Every feature on SportsLotto.vip is built to deliver a secure, consistent, and engaging experience for players worldwide.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Community -->
+<section class="py-5 my-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="text-center mb-5">
+                    <div class="icon-box mb-4 bg-purple border-purple">
+                        <svg width="56" height="56" fill="none" stroke="#a855f7" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <h2 class="display-3 mb-4">More Than a Platform, a Player Community</h2>
+                </div>
+                <div class="card-custom border-purple">
+                    <p class="fs-5 text-white-90 text-center leading-relaxed mb-4">
+                        SportsLotto.vip is built for more than placing wagers. It is a platform designed for sports fans who value competition, strategy, and shared engagement around live sporting events. Our community connects players who follow the same games, build multi-event tickets, and participate in real-money sports action driven by official results.
+                    </p>
+                    <p class="fs-5 text-white-90 text-center leading-relaxed mb-0">
+                        We focus on creating an environment that supports interaction, transparency, and responsible play. From major game-day matchups to global sporting events, SportsLotto.vip brings together players who enjoy informed decision-making and competitive excitement. The result is a connected community where sports fans can engage, compete, and experience the thrill of real-money play together.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="py-5 my-5 cta-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <h2 class="display-2 mb-4 cta-title">
+                    <span class="gradient-text">Join the Action</span>
+                </h2>
+                <p class="fs-5 text-white-70 mx-auto mb-5 leading-relaxed" style="max-width: 900px;">
+                    Whether you're looking to put your sports knowledge to work, experience game-day excitement, or take part in a modern sports lottery, SportsLotto.vip delivers a real-money wagering experience built around live sporting events. Players can create multi-event tickets, follow official game results, and compete for larger payouts in a structured and transparent environment. Designed for fans who enjoy strategy, competition, and real stakes, SportsLotto.vip is where sports action goes beyond watching and becomes part of the game-day experience.
+                </p>
+                <button class="btn-play">PLAY NOW</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Play Now login functionality
+    document.addEventListener("DOMContentLoaded", () => {
+        const playButton = document.querySelector(".btn-play");
+        const loginTrigger = document.getElementById("loginTrigger");
+
+        if (playButton && loginTrigger) {
+            playButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                loginTrigger.click();
+            });
+        }
+    });
+</script>
+
+{% endblock %}

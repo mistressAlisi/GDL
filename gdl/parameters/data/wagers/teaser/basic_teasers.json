@@ -1,0 +1,52 @@
+[
+    {
+    "name":"2-6 Teams (6/4 Pts FB/BK)",
+    "payout_odds": "-110,160,330,450,600",
+    "amf_points": 6,
+    "bab_points": 4,
+    "min_teams": 2,
+    "max_teams": 6,
+    "draws_push": true,
+    "draws_loose": false
+    },
+    {
+    "name":"2-6 Teams -120 (6.5/4.5 Pts FB/BK)",
+    "payout_odds": "-120,145,250,400,500",
+    "amf_points": 6.5,
+    "bab_points": 4.5,
+    "min_teams": 2,
+    "max_teams": 6,
+    "draws_push": true,
+    "draws_loose": false
+    },
+    {
+    "name":"2-6 Teams -130 (7/5 Pts FB/BK)",
+    "payout_odds": "-130,125,200,350,500",
+    "amf_points": 7,
+    "bab_points": 5,
+    "min_teams": 2,
+    "max_teams": 6,
+    "draws_push": true,
+    "draws_loose": false
+    },
+    {
+    "name":"3 Team super teaser -120 (10/6 Pts FB/BK TIES LOOSE)",
+    "payout_odds": "-120,-120,-120,-120,-120,-120",
+    "amf_points": 10,
+    "bab_points": 6,
+    "min_teams": 3,
+    "max_teams": 3,
+    "draws_push": false,
+    "draws_loose": true
+    },
+    {
+    "name":"4 Team super teaser -120 (13/10 Pts FB/BK TIES LOOSE)",
+    "payout_odds": "-120,-120,-120,-120,-120,-120",
+    "amf_points": 13,
+    "bab_points": 10,
+    "min_teams": 4,
+    "max_teams": 4,
+    "draws_push": false,
+    "draws_loose": true
+    }
+]

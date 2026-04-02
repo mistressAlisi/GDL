@@ -1,0 +1,28 @@
+{% extends "minerve/pages/responsive_dashboard/index.html" %}
+{% load django_bootstrap5 %}
+{% load humanize %}
+{% block bootstrap5_title %}
+    {{ vdomain.website_name }}: Cashier: Deposit
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_BODY %}
+{#<script src="https://unpkg.com/@bitjson/qr-code@1.0.2/dist/qr-code.js"></script>#}
+<div class="w-100 flex-container"
+     data-bs-theme="{{ MINERVE_BODY_THEME }}"
+     style="position: relative; min-height: 100dvh;">
+    {% include cashier_deposit_page %}
+
+</div>
+{% include "minerve/pages/dynamic_dashboard/loading_toast.html" %}
+{% endblock %}
+{% block MINERVE_PAGE_FOOTER %}
+    <script type="module" src="/static/mycashier/js/Cashier/loader.js"></script>
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+{% include "lobby/dashboard/components/account_sidebar_header.html" %}
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY_FOOTER %}
+    {% include "lobby/index/theme_switcher.html" %}
+ {% endblock %}
+

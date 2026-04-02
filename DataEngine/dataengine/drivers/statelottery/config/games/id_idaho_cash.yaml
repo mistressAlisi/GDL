@@ -1,0 +1,34 @@
+# Idaho - Idaho Cash
+# Draws daily at 8:00 PM MT
+# Pick 5 numbers from 1-45
+
+state: ID
+name: "Idaho Cash"
+slug: id-idaho-cash
+url: "https://www.idaholottery.com/games/draw/idaho-cash"
+game_type: pool
+
+format:
+  main_count: 5
+  main_range: [1, 45]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: false
+
+schedule:
+  days: [daily]
+  times:
+    - time: "20:00"
+      label: null
+  timezone: "America/Boise"
+
+selectors:
+  all_numbers: ".gamepage--winningnumbers li"
+  draw_date: ".draw-date, .date"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%B %d, %Y"
+  split_main_bonus: false
+
+active: true

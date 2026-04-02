@@ -1,0 +1,67 @@
+{#{% extends "lobby/dashboard/index.html" %}#}
+{% extends "minerve/pages/responsive_dashboard/index.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block DYNAMIC_DASHBOARD_PRE_BODY %}
+{#{% include "gdlfront/dashboard/play_app/param_form.html" %}#}
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY %}
+{% include "gdlfront/dashboard/play_app/home_screen.html" %}
+
+{% include "minerve/pages/dynamic_dashboard/loading_toast.html" %}
+
+{% include "gdlfront/dashboard/play_app/offcanvas_cart.html" %}
+{% include "gdlfront/dashboard/play_app/home_bet_form.html" %}
+    <script src="/static/minerve/js/components/dynamic_dashboard/helper.js"></script>
+
+    <script type="module" src="/static/mycashier/js/Cashier/loader.js"></script>
+    <script type="module" src="/static/frontend/lobby/js/Notifier/loader.js"></script>
+    {% include "lobby/dashboard/account/login/signup_modal.html" %}
+{#    <link rel="stylesheet" href="/static/frontend/lobby/themes/supernova/css/tickets.css"/>#}
+    <link rel="stylesheet" href="/static/frontend/lobby/themes/supernova/css/ticketmodals.css"/>
+    <link rel="stylesheet" href="/static/frontend/lobby/themes/supernova/css/minerve_theme.css"/>
+        <link rel="stylesheet" href="/static/gdlfront/css/sportslotto.css"/>
+    <script src="https://unpkg.com/lucide@latest"></script>
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_BODY_FOOTER %}
+
+{#{% include "gdlfront/dashboard/play_app/play_controls.html" %}#}
+{% include "lobby/index/theme_switcher.html" %}
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+{% include "lobby/dashboard/components/account_sidebar_header.html" %}
+{% endblock %}
+{% block bootstrap5_title %}
+    {{ vdomain.website_name }}: Get Tickets!
+{% endblock %}
+
+{% block MINERVE_PAGE_NAV_BRAND %}
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="{{ vdomain.icon_redirect_url }}">
+      {% if vdomain.website_icon %}
+            <img src="{{ vdomain.website_icon.url }}" alt="icon" width="40" height="40" class=" d-none me-2 d-lg-block">
+      {% elif vhost.website_icon %}
+          <img src="{{ vhost.website_icon.url }}" alt="icon" width="40" height="40" class=" d-none me-2 d-lg-block">
+      {% endif %}
+      {% if vdomain.show_website_name %}
+        <span class="d-none d-md-inline">{{ vdomain.website_name }}</span>
+      {% endif %}
+    </a>
+{% endblock %}
+
+{% block MINERVE_PAGE_NAV_HEADER_POST_MENU %}
+<div class="col">
+    <button id="gdl_buy_now" class="btn btn-success  p-2 m-2 rounded-3"   data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{% translate "Buy selected tickets" %}" title="{% translate "Buy now!" %}"><i class="fa-duotone fa-solid fa-shopping-cart "></i> {% translate "Cart" %} <span id="gdl_active_cnt" class="badge rounded-pill text-bg-success">0</span></button>
+
+    <a id="cart" class="btn btn-danger p-2 m-2 rounded-3"  href="/cashier/deposit"><i class="fa-duotone fa-solid fa-cash-register"></i>Cashier</a>
+</div>
+<script type="module">
+import {CartHandler} from "/static/gdlfront/js/GDLv2/cart.js";
+// Initialize Quick Picks Form
+$(document).ready(function() {
+window.carthandler = new CartHandler();
+});
+</script>
+{% endblock %}
+

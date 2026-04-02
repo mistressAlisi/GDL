@@ -1,0 +1,35 @@
+# Missouri - Lotto
+# Draws Wednesday and Saturday at 8:59 PM CT
+# Pick 6 numbers from 1-44
+# NOTE: Game ending October 18, 2025
+
+state: MO
+name: "Lotto"
+slug: mo-lotto
+url: "https://www.molottery.com/lotto/lotto.jsp"
+game_type: pool
+
+format:
+  main_count: 6
+  main_range: [1, 44]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: false
+
+schedule:
+  days: [wednesday, saturday]
+  times:
+    - time: "20:59"
+      label: null
+  timezone: "America/Chicago"
+
+selectors:
+  all_numbers: ".winning-numbers span, .ball, .number"
+  draw_date: ".draw-date, .date"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%m/%d/%Y"
+  split_main_bonus: false
+
+active: false

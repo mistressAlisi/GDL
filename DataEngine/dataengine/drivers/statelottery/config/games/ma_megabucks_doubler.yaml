@@ -1,0 +1,35 @@
+# Massachusetts - Megabucks
+# Draws Monday, Wednesday and Saturday at 9:00 PM ET
+# Pick 6 numbers from 1-44
+# Note: Game was renamed from "Megabucks Doubler" in Nov 2023, range changed from 1-49 to 1-44
+
+state: MA
+name: "Megabucks"
+slug: ma-megabucks-doubler
+url: "https://www.masslottery.com/games/draw-and-instants/megabucks"
+game_type: pool
+
+format:
+  main_count: 6
+  main_range: [1, 44]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: false
+
+schedule:
+  days: [monday, wednesday, saturday]
+  times:
+    - time: "21:00"
+      label: null
+  timezone: "America/New_York"
+
+selectors:
+  all_numbers: ".winning-numbers span, .ball, .number"
+  draw_date: ".draw-date, .date"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%m/%d/%Y"
+  split_main_bonus: false
+
+active: true

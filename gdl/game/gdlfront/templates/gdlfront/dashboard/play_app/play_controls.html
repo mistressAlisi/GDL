@@ -1,0 +1,33 @@
+{% load i18n %}
+<div class="position-fixed translate-middle top-100 start-50">
+<div class="modal-content rounded-0 rounded-top-3" id="gdl_play_controls" style="z-index: 100; width: 370px; position: relative; height: 55px; top: -20px;">
+
+<div>
+    <button id="gdl_settings_now" class="btn btn-primary  p-1 m-2 me-4" title="{% translate "Options" %}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{% translate "Change Ticket Options" %}"><i class="fa-duotone fa-solid fa-gear"></i> {% translate "Options" %}</button>
+{#    <button id="gdl_refresh_now" class="btn  btn-round btn-success  p-2 m-2" title="{% translate "New Tickets" %}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{% translate "Generate new tickets" %}"><i class="fa-duotone fa-solid fa-sparkles fa-2x"></i></button>#}
+
+    <button id="gdl_buy_now" class="btn btn-danger  p-1 m-2 ms-4"   data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{% translate "Buy selected tickets" %}" title="{% translate "Buy now!" %}"><i class="fa-duotone fa-solid fa-shopping-cart "></i> {% translate "Cart" %} <span id="gdl_active_cnt" class="badge rounded-pill text-bg-success">0</span></button>
+
+{#    <button id="gdl_cashier_now" onclick="{% if vdomain.demo_mode %}alert('{% translate "Cashier disabled in Demo." %}') {% else %} cashier.start_deposit_modal() {% endif %}" class="btn btn-success p-1 m-2" title="{% translate "Cashier" %}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{% translate "Open Cashier" %}"><i class="fa-duotone fa-solid fa-cash-register"></i> {% translate "Cashier" %}</button>#}
+{#    <button id="gdl_more_now" onclick="alert('{% translate "More Options Menu disabled in Demo." %}');" class="btn btn-primary btn-round p-1 m-2" title="{% translate "More Options" %}"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{% translate "More Settings" %}"><i class="fa-duotone fa-ellipsis fa-cash-register"></i></button>#}
+
+
+</div>
+{##}
+<div class="d-flex justify-content-center pb-2 mb-1">
+{#<div class="col-6 ps-0 ms-0"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{% translate "Risk and Payout" %}">#}
+{#$<span id="gdl_risking">1</span> <i class="fa-solid fa-star p-1"></i> $<span id="gdl_to_win">5,000</span>#}
+{#</div>#}
+{#<div class="col-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{% translate "Selected/Total Tickets" %}">#}
+{#<span id="gdl_active_cnt">0</span> {% translated "selected" %}</i>#}
+{#</div>#}
+{#<div class="col-6" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{% translate "Events per Ticket" %}">#}
+{#<span id="gdl_events">7</span> <i class="fa-duotone fa-solid fa-medal p-1"></i>#}
+{#</div>#}
+</div>
+</div>
+</div>
+<script>
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>

@@ -1,0 +1,50 @@
+{% load humanize %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+
+
+<div class="container-fluid d-flex align-items-center justify-content-center min-vh-100 p-4" data-bs-theme="{{ MINERVE_BODY_THEME }}">
+ <div class="menu-container">
+        <div class="menu-wrapper">
+            <!-- Main Card -->
+            <div class="card menu-card">
+                <!-- Header -->
+                <div class="card-header menu-header">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <i class="fa-solid fa-ticket menu-icon"></i>
+                            <h1 class="menu-title mb-0">SPORTSLOTTO</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Body -->
+                <div class="card-body p-4">
+                    <!-- Custom Tickets Button -->
+                    <a href="play/custom" class="btn menu-btn custom-btn w-100 mb-4">
+                        <i class="fa-solid fa-search me-2"></i>
+                        {% translate "Custom Tickets" %}
+                    </a>
+                    <!-- Quick Picks Button -->
+                    <a href="play/quickpicks" class="btn menu-btn quick-picks-btn w-100 mb-3">
+                        <i class="fa-solid fa-stars me-2"></i>
+                        Quick Picks
+                    </a>
+                    <!-- Sports Grid 2x2 -->
+                    <div class="row g-3 pt-2">
+
+                        {% for choices in quick_picks_choices %}
+                             <div class="col-6">
+                            <a href="play/quickpicks/dynamic/{{ choices.uuid }}" class="{{ choices.class_name }}">
+                                <span class="sport-emoji">{{ choices.icon }}</span>
+                                <span class="sport-name">{{ choices.name }}</span>
+                            </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

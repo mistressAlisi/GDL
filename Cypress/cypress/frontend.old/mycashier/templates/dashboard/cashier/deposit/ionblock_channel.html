@@ -1,0 +1,404 @@
+{% extends "minerve/pages/responsive_dashboard/index.html" %}
+{% load django_bootstrap5 %}
+{% load humanize %}
+{% block bootstrap5_title %}
+    {{ vdomain.website_name }}: Deposit - ionBlock Payment
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY %}
+<div class="container-fluid p-4" data-bs-theme="{{ MINERVE_BODY_THEME }}">
+    <div class="card border-0">
+        <div class="card-header bg-transparent border-0">
+            <h1>
+                <i class="fa-duotone fa-solid fa-coins" style="color: #6366f1;"></i>
+                &#160; Complete Your Deposit
+            </h1>
+        </div>
+        <div class="card-body px-0">
+
+            <!-- Status Alert -->
+            <div class="alert alert-warning d-flex align-items-center" role="alert">
+                <i class="fa-solid fa-clock fa-2x me-3"></i>
+                <div>
+                    <h5 class="mb-1">Awaiting Payment</h5>
+                    <p class="mb-0">Send the exact amount shown below to complete your deposit.</p>
+                </div>
+            </div>
+
+            <!-- Payment Details -->
+            <div class="row justify-content-center mt-4">
+                <div class="col-12 col-xl-10">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-5">
+
+                            <!-- Amount Summary -->
+                            <div class="row mb-5">
+                                <div class="col-md-6 text-center mb-4 mb-md-0">
+                                    <div class="p-4 bg-light rounded">
+                                        <small class="text-black d-block mb-2">You're Depositing</small>
+                                        <h2 class="mb-0 text-success">
+                                            <strong>${{ ionblock_channel.receiver_amount }}</strong>
+                                        </h2>
+                                        <small class="text-black">USD</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 text-center">
+                                    <div class="p-4 bg-light rounded">
+                                        <small class="text-black d-block mb-2">Send Exactly</small>
+                                        <h2 class="mb-0 text-primary">
+                                            <strong>{{ ionblock_channel.sender_amount }}</strong>
+                                        </h2>
+                                        <small class="text-black">{{ ionblock_channel.sender_currency }}</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- QR Code and Address -->
+                            <div class="row mb-5">
+                                <div class="col-lg-5 text-center mb-4 mb-lg-0">
+                                    <div class="p-4">
+                                        <h5 class="mb-3">Scan QR Code</h5>
+                                        <div id="qr-code-container" class="d-inline-block p-3 bg-white border rounded">
+                                            <!-- QR code will be generated here -->
+                                        </div>
+                                        <p class="text-muted small mt-3">
+                                            Scan with your mobile wallet
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="p-4">
+                                        <h5 class="mb-3">Or Send to Address</h5>
+
+                                        <!-- Network -->
+                                        <div class="mb-4">
+                                            <label class="form-label text-muted small mb-2">
+                                                <i class="fa-solid fa-network-wired"></i> Network
+                                            </label>
+                                            <div class="input-group">
+                                                <input
+                                                    type="text"
+                                                    class="form-control form-control-lg"
+                                                    value="{{ ionblock_channel.network }}"
+                                                    readonly
+                                                >
+                                            </div>
+                                        </div>
+
+                                        <!-- Deposit Address -->
+                                        <div class="mb-4">
+                                            <label class="form-label text-muted small mb-2">
+                                                <i class="fa-solid fa-wallet"></i> Deposit Address
+                                            </label>
+                                            <div class="input-group">
+                                                <input
+                                                    type="text"
+                                                    class="form-control form-control-lg font-monospace"
+                                                    id="deposit-address"
+                                                    value="{{ ionblock_channel.address }}"
+                                                    readonly
+                                                >
+                                                <button
+                                                    class="btn btn-primary"
+                                                    type="button"
+                                                    onclick="copyAddress()"
+                                                    id="copy-btn"
+                                                >
+                                                    <i class="fa-solid fa-copy"></i> Copy
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Amount to Send -->
+                                        <div class="mb-3">
+                                            <label class="form-label text-muted small mb-2">
+                                                <i class="fa-solid fa-coins"></i> Exact Amount to Send
+                                            </label>
+                                            <div class="input-group">
+                                                <input
+                                                    type="text"
+                                                    class="form-control form-control-lg font-monospace"
+                                                    id="send-amount"
+                                                    value="{{ ionblock_channel.sender_amount }} {{ ionblock_channel.sender_currency }}"
+                                                    readonly
+                                                >
+                                                <button
+                                                    class="btn btn-outline-primary"
+                                                    type="button"
+                                                    onclick="copyAmount()"
+                                                >
+                                                    <i class="fa-solid fa-copy"></i>
+                                                </button>
+                                            </div>
+                                            <small class="text-danger d-block mt-2">
+                                                <i class="fa-solid fa-exclamation-triangle"></i>
+                                                Important: Send the EXACT amount shown. Sending a different amount may result in delays or loss of funds.
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Exchange Rate and Expiry -->
+                            <div class="row mb-4">
+                                <div class="col-md-6 mb-3 mb-md-0">
+                                    <div class="p-3 bg-light rounded">
+                                        <small class="text-black d-block">Exchange Rate</small>
+                                        <strong class="fs-5 text-dark">1 {{ ionblock_channel.sender_currency }} = ${{ ionblock_channel.exchange_rate }}</strong>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-light rounded">
+                                        <small class="text-black d-block">Valid Until</small>
+                                        <strong class="fs-5 text-dark" id="expiry-timer">
+                                            <i class="fa-solid fa-clock"></i>
+                                            <span id="time-remaining">Calculating...</span>
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Instructions -->
+                            <div class="alert alert-info">
+                                <h6><i class="fa-solid fa-info-circle"></i> Instructions:</h6>
+                                <ol class="mb-0">
+                                    <li>Send <strong>exactly {{ ionblock_channel.sender_amount }} {{ ionblock_channel.sender_currency }}</strong> to the address above</li>
+                                    <li>Use the <strong>{{ ionblock_channel.network }}</strong> network</li>
+                                    <li>Your account will be credited with <strong>${{ ionblock_channel.receiver_amount }} USD</strong> once confirmed</li>
+                                    <li>This address is valid for a limited time - complete payment before expiry</li>
+                                </ol>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="row mt-4">
+                                <div class="col-md-6 mb-2 mb-md-0">
+                                    <button
+                                            type="button"
+                                            class="btn btn-outline-secondary btn-lg w-100"
+                                            onclick="goBack()"
+                                    >
+                                        <i class="fa-solid fa-arrow-left"></i> Back to Deposit Options
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary btn-lg w-100" onclick="checkPaymentStatus()">
+                                        <i class="fa-solid fa-refresh"></i> Check Payment Status
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transaction Details -->
+            <div class="row justify-content-center mt-4">
+                <div class="col-12 col-xl-10">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0">Transaction Details</h6>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-sm mb-0">
+                                <tbody>
+                                    <tr>
+                                        <td class="text-muted">Channel ID:</td>
+                                        <td class="font-monospace">{{ ionblock_channel.channel_id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">Transaction ID:</td>
+                                        <td class="font-monospace">{{ ionblock_channel.uuid }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">Created:</td>
+                                        <td>{{ ionblock_channel.created|date:"Y-m-d H:i:s" }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script>
+// Generate QR Code
+document.addEventListener('DOMContentLoaded', function() {
+    const qrData = "{{ ionblock_channel.qr_code_data }}";
+    new QRCode(document.getElementById("qr-code-container"), {
+        text: qrData,
+        width: 200,
+        height: 200,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+    });
+
+    // Start expiry countdown
+    updateExpiryTimer();
+    setInterval(updateExpiryTimer, 1000);
+});
+
+// Copy address to clipboard
+function copyAddress() {
+    const addressInput = document.getElementById('deposit-address');
+    addressInput.select();
+    addressInput.setSelectionRange(0, 99999); // For mobile devices
+
+    navigator.clipboard.writeText(addressInput.value).then(function() {
+        const btn = document.getElementById('copy-btn');
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        btn.classList.remove('btn-primary');
+        btn.classList.add('btn-success');
+
+        setTimeout(function() {
+            btn.innerHTML = originalHTML;
+            btn.classList.remove('btn-success');
+            btn.classList.add('btn-primary');
+        }, 2000);
+    });
+}
+
+// Copy amount to clipboard
+function copyAmount() {
+    const amount = "{{ ionblock_channel.sender_amount }}";
+    navigator.clipboard.writeText(amount).then(function() {
+        alert('Amount copied to clipboard: ' + amount);
+    });
+}
+
+// Update expiry timer
+function updateExpiryTimer() {
+    const expiryTimestamp = {{ ionblock_channel.valid_until|default:0 }};
+    if (!expiryTimestamp) {
+        document.getElementById('time-remaining').textContent = 'No expiry set';
+        return;
+    }
+
+    const now = Math.floor(Date.now() / 1000);
+    const remaining = expiryTimestamp - now;
+
+    if (remaining <= 0) {
+        document.getElementById('time-remaining').innerHTML = '<span class="text-danger">EXPIRED</span>';
+        return;
+    }
+
+    const hours = Math.floor(remaining / 3600);
+    const minutes = Math.floor((remaining % 3600) / 60);
+    const seconds = remaining % 60;
+
+    const timeStr = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    document.getElementById('time-remaining').textContent = timeStr;
+
+    // Warn if less than 5 minutes
+    if (remaining < 300) {
+        document.getElementById('time-remaining').classList.add('text-danger');
+    }
+}
+
+// Check payment status
+function checkPaymentStatus() {
+    const channelId = "{{ ionblock_channel.channel_id }}";
+    const btn = document.querySelector('button[onclick="checkPaymentStatus()"]');
+    const originalHTML = btn.innerHTML;
+
+    // Show loading state
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Checking...';
+
+    fetch(`/api/v1/cashier/deposit/ionblock/status?channel_id=${channelId}`)
+        .then(response => response.json())
+        .then(data => {
+            btn.disabled = false;
+            btn.innerHTML = originalHTML;
+
+            if (data.error) {
+                alert('Error: ' + data.error);
+                return;
+            }
+
+            if (data.status === 'confirmed') {
+                // Payment confirmed - show success and redirect
+                document.querySelector('.alert-warning').classList.remove('alert-warning');
+                document.querySelector('.alert').classList.add('alert-success');
+                document.querySelector('.alert h5').textContent = 'Payment Confirmed!';
+                document.querySelector('.alert p').textContent = 'Your deposit has been credited to your account.';
+
+                // Redirect after a short delay
+                setTimeout(() => {
+                    window.location.href = '/cashier/deposit?success=1';
+                }, 2000);
+
+            } else if (data.status === 'expired') {
+                // Channel expired
+                document.querySelector('.alert-warning').classList.remove('alert-warning');
+                document.querySelector('.alert').classList.add('alert-danger');
+                document.querySelector('.alert h5').textContent = 'Channel Expired';
+                document.querySelector('.alert p').textContent = 'This payment channel has expired. Please create a new deposit.';
+
+            } else {
+                // Still pending
+                const txCount = data.txs ? data.txs.length : 0;
+                if (txCount > 0) {
+                    alert('Payment detected! Waiting for confirmations...');
+                } else {
+                    alert('No payment detected yet. Please send the exact amount to the address shown.');
+                }
+            }
+        })
+        .catch(error => {
+            btn.disabled = false;
+            btn.innerHTML = originalHTML;
+            console.error('Error checking status:', error);
+            alert('Failed to check payment status. Please try again.');
+        });
+}
+
+function goBack() {
+    if (window.history.length > 1) {
+        window.history.back();
+    } else {
+        window.location.href = '/cashier/deposit';
+    }
+}
+
+</script>
+
+<style>
+    /* Make ionBlock modal wider by overriding Bootstrap CSS variable */
+    .modal.cashier-modal {
+        --bs-modal-width: 90vw !important;
+    }
+    @media (min-width: 768px) {
+        .modal.cashier-modal {
+            --bs-modal-width: 80vw !important;
+        }
+    }
+    @media (min-width: 1200px) {
+        .modal.cashier-modal {
+            --bs-modal-width: 1200px !important;
+        }
+    }
+    @media (min-width: 1400px) {
+        .modal.cashier-modal {
+            --bs-modal-width: 1400px !important;
+        }
+    }
+
+    .font-monospace {
+        font-family: 'Courier New', monospace;
+    }
+</style>
+
+{% include "minerve/pages/dynamic_dashboard/loading_toast.html" %}
+{% include "lobby/index/theme_switcher.html" %}
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+{% include "lobby/dashboard/components/account_sidebar_header.html" %}
+{% endblock %}

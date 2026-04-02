@@ -1,0 +1,39 @@
+{% extends "sportslottovip/base/page.html" %}
+{% load i18n %}
+{% block MINERVE_COLOUR_MODE_SWITCH %}
+{% endblock %}
+{% block bootstrap5_title %}
+    {% if vdomain.website_name %}
+        {{ vdomain.website_name }}
+    {% else %}
+        {{ apperance.site_name }}
+    {% endif %}
+    {% block MINERVE_PAGE_SUBTITLE %} {% endblock %}
+{% endblock %}
+{% block MINERVE_NAV_LOGIN_AREA %}
+{% if account %}
+    <div class="my-account-text p-2">
+        <a href="/my/profile" title="{% translate "My Account" %}"><i class="fa-duotone fa-solid fa-circle-user"></i> {{ account.acctnum }}</a> | <a href="/cashier/balance" id="balance-link" title="{% translate "Available Balance" %}"><i class="fa-duotone fa-solid fa-coins"></i><span class="avail_balance">{{ available_balance |floatformat:2 }}</span></a> | <a class="" href="/api/v1/account/logout" title="{% translate "Logout" %}"><i class="fa-duotone fa-solid fa-person-from-portal"></i>&#160;{% translate "Sign Out" %}</a>
+    </div>
+
+{% else %}
+{#        <button class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#login_modal"><i class="fa-duotone fa-solid fa-right-to-bracket"></i>&#160;{% translate "Login" %}</button>#}
+{#        <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#signup_modal"><i class="fa-duotone fa-solid fa-user-plus"></i>&#160;{% translate "Sign Up" %}</button>#}
+{% endif %}
+{% endblock %}
+
+{% block MINERVE_PAGE_FOOTER %}
+    {% include "lobby/dashboard/account/login/signup_modal.html" %}
+
+{% endblock %}
+{% if vdomain.include_theme_files == True %}
+{% block MINERVE_PAGE_BODY %}
+    {% include "lobby/account/register_landing.html" %}
+{% endblock %}
+{% endif %}
+{% block MINERVE_PAGE_HEADER_END %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.12.5/build/css/intlTelInput.css">
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.12.5/build/js/intlTelInput.min.js"></script>
+
+{% endblock %}
+

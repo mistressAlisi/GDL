@@ -1,0 +1,92 @@
+{% extends "minerve/pages/responsive_dashboard/index.html" %}
+{% load django_bootstrap5 %}
+{% load humanize %}
+{% load i18n %}
+{% block MINERVE_PAGE_SUBTITLE %}: {% translate "Cashier: Withdraw" %}{% endblock %}
+{% block bootstrap5_title %}
+    {{ vdomain.website_name }}: Cashier: Withdraw
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_BODY %}
+<div class="w-100 flex-container"
+     data-bs-theme="{{ MINERVE_BODY_THEME }}"
+     style="position: relative; min-height: 100dvh;">
+    <div class="card-header">
+        <h1> <i class="fa-duotone fa-solid fa-money-from-bracket" style="color: #dd8fda;"></i> &#160; {% translate "Cashier: Withdraw" %}</h1>
+    </div>
+    <div class="card-body text-center">
+    <div class="d-flex justify-content-center">
+    {% if not account.account_level.fiat_enabled %}
+    {% if max_deposit > 0 %}
+
+    <div class="d-flex justify-content-center">
+    <div class="text-center p-2  w-100">
+
+
+
+
+    <div class="" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab">
+     <h3>{%  translate "Choose your withdrawal method:" %} </h3>
+        <ul class="cashier-list-group list-group-flush">
+
+{#                <li class="cashier-list-group-item" onclick="cashier.start_deposit('apl');">#}
+{#                <div class="d-flex">#}
+{#                        <img class="img img-fluid img-responsive" src="/static/mycashier/images/apple-pay.png" alt="apple pay logo" style="max-width: 100px; max-height: 53px; top: 20px; position: relative;"/>#}
+{#                    <div class="p-2 text-start pt-3 ps-3">#}
+{#                    <h4>Apple Pay</h4>#}
+{#                        <h6>Deposit now using Apple Pay!</h6>#}
+{##}
+{#                    <div class="ps-0 ms-0 m-1">#}
+{#                        <strong>{% translate "Minimum Transaction" %}:</strong> {{ provider.payment_provider.dep_min }}#}
+{#                        &#160;#}
+{#                        <strong>{% translate "Maximum Transaction" %}:</strong> {{ provider.payment_provider.dep_max }}#}
+{#                        &#160;#}
+{#                        <strong>{% translate "Deposit Fees" %}:</strong> {{ provider.payment_provider.dep_fees }}%#}
+{#                        &#160;#}
+{#                    </div>#}
+{#                </div>#}
+{#                </li>#}
+
+
+                <li class="cashier-list-group-item" onclick="cashier.start_deposit('pyl');">
+                <div class="d-flex">
+                        <img class="img img-fluid img-responsive pe-1" src="/static/mycashier/images/paypal.png" alt="paypal logo" style="max-width: 100px; max-height: 42px; position: relative; top: 21px;"/>
+                    <div class="p-2 text-start pt-3 ps-3">
+                    <h4>SEPA</h4>
+                        <h6>Withdraw now using SEPA!</h6>
+
+{#                    <div class="ps-0 ms-0 m-1">#}
+{#                        <strong>{% translate "Minimum Transaction" %}:</strong> {{ provider.payment_provider.dep_min }}#}
+{#                        &#160;#}
+{#                        <strong>{% translate "Maximum Transaction" %}:</strong> {{ provider.payment_provider.dep_max }}#}
+{#                        &#160;#}
+{#                        <strong>{% translate "Deposit Fees" %}:</strong> {{ provider.payment_provider.dep_fees }}%#}
+{#                        &#160;#}
+{#                    </div>#}
+                </div>
+                </li>
+
+                <li class="cashier-list-group-item" onclick="cashier.start_withdraw('cashier.providers.ionBlock');">
+                <div class="d-flex">
+                        <img class="img img-fluid img-responsive ms-2" src="/static/mycashier/images/crypto.png" alt="crypto logo" style="max-width: 100px; max-height: 66px; position: relative; top: 5px;"/>
+                    <div class="p-2 text-start pt-2 mt-1 ps-4 ms-2">
+                    <h4>Ethereum (ETH)</h4>
+                        <h6>Withdraw ETH to your wallet via ionBlock!</h6>
+                </div>
+                </li>
+
+        </ul>
+    </div>
+    {% else %}
+        <div class="p-2">
+        <h4>{%  translate "Withdrawal limits exceeded! Please contact support to increase." %} </h4>
+    {% endif %}
+    </div>
+    {% endif %}
+
+
+    </div>
+    {% endblock %}
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+{% include "lobby/dashboard/components/account_sidebar_header.html" %}
+{% endblock %}

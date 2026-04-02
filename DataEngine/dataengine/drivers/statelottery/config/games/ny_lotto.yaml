@@ -1,0 +1,37 @@
+# New York Lotto
+# Draws Wednesday and Saturday at 8:15 PM ET
+# Pick 6 numbers from 1-59, plus 1 bonus number from 1-59
+
+state: NY
+name: "New York Lotto"
+slug: ny-lotto
+url: "https://nylottery.ny.gov/draw-game?game=lotto"
+game_type: bonus
+
+format:
+  main_count: 6
+  main_range: [1, 59]
+  bonus_count: 1
+  bonus_range: [1, 59]
+  is_positional: false
+
+schedule:
+  days: [wednesday, saturday]
+  times:
+    - time: "20:15"
+      label: null
+  timezone: "America/New_York"
+
+selectors:
+  # NY Lottery uses styled-components with dynamic class names
+  # All 7 balls use the same selector; first 6 are main, 7th is bonus
+  all_numbers: "div[class*='BallContainer'] div[class*='Headline__Ball']"
+  draw_date: "div[class*='DrawDate']"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%A, %B %d, %Y"
+  # Split pattern: first N are main numbers, rest are bonus
+  split_main_bonus: true
+
+active: true

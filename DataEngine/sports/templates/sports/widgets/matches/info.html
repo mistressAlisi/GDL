@@ -1,0 +1,16 @@
+          <strong class="d-block text-gray-dark">
+              <span class="team_away">
+                  {% if match.match.away_team.card_logo %}
+                        <img src="{{ match.match.away_team.card_logo.url }}" alt="{{ match.match.away_team.key }} card logo" class="img-fluid img-responsive rounded team-logo-main-card"/>
+                  {% endif %}
+                  {{ match.match.away_team.name }}
+              </span>
+              at <span class="text-primary">
+              {{ match.match.home_team.name }}
+              {% if match.match.home_team.card_logo %}
+                        <img src="{{ match.match.home_team.card_logo.url }}" alt="{{ match.match.home_team.key }} card logo" class="img-fluid img-responsive  rounded team-logo-main-card"/>
+              {% endif %}
+          </span>:
+              {{ match.match.commence_time }}
+          </strong>
+          <br/>

@@ -1,0 +1,257 @@
+{% extends "minerve/base/page.html" %}
+{% block MINERVE_PAGE_NAV_HEADER %}
+     <!-- Selectize !-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css"
+      integrity="sha512-pTaEn+6gF1IeWv3W1+7X7eM60TFu/agjgoHmYhAfLEU8Phuf6JKiiE8YmsNC0aCgQv4192s4Vai8YZ6VNM6vyQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
+      integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- Animate.css -->
+      <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  <!-- Top Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top border-bottom">
+      <div class="container-fluid">
+
+      <a class="navbar-brand d-flex align-items-center" href="{{ domain.icon_redirect_url }}">
+      {% if vdomain.website_icon %}
+            <img src="{{ vdomain.website_icon.url }}" alt="icon" width="40" height="40" class=" d-none me-2 d-lg-block">
+      {% elif vhost.website_icon %}
+          <img src="{{ vhost.website_icon.url }}" alt="icon" width="40" height="40" class=" d-none me-2 d-lg-block">
+      {% endif %}
+      {% if vdomain.show_website_name %}
+        <span class="d-none d-md-none">{{ vdomain.website_name }}</span>
+      {% endif %}
+      </a>
+
+      {% block MINERVE_NAV_PAGE_NAME %}
+
+      {% endblock %}
+
+
+      <div class="collapse navbar-collapse justify-content-center" id="dashboardNavbar">
+        <ul class="navbar-nav mb-2 mb-lg-0 ">
+        {% block DYNAMIC_DASHBOARD_TOP_MENU_ULTOP %}
+        {% endblock %}
+        {% for entry in DYNAMIC_DASHBOARD_TOP_MENU %}
+
+            <li class="nav-item {% if entry.has_submenus %}dropdown{% endif %}">
+            <a class="nav-link {% if entry.has_submenus %}dropdown-toggle{% endif %}" href="{{ entry.url }}"
+                    {% if entry.onclick %} onclick="{{ entry.onclick }}"{% endif %}
+                    {%  if entry.active %} active="active"{% endif %}
+                    {% if entry.help_text %} title="{{ entry.help_text }}"{% endif %}
+                    {% if entry.has_submenus %} data-bs-toggle="dropdown" aria-expanded="false" {% endif %}
+                    {% if entry.target_url %}data-target-url="{{ submenu.target_url }}" {% endif %}>
+
+
+            {% if entry.icon %}
+                <i class="{{ entry.icon }}"></i>
+            {% endif %}
+                {{ entry.name }}
+            </a>
+          {% if entry.has_submenus %}
+          <ul class="dropdown-menu">
+              {% for submenu in entry.get_submenus %}
+                  <li><a class="dropdown-item submenu-entry"
+                  help_text="{{ submenu.help_text }}"
+                  {% if submenu.target_url %}
+                          data-target-url="{{ submenu.target_url }}" href="#"
+                 {% else %}
+                          href="{{ submenu.url }}"
+                 {% endif %}
+                  {% if submenu.on_click %}
+                         on_click="{{ submenu.onclick }}"
+                 {% endif %}>
+                      {% if submenu.icon %}
+                      <i class="{{ submenu.icon }}"></i>
+                      {% endif %}
+                      {{ submenu.name }}
+                  </a></li>
+              {% endfor %}
+
+          </ul>
+
+          {% endif %}
+          </li>
+        {% endfor %}
+        {% block DYNAMIC_DASHBOARD_TOP_MENU_ULBOT %}
+        {% endblock %}
+        </ul>
+
+      </div>
+    <!-- Mobile Sidebar Toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#dashboardNavbar" aria-controls="dashboardNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="bi bi-list"></i>
+    </button>
+      <div class="d-lg-flex d-md-flex d-xl-flex d-xxl-flex d-none">
+      {% block MINERVE_NAV_LOGIN_AREA %}
+        {% if account %}
+            <div class="my-account-text p-2">
+                <a href="/my/profile" title="My Account"><i class="fa-duotone fa-solid fa-circle-user"></i> {{ account.acctnum }}</a> | <a  href="#" onclick="cashier.start_deposit_modal()" id="balance-link" title="Available Balance"><i class="fa-duotone fa-solid fa-coins"></i><span class="avail_balance">{{ available_balance |floatformat:2 }}</span></a> | <a class="" href="/api/v1/account/logout" title="Logout"><i class="fa-duotone fa-solid fa-person-from-portal"></i>&#160;Sign Out</a>
+            </div>
+          {% endif %}
+      {% endblock %}
+      </div>
+    </div>
+
+  </nav>
+{% endblock %}
+{% block MINERVE_PAGE_BODY %}
+<!-- Full-page container with vertical flex layout -->
+<div class="d-flex flex-column" style="height: 100vh;">
+  {% if not DYNAMIC_DASHBOARD_SKIP_SIDEBARS %}
+  <!-- SIDEBARS & MAIN (horizontal layout) -->
+  <div class="d-flex flex-grow-1" style="position: relative;">
+
+    <!-- First Sidebar -->
+    <div id="mainSidebar" class="sidebar d-flex flex-column align-items-center">
+      {% for entry in DYNAMIC_DASHBOARD_SIDE_MENU %}
+        <a class="nav-link side-link py-3"
+           {% if entry.submenu_entries %}
+              href="javascript:void(0);"
+              onclick="toggleSecondSidebar({{ forloop.counter0 }})"
+           {% else %}
+              href="{{ entry.url }}"
+           {% endif %}
+           title="{{ entry.name }}"
+           data-bs-placement="right" data-bs-title="{{ entry.name }}" data-bs-toggle="tooltip">
+          <i class="{{ entry.icon }}"></i>
+        </a>
+      {% endfor %}
+
+      <div class="flex-grow-1"></div>
+    {% if not MINERVE_DISABLE_PROFILE_ENTRY %}
+      <div class="bottom-icon mb-3">
+        <a href="#" title="Account" onclick="toggleSecondSidebar('account');" data-bs-title="My Account" data-bs-toggle="tooltip"><i class="bi bi-person-circle"></i></a>
+      </div>
+    {% endif %}
+    </div>
+
+    <!-- Second Sidebar -->
+    <div class="sidebar-right" id="secondSidebar">
+      {% for entry in DYNAMIC_DASHBOARD_SIDE_MENU %}
+        <div class="second-sidebar-section d-none" id="second-sidebar-{{ forloop.counter0 }}">
+          <h6><i class="{{ entry.icon }}"></i> {{ entry.name }}: Menu</h6>
+          <hr class="opacity-50" />
+          <ul class="list-group list-group-flush">
+            {% for sub in entry.submenu_entries %}
+              <li class="list-item">
+                <a class="nav-link d-flex align-items-center py-2" href="{{ sub.url }}"
+                   {% if sub.active %}active="active"{% endif %}
+                   title="{{ sub.name }}" help_text="{{ sub.help_text }}">
+                  <i class="{{ sub.icon }} me-2"></i> <span>{{ sub.name }}</span>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+
+    {% block DYNAMIC_DASHBOARD_SECOND_NAVBAR %}
+      <div class="second-sidebar-section d-none" id="second-sidebar-account">
+        <h6 class=""><i class="bi bi-person-circle"></i> Second Dashbar: Menu</h6>
+         <hl class="opacity-50"></hl>
+        <ul class="list-group list-group-flush">
+            <li class="list-item"><a class="nav-link d-flex align-items-center py-2"  href="/my/profile"><i class="fa-duotone fa-solid fa-address-card"></i>&#160;My Profile</a></li>
+
+        </ul>
+    </div>
+    {% endblock %}
+    <hr class="border-white opacity-25 border-2"/>
+    <div class="flex-container">
+    <button class="btn btn-outline-light" onclick="$('#secondSidebar').removeClass('open');">Close Sidebar</button>
+    </div>
+    </div>
+    {% endif %}
+
+
+    <!-- Main content fills remaining space -->
+  {% block DYNAMIC_DASHBOARD_PRE_BODY %}
+  {% endblock %}
+    <main class="content flex-grow-1 d-flex pb-4 px-1" id="main-content">
+      {% block DYNAMIC_DASHBOARD_BODY %}
+        <div class=" justify-content-center align-items-center text-center">
+          <h1>Main Content Area</h1>
+          <p class="lead">Replace the DYNAMIC_DASHBOARD_BODY block to put content here.</p>
+        </div>
+      {% endblock %}
+    </main>
+{% if not DYNAMIC_DASHBOARD_SKIP_SIDEBARS %}
+  </div>
+{% endif %}
+
+</div>
+  {% block DYNAMIC_DASHBOARD_BODY_FOOTER %}
+  {% endblock %}
+<script>
+
+{#const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')#}
+{#const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))#}
+  // Open second sidebar and show correct submenu
+  function toggleSecondSidebar(index) {
+    const $sidebar = $('#secondSidebar');
+    $sidebar.addClass('open');
+
+    $('.second-sidebar-section').addClass('d-none');
+    $('#second-sidebar-' + index).removeClass('d-none');
+  }
+
+  // Toggle main sidebar (mobile)
+  $('#toggleSidebarBtn').on('click', function () {
+    $('#mainSidebar').toggleClass('show');
+  });
+
+  // Collapse Bootstrap top navbar on link click (mobile only)
+  $('.navbar-collapse .nav-link').on('click', function () {
+    if ($(window).width() < 768) {
+      $('.navbar-collapse').collapse('hide');
+    }
+  });
+
+  // ✅ Collapse mainSidebar on link click (mobile only)
+  $('#mainSidebar .nav-link').on('click', function () {
+    if ($(window).width() < 768) {
+      $('#mainSidebar').removeClass('show');
+    }
+  });
+
+  // Click-outside handler to close both sidebars on mobile
+  $(document).on('click', function (e) {
+    const $target = $(e.target);
+
+    // Close mainSidebar if clicked outside
+    if (
+      $('#mainSidebar').hasClass('show') &&
+      !$target.closest('#mainSidebar').length &&
+      !$target.closest('#toggleSidebarBtn').length
+    ) {
+      $('#mainSidebar').removeClass('show');
+    }
+
+    // Close secondSidebar if clicked outside
+    if (
+      $('#secondSidebar').hasClass('open') &&
+      !$target.closest('#secondSidebar').length &&
+      !$target.closest('.sidebar').length
+    ) {
+      $('#secondSidebar').removeClass('open');
+    }
+  });
+</script>
+<link href="/static/minerve/css/pages/dynamic_dashboard/index.css" rel="stylesheet">
+{#<script src="/static/minerve/js/pages/dynamic_dashboard/helper.js"></script>#}
+{% endblock %}
+{% block MINERVE_PAGE_FOOTER %}
+    {% include "minerve/pages/dynamic_dashboard/loading_toast.html" %}
+
+{% endblock %}

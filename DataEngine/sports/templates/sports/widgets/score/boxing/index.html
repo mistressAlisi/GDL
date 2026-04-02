@@ -1,0 +1,20 @@
+<div class="text-center">
+<h3><span class="text-purple">
+    {% if show_score_team %}
+    {{ scores.away_score.team.name }}&#160;
+    {% endif %}
+    {% if scores.away_score.winner %}
+        <i class="fa-duotone fa-solid  fa-trophy-star winner-text"></i>
+    {% endif %}
+    {{ scores.away_score.score }}
+</span>&#160;-&#160;
+    <span class="text-primary">
+    {% if scores.home_score.winner %}
+        <i class="fa-duotone fa-solid  fa-trophy-star winner-text"></i>
+    {% endif %}
+        {{ scores.home_score.score }}
+    {% if show_score_team %}
+    &#160;{{ scores.home_score.team.name }}
+    {% endif %}
+    </span></h3>
+</div>

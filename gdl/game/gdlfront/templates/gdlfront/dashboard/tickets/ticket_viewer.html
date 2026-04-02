@@ -1,0 +1,27 @@
+{% load i18n %}
+<h3>{% blocktranslate with ticket_stake=ticket.stake ticket_returns=ticket.returns|floatformat:0 %}Risking {{ ticket_stake }} returns {{ ticket_returns }}:{% endblocktranslate %} </h3>
+<h6>{% translate "Number of Matches in ticket:" %} {{ ticket.mlen }} - {% translate "Ticket Outcome:" %} {{ ticket.grade_outcome }}</h6>
+<h6>{% translate "Created at:" %} {{ rootWagerObj.created }}</h6>
+<hr class="border-2 opacity-50" style="border-color: var(--bs-success);"/>
+
+<hr class="border-2 opacity-50" style="border-color: var(--bs-success);"/>
+<div class="container-fluid d-flex" id="tvd_ticket">
+{#{{ matches_batches }}#}
+{% for matches in matches_batches %}
+<div class="col col-lg-12">
+    <ul class="">
+    {% for match in matches %}
+    <li class="">
+{#    {{ match.2.home_team }}#}
+
+    {% include  "gdlfront/dashboard/tickets/match_name.html" with match=match.1 wager=match.0 home_score=match.2.home_team.score away_score=match.2.away_team.score status=match.2.status_long %}
+    </li>
+    {% endfor %}
+    </ul>
+    </div>
+{% endfor %}
+</div>
+
+
+
+{#{% include  "gdlfront/dashboard/tickets/match_name.html" with match=match.1 wager=match.0  %}#}

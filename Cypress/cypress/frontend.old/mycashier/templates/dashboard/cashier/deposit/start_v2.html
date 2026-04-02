@@ -1,0 +1,68 @@
+{% load humanize %}
+{% load i18n %}
+{% load mathfilters %}
+
+<div class="text-start">
+<h4><i class="fa-duotone fa-solid fa-circle-dollar-to-slot"></i> {% translate "Cashier Deposit" %}</h4>
+<h5>{% translate "Provider:" %} {{ provider.name }}</h5>
+<h6>{% translate "Min Deposit:" %} ${{ provider.dep_min|intcomma:3 }} {% translate "Max Deposit:" %} ${{ provider.dep_max|intcomma:3 }}</h6>
+<h6>{% translate "Your Level Fees:" %} {{ account.account_level.deposit_fee_pct_cryp|floatformat:0 }}% {% translate "Processor Fees:" %} {{ provider.dep_fees|floatformat:0 }}%</h6>
+{% if is_fiat %}
+{% else %}
+    <h6>{% translate "Exchange Rate for Crypto to Tokens: " %} 1 {{ cryptoParams.base_crypto }} {% translate "for " %} {{ account.account_level.get_base_rate|floatformat:2 }} {% translate "token(s)" %}</h6>
+{% endif %}
+</div>
+
+<form id="payment_amount_form" onsubmit="return cashier._validate_deposit(event);" method="POST" action="#" data-post-url="deposit/validate">
+    {% csrf_token %}
+        <input type="hidden" name="provider" id="provider" value="{{ provider.module_name }}">
+        <input type="hidden" id="total_fees" value="{{ provider.dep_fees|add:account.account_level.deposit_fee_pct_cryp|div:100 }}"/>
+        {% if is_fiat %}
+        {% else %}
+            <input type="hidden" id="exchange_rate" value="{{ account.account_level.get_base_rate }}" />
+        {% endif %}
+        <div class="mb-3">
+          <label for="dep-amount" class="form-label">{% translate "You Deposit:" %}</label>
+          <div class="input-group">
+           {% if is_fiat %}
+            <span class="input-group-text" id="basic-addon3">$</span>
+           {% else %}
+            <span class="input-group-text" id="basic-addon3"><i class="fa-brands fa-ethereum pe-2"></i>{{ cryptoParams.base_crypto.name }}:</span>
+          {% endif %}
+            <input type="number" class="form-control" name="amount" id="amount" onchange="cashier._handle_dep_change(event)" aria-describedby="basic-addon3 basic-addon4" min="{{ provider.dep_min }}" max="{{ provider.dep_max }}" step="1" value="{{ provider.dep_min }}">
+          </div>
+
+          <div class="form-text" id="basic-addon4">{% translate "Enter any amount from" %} {{ provider.dep_min|intcomma:3 }} {% translate "to" %} {{ provider.dep_max|intcomma:3 }}.</div>
+        </div>
+        {%  if not is_fiat %}
+        <div class="mb-3">
+
+          <div class="input-group">
+            <span class="input-group-text" id="basic-addon3"><i class="fa-duotone fa-solid fa-coin-front pe-2"></i>{% translate "Select Crypto to Deposit" %}:</span>
+            <select class="form-select" id="paymentCurrency" name="paymentCurrency">
+                <option value="" selected="selected">{% translate "[select token to deposit]" %}</option>
+                {%  for token in cashier.get_crypto_tokens %}
+                    <option value="{{ token.uuid }}">{{ token.name }} ({{ token.symbol }})</option>
+                {% endfor %}
+            </select>
+
+          </div>
+
+          <div class="form-text" id="basic-addon4">{% translate "This will be the Crypto token you deposit to the cashier." %}</div>
+        </div>
+        {% endif %}
+        <div class="mb-3">
+          <label for="dep-amount" class="form-label">{% translate "You Receive:" %}</label>
+          <div class="input-group">
+           {% if is_fiat %}
+            <span class="input-group-text" id="basic-addon6">$</span>
+           {% else %}
+            <span class="input-group-text" id="basic-addon6"> <i class="fa-duotone fa-solid fa-coins pe-2"></i> Tokens:</span>
+          {% endif %}
+            <input type="text" class="form-control" name="final_amount" id="final_amount" readonly="readonly" aria-readonly="readonly" aria-describedby="basic-addon6 basic-addon8" min="{{ provider.dep_min }}" max="{{ provider.dep_max }}" step="1" value="{{ provider.dep_min }}">
+          </div>
+          <div class="form-text" id="basic-addon8">{% translate "The deposit amount that will be deposited after fees (in tokens)." %}</div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="{% translate "Deposit Now!" %}">
+</form>
+

@@ -1,0 +1,535 @@
+{% load static %}
+<div class="sports-filter-container">
+  <div class="sports-filter-wrapper" id="sportsFilter">
+    <button class="glass-tag selected" data-sport="basketball">
+      <span class="sport-icon">🏀</span>
+      <span class="sport-name">Basketball</span>
+    </button>
+    <button class="glass-tag selected" data-sport="soccer">
+      <span class="sport-icon">⚽</span>
+      <span class="sport-name">Soccer</span>
+    </button>
+    <button class="glass-tag selected" data-sport="tennis">
+      <span class="sport-icon">🎾</span>
+      <span class="sport-name">Tennis</span>
+    </button>
+    <button class="glass-tag selected" data-sport="hockey">
+      <span class="sport-icon">🏒</span>
+      <span class="sport-name">Hockey</span>
+    </button>
+    <button class="glass-tag selected" data-sport="american-football">
+      <span class="sport-icon">🏈</span>
+      <span class="sport-name">American Football</span>
+    </button>
+    <button class="glass-tag selected" data-sport="baseball">
+      <span class="sport-icon">⚾</span>
+      <span class="sport-name">Baseball</span>
+    </button>
+  </div>
+</div>
+
+<section class="tube-hero">
+  <!-- Hero tagline -->
+  <div class="hero-tagline">
+    <h2 id="hero-text">Real Games On Every Ticket</h2>
+  </div>
+
+  <!-- Top row (exactly 4 balls) -->
+  <div class="ball-row top" id="top-row"></div>
+
+  <!-- Bottom row (exactly 4 balls) -->
+  <div class="ball-row bottom" id="bottom-row"></div>
+
+  <!-- Draw button -->
+  <button id="draw-btn">Discover New Teams</button>
+</section>
+
+<style>
+.sports-filter-container {
+  width: 100%;
+  padding: 20px;
+}
+
+.sports-filter-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.glass-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  user-select: none;
+}
+
+.glass-tag.selected {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.glass-tag.unselected {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.glass-tag:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+}
+
+.glass-tag:active {
+  transform: translateY(-1px);
+}
+
+.sport-icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.sport-name {
+  white-space: nowrap;
+}
+
+/* MOBILE: Compact 2-row layout */
+@media (max-width: 768px) {
+  .sports-filter-container {
+    padding: 15px 10px;
+  }
+
+  .sports-filter-wrapper {
+    gap: 6px;
+    max-width: 100%;
+  }
+
+  .glass-tag {
+    padding: 6px 10px;
+    font-size: 12px;
+    gap: 4px;
+    border-width: 1.5px;
+  }
+
+  .sport-icon {
+    font-size: 16px;
+  }
+
+  .sport-name {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sports-filter-wrapper {
+    gap: 4px;
+  }
+
+  .glass-tag {
+    padding: 5px 8px;
+    font-size: 11px;
+    gap: 3px;
+  }
+
+  .sport-icon {
+    font-size: 14px;
+  }
+
+  .sport-name {
+    font-size: 11px;
+  }
+}
+
+/* Tube Hero */
+.tube-hero {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: radial-gradient(circle at top, var(--prize-bg, #0e6a36) 0%, #000 100%);
+  border-radius: 20px;
+  border: 2px solid var(--prize-border, #2dbd66);
+  box-shadow: 0 0 40px var(--prize-glow-1, #38d97d), 0 0 80px var(--prize-glow-2, #2dbd66) inset;
+  overflow: visible;
+}
+
+/* Hero tagline */
+.hero-tagline h2 {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--prize-text, #ffffff);
+  text-shadow: 0 0 8px var(--prize-glow-1, #38d97d), 0 0 20px var(--prize-glow-2, #2dbd66), 0 0 30px var(--prize-glow-1, #38d97d);
+  margin: 0;
+  position: relative;
+  z-index: 2;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.fade-out { opacity: 0; }
+
+/* Ball Rows */
+.ball-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 12px;
+  position: relative;
+  min-height: 110px;
+  flex-wrap: wrap;
+}
+
+.ball-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 8px;
+  position: relative;
+}
+
+.ball-name {
+  margin-top: 6px;
+  font-size: 0.80rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  max-width: 120px;
+  text-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+
+/* Theme-reactive ball styling */
+.ball {
+  width: 70px;
+  height: 70px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50%;
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: var(--ball-text, #ffffff);
+  background: var(--ball-bg, var(--bs-secondary));
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3), 0 0 10px var(--ball-glow, rgba(56,217,125,0.5)), inset 0 -2px 4px rgba(0,0,0,0.2);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+}
+
+.ball:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.4), 0 0 18px var(--ball-glow, rgba(56,217,125,0.8)), inset 0 -2px 4px rgba(0,0,0,0.25);
+}
+
+/* Logo Overlay */
+.ball-logo {
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  z-index: 2;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5), 0 0 4px var(--logo-outline, rgba(255,255,255,0.4));
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ball-logo:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.6), 0 0 6px var(--logo-outline, rgba(255,255,255,0.5));
+}
+
+/* Fallback Letter */
+.ball-text-fallback {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #fff;
+}
+
+/* Draw button */
+#draw-btn {
+  margin-top: 20px;
+  padding: 12px 28px;
+  border-radius: 14px;
+  font-weight: 900;
+  font-size: 1.5rem;
+  cursor: pointer;
+  background: linear-gradient(45deg, var(--prize-glow-1, #38d97d), var(--prize-glow-2, #2dbd66));
+  color: var(--prize-text, #ffffff);
+  border: none;
+  box-shadow: 0 0 20px var(--prize-glow-1, #38d97d), 0 0 40px var(--prize-glow-2, #2dbd66) inset;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#draw-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 0 28px var(--prize-glow-1, #38d97d), 0 0 48px var(--prize-glow-2, #2dbd66) inset;
+}
+
+@media (max-width: 768px) {
+  .tube-hero {
+    max-width: 100%;
+    padding: 30px 10px;
+  }
+
+  .hero-tagline h2 {
+    font-size: 1.5rem;
+  }
+
+  .ball-row {
+    gap: 8px;
+    min-height: 60px;
+  }
+
+  .ball {
+    width: 50px;
+    height: 50px;
+    font-size: 1rem;
+  }
+
+  .ball-logo {
+    width: 60%;
+    height: 60%;
+  }
+
+  .ball-name {
+    font-size: 0.8rem;
+    max-width: 60px;
+  }
+
+  #draw-btn {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-tagline h2 {
+    font-size: 1.2rem;
+  }
+
+  .ball {
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+
+  .ball-logo {
+    width: 55%;
+    height: 55%;
+  }
+
+  .ball-name {
+    font-size: 0.7rem;
+    max-width: 50px;
+  }
+
+  #draw-btn {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+}
+</style>
+
+<script>
+// ========== SPORTS FILTER LOGIC ==========
+console.log('Script loaded');
+
+const sportMapping = {
+  'nfl': 'american-football',
+  'nba': 'basketball',
+  'wnba': 'basketball',
+  'nhl': 'hockey',
+  'mlb': 'baseball',
+  'fifa': 'soccer'
+};
+
+function getSelectedSports() {
+  const selected = Array.from(document.querySelectorAll('.glass-tag.selected'))
+    .map(tag => tag.dataset.sport);
+  console.log('Currently selected sports:', selected);
+  return selected;
+}
+
+function isSportSelected(pythonSportName) {
+  const selectedSports = getSelectedSports();
+  const mappedSport = sportMapping[pythonSportName];
+  const isSelected = selectedSports.includes(mappedSport);
+  console.log(`Checking if ${pythonSportName} (mapped to ${mappedSport}) is selected:`, isSelected);
+  return isSelected;
+}
+
+function initSportsFilter() {
+  const sportTags = document.querySelectorAll('.glass-tag');
+  console.log('Found sport tags:', sportTags.length);
+
+  if (sportTags.length === 0) {
+    console.error('ERROR: No .glass-tag elements found in DOM!');
+    return;
+  }
+
+  sportTags.forEach(tag => {
+    tag.addEventListener('click', function() {
+      const selectedCount = document.querySelectorAll('.glass-tag.selected').length;
+
+      if (this.classList.contains('selected') && selectedCount === 1) {
+        console.log('Cannot deselect last sport');
+        return;
+      }
+
+      this.classList.toggle('selected');
+      this.classList.toggle('unselected');
+
+      console.log(`Toggled ${this.dataset.sport}`);
+      getSelectedSports();
+    });
+  });
+}
+
+// ========== LOTTERY MACHINE LOGIC ==========
+const taglines = [
+  "Real Teams, Real Action.",
+  "What Teams Will You Discover?",
+  "We Generate Every Ticket. You Pick The Ones You Want",
+  "When They Win, So Do You."
+];
+
+function getRandomTagline() {
+  return taglines[Math.floor(Math.random() * taglines.length)];
+}
+
+async function updateBalls() {
+  console.log('updateBalls called');
+
+  const res = await fetch("{% url 'hero_rows_json' %}");
+  const data = await res.json();
+  console.log('Fetched data:', data);
+
+  if (!isSportSelected(data.sport)) {
+    console.log(`Sport "${data.sport}" is not selected. Fetching again...`);
+    updateBalls();
+    return;
+  }
+
+  const topRow = document.getElementById('top-row');
+  const bottomRow = document.getElementById('bottom-row');
+  const heroText = document.getElementById('hero-text');
+
+  // Animate tagline
+  if (heroText) {
+    heroText.classList.add('fade-out');
+    setTimeout(() => {
+      heroText.textContent = getRandomTagline();
+      heroText.classList.remove('fade-out');
+    }, 400);
+  }
+
+  if (topRow) topRow.innerHTML = '';
+  if (bottomRow) bottomRow.innerHTML = '';
+
+  function createBall(b) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'ball-wrapper';
+
+    const ballDiv = document.createElement('div');
+    ballDiv.className = 'ball';
+    ballDiv.style.setProperty('--ball-bg', b.color || 'var(--bs-secondary)');
+    ballDiv.style.setProperty('--ball-glow', b.glow || 'rgba(56,217,125,0.5)');
+
+    const svgContainer = document.createElement('div');
+    svgContainer.className = 'ball-svg-container';
+    svgContainer.innerHTML = `<svg viewBox="0 0 300 300"><circle cx="150" cy="150" r="140" fill="${b.color || 'var(--bs-secondary)'}" stroke="#fff" stroke-width="5"/></svg>`;
+
+    let logoOrText;
+    if (b.logo) {
+      logoOrText = document.createElement('div');
+      logoOrText.className = 'ball-logo';
+      logoOrText.style.backgroundImage = `url('${b.logo}')`;
+      logoOrText.style.setProperty('--logo-outline', 'rgba(255,255,255,0.3)');
+      logoOrText.dataset.teamName = b.name;
+    } else {
+      logoOrText = document.createElement('div');
+      logoOrText.className = 'ball-text-fallback';
+      logoOrText.textContent = b.abbr || b.name.charAt(0);
+      logoOrText.dataset.teamName = b.name;
+    }
+
+    const nameDiv = document.createElement('div');
+    nameDiv.className = 'ball-name';
+    nameDiv.textContent = b.name;
+
+    ballDiv.appendChild(svgContainer);
+    ballDiv.appendChild(logoOrText);
+    wrapper.appendChild(ballDiv);
+    wrapper.appendChild(nameDiv);
+
+    wrapper.style.opacity = 0;
+    wrapper.style.transform = 'translateY(-10px)';
+
+    return wrapper;
+  }
+
+  // Top row: exactly 4 balls
+  if (data.top && topRow) {
+    const topBalls = data.top.slice(0, 4);
+    topBalls.forEach(b => topRow.appendChild(createBall(b)));
+  }
+
+  // Bottom row: exactly 4 balls
+  if (data.bottom && bottomRow) {
+    const bottomBalls = data.bottom.slice(0, 4);
+    bottomBalls.forEach(b => bottomRow.appendChild(createBall(b)));
+  }
+
+  // Fade in animation
+  const allBalls = [
+    ...(topRow ? topRow.children : []),
+    ...(bottomRow ? bottomRow.children : [])
+  ];
+
+  allBalls.forEach((b, i) => {
+    setTimeout(() => {
+      b.style.transition = 'opacity 0.3s, transform 0.3s';
+      b.style.opacity = 1;
+      b.style.transform = 'translateY(0)';
+    }, 100 * i);
+  });
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  console.log('DOM Content Loaded');
+  initSportsFilter();
+  updateBalls();
+});
+
+const drawBtn = document.getElementById('draw-btn');
+if (drawBtn) {
+  drawBtn.addEventListener('click', updateBalls);
+} else {
+  console.error('ERROR: draw-btn not found');
+}
+</script>

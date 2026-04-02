@@ -1,0 +1,34 @@
+# Maryland - Multi-Match
+# Draws Monday and Thursday at 7:56 PM ET
+# Pick 6 numbers from 1-43
+
+state: MD
+name: "Multi-Match"
+slug: md-multi-match
+url: "https://www.mdlottery.com/games/multi-match/"
+game_type: pool
+
+format:
+  main_count: 6
+  main_range: [1, 43]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: false
+
+schedule:
+  days: [monday, thursday]
+  times:
+    - time: "19:56"
+      label: null
+  timezone: "America/New_York"
+
+selectors:
+  all_numbers: ".winning-numbers span, .ball, .number"
+  draw_date: ".draw-date, .date"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%m/%d/%Y"
+  split_main_bonus: false
+
+active: true

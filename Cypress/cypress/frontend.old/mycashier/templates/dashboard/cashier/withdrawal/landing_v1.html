@@ -1,0 +1,128 @@
+{% extends "minerve/pages/responsive_dashboard/index.html" %}
+{% load django_bootstrap5 %}
+{% load humanize %}
+{% load i18n %}
+{% block MINERVE_PAGE_SUBTITLE %}: {% translate "Cashier: Withdraw Funds" %}{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_BODY %}
+<div class="w-100 flex-container"
+     data-bs-theme="{{ MINERVE_BODY_THEME }}"
+     style="position: relative; min-height: 100dvh;">
+    <div class="card-header">
+        <h1> <i class="fa-duotone fa-solid fa-money-from-bracket" style="color: #dd8fda;"></i> &#160; {% translate "Cashier: Withdraw Funds" %}</h1>
+
+    <div class="card-body text-center">
+    <div class="d-flex justify-content-center">
+    {% if not account.account_level.fiat_enabled %}
+    <div>
+
+     <h4>{%  translate "Current Withdraw Account Limits:" %}</h4>
+            <table class="table table-striped table-responsive w-100">
+
+                <tr>
+                    <th>{% translate "Crypto Tokens (all accepted by cashier)" %}</th>
+                    <th>{% translate "Daily" %}</th>
+                    <th>{% translate "Weekly" %}</th>
+                    <th>{% translate "Monthly" %}</th>
+                    <th>{% translate "Yearly" %}</th>
+
+                </tr>
+                <tr>
+                    <th>{% translate "Limits:" %}</th>
+                    <td>{{ account.account_level.daily_withdrawal_lim_cryp|intcomma}}</td>
+                    <td>{{ account.account_level.weekly_withdrawal_lim_cryp|intcomma}}</td>
+                    <td>{{ account.account_level.monthly_withdrawal_lim_cryp|intcomma}}</td>
+                    <td>{{ account.account_level.yearly_withdrawal_lim_cryp|intcomma}}</td>
+                </tr>
+                  <tr>
+                      <td><strong>{%  translate "Tokens available to withdraw:" %}</strong></td>
+                    <td colspan="4">{{ balance.withdrawable|floatformat:2|intcomma:3 }}</td>
+                </tr>
+{#                <tr>#}
+{#                    <th>{% translate "Spent:" %}</th>#}
+{#                    <td>{{ counters.daily_total_cryp|intcomma}}</td>#}
+{#                    <td>{{ counters.weekly_total_cryp|intcomma}}</td>#}
+{#                    <td>{{ counters.monthly_total_cryp|intcomma}}</td>#}
+{#                    <td>{{ counters.yearly_total_cryp|intcomma}}</td>#}
+{#                </tr>#}
+            </table>
+
+        </div>
+
+    </div>
+    </div>
+    {% if max_deposit > 0 %}
+
+    <div class="d-flex justify-content-center">
+    <div class="text-center p-2  w-50">
+        <ul class="nav nav-tabs" id="cashierTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="withdraw-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
+            <i class="fa-duotone fa-solid fa-cash-register pe-2"></i>{% translate "Withdraw Funds" %}</button>
+    </li>
+    </ul>
+
+
+    <div class="tab-content" id="cashierTabs">
+    <div class="tab-pane fade show active pt-2" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab">
+     <h4>{%  translate "Available Crypto Withdrawal Providers:" %} </h4>
+        <ul class="list-group list-group-flush">
+            {% for provider in providers %}
+                <li class="list-group-item" onclick="cashier.start_withdraw('{{ provider.payment_provider.module_name }}');">
+                <div class="d-flex">
+                    {% if provider.payment_provider.icon_class %}
+                    <div class="p-2 mt-4"><i class="{{ provider.payment_provider.icon_class }}"></i></div>
+                    {% endif %}
+                    <div class="p-2 text-start">
+                    <h4>{{ provider.payment_provider.name }}</h4>
+                        <h6>{{ provider.payment_provider.description }}</h6>
+
+                    <div class="ps-0 ms-0 m-1">
+                        <strong>{% translate "Minimum Transaction" %}:</strong> {{ provider.payment_provider.wdl_min }}
+                        &#160;
+                        <strong>{% translate "Maximum Transaction" %}:</strong> {{ provider.payment_provider.wdl_max }}
+                        &#160;
+                        <strong>{% translate "Withdrawal Fees" %}:</strong> {{ provider.payment_provider.wdl_fees }}%
+                        &#160;
+                    </div>
+                </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% else %}
+        <div class="p-2">
+        <h4>{%  translate "Deposit limits exceeded! Please contact support to increase." %} </h4>
+    {% endif %}
+    </div>
+    {% endif %}
+{#            <div class="d-flex">#}
+{#                <button href="/cashier/request" class="btn btn-primary px-1 m-2"><i class="fa-duotone fa-solid fa-headset p-1"></i>Initiate Buy/Exchange Request</button>#}
+{#                &#160;#}
+{#                {%  if cryptoParams.crypto_enabled %}#}
+{#                    <a href="/cashier/buy_tokens" class="btn btn-bd-primary px-1 m-2"><i class="fa-duotone fa-solid fa-cart-shopping"></i>Buy Tokens with Crypto</a>#}
+{#                    <a href="/cashier/exchange" class="btn btn-primary px-1 m-2"><i class="fa-duotone fa-solid fa-money-check-dollar"></i>Exchange Tokens for Crypto</a>#}
+{#                {% endif %}#}
+{#            </div>#}
+
+    </div>
+</div>
+{% include "minerve/pages/dynamic_dashboard/loading_toast.html" %}
+<script type="module" src="/static/mycashier/js/Cashier/loader.js"></script>
+{% endblock %}
+{% block bootstrap5_title %}
+    {{ vdomain.website_name }}: Withdraw Funds
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+    <div class="row">
+    <div class="col pt-2 pb-2">
+    <a class="nav-link" href="/my/profile" title="My Account"><i class="fa-duotone fa-solid fa-circle-user pe-2"></i> #{{ account.acctnum }}</a>
+    </div>
+    <div class="col pt-2 pb-2">
+        <a href="#" onclick="{% if vdomain.demo_mode %}alert('Cashier disabled in Demo.') {% else %} cashier.start_deposit_modal() {% endif %}" id="balance-link" title="Available Balance">
+        <i class="fa-duotone fa-solid fa-coins pe-2"></i><span class="avail_balance">Balance: {{ available_balance |floatformat:2 }}</span></a>
+    </div>
+    </div>
+    <hr class="border-2 border-opacity-50 border-success"/>
+{% endblock %}

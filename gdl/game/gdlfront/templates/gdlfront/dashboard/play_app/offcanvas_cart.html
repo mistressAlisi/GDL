@@ -1,0 +1,22 @@
+{% load i18n %}
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offCanvasCart" aria-labelledby="offCanvasCartLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offCanvasCartLabel"><i class="fa-duotone fa-solid fa-cart-shopping"></i> <span class="modal_counter">0</span> {% translate "Tickets in Cart" %} -  {% translate "Subtotal:" %} <span class="modal_stake">0</span></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="{% translate "Close" %}"></button>
+  </div>
+  <div class="offcanvas-body">
+      <div class="w-100 h-80" style="overflow-y: auto; overflow-x: hidden;" >
+      <button class="btn btn-warning p-2 w-100" id="gdl_empty_btn">{% translate "Empty Cart" %}</button>
+        <ol class="list-group list-group-numbered" id="cart_container">
+
+        </ol>
+
+  </div>
+      </div>
+<div class="h-20 w-100">
+    <h6 class="p-2 ">{% translate  "Total Tickets:" %} <span class="modal_counter">0</span> - {% translate  "Subtotal:" %} <span class="modal_stake"></span> </h6>
+
+    <button class="btn btn-primary p-2 w-100" id="gdl_purchase_btn">{% translate "Buy Tickets!" %}</button>
+</div>
+</div>
+{#{% include "gdlfront/dashboard/play_app/confirm_modal.html" %}#}

@@ -1,0 +1,55 @@
+{% load i18n %}
+<div class="sidebar-right p-2" data-bs-theme="{{ MINERVE_BODY_THEME }}" id="ticket_settings_div">
+    <h6><i class="fa-duotone fa-solid fa-square-sliders"></i> &#160;{% translate "Ticket Settings:" %}</h6>
+    <div class="card-body">
+    <form onsubmit="gdlapp.start(event); return false;" method="POST" action="#" data-post-url="generate/tickets" id="parameter_form" data-ruleset="'{{ ruleset }}'">
+        {% csrf_token %}
+        <input type="hidden" name="ruleset" id="ruleset" value="{{ ruleset }}" />
+       <label for="events" class="form-label"><i class="fa-duotone fa-solid fa-trophy-star"></i>&#160;{% translate "Number of Games:" %}</label>
+        <div class="input-group input-group-sm glowing-input mb-3" data-events-range="4,10">
+            <button class="btn btn-outline-primary btn-decrease" type="button">
+                <i class="fa-solid fa-minus"></i>
+            </button>
+            <input type="number" class="form-control text-center" name="events" id="events" min="{{ min_legs }}" max="{{ max_legs }}" step="1" value="7">
+            <button class="btn btn-outline-primary btn-increase" type="button">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+        </div>
+        <label for="stake" class="form-label"><i class="fa-duotone fa-solid fa-stars"></i>&#160;{% translate "Stake:" %}</label>
+        <div class="input-group input-group-sm glowing-input mb-3" data-stake-range="1,10">
+            <button class="btn btn-outline-primary btn-decrease" type="button">
+                <i class="fa-solid fa-minus"></i>
+            </button>
+            <input type="number" class="form-control text-center" name="stake" id="stake" min="1" max="10" step="1" value="5">
+            <button class="btn btn-outline-primary btn-increase" type="button">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+        </div>
+        <label for="minwin" class="form-label"><i class="fa-duotone fa-solid fa-user-group-crown"></i>&#160;{% translate "Minimum Win:" %}</label>
+        <div class="input-group input-group-sm glowing-input mb-3">
+            <input type="number" class="form-control" name="minwin" id="minwin"
+                   min="1000" max="10000" step="1000" value="6000">
+            <span class="input-group-text">₿</span>
+        </div>
+        <label for="count" class="form-label"><i class="fa-duotone fa-solid fa-tickets"></i>&#160;{% translate "Ticket Count:" %}</label>
+<div class="input-group input-group-sm glowing-input mb-3" data-count-range="10,50">
+    <button class="btn btn-outline-primary btn-decrease" type="button">
+        <i class="fa-solid fa-minus"></i>
+    </button>
+    <input type="number" class="form-control text-center" name="count" id="count" min="10" max="50" step="1" value="30">
+    <button class="btn btn-outline-primary btn-increase" type="button">
+        <i class="fa-solid fa-plus"></i>
+    </button>
+</div>
+     <div class="d-flex justify-content-end">
+         <button class="btn btn-primary" type="submit">{% translate "Generate Tickets!" %}</button>
+     </div>
+    </form>
+    </div>
+</div>
+    <div class="position-fixed bottom-0 start-0 mb-3 me-3 bd-mode-toggle rounded-4 ticket_settings_bttnhld" style="background: #6f42c1;">
+      <button id="ticket_settings_bttn" class="btn btn-bd-primary" type="button" title="{% translate "Ticket Settings!" %}" help_text="{% translate "Show/hide ticketing Settings" %}" onclick="gdlapp.toggle_ticket_settings();" >
+          <h4 class="pt-2"><i class="fa-duotone fa-solid fa-gears ms-2"></i></h4>
+      </button>
+
+    </div>

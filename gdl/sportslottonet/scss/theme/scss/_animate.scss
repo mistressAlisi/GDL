@@ -1,0 +1,23 @@
+//@use 'variables'; // ← our custom vars (defined before bootstrap!)
+//
+//@use 'vendor/bootstrap/scss/bootstrap'; // ← now bootstrap sees your overrides
+//
+//.animate-on-scroll {
+//  opacity: 0;
+//}
+///* Start hidden with a fade-out effect */
+///* Overlay that matches theme color */
+///* Base body style */
+///* Base body style */
+///* Initial body state: slightly shifted down and transparent */
+///* Hide body initially */
+///* Start body invisible */
+//// Body initially hidden
+//body {
+//    opacity: 0; // hidden until JS triggers
+//    transition: opacity 0.25s ease-in-out, background 0.25s ease-in-out;
+//}
+//
+////.animate__animated {
+////  opacity: 1 !important;
+////

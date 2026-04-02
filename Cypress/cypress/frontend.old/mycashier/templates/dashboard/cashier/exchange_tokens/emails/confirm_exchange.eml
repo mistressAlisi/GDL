@@ -1,0 +1,39 @@
+{{apperance.site_name}}
+Esteemed {{account.holder}},
+
+We have received a token exchange request for Account #{{account.acctnum}}: Requesting to trade {{token_amount}} tokens for {{crypto_amount}} {{crypto_name}}.
+The destination currency is {{dest_crypto}} and the destination address requested is: {{transaction.address}}.
+
+If you do NOT recognise this transaction, please report it immediately to customer support by emailing us at support@{{vhost.email_domain}}: Please forward us this message.
+
+To approve this request, please open this link: https://{{vhost.email_domain}}/cashier/exchange/approve/{{transaction.confirmation_key}}
+
+This request will expire on: {{transaction.expiry_date}}
+
+Thank you,
+Sincerely,
+
+Your {{apperance.site_name}} service team
+support@{{vhost.email_domain}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------
+MSGREFID:
+{{account.uuid}}|{{transaction.uuid}}|{{transaction.address}}
+
+
+
+
+

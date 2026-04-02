@@ -1,0 +1,55 @@
+{% extends "minerve/pages/responsive_dashboard/index.html" %}
+{% load humanize %}
+{% load i18n %}
+{% load mathfilters %}
+{% load django_bootstrap5 %}
+{% block bootstrap5_title %}
+    {{ vdomain.website_name }}: Withdraw - ionBlock Payment
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY %}
+<div class="text-start">
+<h4><i class="fa-duotone fa-solid fa-money-from-bracket"></i> {% translate "SEPA Withdraw Request" %}</h4>
+</div>
+<form id="sepa_request_form" onsubmit="" method="POST" action="#" data-post-url="withdraw/sepa-submit">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="mb-3">
+        {{ form.legalname.label_tag }}
+        {{ form.legalname }}
+        {{ form.legalname.errors }}
+    </div>
+    <div class="form-text"
+             id="basic-addon4">{% translate "Enter the full legal name exactly as it appears on your bank account." %}
+    </div>
+    <div class="mb-3">
+        {{ form.iban.label_tag }}
+        {{ form.iban }}
+        {{ form.iban.errors }}
+    </div>
+    <div class="form-text"
+             id="basic-addon4">{% translate "Carefully enter the IBAN number exactly as it appears on your bank account." %}
+    </div>
+    <div class="mb-3">
+        {{ form.amount.label_tag }}
+        {{ form.amount }}
+        {{ form.amount.errors }}
+        <div class="form-text"
+             id="basic-addon4">{% translate "Enter any amount from" %} €1 {% translate "to" %} €100.
+        </div>
+    </div>
+    <div class="mb-3">
+        {{ form.acct_passwd.label_tag }}
+        {{ form.acct_passwd }}
+        {{ form.acct_passwd.errors }}
+        <div class="form-text"
+             id="basic-addon14">{% translate "Enter your account password to confirm this withdrawal" %}</div>
+    </div>
+    <input type="submit" class="btn btn-primary" value="{% translate "Submit SEPA Withdraw Request" %}">
+</form>
+{% include "minerve/pages/dynamic_dashboard/loading_toast.html" %}
+{% include "lobby/index/theme_switcher.html" %}
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+{% include "lobby/dashboard/components/account_sidebar_header.html" %}
+{% endblock %}

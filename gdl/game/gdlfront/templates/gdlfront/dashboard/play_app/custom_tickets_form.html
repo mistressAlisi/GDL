@@ -1,0 +1,235 @@
+{#{% extends "lobby/dashboard/index.html" %}#}
+{% extends "minerve/pages/responsive_dashboard/index.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% block MINERVE_PAGE_NAV_HEADER_POST_MENU %}
+<div class="col">
+    <button id="gdl_buy_now" class="btn btn-success  p-2 m-2 rounded-3"   data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{% translate "Buy selected tickets" %}" title="{% translate "Buy now!" %}"><i class="fa-duotone fa-solid fa-shopping-cart "></i> {% translate "Cart" %} <span id="gdl_active_cnt" class="badge rounded-pill text-bg-success">{{ gdl_count }}</span></button>
+    <a id="cart" class="btn btn-danger p-2 m-2 rounded-3"  href="/cashier/deposit"><i class="fa-duotone fa-solid fa-cash-register"></i>Cashier</a>
+</div>
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_PRE_BODY %}
+{#{% include "gdlfront/dashboard/play_app/param_form.html" %}#}
+{% endblock %}
+{% block bootstrap5_title %}
+    {{ vdomain.website_name }}: Get Quick Picks!
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY %}
+
+{% include "minerve/pages/dynamic_dashboard/loading_toast.html" %}
+{% include "gdlfront/dashboard/play_app/offcanvas_cart.html" %}
+<script src="https://unpkg.com/lucide@latest"></script>
+<form method="POST" action="#" data-post-url="tickets/confirm" id="confirm_form" onsubmit="window.customTicketsForm._save_tickets(event);">
+    {% csrf_token %}
+    <input type="hidden" id="gdl_data"  name="gdl_data" value="{{ bet.id }}">
+    <input type="hidden" id="use_bonus_input" name="use_bonus" value="false">
+</form>
+<link rel="stylesheet" href="/static/gdlfront/css/sportslotto.css"/>
+
+<!-- Back Button -->
+<a href="/game/play" class="btn back-btn mb-3 mt-2">
+    <i class="fa-solid fa-arrow-left me-2"></i>
+    {% translate "Back to Menu" %}
+</a>
+<div id="gdl_play_area"
+class=" w-100 row gx-0 ps-2 pe-0 me-0
+justify-content-md-start
+justify-content-center
+"
+style="min-height: 100vh;"
+>
+    <div class="form-page-container">
+        <div class="form-page-wrapper" id="setup_area">
+
+
+            <!-- Balance Card -->
+            <div class="balance-card mb-4">
+                <table class="table table-borderless text-white mb-0">
+                    <thead>
+                        <tr class="balance-header">
+                            <th class="pb-3">{% translate "Balance" %}</th>
+                            <th class="pb-3">{% translate "Pending" %}</th>
+                            <th class="pb-3">{% translate "Free Play" %}</th>
+                            <th class="pb-3">{% translate "Avail." %}</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="pt-3 balance-amount" id="balance-amount">0.00</td>
+                            <td class="pt-3 pending-amount" id="pending-amount">0.00</td>
+                            <td class="pt-3 balance-amount bonus-amount bonus-balance" id="available-bonus">0.00</td>
+                            <td class="pt-3 available-amount" id="available-amount">0.00</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Custom Tickets Form -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-card">
+                        <h1 class="form-title gradient-text mb-2">
+                            <i class="fa-solid fa-search me-2 bouncing-icon"></i>
+                            Custom Tickets:
+                        </h1>
+                        <p class="form-subtitle mb-4">
+                            {% translate "Your dream play starts here! Pick how much to risk, how much to win, and what events to include!" %}
+                        </p>
+
+                        <form method="post" action="#submit" id="parameter_form" data-post-url="generate/tickets"  onsubmit="LoadingModal.show(); window.customTicketsForm.start(event);" data-ruleset="'{{ ruleset }}'">
+                            {% csrf_token %}
+                            <input type="hidden" name="ruleset" id="ruleset" value="{{ ruleset }}" />
+                            <input type="hidden" name="vhost" id="vhost" value="{{ vhost.uuid }}" />
+                            <input type="hidden" name="vdomain" id="vdomain" value="{{ vdomain.uuid }}" />
+                            <input type="hidden" name="account" id="account" value="{{ account.uuid }}" />
+                            <input type="hidden" name="count" id="count" value="10" />
+                            <!-- Risk, Events, Win - 3 column grid -->
+                            <div class="row g-4 mb-4">
+
+                                <div class="col-md-4">
+                                    <div class="input-container">
+                                        <label for="custom-risk" class="form-label text-white fw-semibold">
+                                            <i class="fa-solid fa-dollar-sign me-2"></i>
+                                            {% translate "Stake:" %} <span class="text-danger">*</span>
+                                        </label>
+                                        <input
+                                            type="number"
+                                            class="form-control input-enhanced"
+                                            id="stake"
+                                            name="stake"
+                                            min="1"
+                                            max="1000"
+                                            value="1"
+                                            placeholder="$1 - $1,000"
+                                            required
+                                        >
+                                    </div>
+                                </div>
+
+                                <!-- Events -->
+                                <div class="col-md-4">
+                                    <div class="input-container">
+                                        <label for="custom-events" class="form-label text-white fw-semibold">
+                                            <i class="fa-solid fa-calendar-days me-2"></i>
+                                            {% translate "Events:" %} <span class="text-danger">*</span>
+                                        </label>
+                                        <input
+                                            type="number"
+                                            class="form-control input-enhanced"
+                                            id="depth"
+                                            name="depth"
+                                            min="1"
+                                            max="20"
+                                            value="7"
+                                            placeholder="1 - 20"
+                                            required
+                                        >
+                                    </div>
+                                </div>
+
+                                <!-- Win -->
+                                <div class="col-md-4">
+                                    <div class="input-container">
+                                        <label for="custom-win" class="form-label text-white fw-semibold">
+                                            <i class="fa-solid fa-trophy me-2"></i>
+                                            Win: <span class="text-danger">*</span>
+                                        </label>
+                                        <input
+                                            type="number"
+                                            class="form-control input-enhanced"
+                                            id="min_payout"
+                                            name="min_payout"
+                                            min="10"
+                                            max="100000"
+                                            value="2500"
+                                            placeholder="$10 - $100,000"
+                                            required
+                                        >
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                            <!-- Sports Selection -->
+                            <div class="mb-4">
+                                <h6 class="text-white fw-semibold mb-3">
+                                    <i class="fa-solid fa-basketball me-2"></i>
+                                    {% translate "Select Sports:" %}
+                                </h6>
+                                <div class="d-flex flex-wrap gap-3 pb-2" id="sports-checkboxes">
+
+                                    {% for sport in filter_sports %}
+                                        <div class="sport-checkbox form-check selected">
+                                        <input class="sport-entry" type="checkbox" value="{% if sport.sport %}{{ sport.sport.uuid }}{% else %}{{ sport.group.uuid }}{% endif %}" id="group_{{ forloop.counter }}" name="group_{{ forloop.counter }}" checked />
+                                            <label class="text-white cursor-pointer mb-0" for="id_sport_{{ forloop.counter }}">
+
+                                            {% if sport.group.icon %}
+                                            {{ sport.group.icon }}
+                                            {% endif %}
+                                            {% if sport.sport %}{{ sport.sport.title }}{% else %}{{ sport.group.name }}{% endif %}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+
+                            </div>
+
+                            <!-- Time Frame -->
+                            <div class="input-container mb-4">
+                                <label for="time-frame" class="form-label text-white fw-semibold">
+                                    <i class="fa-solid fa-clock me-2"></i>
+                                    {% translate "Time Frame:" %} <span class="text-danger">*</span>
+                                </label>
+                                <select class="form-select input-enhanced" id="events_within" name="events_within" required>
+                                    <option value="129600" selected>{% translate "36 Hours" %}</option>
+                                    <option value="86400">{% translate "24 Hours" %}</option>
+                                    <option value="43200">{% translate "12 Hours" %}</option>
+                                    <option value="21600">{% translate "6 Hours" %}</option>
+                                    <option value="10800">{% translate "3 Hours" %}</option>
+                                </select>
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn btn-gradient w-100 py-3 fs-5 fw-semibold">
+                                        <i class="fa-solid fa-rocket me-2"></i>
+                                        {% translate "Get Tickets!" %}
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" id="view_cart_btn" class="btn btn-outline w-100 py-3 fs-5 fw-semibold">
+                                        <i class="fa-solid fa-shopping-cart me-2"></i>
+                                        {% translate "View Cart" %} <span class="badge rounded-pill text-bg-primary modal_counter">0</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+<script type="module">
+    import {CustomTicketsForm} from "/static/gdlfront/js/GDLv2/custom.js";
+    // Initialize Quick Picks Form
+    $(document).ready(function() {
+        window.customTicketsForm = new CustomTicketsForm('parameter_form');
+    });
+</script>
+{% endblock %}
+
+
+{% block MINERVE_PAGE_FOOTER %}
+{% include "lobby/index/theme_switcher.html" %}
+{% include "gdlfront/dashboard/play_app/modals.html" %}
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+{% include "lobby/dashboard/components/account_sidebar_header.html" %}
+{% endblock %}

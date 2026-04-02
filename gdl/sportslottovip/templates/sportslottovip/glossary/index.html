@@ -1,0 +1,27 @@
+{% extends "sportslottovip/base/page.html" %}
+{% load static %}
+{% block bootstrap5_title %} SPORTSLOTTO.VIP: Glossary {% endblock %}
+{% block PAGE_BODY %}
+<section class="glossary-section">
+  <div class="glossary-container">
+    <h1 class="glossary-title">Sports Lotto Glossary</h1>
+    <p class="glossary-intro">
+      SportsLotto VIP features additional terms and explanations for premium users.
+      This glossary explains common terms used in the VIP/paid section.
+    </p>
+
+    <input
+      type="text"
+      id="glossarySearch"
+      placeholder="Search VIP terms..."
+      class="glossary-search"
+      aria-label="Search glossary terms"
+    />
+
+    <div id="glossaryList" class="glossary-list"></div>
+  </div>
+</section>
+
+<script src="{% static 'sportslottovip/js/glossary.js' %}"></script>
+
+{% endblock %}

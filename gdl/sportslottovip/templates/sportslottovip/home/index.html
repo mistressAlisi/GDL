@@ -1,0 +1,45 @@
+{% extends "sportslottovip/base/page.html" %}
+{% load static %}
+
+{% block PAGE_BODY %}
+
+{% include "sportslottovip/svg/sports-icons.sprite.svg" %}
+
+  {# ✅ Include SVG sprite once at the top #}
+  {# Vertical background rails: 4 stacked rails, scrolling behind content #}
+
+      {% include 'sportslottovip/home/hero_section.html' %}
+
+{% include 'sportslottovip/home/partials/tube_hero.html' with league_teams_list=nfl_teams_list %}
+  <main class="homepage" style="position: relative; z-index: 1;">
+
+    <!-- Hero Section -->
+
+    <!-- Stats Bar Section -->
+    {% include "sportslottovip/home/stats_bar.html" %}
+
+    <!-- Stats JS -->
+    <script type="module" src="{% static 'sportslottovip/js/statsRender.js' %}"></script>
+
+    <!-- Accordion Section -->
+    <section class="info-section container my-5">
+      <div class="accordion" id="infoAccordion">
+        <!-- JS will insert items -->
+      </div>
+    </section>
+
+    <!-- Accordion JS -->
+    <script type="module" src="{% static 'sportslottovip/js/accordionRender.js' %}"></script>
+    <!-- Winners Table !-->
+        <div  id="winnerboard">
+
+        </div>
+        <script>
+            $(document).ready(function() {
+                {#$("#winnerboard").load("https://winners.slsapi.lat/get/winnerboard")#}
+            });
+        </script>
+
+  </main>
+
+{% endblock %}

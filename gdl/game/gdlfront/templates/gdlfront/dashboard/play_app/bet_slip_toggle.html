@@ -1,0 +1,7 @@
+   {% load i18n %}
+    <div class="position-fixed bottom-0 start-50 mb-3 me-3 bd-mode-toggle rounded-4" style="background: #6f42c1;">
+      <button id="ticket_button" class="btn btn-bd-primary py-2 d-flex m-1" type="button" title="{% translate "Place Tickets!" %}" help_text="{% translate "Once you have some tickets selected, click me!" %}" onclick="gdlapp._showModal();">
+          <h4 class="pt-2"><span id="ticket_counter">0</span><i class="fa-duotone fa-solid fa-tickets ms-2"></i></h4>
+      </button>
+
+    </div>

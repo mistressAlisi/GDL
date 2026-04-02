@@ -1,0 +1,143 @@
+{% load humanize %}
+{% load i18n %}
+<div class="card-header">
+        <h1> <i class="fa-duotone fa-solid fa-circle-dollar-to-slot" style="color: #dd8fda;"></i> &#160; {% translate "Deposit Now!" %}</h1>
+</div>
+    <div class="card-body text-center">
+    <div class="d-flex justify-content-center">
+    {% if not account.account_level.fiat_enabled %}
+
+    {% if max_deposit > 0 %}
+
+    <div class="d-flex justify-content-center">
+    <div class="text-center p-2  w-100">
+
+
+
+
+    <div class="" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab">
+     <h3>{%  translate "Choose your deposit method:" %} </h3>
+        <ul class="cashier-list-group list-group-flush">
+
+                <li class="cashier-list-group-item" onclick="cashier.start_deposit('apl');">
+                <div class="d-flex">
+                        <img class="img img-fluid img-responsive" src="/static/mycashier/images/apple-pay.png" alt="apple pay logo" style="max-width: 100px; max-height: 53px; top: 20px; position: relative;"/>
+                    <div class="p-2 text-start pt-3 ps-3">
+                    <h4>Apple Pay</h4>
+                        <h6>Deposit now using Apple Pay!</h6>
+
+{#                    <div class="ps-0 ms-0 m-1">#}
+{#                        <strong>{% translate "Minimum Transaction" %}:</strong> {{ provider.payment_provider.dep_min }}#}
+{#                        &#160;#}
+{#                        <strong>{% translate "Maximum Transaction" %}:</strong> {{ provider.payment_provider.dep_max }}#}
+{#                        &#160;#}
+{#                        <strong>{% translate "Deposit Fees" %}:</strong> {{ provider.payment_provider.dep_fees }}%#}
+{#                        &#160;#}
+{#                    </div>#}
+                </div>
+                </li>
+
+
+                <li class="cashier-list-group-item" onclick="cashier.start_deposit('pyl');">
+                <div class="d-flex">
+                        <img class="img img-fluid img-responsive pe-1" src="/static/mycashier/images/paypal.png" alt="paypal logo" style="max-width: 100px; max-height: 42px; position: relative; top: 21px;"/>
+                    <div class="p-2 text-start pt-3 ps-3">
+                    <h4>PayPal</h4>
+                        <h6>Deposit now using PayPal!</h6>
+
+{#                    <div class="ps-0 ms-0 m-1">#}
+{#                        <strong>{% translate "Minimum Transaction" %}:</strong> {{ provider.payment_provider.dep_min }}#}
+{#                        &#160;#}
+{#                        <strong>{% translate "Maximum Transaction" %}:</strong> {{ provider.payment_provider.dep_max }}#}
+{#                        &#160;#}
+{#                        <strong>{% translate "Deposit Fees" %}:</strong> {{ provider.payment_provider.dep_fees }}%#}
+{#                        &#160;#}
+{#                    </div>#}
+                </div>
+                </li>
+
+                <li class="cashier-list-group-item" onclick="cashier.start_deposit('crd');">
+                <div class="d-flex">
+                        <img class="img img-fluid img-responsive" src="/static/mycashier/images/credit-cards.png" alt="cc logo" style="max-width: 100px; max-height: 66px; position: relative; top: 7px;"/>
+                    <div class="p-2 text-start pt-2 ps-4">
+                    <h4>Debit/Credit Cards</h4>
+                        <h6>Deposit now using Debit/CC Cards!</h6>
+
+{#                    <div class="ps-0 ms-0 m-1">#}
+{#                        <strong>{% translate "Minimum Transaction" %}:</strong> {{ provider.payment_provider.dep_min }}#}
+{#                        &#160;#}
+{#                        <strong>{% translate "Maximum Transaction" %}:</strong> {{ provider.payment_provider.dep_max }}#}
+{#                        &#160;#}
+{#                        <strong>{% translate "Deposit Fees" %}:</strong> {{ provider.payment_provider.dep_fees }}%#}
+{#                        &#160;#}
+{#                    </div>#}
+                </div>
+                </li>
+
+                <li class="cashier-list-group-item" onclick="cashier.start_deposit('cashier.providers.hotwallet');">
+                <div class="d-flex">
+                        <img class="img img-fluid img-responsive ms-2" src="/static/mycashier/images/crypto.png" alt="crypto logo" style="max-width: 100px; max-height: 66px; position: relative; top: 5px;"/>
+                    <div class="p-2 text-start pt-2 mt-1 ps-4 ms-2">
+                    <h4>Hot Wallet (Ethereum)</h4>
+                        <h6>Deposit ETH directly to your secure hot wallet!</h6>
+                </div>
+                </li>
+
+                <li class="cashier-list-group-item" onclick="cashier.start_deposit('cashier.providers.ionBlock');">
+                <div class="d-flex">
+                        <img class="img img-fluid img-responsive ms-2" src="/static/mycashier/images/crypto.png" alt="crypto logo" style="max-width: 100px; max-height: 66px; position: relative; top: 5px;"/>
+                    <div class="p-2 text-start pt-2 mt-1 ps-4 ms-2">
+                    <h4>ionBlock (Crypto Gateway)</h4>
+                        <h6>Deposit ETH and other cryptocurrencies via ionBlock!</h6>
+                </div>
+                </li>
+
+        </ul>
+    </div>
+    {% else %}
+        <div class="p-2">
+        <h4>{%  translate "Deposit limits exceeded! Please contact support to increase." %} </h4>
+    {% endif %}
+    </div>
+    {% endif %}
+{#            <div class="d-flex">#}
+{#                <button href="/cashier/request" class="btn btn-primary px-1 m-2"><i class="fa-duotone fa-solid fa-headset p-1"></i>Initiate Buy/Exchange Request</button>#}
+{#                &#160;#}
+{#                {%  if cryptoParams.crypto_enabled %}#}
+{#                    <a href="/cashier/buy_tokens" class="btn btn-bd-primary px-1 m-2"><i class="fa-duotone fa-solid fa-cart-shopping"></i>Buy Tokens with Crypto</a>#}
+{#                    <a href="/cashier/exchange" class="btn btn-primary px-1 m-2"><i class="fa-duotone fa-solid fa-money-check-dollar"></i>Exchange Tokens for Crypto</a>#}
+{#                {% endif %}#}
+{#            </div>#}
+{#    <div class="tab-pane fade pt-2" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab">#}
+{#        <h4>{% translate "Current available Crypto Bonuses:" %}</h4>#}
+{#        <p>{% translate "All of these are deposit bonuses - they're activated and updated by your depositing in the Cashier!" %}</p>#}
+{#         <ul class="list-group list-group-flush">#}
+{#            {% for bonus in bonuses %}#}
+{#                <li class="list-group-item">#}
+{#                <div class="d-flex">#}
+{##}
+{#                    <div class="p-2 mt-4"><i class="fa-duotone fa-solid fa-stars fa-2x"></i></div>#}
+{##}
+{#                    <div class="p-2 text-start">#}
+{#                    <h4>{{ bonus.name }}</h4>#}
+{#                        <h6>{{ bonus.description }}</h6>#}
+{##}
+{#                    <div class="ps-0 ms-0 m-1">#}
+{#                        <strong>{% translate "Minimum Deposit:" %}</strong> {{ bonus.min_deposit }}#}
+{#                        &#160;#}
+{#                        {% if bonus.reward_deposit %}#}
+{#                        <strong>{% translate "Reward Deposit:" %}</strong> {{ bonus.reward_deposit }}#}
+{#                        &#160;#}
+{#                        {% endif %}#}
+{#                        <strong>{% translate "Multiplier:" %}</strong> {{ bonus.deposit_multiplier }}x#}
+{#                        &#160;#}
+{#                        <strong>{% translate "Rollover:" %}</strong> {{ bonus.rollover }}x#}
+{#                        &#160;#}
+{#                    </div>#}
+{#                </div>#}
+{#                </li>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#    </div>#}
+
+    </div>

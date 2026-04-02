@@ -1,0 +1,63 @@
+[
+    {
+        "symbol":"BTC",
+        "name":"Bitcoin",
+        "active":true
+    },
+    {
+        "symbol": "BTC.LN",
+        "name": "Bitcoin Lighting",
+        "active": true
+    },
+    {
+        "symbol": "BCH",
+        "name": "Bitcoin Cash",
+        "active": true
+    },
+    {
+        "symbol": "LTC",
+        "name": "Litecoin",
+        "active": true
+    },
+    {
+        "symbol": "ETH",
+        "name": "Ether",
+        "active": true
+    },
+    {
+        "symbol": "ETC",
+        "name": "Ether Classic",
+        "active": true
+    },
+    {
+        "symbol": "XMR",
+        "name": "Monero",
+        "active": true
+    },
+    {
+        "symbol": "SOL",
+        "name": "Solana",
+        "active": true
+    },
+    {
+        "symbol": "USDT",
+        "name": "USD Tether (Omni)",
+        "active": true
+    },
+    {
+        "symbol": "USDT.TRC20",
+        "name": "USD Tether (Tron/TRC20)",
+        "active": true
+    },
+    {
+        "symbol": "USDC.SOL",
+        "name": "USDCoin (Solana)",
+        "active": true
+    },
+    {
+        "symbol": "USDC.TRC20",
+        "name": "USDCoin (Tron/TRC20)",
+        "active": true
+    }
+
+]

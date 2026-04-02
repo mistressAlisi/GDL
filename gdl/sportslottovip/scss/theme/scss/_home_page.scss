@@ -1,0 +1,350 @@
+@use 'variables';
+@use 'theme-custom-core';
+
+.info-section {
+    max-width: 800px;
+    margin: auto;
+    margin-top: 60px;
+}
+
+/* ============================================================
+   == ACCORDION CORE FIXES
+   ============================================================ */
+
+.info-card {
+    border: none !important;
+    background: rgba(20,20,20,0.55);
+    backdrop-filter: blur(3px);
+    border-radius: 20px !important;
+    overflow: hidden; // ✅ REQUIRED — prevents jump + broken collapse
+}
+
+.accordion-collapse,
+.collapsing {
+    transition: height 0.08s ease-out !important; // ⚡ fast & snappy
+}
+
+.accordion-button {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    padding-right: 1.25rem; // prevents arrow layout shift
+}
+
+.accordion-button:not(.collapsed) {
+    background: transparent !important;
+}
+
+.accordion-button:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* ============================================================
+   == CUSTOM TRIANGLE ARROW (BOOTSTRAP STATE DRIVEN)
+   ============================================================ */
+
+.accordion-button::after {
+    background-image: none !important;
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-left: auto;
+
+    border-style: solid;
+    border-width: 2px 2px 0 0;
+
+    transform: rotate(-45deg);
+    transition: transform 0.08s ease-out; // ⚡ fast
+}
+
+.accordion-button:not(.collapsed)::after {
+    transform: rotate(135deg);
+}
+
+.accordion-button:focus::after,
+.accordion-button:active::after {
+}
+
+/* ============================================================
+   == ICON BLOCKS
+   ============================================================ */
+
+.gradient-icon,
+.gradient-icon2,
+.gradient-icon3 {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+    flex-shrink: 0;
+    padding: 6px;
+}
+
+.gradient-icon {
+    background: linear-gradient(90deg, #a95cff 0%, #b10554 100%);
+}
+.gradient-icon2 {
+    background: linear-gradient(90deg, #0070FF 0%, #7ED6FF 100%);
+}
+.gradient-icon3 {
+    background: linear-gradient(90deg, #07a800 0%, #09fa14 100%);
+}
+
+.gradient-icon svg,
+.gradient-icon2 svg,
+.gradient-icon3 svg {
+    width: 56px;
+    height: 56px;
+    display: block;
+}
+
+/* ============================================================
+   == ACCORDION CONTENT
+   ============================================================ */
+
+.accordion-title-text {
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #ffffff !important;
+}
+
+.accordion-body {
+    font-size:1.4rem;
+    color: rgba(255,255,255,0.78) !important;
+    line-height: 1.55rem;
+}
+
+.start-btn {
+    margin-top: 15px;
+  background: var(--ticket-text-glow);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 25px;
+    font-size: 1.2rem;
+}
+
+.accordion-body .start-btn {
+    display: inline-block;
+    margin-top: 1.2rem;
+    color: #ffffff !important;
+}
+
+.accordion-body .accordion-subhead {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.accept-text {
+    color: #3ddc3d;
+    font-weight: 600;
+}
+
+.deny-text {
+    color: #ff3b3b;
+    font-weight: 600;
+}
+
+.sub-note {
+    font-style: italic;
+    color: var(--accent-purple);
+    margin-top: 0.75rem;
+}
+
+/* ============================================================
+   == SUBCARDS
+   ============================================================ */
+
+.subcard {
+    background: rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 1.25rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-height: 100%;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+}
+
+.subcard:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+}
+
+.subcard-number {
+    width: 42px;
+    height: 42px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.subcard-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.subcard-desc {
+    font-size: 1.2rem;
+    line-height: 1.35rem;
+}
+
+/* ============================================================
+   == SUBCARD BUTTONS
+   ============================================================ */
+.subcard-btn {
+  padding: 0.55rem 1.2rem;   /* smaller default */
+  border-radius: 12px;
+
+  font-weight: 600;
+  font-size: 0.95rem;        /* readable, not huge */
+
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  text-align: center;
+}
+
+/* Desktop / larger screens */
+@media (min-width: 768px) {
+  .subcard-btn {
+    padding: 0.75rem 1.75rem;
+    border-radius: 14px;
+    font-size: 1.1rem;
+  }
+}
+
+
+.subcard-btn-green {
+  background: var(--prize-bg);
+    color: #ffffff;
+}
+
+.subcard-btn-orange {
+  background: var(--prize-bg);
+    color: #ffffff;
+}
+
+.subcard-btn:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+}
+
+/* ============================================================
+   == CARD-4 BLOCK
+   ============================================================ */
+
+.card4-subcard {
+    flex: 1 1 calc(25% - 12px);
+    background: var(--panel);
+    border-radius: 12px;
+    padding: 16px;
+    min-width: 160px;
+    text-align: center;
+    transition: transform 0.25s ease;
+}
+
+.card4-subcard:hover {
+    transform: scale(1.04);
+}
+
+.card4-icon-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-bg {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-bg-blue { background: linear-gradient(90deg, #0077ff, #66baff); }
+.icon-bg-green { background: linear-gradient(90deg, #006337, #005528); }
+.icon-bg-orange { background: linear-gradient(90deg, #ff8b00, #ffc466); }
+.icon-bg-purple { background: linear-gradient(90deg, #8e5cff, #c9a3ff); }
+
+.card4-title {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.card4-desc {
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+/* ============================================================
+   == STATS BAR
+   ============================================================ */
+.stats-bar {
+  width: 100%;
+  background-color: rgba(var(--theme-bg-rgb,17,17,17), 0.08);
+  border: 2px solid var(--prize-glow-1);
+  backdrop-filter: blur(12px);
+  padding: 2rem 0;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+
+  .stat-item {
+    text-align: center;
+    flex: 1 1 150px; // flexible min width
+
+    h3 {
+      font-weight: 800;
+      font-size: 2.1rem;
+      color: #ffffff;
+      margin-bottom: 0.25rem;
+
+      @media (max-width: 1024px) {
+        font-size: 1.9rem;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 1.7rem;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 1.5rem;
+      }
+    }
+
+    p {
+      font-size: 1.05rem;
+      opacity: 0.95;
+      margin: 0;
+
+      @media (max-width: 1024px) {
+        font-size: 1rem;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 0.95rem;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+

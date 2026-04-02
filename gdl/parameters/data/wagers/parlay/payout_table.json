@@ -1,0 +1,65 @@
+[
+  {
+    "num_bets":2,
+    "payout_odds":2.6,
+    "draws_loose": false,
+    "draws_push": true,
+    "groups":["americanfootball","basketball","baseball","soccer"]
+  },
+  {
+    "num_bets":3,
+    "payout_odds":6,
+    "draws_loose": false,
+    "draws_push": true,
+    "groups":["americanfootball","basketball","baseball","soccer"]
+  },
+  {
+    "num_bets":4,
+    "payout_odds":10,
+    "draws_loose": false,
+    "draws_push": true,
+    "groups":["americanfootball","basketball","baseball","soccer"]
+  },
+  {
+    "num_bets":5,
+    "payout_odds":20,
+    "draws_loose": false,
+    "draws_push": true,
+    "groups":["americanfootball","basketball","baseball","soccer"]
+  },
+  {
+    "num_bets":6,
+    "payout_odds":40,
+    "draws_loose": false,
+    "draws_push": true,
+    "groups":["americanfootball","basketball","baseball","soccer"]
+  },
+  {
+    "num_bets":7,
+    "payout_odds":75,
+    "draws_loose": false,
+    "draws_push": true,
+    "groups":["americanfootball","basketball","baseball","soccer"]
+  },
+  {
+    "num_bets":8,
+    "payout_odds":150,
+    "draws_loose": false,
+    "draws_push": true,
+    "groups":["americanfootball","basketball","baseball","soccer"]
+  },
+  {
+    "num_bets":9,
+    "payout_odds":300,
+    "draws_loose": false,
+    "draws_push": true,
+    "groups":["americanfootball","basketball","baseball","soccer"]
+  },
+  {
+    "num_bets":10,
+    "payout_odds":700,
+    "draws_loose": false,
+    "draws_push": true,
+    "groups":["americanfootball","basketball","baseball","soccer"]
+  }
+]

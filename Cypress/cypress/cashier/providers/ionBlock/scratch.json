@@ -1,0 +1,34 @@
+{
+   "CustomerTransID":"645b8a23-d496-4d7e-96ba-b503c1a0a12f",
+   "channel_id":796428,
+   "type":"IN",
+   "status":2,
+   "receiver_reference":"645b8a23-d496-4d7e-96ba-b503c1a0a12f",
+   "receiver_currency":"USD",
+   "receiver_amount":50,
+   "address":"0x4d2a13b82890c6f9566a0904380ef2c155aecac4",
+   "sender_currency":"ETH",
+   "sender_amount":"0.016954899966090200",
+   "network":"ERC20",
+   "sender_rate":2949,
+   "valid_until":1768950908,
+   "is_blocked":false,
+   "customer_reference":"167a9421-1de6-4a4c-a66e-53aef35ac364",
+   "created_at":1768950008,
+   "txs":{
+      "data":[
+         {
+            "sender_currency":"USDT",
+            "internal_reference":741283,
+            "sender_amount":"2.500000",
+            "sender_rate":0.998775,
+            "confirmations":4,
+            "vout":0,
+            "miner_fee":"0.000000000000000000000000000000",
+            "block_hash":"0xde6ac56e24f566987015c8dbcfb3c008f2c02bab63160672be4267220e17f979",
+            "bitcoin_txid":"0xbb708f7906818233312f3e35a2b2b9f653107bdf664dc7f35819b91e7386d326",
+            "created_at":1768950254
+         }
+      ]
+   }
+}

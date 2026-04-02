@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-[#0a0a0f] text-foreground;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-size: 2rem;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    line-height: 1.4;
+  }
+}
+
+@layer utilities {
+  /* Glass morphism effect */
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+
+  /* 3D Transform utilities */
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+
+  /* Golden gradient text */
+  .text-golden {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Golden gradient background */
+  .bg-golden {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+  }
+
+  /* Premium button styling */
+  .btn-golden {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+    color: #000;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .btn-golden:hover {
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+    transform: translateY(-2px);
+  }
+
+  /* Card border glow effects */
+  .border-glow-purple {
+    border: 2px solid transparent;
+    background-image: 
+      linear-gradient(rgba(10, 10, 15, 1), rgba(10, 10, 15, 1)),
+      linear-gradient(135deg, #a855f7, #ec4899);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+
+  .border-glow-blue {
+    border: 2px solid transparent;
+    background-image: 
+      linear-gradient(rgba(10, 10, 15, 1), rgba(10, 10, 15, 1)),
+      linear-gradient(135deg, #3b82f6, #06b6d4);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+
+  .border-glow-green {
+    border: 2px solid transparent;
+    background-image: 
+      linear-gradient(rgba(10, 10, 15, 1), rgba(10, 10, 15, 1)),
+      linear-gradient(135deg, #10b981, #22d3ee);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+
+  .border-glow-gold {
+    border: 2px solid transparent;
+    background-image: 
+      linear-gradient(rgba(10, 10, 15, 1), rgba(10, 10, 15, 1)),
+      linear-gradient(135deg, #ffd700, #ffed4e);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+
+  .border-glow-cyan {
+    border: 2px solid transparent;
+    background-image: 
+      linear-gradient(rgba(10, 10, 15, 1), rgba(10, 10, 15, 1)),
+      linear-gradient(135deg, #06b6d4, #8b5cf6);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+}

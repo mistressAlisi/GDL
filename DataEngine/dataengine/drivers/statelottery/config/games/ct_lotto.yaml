@@ -1,0 +1,35 @@
+# Connecticut - Lotto!
+# Draws Tuesday and Friday evenings
+# Pick 6 numbers from 1-44
+
+state: CT
+name: "Lotto!"
+slug: ct-lotto
+url: "https://www.ctlottery.org/WinningNumbers/Lotto!"
+game_type: pool
+
+format:
+  main_count: 6
+  main_range: [1, 44]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: false
+
+schedule:
+  days: [tuesday, friday]
+  times:
+    - time: "22:30"
+      label: null
+  timezone: "America/New_York"
+
+selectors:
+  # CT Lottery uses AJAX-loaded table - numbers parsed from body text
+  all_numbers: "body"
+  draw_date: null
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%m/%d/%Y"
+  split_main_bonus: false
+
+active: true

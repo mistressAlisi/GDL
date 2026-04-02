@@ -1,0 +1,36 @@
+# Mega Millions
+# Draws Tuesday and Friday at 11:00 PM ET
+# Pick 5 numbers from 1-70, plus 1 Mega Ball from 1-25
+
+state: MULTI
+name: "Mega Millions"
+slug: mega-millions
+url: "https://www.megamillions.com/Winning-Numbers.aspx"
+game_type: bonus
+
+format:
+  main_count: 5
+  main_range: [1, 70]
+  bonus_count: 1
+  bonus_range: [1, 25]
+  is_positional: false
+
+schedule:
+  days: [tuesday, friday]
+  times:
+    - time: "23:00"
+      label: null
+  timezone: "America/New_York"
+
+selectors:
+  # Mega Millions displays numbers in a table structure
+  all_numbers: ".winning-numbers .ball, .winning-numbers li, table.winners td.ball"
+  draw_date: ".drawing-date, .date-header"
+  bonus_number: ".mega-ball, .gold-ball"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%m/%d/%Y"
+  split_main_bonus: true
+
+active: true

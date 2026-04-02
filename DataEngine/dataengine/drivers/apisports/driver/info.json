@@ -1,0 +1,7 @@
+{
+    "class_name":"dataengine.drivers.apisports",
+    "name":"ApiSports Data Driver",
+    "version":"0.0.1",
+    "homepage":"https://solstic.ai",
+    "author":"Solstic Systems, B.V."
+}

@@ -1,0 +1,77 @@
+{% extends "minerve/pages/responsive_dashboard/index.html" %}
+{% load mathfilters %}
+{% load django_bootstrap5 %}
+{% load humanize %}
+{% load i18n %}
+{% block bootstrap5_title %}
+    {{ vdomain.website_name }}: Active Promos and bonuses
+{% endblock %}
+{% block MINERVE_PAGE_SUBTITLE %}: {% translate "Cashier: Active Promos and Bonuses" %}{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_BODY %}
+<div class="w-100 flex-container"
+     data-bs-theme="{{ MINERVE_BODY_THEME }}"
+     style="position: relative; min-height: 100dvh;">
+    <div class="card-header">
+        <h1> <i class="fa-duotone fa-solid fa-gifts"></i> &#160; {% translate "Cashier: Promos and Bonuses" %}</h1>
+    </div>
+    <div class="card-body text-center w-100">
+      <h4>{%  translate "Currently Active Bonuses and Promos:" %}</h4>
+    <div class="d-flex justify-content-center w-100">
+       <table class="table table-hover table-responsive table-dark table-striped">
+           <tr>
+               <th>{% translate "Name" %}</th>
+               <th>{% translate "Type" %}</th>
+               <th>{% translate "Created At" %}</th>
+               <th>{% translate "Expires At" %}</th>
+               <th>{% translate "Minimum Deposit" %}</th>
+               <th>{% translate "Deposit Bonuses" %}</th>
+               <th>{% translate "Rollover" %}</th>
+               <th>{% translate "Status" %}</th>
+               <th>{% translate "Progress" %}</th>
+           </tr>
+           {% for promo in promos %}
+               <tr>
+               {% if promo.deposit_bonus %}
+                   <td>{{ promo.deposit_bonus.name }}</td>
+                   <td>{% translate "Deposit Bonus" %}</td>
+               {% elif promo.activation_bonus %}
+                   <td>{{ promo.activation_bonus.name }}</td>
+                   <td>{% translate "Account Level Bonus" %}</td>
+               {% endif %}
+               <td>{{ promo.created_at }}</td>
+               <td>{{ promo.expires_at }}</td>
+               <td>{{ promo.min_deposit}}</td>
+               {% if promo.current_deposit < promo.min_deposit %}
+               <td>{{ promo.deposit_multiplier}}x</td>
+               {% else %}
+               <td>{{ promo.reward_deposit}}</td>
+               {% endif %}
+               <td>{{ promo.rollover}}x</td>
+               {% if promo.current_deposit < promo.min_deposit %}
+               <td>{% translate "Deposits:" %} {{ promo.current_deposit }}/{{ promo.min_deposit }}</td>
+               <td>
+                <div class="progress" role="progressbar" aria-label="Current Deposit Progress" aria-valuenow="{{ promo.current_deposit }}" aria-valuemin="0" aria-valuemax="{{ promo.min_deposit }}">
+                  <div class="progress-bar" style="width: {{ promo.current_deposit|div:promo.min_deposit|mul:100 }}%">{{ promo.current_deposit|div:promo.min_deposit|mul:100|floatformat:2 }}%</div>
+                </div>
+               </td>
+               {% else %}
+               <td>{% translate "Rollovers:" %} {{ promo.rollover_completed }}/{{ promo.rollover_amount }}</td>
+               <td>
+               <div class="progress" role="progressbar" aria-label="Current Deposit Progress" aria-valuenow="{{ promo.rollover_completed }}" aria-valuemin="0" aria-valuemax="{{ promo.rollover_amount }}">
+                  <div class="progress-bar" style="width: {{ promo.rollover_completed|div:promo.rollover_amount|mul:100 }}%">{{ promo.rollover_completed|div:promo.rollover_amount|mul:100|floatformat:2 }}%</div>
+                </div>
+               </td>
+               {% endif %}
+               </tr>
+           {% endfor %}
+       </table>
+    </div>
+    </div>
+</div>
+{% include "minerve/pages/dynamic_dashboard/loading_toast.html" %}
+<script type="module" src="/static/mycashier/js/Cashier/loader.js"></script>
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+{% include "lobby/dashboard/components/account_sidebar_header.html" %}
+{% endblock %}

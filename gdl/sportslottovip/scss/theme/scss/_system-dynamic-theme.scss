@@ -1,0 +1,325 @@
+@use "sass:map";
+@use "sass:meta";
+@use "variables" as *;
+@use "theme-custom-core" as *;
+
+// -------------------------------------------------------
+// SYSTEM DYNAMIC THEME
+// Bootstrap 5.3+ Full Colour Skin Generator
+// -------------------------------------------------------
+
+///
+/// Extract bootstrap colour set from the theme entry.
+///
+@function bs-skin($entry) {
+  @return (
+    "primary": map.get($entry, "bs-primary"),
+    "secondary": map.get($entry, "bs-secondary"),
+    "success": map.get($entry, "bs-success"),
+    "info": map.get($entry, "bs-info"),
+    "warning": map.get($entry, "bs-warning"),
+    "danger": map.get($entry, "bs-danger"),
+    "light": map.get($entry, "bs-light"),
+    "dark": map.get($entry, "bs-dark"),
+    "bg-body-secondary": map.get($entry, "bs-bg-body-secondary"),
+    "bg-body-tertiary": map.get($entry, "bs-bg-body-tertiary"),
+    "bs-table-bg": map.get($entry, "bs-table-bg"),
+    "bs-table-color-type": map.get($entry, "bs-table-color-type"),
+    "bs-table-striped-bg": map.get($entry, "bs-table-striped-bg"),
+    "bs-table-striped-color": map.get($entry, "bs-table-striped-color"),
+    "bs-bg1": map.get($entry, "bs-bg1"),
+    "bs-bg2": map.get($entry, "bs-bg2")
+
+
+  );
+}
+
+///
+/// Utility: returns selector for theme + subtype
+///
+
+
+///
+/// Bootstrap Color CSS Variables Generator
+/// Generates BS5.3 colour CSS vars inside theme scope.
+///
+@mixin bs-table() {
+
+/* === Section Wrapper === */
+#sportslotto-consolation {
+  padding: 70px 5%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  background: var(--bg1);
+  color: var(--text-primary);
+
+  .payout-table-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: var(--bg2);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    box-shadow: 0 0 20px var(--shadow1), 0 0 40px var(--shadow2);
+    backdrop-filter: blur(12px);
+
+      h1 {
+    font-size: clamp(2.6rem, 5vw, 3.2rem); // bigger and responsive
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, var(--glow1), var(--glow2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 12px var(--glow1), 0 0 24px var(--glow2);
+  }
+ .styled-table {
+    th, td {
+      font-size: 1.1rem;   // increase table text
+      padding: 1rem 1.2rem; // increase spacing
+    }
+
+    th {
+      font-weight: 700;
+    }
+
+    tbody tr:hover {
+      background: rgba(99,226,237,0.2);
+      box-shadow: inset 0 0 10px var(--glow1);
+    }
+  }
+
+
+
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 1rem 0 2rem;
+    }
+
+    table.styled-table {
+      width: 100%;
+      min-width: 700px;
+      border-collapse: collapse;
+      font-family: 'Rajdhani', 'Teko', sans-serif;
+      text-align: center;
+
+      th, td {
+        padding: 0.8rem 1rem;
+        border: 1px solid var(--border);
+        color: var(--text-primary);
+      }
+
+      tbody tr:nth-child(odd) {
+        background: rgba(1,25,44,0.35);
+      }
+
+      tbody tr:nth-child(even) {
+        background: rgba(0,0,19,0.05);
+      }
+
+      tbody tr:hover {
+        background: rgba(99,226,237,0.15);
+        box-shadow: inset 0 0 8px var(--glow1);
+      }
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      padding: 1.5rem;
+
+      table.styled-table {
+        min-width: 600px;
+        font-size: 0.9rem;
+
+        th, td {
+          padding: 0.6rem 0.8rem;
+        }
+
+        tbody tr:nth-child(odd) {
+          background: rgba(1,25,44,0.45);
+        }
+
+        tbody tr:nth-child(even) {
+          background: rgba(0,0,19,0.08);
+        }
+      }
+    }
+  }
+}
+
+
+
+}
+
+
+@function theme-scope($theme, $variant) {
+  @return '[data-bs-theme="#{$theme}"][data-bs-variant="#{$variant}"]';
+}
+@mixin bs-color-vars($colors) {
+  @each $name, $value in $colors {
+    @if $value != null {
+      --bs-#{$name}: #{$value};
+      --bs-#{$name}-rgb: #{red($value)}, #{green($value)}, #{blue($value)};
+    }
+  }
+
+
+}
+
+///
+/// Contextual utilities: buttons, text, bg, border
+/// Bootstrap 5.3-compliant (uses CSS variables when possible)
+///
+@mixin bs-contextual-utilities($colors) {
+  @each $name, $value in $colors {
+    @if $value != null {
+      .text-#{$name} { color: #{$value} !important; }
+      .bg-#{$name} { background-color: #{$value} !important; }
+      .border-#{$name} { border-color: #{$value} !important; }
+
+      .btn-#{$name} {
+        --bs-btn-bg: #{$value};
+        --bs-btn-border-color: #{$value};
+        --bs-btn-hover-bg: color-mix(in srgb, #{$value} 85%, black);
+        --bs-btn-hover-border-color: color-mix(in srgb, #{$value} 80%, black);
+        --bs-btn-active-bg: color-mix(in srgb, #{$value} 70%, black);
+        --bs-btn-active-border-color: color-mix(in srgb, #{$value} 65%, black);
+
+        color: var(--bs-info) !important;
+
+}
+      }
+
+      }
+    }
+
+
+
+
+///
+/// Glow utilities for all bs-* colors
+///
+@mixin bs-glow-utilities($colors) {
+  @each $name, $value in $colors {
+    @if $value != null {
+      .glow-#{$name} {
+        box-shadow: 0 0 10px #{$value}, 0 0 25px #{rgba($value, .45)};
+      }
+
+      .text-glow-#{$name} {
+        text-shadow: 0 0 6px #{$value}, 0 0 12px #{rgba($value, .55)};
+      }
+
+      .border-glow-#{$name} {
+        border-color: #{$value};
+        box-shadow: 0 0 8px #{rgba($value, .6)};
+      }
+    }
+
+  }
+
+//
+///* --- THEME SWITCHER STICKY --- */
+//#theme-switcher {
+//  position: fixed;
+//  bottom: 25px;
+//  left: 25px; /* change if you want right-side placement */
+//  z-index: 9999;
+//}
+
+/* -------------------------------------------------- */
+/*               LOGIN MODAL (Ticket Theme)           */
+/* -------------------------------------------------- */
+
+
+}
+
+///
+/// Component-level theme overrides (alerts, badges, forms, etc.)
+/// Bootstrap 5.3-safe versions
+///
+@mixin bs-component-vars($colors) {
+  @each $name, $value in $colors {
+    @if $value != null {
+      // Alerts
+      .alert-#{$name} {
+        --bs-alert-bg: #{rgba($value, 0.12)};
+        --bs-alert-border-color: #{$value};
+        --bs-alert-color: #{$value};
+      }
+
+      // Badges (Bootstrap 5.3 uses `.badge.bg-variant`)
+      .badge.bg-#{$name} {
+        background-color: #{$value} !important;
+        color: #fff;
+      }
+
+      // List groups
+      .list-group-item-#{$name} {
+        background-color: #{rgba($value, 0.12)};
+        color: #{$value};
+        border-color: #{$value};
+      }
+      .text-danger {
+        color: var(--bs-danger) !important;
+      }
+      // Progress bars
+      .progress-bar.bg-#{$name} {
+        background-color: #{$value};
+      }
+
+
+    }}}
+
+
+/// =====================================================
+///  🟣 UNIVERSAL BS-VARIABLE REACTIVE MODAL MIXIN
+///  All colors + shadows derive from Bootstrap variables:
+///  --bs-primary, --bs-success, --bs-danger, etc.
+/// =====================================================
+
+@mixin bs-gdl-modal($colors) {
+
+}
+
+/* ---------------- FAQ SECTION (NEON THEME, VARS) ---------------- */
+
+/* ---------------- HEADER ---------------- */
+
+@mixin generate-bootstrap-skin($theme, $variant, $entry) {
+  $colors: bs-skin($entry);
+  $selector: theme-scope($theme, $variant);
+
+  #{$selector} {
+    @include bs-color-vars($colors);
+    @include bs-contextual-utilities($colors);
+    @include bs-glow-utilities($colors);
+    @include bs-component-vars($colors);
+    @include bs-gdl-modal($colors);
+    @include bs-table();
+
+    .text-primary {
+  color :var(--bs-info) !important;
+}
+  }
+
+}
+
+///
+/// MAIN ENGINE — iterate themes & variants
+///
+@each $theme-name, $variants in $theme-ticket-styles {
+  @each $variant, $entry in $variants {
+    @include generate-bootstrap-skin($theme-name, $variant, $entry);
+  }
+}
+
+///
+/// Extended Bootstrap Form Component Variables
+/// Applies theme-driven overrides to all form controls
+///
+
+

@@ -1,0 +1,47 @@
+{% extends "lobby/dashboard/index.html" %}
+{% load django_bootstrap5 %}
+{% load humanize %}
+{% load mathfilters %}
+{% block MINERVE_PAGE_SUBTITLE %}: Cashier - Transaction Confirmed!{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY %}
+<div class="card w-100 h-100 m-2 p-2" data-bs-theme="{{ MINERVE_BODY_THEME }}">
+    <div class="card-header">
+        <h1> <i class="fa-solid fa-books logo-text" style="color: #dd8fda;"></i> &#160; Transaction Confirmed!</h1>
+        <p>Your Exchange request has been created!</p>
+        {%  if not cryptoParams.crypto_enabled %}
+        <p>Cryptocurrency payments are disabled for this book; please contact support.</p>
+        {%  else %}
+                <div class="card-body">
+                 <h4>Sale Request Created!</h4>
+                     <p>
+                         <strong>Great Success!</strong> Your Sale request has been created. The tokens have been set apart as 'pending sale'. <br/>
+                         Please <strong>confirm the sale</strong> in the email you received to process the transaction.
+                         <br/> Don't forget to check your Spam folder if the email does not arrive in a timely fashion.
+                     </p>
+                    <p>
+                        Please note! Transactions that are not confirmed within 48 hours are automatically cancelled.
+                    </p>
+
+                    <h5>You may resend the e-mail and cancel any pending exchange operations in the <a href="/cashier/pending/">Pending Transaction(s)</a> page.</h5>
+
+                    </div>
+
+            </div>
+            </div>
+        {% endif %}
+
+
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+    <div class="row">
+    <div class="col pt-2 pb-2">
+    <a class="nav-link" href="/my/profile" title="My Account"><i class="fa-duotone fa-solid fa-circle-user pe-2"></i> #{{ account.acctnum }}</a>
+    </div>
+    <div class="col pt-2 pb-2">
+        <a href="#" onclick="{% if vdomain.demo_mode %}alert('Cashier disabled in Demo.') {% else %} cashier.start_deposit_modal() {% endif %}" id="balance-link" title="Available Balance">
+        <i class="fa-duotone fa-solid fa-coins pe-2"></i><span class="avail_balance">Balance: {{ available_balance |floatformat:2 }}</span></a>
+    </div>
+    </div>
+    <hr class="border-2 border-opacity-50 border-success"/>
+{% endblock %}

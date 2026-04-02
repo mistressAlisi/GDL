@@ -1,0 +1,85 @@
+
+$primary: #000000 !default;
+$secondary: #2A4EDF !default;
+$success: #c60077 !default;
+$danger: #dc3545 !default;
+$warning: #f58a07 !default;
+$info: #FFB41F !default;
+$dark: #200819 !default;
+$text-white: #D6C3C9 !default;
+$white: #D6C3C9 !default;
+
+$success-hover: #FF99D6 !default;
+$success-hover-hl: #FF47B6 !default;
+$primary-hover: #FF99A7 !default;
+$primary-hover-hl: #FFC2CA !default;
+
+$dark-red: #630310;
+$dark-grey: #303136;
+
+// Optional extras
+$soft-pink: #ffe6f9 !default;
+$neon-cyan: #00f0ff !default;
+$neon-green: #8aff00 !default;
+$neon-orange: #ff7a00 !default;
+$neon-teal: #00ffd9 !default;
+$neon-violet: #a761ff !default;
+$neon-rose: #ff3cac !default;
+$neon-yellow: #fff200 !default;
+$neon-electric: #47eaea !default;
+$ticket-bg-2: #150606 !default;
+$prize-bg: #000000 !default;
+
+@use "theme-custom-core" as themeCore;
+
+@each $theme, $variants in themeCore.$theme-ticket-styles {
+  .theme-#{$theme} {
+    $colors: map-get($variants, 0);
+
+    @if type-of($colors) == "map" {
+      --bg1: #{map-get($colors, bg1)} !important;
+      --bg2: #{map-get($colors, bg2)} !important;
+      --glow1: #{map-get($colors, glow1)} !important;
+      --glow2: #{map-get($colors, glow2)} !important;
+      --border: #{map-get($colors, border)} !important;
+      --shadow1: #{map-get($colors, shadow1)} !important;
+      --shadow2: #{map-get($colors, shadow2)} !important;
+
+      --ticket-border: #{map-get($colors, ticket-border)} !important;
+      --ticket-bg-1: #{map-get($colors, ticket-bg-1)} !important;
+      --ticket-bg-2: #{map-get($colors, ticket-bg-2)} !important;
+      --ticket-text: #{map-get($colors, ticket-text)} !important;
+      --ticket-glow-outer: #{map-get($colors, ticket-glow-outer)} !important;
+      --ticket-glow-inner: #{map-get($colors, ticket-glow-inner)} !important;
+      --ticket-text-glow: #{map-get($colors, ticket-text-glow)} !important;
+      --ticket-text-glow-2: #{map-get($colors, ticket-text-glow-2)} !important;
+      --ticket-shadow: #{map-get($colors, ticket-shadow)} !important;
+
+      --prize-bg: #{map-get($colors, prize-bg)} !important;
+      --prize-border: #{map-get($colors, prize-border)} !important;
+      --prize-text: #{map-get($colors, prize-text)} !important;
+      --prize-glow-1: #{map-get($colors, prize-glow-1)} !important;
+      --prize-glow-2: #{map-get($colors, prize-glow-2)} !important;
+
+      // Bootstrap / core
+      --bs-primary: #{map-get($colors, bs-primary)} !important;
+      --bs-secondary: #{map-get($colors, bs-secondary)} !important;
+      --bs-success: #{map-get($colors, bs-success)} !important;
+      --bs-info: #{map-get($colors, bs-info)} !important;
+      --bs-warning: #{map-get($colors, bs-warning)} !important;
+      --bs-danger: #{map-get($colors, bs-danger)} !important;
+      --bs-light: #{map-get($colors, bs-light)} !important;
+      --bs-dark: #{map-get($colors, bs-dark)} !important;
+      --bs-bg-body-secondary: #{map-get($colors, bs-bg-body-secondary)} !important;
+      --bs-bg-body-tertiary: #{map-get($colors, bs-bg-body-tertiary)} !important;
+
+      // Tables
+      --bs-table-bg: #{map-get($colors, bs-table-bg)} !important;
+      --bs-table-color-type: #{map-get($colors, bs-table-color-type)} !important;
+      --bs-table-striped-bg: #{map-get($colors, bs-table-striped-bg)} !important;
+      --bs-table-striped-color: #{map-get($colors, bs-table-striped-color)} !important;
+    }
+  }
+}
+
+

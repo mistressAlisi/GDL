@@ -1,0 +1,44 @@
+# New York Win4
+# Draws twice daily - Midday (2:30 PM) and Evening (10:30 PM) ET
+# Pick 4 digits, each 0-9 (positional game)
+
+state: NY
+name: "Win4"
+slug: ny-win4
+url: "https://nylottery.ny.gov/draw-game?game=win4"
+game_type: positional
+
+format:
+  main_count: 4
+  main_range: [0, 9]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: true
+
+schedule:
+  days: [daily]
+  times:
+    - time: "14:30"
+      label: "midday"
+    - time: "22:30"
+      label: "evening"
+  timezone: "America/New_York"
+
+selectors:
+  # Page shows both draws - 8 balls total
+  # First 4 = Evening (most recent evening draw)
+  # Last 4 = Midday (most recent midday draw)
+  all_numbers: "div[class*='BallContainer'] div[class*='Headline__Ball']"
+  draw_date: "[class*='date']"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%a %m/%d/%y"
+  # Multi-draw page: balls are split by draw label
+  multi_draw: true
+  draws_per_page: 2
+  balls_per_draw: 4
+  # Order on page: evening first, midday second
+  draw_order: ["evening", "midday"]
+
+active: true

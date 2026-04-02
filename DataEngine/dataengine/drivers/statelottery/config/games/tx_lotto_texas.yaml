@@ -1,0 +1,34 @@
+# Texas - Lotto Texas
+# Draws Monday, Wednesday, and Saturday at 10:12 PM CT
+# Pick 6 numbers from 1-54
+
+state: TX
+name: "Lotto Texas"
+slug: tx-lotto-texas
+url: "https://www.texaslottery.com/export/sites/lottery/Games/Lotto_Texas/index.html"
+game_type: pool
+
+format:
+  main_count: 6
+  main_range: [1, 54]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: false
+
+schedule:
+  days: [monday, wednesday, saturday]
+  times:
+    - time: "22:12"
+      label: null
+  timezone: "America/Chicago"
+
+selectors:
+  all_numbers: ".winning-numbers span, .ball, .number"
+  draw_date: ".draw-date, .date"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%m/%d/%Y"
+  split_main_bonus: false
+
+active: true

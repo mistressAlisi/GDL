@@ -1,0 +1,95 @@
+<div class="text-center">
+<h3><span class="text-purple">
+    {% if show_score_team %}
+    {{ scores.away_score.team.name }}&#160;
+    {% endif %}
+    {% if scores.away_score.winner %}
+        <i class="fa-duotone fa-solid  fa-trophy-star winner-text"></i>
+    {% endif %}
+    {{ scores.away_score.score }}
+</span>&#160;-&#160;
+    <span class="text-primary">
+    {% if scores.home_score.winner %}
+        <i class="fa-duotone fa-solid  fa-trophy-star winner-text"></i>
+    {% endif %}
+        {{ scores.home_score.score }}
+    {% if show_score_team %}
+    &#160;{{ scores.home_score.team.name }}
+    {% endif %}
+    </span></h3>
+<table class="table table-striped-columns table-responsive table-hover">
+                <tbody>
+                        <tr>
+                            <td class="text-primary">
+                                {% if scores.home_score.score_data.quarter_1 > scores.away_score.score_data.quarter_1  %}
+                                <i class="fa-solid fa-trophy fa-sm"></i>
+                                {% endif %}
+                                {{ scores.home_score.score_data.quarter_1 }}
+                            </td>
+                            <td class="text-primary">
+                                {% if scores.home_score.score_data.quarter_2 > scores.away_score.score_data.quarter_2  %}
+                                <i class="fa-solid fa-trophy fa-sm"></i>
+                                {% endif %}
+                                {{ scores.home_score.score_data.quarter_2 }}
+                            </td>
+                            <td class="text-primary">
+                                {% if scores.home_score.score_data.quarter_3 > scores.away_score.score_data.quarter_3  %}
+                                <i class="fa-solid fa-trophy fa-sm"></i>
+                                {% endif %}
+                                {{ scores.home_score.score_data.quarter_3 }}
+                            </td>
+                            <td class="text-primary">
+                                {% if scores.home_score.score_data.quarter_4 > scores.away_score.score_data.quarter_4  %}
+                                <i class="fa-solid fa-trophy fa-sm"></i>
+                                {% endif %}
+                                {{ scores.home_score.score_data.quarter_4 }}
+                            </td>
+                            <td class="text-primary">
+                                {% if scores.home_score.score_data.overtime > scores.away_score.score_data.overtime  %}
+                                <i class="fa-solid fa-trophy fa-sm"></i>
+                                {% endif %}
+                                {{ scores.home_score.score_data.overtime }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-white"><strong><i class="fa-duotone fa-solid fa-circle-quarter"></i></strong></td>
+                            <td class="text-white"><strong><i class="fa-duotone fa-solid fa-circle-half"></i></strong></td>
+                            <td class="text-white"><strong><i class="fa-duotone fa-solid fa-circle-three-quarters"></i></strong></td>
+                            <td class="text-white"><strong><i class="fa-solid fa-circle text-white"></i></strong></td>
+                            <td class="text-white"><strong><i class="fa-duotone fa-solid fa-ufo"></i></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-purple">
+                                {% if scores.away_score.score_data.quarter_1 > scores.home_score.score_data.quarter_1  %}
+                                <i class="fa-solid fa-trophy fa-sm"></i>
+                                {% endif %}
+                                {{ scores.away_score.score_data.quarter_1 }}
+                            </td>
+                            <td class="text-purple">
+                                {% if scores.away_score.score_data.quarter_2 > scores.home_score.score_data.quarter_2  %}
+                                <i class="fa-solid fa-trophy fa-sm"></i>
+                                {% endif %}
+                                {{ scores.away_score.score_data.quarter_2 }}
+                            </td>
+                            <td class="text-purple">
+                                {% if scores.away_score.score_data.quarter_3 > scores.home_score.score_data.quarter_3  %}
+                                <i class="fa-solid fa-trophy fa-sm"></i>
+                                {% endif %}
+                                {{ scores.away_score.score_data.quarter_3 }}
+                            </td>
+                            <td class="text-purple">
+                                {% if scores.away_score.score_data.quarter_4 > scores.home_score.score_data.quarter_4  %}
+                                <i class="fa-solid fa-trophy fa-sm"></i>
+                                {% endif %}
+                                {{ scores.away_score.score_data.quarter_4 }}
+                            </td>
+                            <td class="text-purple">
+                                {% if scores.away_score.score_data.overtime > scores.home_score.score_data.overtime  %}
+                                <i class="fa-solid fa-trophy fa-sm"></i>
+                                {% endif %}
+                                {{ scores.away_score.score_data.overtime }}
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+</div>

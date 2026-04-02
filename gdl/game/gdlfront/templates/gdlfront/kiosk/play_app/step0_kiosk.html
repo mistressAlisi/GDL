@@ -1,0 +1,172 @@
+{% extends "minerve/base/page.html" %}
+{% load humanize %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% block MINERVE_PAGE_BODY %}
+<div class="position-absolute top-50 start-50 translate-middle text-white" id="gdl_loading_message">
+<h1 class="align-middle"><i class="fa-duotone fa-solid fa-spinner-third fa-spin mx-1"></i>{%  translate "Generating new Tickets..." %}</h1>
+</div>
+<div class="position-absolute top-50 start-50 translate-middle text-white" id="gdl_empty_message" style="z-index: 100;">
+<h2 class="align-middle"><i class="fa-duotone fa-solid fa-square-0 mx-1"></i>{%  translate "Oops! No tickets were generated with current settings!" %}</h2>
+<h3 class="align-middle"><i class="fa-duotone fa-solid fa-lightbulb-exclamation-on mx-1"></i>Click below to change your settings and try again!</h3>
+<button id="gdl_settings_ntk" class="btn btn-primary  p-2 m-2 me-4 btn-lg" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Change Ticket settings" data-bs-original-title="Settings"><i class="fa-duotone fa-solid fa-gear"></i> Settings</button>
+</div>
+<br/>
+
+
+<br/>
+
+<div class="w-100 h-100 row gx-0 ps-2 pe-0 me-0" id="gdl_play_area">
+
+
+</div>
+<div id="gdl_setup_card" class="card h-70 m-2 p-2" data-bs-theme="{{ MINERVE_BODY_THEME }}">
+
+    <div class="card-header">
+        <h1> <i class="fa-duotone fa-solid fa-gear"></i> &#160; {% translate "Choose your Options!" %}</h1>
+        <h6 class="d-none d-lg-block" >Your dream play starts here! Pick how much to risk, how much to win, and what events to include!</h6>
+    </div>
+    <div class="card-body text-center w-100" id="basic_settings">
+        <form onsubmit="gdlapp.start(event); return false;" method="POST" action="#" data-post-url="generate/tickets" id="parameter_form" data-ruleset="'{{ ruleset }}'">
+        {% csrf_token %}
+        <input type="hidden" name="ruleset" id="ruleset" value="{{ ruleset }}" />
+        <input type="hidden" name="vhost" id="vhost" value="{{ vhost.uuid }}" />
+        <input type="hidden" name="vdomain" id="vdomain" value="{{ vdomain.uuid }}" />
+        <input type="hidden" name="account" id="account" value="{{ account.uuid }}" />
+        {% crispy setup_form %}
+
+        </form>
+    </div>
+    <div class="card-body text-left w-100" id="advanced_settings">
+        <form onsubmit="gdlapp.start(event); return false;" method="POST" action="#" data-post-url="generate/tickets" id="adv_parameter_form" data-ruleset="'{{ ruleset }}'">
+        {% csrf_token %}
+        <input type="hidden" name="ruleset" id="ruleset" value="{{ ruleset }}" />
+        <input type="hidden" name="vhost" id="vhost" value="{{ vhost.uuid }}" />
+        <input type="hidden" name="vdomain" id="vdomain" value="{{ vdomain.uuid }}" />
+        <input type="hidden" name="account" id="account" value="{{ account.uuid }}" />
+        <h6 class="d-none d-lg-block">Basic Settings:</h6>
+        <div class="row"> <div class="col row"> <div id="div_id_stake" class="mb-3"> <label for="id_stake" class="form-label requiredField">
+        Risk:<span class="asteriskField">*</span> </label> <input type="number" name="stake" value="1" min="1" max="1000"  class="numberinput form-control" required="" id="id_stake" data-bs-toggle="tooltip" data-bs-title="How much to risk per ticket? $1 up to $1,000" data-bs-placement="bottom"> </div> </div>
+        <div class="col row"> <div id="div_id_events" class="mb-3"> <label for="id_events" class="form-label requiredField">
+        Events:<span class="asteriskField">*</span> </label> <input type="number" name="depth" value="7" min="1" max="20" class="numberinput form-control" required="" id="id_depth" data-bs-toggle="tooltip" data-bs-title="How many Events to include? 1 to 20." data-bs-placement="bottom"> </div> </div>
+        <div class="col-5 row"> <div id="div_id_min_payout" class="mb-3"> <label for="id_min_payout" class="form-label requiredField">
+        Win:<span class="asteriskField">*</span> </label> <input type="number" name="min_payout" value="2500" min="100" max="100000" class="numberinput form-control" required="" id="id_min_payout" data-bs-toggle="tooltip" data-bs-title="Enter Your Desired Win Amount! Up to $100,000." data-bs-placement="bottom"> </div> </div>
+        <div class="col row"> <div id="div_id_event_cutoff" class="mb-3"> <label for="id_event_cutoff" class="form-label requiredField">
+        Time Frame:<span class="asteriskField">*</span> </label> <select name="events_within" class="select form-select" id="id_events_within" data-bs-toggle="tooltip" data-bs-title="Only select events starting within..." data-bs-placement="top"><option value="129600">36 Hours</option> <option value="86400">24 Hours</option> <option value="43200">12 Hours</option> <option value="21600">6 Hours</option> <option value="10800">3 Hours</option>
+
+        </select> </div> </div>
+
+
+        </div>
+        <hr class="border-2 border-opacity-50 d-none d-lg-block"/>
+        <h6  class="d-none d-lg-block">Including Sports:</h6>
+
+        {% for sport in filter_sports %}
+
+        <div class="form-check form-check-inline">
+          <input class="form-check-input sport-entry" type="checkbox" value="{{ sport.uuid }}" id="sport_{{ forloop.counter }}" name="sport_{{ forloop.counter }}" />
+          <label class="form-check-label" for="id_sport_{{ forloop.counter }}">
+            {% if sport.sport %}
+              {{ sport.sport.title }}
+            {% else %}
+              {{ sport.group.name }}
+            {% endif %}
+          </label>
+        </div>
+
+        {% endfor %}
+        <br/>
+        <button type="submit" class="btn btn-outline-success w-50 pt-2 pb-2" onclick='$(".sport-entry:not(:checked)").click();'>Include All Sports</button>
+        <br/>
+        <br/>
+        <input type="hidden" name="count" value="15" max="30"  id="id_count">
+        <button type="submit" class="btn btn-primary w-100 pt-2 pb-2" >Get Tickets!</button>
+        <br/><br/>
+        <button type="button" class="btn btn-outline-primary w-100 pt-2 pb-2" onclick="gdlapp._reset_mode();">Back...</button>
+        </form>
+
+    </div>
+
+</div>
+
+<div id="quick-picks" class="card m-2 p-2">
+    <div  class="card-body text-left w-100">
+        <h3><i class="fa-duotone fa-solid fa-stars pe-1"></i>Quick Picks!</h3>
+        <p>{% translate "Quick picks are AI-chosen tickets on 4 events to win roughly 20 for 1 risked." %} </p>
+           <form onsubmit="gdlapp.start_qp(event); return false;" method="POST" action="#" data-post-url="generate/quickpick" id="quick_pick_form" data-ruleset="'{{ ruleset }}'">
+        {% csrf_token %}
+        <input type="hidden" name="ruleset" id="ruleset" value="{{ ruleset }}" />
+        <input type="hidden" name="min_payout" id="min_payout" value="20" />
+        <input type="hidden" name="events_within" id="events_within" value="36" />
+        <input type="hidden" name="depth" id="depth" value="4" />
+        <input type="hidden" name="stake" id="stake" value="1" />
+           <input type="hidden" name="vhost" id="vhost" value="{{ vhost.uuid }}" />
+        <input type="hidden" name="vdomain" id="vdomain" value="{{ vdomain.uuid }}" />
+        <input type="hidden" name="account" id="account" value="{{ account.uuid }}" />
+        <div class="row"> <div class="col pt-3">
+            <h6>Ticket Count:</h6>
+        </div>
+        <div class="col">
+         <input type="number" name="count" value="5" min="5" max="100" class="numberinput form-control w-50" required="" id="id_count" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Enter How many QuickPicks to Generate!">
+        </div>
+        <div class="row"><div class="col pt-3">
+                <button type="submit" class="btn btn-primary w-100 pt-2 pb-2" >Get Quick Picks!</button>
+        </div></div>
+        <div class="row"><div class="col pt-3">
+{#                <button type="button" class="btn btn-outline-primary w-100 pt-2 pb-2" onclick="gdlapp._reset_mode();">Back...</button>#}
+        </div></div>
+        </div>
+       </form>
+
+
+    </div>
+</div>
+
+
+{% endblock %}
+{% block MINERVE_PAGE_FOOTER %}
+
+{% include "gdlfront/dashboard/play_app/play_controls.html" %}
+<div id="__modal_area"></div>
+<script type="text/javascript">
+$(".sport-entry:not(:checked)").click();
+</script>
+
+{% include "minerve/pages/dynamic_dashboard/loading_toast.html" %}
+
+{% include "gdlfront/dashboard/play_app/offcanvas_cart.html" %}
+{% include "gdlfront/dashboard/play_app/bet_form.html" %}
+<script src="/static/minerve/js/components/dynamic_dashboard/helper.js"></script>
+<script type="module" src="/static/gdlfront/js/loader.js"></script>
+<script type="module" src="/static/mycashier/js/Cashier/loader.js"></script>
+<script type="module" src="/static/kiosk/js/Kiosk/loader-timeout.js"></script>
+{% include "kiosk/timeout_modal.html" %}
+    {% include "lobby/dashboard/account/login/signup_modal.html" %}
+{#    <link rel="stylesheet" href="/static/frontend/lobby/themes/supernova/css/tickets.css"/>#}
+    <link rel="stylesheet" href="/static/frontend/lobby/themes/supernova/css/ticketmodals.css"/>
+    <link rel="stylesheet" href="/static/frontend/lobby/themes/supernova/css/minerve_theme.css"/>
+{% endblock %}
+
+
+
+{% block bootstrap5_title %}
+    {{ vdomain.website_name }}: Get Tickets!
+{% endblock %}
+
+
+{% block MINERVE_NAV_LOGIN_AREA %}
+    <div id="kiosk_balance_area">
+        <i class="fa-solid fa-user pe-2"></i><span id="bal_acctnum">{{ account.acctnum }}</span>
+        |
+        <i class="fa-duotone fa-solid fa-money-bill-wave pe-2"></i><span id="bal_amount">${{ available_balance|floatformat:1|intcomma:3 }}</span>
+        |
+        <i class="fa-duotone fa-solid fa-gift-card pe-2"></i><span id="bal_bonus">{{ available_bonus|floatformat:1|intcomma:3 }}</span>
+        |
+        <button id="kiosk_reset" onclick="location.href='/kiosk';" class="btn btn-outline-warning">Main Menu</button>
+    </div>
+{% endblock %}
+
+
+{% block MINERVE_COLOUR_MODE_SWITCH %}
+
+{% endblock %}

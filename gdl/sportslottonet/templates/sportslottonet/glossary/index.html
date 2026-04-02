@@ -1,0 +1,27 @@
+{% extends "sportslottonet/base/page.html" %}
+{% load static %}
+{% block bootstrap5_title %} SPORTSLOTTO: Glossary {% endblock %}
+{% block PAGE_BODY %}
+<section class="glossary-section">
+  <div class="glossary-container">
+    <h1 class="glossary-title">Sports Lotto Glossary</h1>
+
+    <p class="glossary-intro">
+      SportsLotto.net is a free-to-play, non-gambling sports prediction game.
+      This glossary explains common terms used across the site.
+    </p>
+
+    <input
+      type="text"
+      id="glossarySearch"
+      placeholder="Search terms..."
+      class="glossary-search"
+      aria-label="Search glossary terms"
+    />
+
+    <div id="glossaryList" class="glossary-list"></div>
+  </div>
+</section>
+
+<script src="{% static 'sportslottonet/js/glossary.js' %}"></script>
+{% endblock %}

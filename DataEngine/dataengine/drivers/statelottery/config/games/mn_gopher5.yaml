@@ -1,0 +1,34 @@
+# Minnesota - Gopher 5
+# Draws Monday, Wednesday, and Friday at 6:17 PM CT
+# Pick 5 numbers from 1-47
+
+state: MN
+name: "Gopher 5"
+slug: mn-gopher5
+url: "https://www.mnlottery.com/games/lotto/gopher-5"
+game_type: pool
+
+format:
+  main_count: 5
+  main_range: [1, 47]
+  bonus_count: 0
+  bonus_range: null
+  is_positional: false
+
+schedule:
+  days: [monday, wednesday, friday]
+  times:
+    - time: "18:17"
+      label: null
+  timezone: "America/Chicago"
+
+selectors:
+  all_numbers: ".winning-numbers span, .ball, .number"
+  draw_date: ".draw-date, .date"
+
+parser:
+  number_extractor: "text_content"
+  date_format: "%m/%d/%Y"
+  split_main_bonus: false
+
+active: false

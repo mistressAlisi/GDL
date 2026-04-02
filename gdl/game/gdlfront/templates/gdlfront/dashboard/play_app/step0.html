@@ -1,0 +1,297 @@
+{#{% extends "lobby/dashboard/index.html" %}#}
+{% extends "minerve/pages/responsive_dashboard/index.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block DYNAMIC_DASHBOARD_PRE_BODY %}
+{#{% include "gdlfront/dashboard/play_app/param_form.html" %}#}
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY %}
+
+
+<div class="position-absolute top-50 start-50 translate-middle text-white" id="gdl_loading_message" style="opacity: 0;">
+<h1 class="align-middle"><i class="fa-duotone fa-solid fa-spinner-third fa-spin mx-1"></i>{%  translate "Generating new Tickets..." %}</h1>
+</div>
+<div class="position-absolute top-50 start-50 translate-middle text-white" id="gdl_empty_message" style="z-index: 100; opacity: 0;">
+<h2 class="align-middle"><i class="fa-duotone fa-solid fa-square-0 mx-1"></i>{%  translate "Oops! No tickets were generated with current settings!" %}</h2>
+<h3 class="align-middle"><i class="fa-duotone fa-solid fa-lightbulb-exclamation-on mx-1"></i>{% translate "Click below to change your settings and try again!" %}</h3>
+<button id="gdl_settings_ntk" class="btn btn-primary  p-2 m-2 me-4 btn-lg" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{% translate "Change Ticket settings" %}" data-bs-original-title="{% translate "Settings" %}"><i class="fa-duotone fa-solid fa-gear"></i> {% translate "Settings" %}</button>
+</div>
+<br/>
+
+
+<br/>
+
+<div
+  id="gdl_play_area"
+  class="
+    w-100
+    row gx-0 ps-2 pe-0 me-0
+    justify-content-md-start
+    justify-content-center
+  "
+  style="min-height: 100vh;"
+>
+
+</div>
+<div id="gdl_setup_card" class="card h-70 m-2 p-2" data-bs-theme="{{ MINERVE_BODY_THEME }}">
+
+
+    <!-- Account Balance Table -->
+    <div class="card-body w-100 mb-3">
+        <table class="table account-balance-table mb-2">
+            <thead>
+                <tr class="balance-header-row">
+                    <th scope="col">{% translate "Balance" %}</th>
+                    <th scope="col">{% translate "Pending" %}</th>
+                    <th scope="col">{% translate "Avail." %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="balance-data-row">
+                    <td id="balance">{{ current_balance|floatformat:2 }}</td>
+                    <td id="pending" class="pending_bal">{{ pending_balance|floatformat:2 }}</td>
+                    <td id="avail_balance" class="avail_bal">{{ available_balance|floatformat:2 }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Side by Side Cards Container -->
+<div class="row g-3 w-100">
+        <!-- Quick Picks Card -->
+{% if qp %}
+
+
+<div id="quick-picks" class="col-12 col-md-12 order-1 order-md-1">
+
+            <h1><i class="fa-duotone fa-solid fa-stars pe-1"></i>{% translate "Quick Picks!" %}</h1>
+            <p>{% translate "Quick picks are AI-chosen tickets on 4 events to win roughly 20 for 1 risked." %}</p>
+            <form onsubmit="gdlapp.start_qp(event); return false;" method="POST" action="#" data-post-url="generate/quickpick" id="quick_pick_form" data-ruleset="'{{ ruleset }}'">
+                {% csrf_token %}
+                <input type="hidden" name="ruleset" id="ruleset" value="{{ ruleset }}" />
+                <input type="hidden" name="min_payout" id="min_payout" value="20" />
+                <input type="hidden" name="events_within" id="events_within" value="129600" />
+                <input type="hidden" name="vhost" id="vhost" value="{{ vhost.uuid }}" />
+                <input type="hidden" name="vdomain" id="vdomain" value="{{ vdomain.uuid }}" />
+                <input type="hidden" name="account" id="account" value="{{ account.uuid }}" />
+                <input type="hidden" name="depth" id="depth" value="4" />
+
+         <div class="row justify-content-center align-items-center g-3">
+
+  <!-- Ticket Count -->
+  <div class="col-12 col-md-auto d-flex justify-content-center align-items-center gap-2">
+    <h6 class="mb-0">{% translate "Ticket Count:" %}</h6>
+    <input
+      type="number"
+      name="count"
+      value="5"
+      min="5"
+      max="9999"
+      class="numberinput form-control"
+      id="id-count"
+      data-bs-toggle="tooltip"
+      data-bs-placement="bottom"
+      data-bs-title="{% translate "Enter How many QuickPicks to Generate!" %}">
+  </div>
+
+  <!-- Risk Amount -->
+  <div class="col-12 col-md-auto d-flex justify-content-center align-items-center gap-2">
+    <h6 class="mb-0">{% translate "Risk Amount:" %}</h6>
+    <input
+      type="number"
+      name="stake"
+      value="1"
+      min="1"
+      max="10"
+      class="numberinput form-control"
+      id="id-stake"
+      data-bs-toggle="tooltip"
+      data-bs-placement="bottom"
+      data-bs-title="{% translate "Enter Risk Amount" %}"
+      onchange="gdlapp.update_qp(event)";
+    >
+  </div>
+
+</div>
+
+
+                <div class="row mt-3">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary w-100 pt-2 pb-2">{% translate "Get Quick Picks!" %}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+{% endif %}
+        <!-- Custom Tickets / Basic Settings Card -->
+  <!-- Custom Tickets -->
+{% if cst %}
+
+
+ <div id="basic_settings"
+     class="col-12 col-md-12 order-2 order-md-2">
+
+
+
+            <h1><i class="fa-duotone fa-solid fa-search pe-1"></i>{% translate "Custom Tickets:" %}</h1>
+            <h6 class="d-none d-lg-block">{% translate "Your dream play starts here! Pick how much to risk, how much to win, and what events to include!" %}</h6>
+
+            <form onsubmit="gdlapp.start(event); return false;" method="POST" action="#" data-post-url="generate/tickets" id="parameter_form" data-ruleset="'{{ ruleset }}'">
+                {% csrf_token %}
+                <input type="hidden" name="ruleset" id="ruleset" value="{{ ruleset }}" />
+                <input type="hidden" name="vhost" id="vhost" value="{{ vhost.uuid }}" />
+                <input type="hidden" name="vdomain" id="vdomain" value="{{ vdomain.uuid }}" />
+                <input type="hidden" name="account" id="account" value="{{ account.uuid }}" />
+                <input type="hidden" name="events_within" id="events_within" value="129600" />
+                <div id="custom_settings">
+                    {% for group in filter_groups %}
+                    <div class="form-check form-check-inline">
+                    <input class="form-check-input sport-entry" type="checkbox" value="{{ group.uuid }}" id="group_{{ forloop.counter }}" name="group_{{ forloop.counter }}" />
+                    <label class="form-check-label" for="id_group_{{ forloop.counter }}">{{ group.name }}</label>
+                    </div>
+                    {% endfor %}
+
+                    {% for sport in filter_sports %}
+                    <div class="form-check form-check-inline">
+                    <input class="form-check-input sport-entry" type="checkbox" value="{% if sport.sport %}{{ sport.sport.uuid }}{% else %}{{ sport.group.uuid }}{% endif %}" id="sport_{{ forloop.counter }}" name="sport_{{ forloop.counter }}" />
+                    <label class="form-check-label" for="id_sport_{{ forloop.counter }}">
+                    {% if sport.sport %}{{ sport.sport.title }}{% else %}{{ sport.group.name }}{% endif %}
+                    </label>
+                    </div>
+
+                    {% endfor %}
+                    <div class="col row">
+                    <div id="div_id_event_cutoff" class="mb-3">
+                    <label for="id_event_cutoff" class="form-label requiredField">{% translate "Time Frame:" %}<span class="asteriskField">*</span></label>
+                    <select name="events_within" class="select form-select" id="id_events_within" data-bs-toggle="tooltip" data-bs-title="{% translate "Only select events starting within..." %}" data-bs-placement="top">
+                    <option value="129600">{% translate "36 Hours" %}</option>
+                    <option value="86400">{% translate "24 Hours" %}</option>
+                    <option value="43200">{% translate "12 Hours" %}</option>
+                    <option value="21600">{% translate "6 Hours" %}</option>
+                    <option value="10800">{% translate "3 Hours" %}</option>
+                    </select>
+                    </div>
+                    </div>
+                    </div>
+                {% crispy setup_form %}
+
+
+            </form>
+
+        </div>
+
+    </div>
+{% endif %}
+    <hr class="border-2 mt-3 mb-3"/>
+
+{#    <!-- Advanced Settings -->#}
+{#    <div id="advanced_settings" class="card-body text-left w-100">#}
+{#        <form onsubmit="gdlapp.start(event); return false;" method="POST" action="#" data-post-url="generate/tickets" id="adv_parameter_form" data-ruleset="'{{ ruleset }}'">#}
+{#            {% csrf_token %}#}
+{#            <input type="hidden" name="ruleset" id="ruleset" value="{{ ruleset }}" />#}
+{#            <input type="hidden" name="vhost" id="vhost" value="{{ vhost.uuid }}" />#}
+{#            <input type="hidden" name="vdomain" id="vdomain" value="{{ vdomain.uuid }}" />#}
+{#            <input type="hidden" name="account" id="account" value="{{ account.uuid }}" />#}
+{##}
+{#            <h6 class="d-none d-lg-block">{% translate "Basic Settings:" %}</h6>#}
+{#            <div class="row">#}
+{#                <div class="col row">#}
+{#                    <div id="div_id_stake" class="mb-3">#}
+{#                        <label for="id_stake" class="form-label requiredField">{% translate "Risk:" %}<span class="asteriskField">*</span></label>#}
+{#                        <input type="number" name="stake" value="1" min="1" max="1000" class="numberinput form-control" required="" id="id_stake" data-bs-toggle="tooltip" data-bs-title="{% translate 'How much to risk per ticket? $1 up to $1,000' %}" data-bs-placement="bottom">#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col row">#}
+{#                    <div id="div_id_events" class="mb-3">#}
+{#                        <label for="id_events" class="form-label requiredField">{% translate "Events:" %}<span class="asteriskField">*</span></label>#}
+{#                        <input type="number" name="depth" value="7" min="1" max="20" class="numberinput form-control" required="" id="id_depth" data-bs-toggle="tooltip" data-bs-title="{% translate 'How many Events to include? 1 to 20.' %}" data-bs-placement="bottom">#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-5 row">#}
+{#                    <div id="div_id_min_payout" class="mb-3">#}
+{#                        <label for="id_min_payout" class="form-label requiredField">{% translate "Win:" %}<span class="asteriskField">*</span></label>#}
+{#                        <input type="number" name="min_payout" value="2500" min="100" max="100000" class="numberinput form-control" required="" id="id_min_payout" data-bs-toggle="tooltip" data-bs-title="{% translate 'Enter Your Desired Win Amount! Up to $100,000.' %}" data-bs-placement="bottom">#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            <hr class="border-2 border-opacity-50 d-none d-lg-block"/>#}
+{#            <h5 class="d-none d-lg-block">{% translate "Including Sports:" %}</h5>#}
+{##}
+{##}
+{##}
+{#            <br/>#}
+{#            <button type="submit" class="btn btn-outline-success w-50 pt-2 pb-2" onclick='$(".sport-entry:not(:checked)").click();'>{% translate "Include All Sports" %}</button>#}
+{#            <br/><br/>#}
+{#            <input type="hidden" name="count" value="15" max="30" id="id_count">#}
+{##}
+{#            <div class="row mt-3">#}
+{#                <div class="col">#}
+{#                    <button type="submit" class="btn btn-primary w-100 pt-2 pb-2">Get Tickets!</button>#}
+{#                </div>#}
+{#                <div class="col">#}
+{#                    <button type="submit" class="btn btn-primary w-100 pt-2 pb-2">View Cart</button>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            <br/><br/>#}
+{#            <button type="button" class="btn btn-outline-primary w-100 pt-2 pb-2" onclick="gdlapp._reset_mode();">{% translate "Back..." %}</button>#}
+{#        </form>#}
+{#    </div>#}
+
+</div>
+
+
+
+
+{% endblock %}
+{% block MINERVE_PAGE_FOOTER %}
+<div id="__modal_area"></div>
+<script type="text/javascript">
+$(".sport-entry:not(:checked)").click();
+</script>
+
+{% include "minerve/pages/dynamic_dashboard/loading_toast.html" %}
+
+{% include "gdlfront/dashboard/play_app/offcanvas_cart.html" %}
+{% include "gdlfront/dashboard/play_app/bet_form.html" %}
+    <script src="/static/minerve/js/components/dynamic_dashboard/helper.js"></script>
+    <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
+    <script type="module" src="/static/gdlfront/js/loader.js"></script>
+    <script type="module" src="/static/mycashier/js/Cashier/loader.js"></script>
+    <script type="module" src="/static/frontend/lobby/js/Notifier/loader.js"></script>
+    {% include "lobby/dashboard/account/login/signup_modal.html" %}
+{#    <link rel="stylesheet" href="/static/frontend/lobby/themes/supernova/css/tickets.css"/>#}
+    <link rel="stylesheet" href="/static/frontend/lobby/themes/supernova/css/ticketmodals.css"/>
+    <link rel="stylesheet" href="/static/frontend/lobby/themes/supernova/css/minerve_theme.css"/>
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_BODY_FOOTER %}
+
+{#{% include "gdlfront/dashboard/play_app/play_controls.html" %}#}
+{% include "lobby/index/theme_switcher.html" %}
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+{% include "lobby/dashboard/components/account_sidebar_header.html" %}
+{% endblock %}
+{% block bootstrap5_title %}
+    {{ vdomain.website_name }}: Get Tickets!
+{% endblock %}
+
+{% block MINERVE_PAGE_NAV_BRAND %}
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="{{ vdomain.icon_redirect_url }}">
+      {% if vdomain.website_icon %}
+            <img src="{{ vdomain.website_icon.url }}" alt="icon" width="40" height="40" class=" d-none me-2 d-lg-block">
+      {% elif vhost.website_icon %}
+          <img src="{{ vhost.website_icon.url }}" alt="icon" width="40" height="40" class=" d-none me-2 d-lg-block">
+      {% endif %}
+      {% if vdomain.show_website_name %}
+        <span class="d-none d-md-inline">{{ vdomain.website_name }}</span>
+      {% endif %}
+    </a>
+{% endblock %}
+
+{% block MINERVE_PAGE_NAV_HEADER_POST_MENU %}
+<button id="gdl_buy_now" class="btn btn-danger  p-1 m-2 ms-4"   data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{% translate "Buy selected tickets" %}" title="{% translate "Buy now!" %}"><i class="fa-duotone fa-solid fa-shopping-cart "></i> {% translate "Cart" %} <span id="gdl_active_cnt" class="badge rounded-pill text-bg-success">0</span></button>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "lobby/dashboard/index.html" %}
+{% load django_bootstrap5 %}
+{% load mathfilters %}
+{% block MINERVE_PAGE_SUBTITLE %}: Cashier - Completed Transactions {% endblock %}
+
+{% block DYNAMIC_DASHBOARD_BODY %}
+<div class="card w-100 h-100 m-2 p-2" data-bs-theme="{{ MINERVE_BODY_THEME }}">
+    <div class="card-header">
+        <h1> <i class="fa-duotone fa-solid fa-check" style="color: #dd8fda;"></i> &#160;Completed Transactions </h1>
+        <p>These are all your completed transactions registered for your account.</p>
+
+
+    <div class="card-body">
+           <table class="table table-responsive table-hover text-center table-striped">
+            <thead>
+                <tr>
+                    {% for row in table_header_rows %}
+                        <th scope="row">{{ row }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in table_rows %}
+                    <tr>
+                        <td>{{ row.get_type_display }}</td>
+                        <td>{{ row.txn_id }}</td>
+                        <td>{{ row.updated }}</td>
+                        <td>{{ row.currency1 }}</td>
+                        <td>{{ row.amount1 }}</td>
+                        <td>{{ row.currency2 }}</td>
+                        <td>{{ row.amount2 }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+    <div class="row">
+    <div class="col pt-2 pb-2">
+    <a class="nav-link" href="/my/profile" title="My Account"><i class="fa-duotone fa-solid fa-circle-user pe-2"></i> #{{ account.acctnum }}</a>
+    </div>
+    <div class="col pt-2 pb-2">
+        <a href="#" onclick="{% if vdomain.demo_mode %}alert('Cashier disabled in Demo.') {% else %} cashier.start_deposit_modal() {% endif %}" id="balance-link" title="Available Balance">
+        <i class="fa-duotone fa-solid fa-coins pe-2"></i><span class="avail_balance">Balance: {{ available_balance |floatformat:2 }}</span></a>
+    </div>
+    </div>
+    <hr class="border-2 border-opacity-50 border-success"/>
+{% endblock %}

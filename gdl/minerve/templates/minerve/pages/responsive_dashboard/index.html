@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+{% load django_bootstrap5 %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE|default:'en' }}" class="h-100" data-bs-theme="{% if MINERVE_BODY_THEME %}{{MINERVE_BODY_THEME}}{% else %}dark{% endif %}">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="/static/frontend/lobby/img/icon.png" type="image/png">
+    <!-- Page title -->
+    <title>{% block bootstrap5_title %}
+        {{ apperance.site_name }}
+    {% endblock %}</title>
+    <!-- poppler !-->
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <!--     JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bs5-toast/dist/bs5-toast.js"></script>
+    <!-- Bootstrap CSS -->
+    {% bootstrap_css %}
+
+    <!-- Bootstrap JavaScript: !-->
+     {% bootstrap_javascript %}
+    <script src="/static/minerve/js/components/bootstrap/colour-modes.js"></script>
+
+    <!-- Font Awesome !-->
+    {% if FONT_AWESOME_KIT %}
+        <script src="https://kit.fontawesome.com/{{ FONT_AWESOME_KIT }}" crossorigin="anonymous"></script>
+    {% endif %}
+
+    <!-- Animate CSS !-->
+{#     <link  rel="stylesheet"  href="/static/animate.css/animate.css" />#}
+    <!-- Fonts! -->
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Teko:wght@300..700&display=swap&family=Dancing+Script:wght@400..700&display=swap&family=Monoton&display=swap');
+    </style>
+    <!-- Custom styles for this template -->
+
+    {% for css in MINERVE_PAGE_CSS %}
+        <link href="/static/{{ css.css_file_path }}" rel="stylesheet">
+    {% endfor %}
+    {% block MINERVE_HEADER_END_BLOCK %}
+    {% endblock %}
+  </head>
+  <body class="text-center" {% if MINERVE_BODY_THEME %} data-bs-theme="{{ MINERVE_BODY_THEME }}"{% endif %}>
+      <!-- custom body Scripts !-->
+    {%  for js in MINERVE_PAGE_JS %}
+    <script src='{{ js }}'></script>
+    {% endfor %}
+
+{% block MINERVE_PAGE_NAV_HEADER %}
+<header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
+{% block MINERVE_PAGE_NAV_BRAND %}
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="{{ vdomain.icon_redirect_url }}">
+      {% if vdomain.website_icon %}
+            <img src="{{ vdomain.website_icon.url }}" alt="icon" width="40" height="40" class=" d-none me-2 d-lg-block">
+      {% elif vhost.website_icon %}
+          <img src="{{ vhost.website_icon.url }}" alt="icon" width="40" height="40" class=" d-none me-2 d-lg-block">
+      {% endif %}
+      {% if vdomain.show_website_name %}
+        <span class="d-none d-md-inline">{{ vdomain.website_name }}</span>
+      {% endif %}
+    </a>
+{% endblock %}
+{% block MINERVE_PAGE_NAV_HEADER_POST_MENU %}
+{% endblock %}
+    <ul class="navbar-nav flex-row d-md-none">
+{#    <li class="nav-item text-nowrap">#}
+{#    <button class="nav-link px-3 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSearch" aria-controls="navbarSearch" aria-expanded="false" aria-label="Toggle search">#}
+{#        <i class="fa-duotone fa-solid fa-magnifying-glass"></i> </button>#}
+{#    </li>#}
+        <li class="nav-item text-nowrap"> <button class="nav-link px-3 text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"><i class="fa-duotone fa-solid fa-bars"></i> </button> </li>
+    </ul>
+{#    <div id="navbarSearch" class="navbar-search w-100 collapse">#}
+{#        <input class="form-control w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">#}
+{#    </div>#}
+</header>
+{% endblock %}
+
+{% block MINERVE_PAGE_BODY %}
+  {% block DYNAMIC_DASHBOARD_PRE_BODY %}
+  {% endblock %}
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+            <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel" style="height: 100vh;">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title text-info" id="sidebarMenuLabel">{{ vdomain.website_name }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+                        {% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+                        {% endblock %}
+                        <ul class="nav flex-column">
+                            {% for entry in DYNAMIC_DASHBOARD_SIDE_MENU %}
+
+
+                              <li class="nav-item">
+                               <a class="nav-link d-flex align-items-center gap-2 text-info sidebar-nav-link" {% if entry.onclick %} onclick="{{ entry.onclick }}"{% endif %}
+                                       {% if entry.help_text %} title="{{ entry.help_text }}"{% endif %} aria-current="page" href="{{ entry.url }}"
+                                        {% if entry.target_url %} data-target-url="{{ entry.target_url }}"{% endif %}
+                                        {% if entry.html_target %} target="{{ entry.html_target }}" {% endif %}
+                                       {%  if entry.active %} active="active"{% endif %}
+
+                                  {% if entry.submenu_entries %}
+                                       data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#col_{{ forloop.counter }}"
+                                  {% endif %}
+                                  >
+                                   {% if entry.icon %}<i class="{{ entry.icon }}"></i>{% endif %} {{ entry.name }}
+                               </a>
+                              </li>
+
+                                   <ul class="nav flex-column collapse" id="col_{{ forloop.counter }}">
+                                   {% for sub in entry.submenu_entries %}
+                                      <li class="nav-item">
+                                        <a class="nav-link d-flex  gap-2 sidebar-nav-link" href="{{ sub.url }}"
+                                           {% if sub.active %}active="active"{% endif %}
+                                            {% if sub.target_url %} data-target-url="{{ sub.target_url }}"{% endif %}
+                                           title="{{ sub.name }}" help_text="{{ sub.help_text }}"
+                                            {% if sub.html_target %} target="{{ sub.html_target }}" {% endif %}
+                                           >
+                                          <i class="{{ sub.icon }} me-2"></i> <span>{{ sub.name }}</span>
+
+                                        </a>
+                                      </li>
+                                   {% endfor %}
+                                   </ul>
+                                  </li>
+
+
+
+
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+            </div>
+
+        </div>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" id="main-content-v2">
+             {% block DYNAMIC_DASHBOARD_BODY %}
+        <div class=" justify-content-center align-items-center text-center">
+          <h1>Main Content Area</h1>
+          <p class="lead">Replace the DYNAMIC_DASHBOARD_BODY block to put content here.</p>
+        </div>
+      {% endblock %}
+        </main>
+    </div>
+
+
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY_FOOTER %}
+  {% endblock %}
+      </div>
+  {% block MINERVE_PAGE_FOOTER %}
+  {% endblock %}
+  {% include "minerve/pages/dynamic_dashboard/loading_toast.html" %}
+  </body>

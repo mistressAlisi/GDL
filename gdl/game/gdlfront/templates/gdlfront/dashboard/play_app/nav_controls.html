@@ -1,0 +1,37 @@
+{% load i18n %}
+<div class="position-absolute top-100 start-50 translate-middle">
+<div class="modal-content rounded-0 rounded-top-3" id="gdl_play_controls" style="z-index: 1; min-width: 370px; position: relative; top: -50px;">
+
+<div>
+    <button id="gdl_settings_now" class="btn btn-primary btn-round p-1 m-2" title="{% translate "First Page" %}"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{% translate "First Page" %}"><i class="fa-duotone fa-solid fa-backward fa-3x"></i></button>
+    <button id="gdl_refresh_now" class="btn  btn-round btn-success  p-2 m-2" title="{% translate "Previous Page" %}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{% translate "Previous Page" %}"><i class="fa-duotone fa-solid fa-backward-step fa-2x"></i></button>
+
+    <button id="gdl_buy_now" class="btn btn-danger btn-round btn-lg p-1 m-2" style="position: relative; top: -32px;"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{% translate "Search/Filter, Go To" %}" title="{% translate "Search/Filter" %}"><i class="fa-duotone fa-solid fa-magnifying-glass fa-2x"></i></button>
+
+    <button id="gdl_cashier_now" onclick="" class="btn btn-success btn-round p-1 m-2" title="{% translate "Next Page" %}"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{% translate "Next Page" %}"><i class="fa-duotone fa-solid fa-forward-step fa-2x"></i></button>
+    <button id="gdl_more_now" onclick="" class="btn btn-primary btn-round p-1 m-2" title="{% translate "Last Page" %}"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{% translate "Last Page" %}><i class="fa-duotone fa-ellipsis fa-forward fa-2x"></i></button>
+
+
+</div>
+{##}
+<div class="d-flex justify-content-between pb-2 mb-1">
+<div class="col-2 ps-0 ms-0"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{% translate "Current/Total Pages" %}">
+<i class="fa-duotone fa-solid fa-page-caret-down"></i>
+    <span id="gdl_current_page">1</span>/<span id="gdl_total_pages">500</span>
+</div>
+<div class="col-6" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{% translate "Ticket navigation progress" %}">
+<div class="progress" role="progressbar" aria-label="{% translate "Page Stepper Progress Indicator" %}" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" >
+  <div class="progress-bar progress-bar-striped" id="gdl_progressbar" style="width: 10%"></div>
+</div>
+</div>
+<div class="col-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{% translate "Total Tickets" %}">
+<span id="gdl_total_tickets">7</span> <i class="fa-duotone fa-solid fa-file-lines p-1"></i>
+</div>
+</div>
+</div>
+</div>
+<script>
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
+

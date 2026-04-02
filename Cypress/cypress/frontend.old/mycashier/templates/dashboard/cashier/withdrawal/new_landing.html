@@ -1,0 +1,359 @@
+{% extends "minerve/pages/responsive_dashboard/index.html" %}
+{% load i18n %}
+{% load django_bootstrap5 %}
+{% block bootstrap5_title %}
+    {{ vdomain.website_name }}: {% translate "Cashier" %}
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY %}
+    <link href="/static/mycashier/css/cashierv2.css" rel="stylesheet" type="text/css"/>
+    <!-- Top navigation bar -->
+    {% csrf_token %}
+    <header class="sticky-top sticky-top-blur py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center gap-3">
+                <!-- Back button -->
+                <button class="topbar-btn" id="backButton">
+                    &#8592;
+                </button>
+
+                <div class="d-flex align-items-center gap-2">
+                    <div class="gradient-icon">💰</div>
+                    <h1 class="h5 mb-0">{% translate "Withdraw" %}</h1>
+                </div>
+
+            </div>
+
+            <div class="d-flex align-items-center gap-2">
+
+                <!-- Notification bell -->
+                <button class="topbar-btn position-relative" id="alertBellBtn">
+                    🔔
+                    {% if unread_alert_count > 0 %}
+                    <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger rounded-circle" id="alertBadge"></span>
+                    {% endif %}
+                </button>
+
+                <!-- Help button -->
+                <button class="topbar-btn" id="helpButton">
+                    ❓
+                </button>
+
+                <!-- Profile glass card -->
+                <div class="d-none d-md-flex align-items-center gap-3 px-4 py-2 topbar-profile">
+                    <div class="gradient-icon profile-avatar-cashier">
+                        {% if account.avatar %}
+                            <img
+                                    src="{{ account.avatar.url }}"
+                                    alt="Profile avatar"
+                                    loading="lazy"
+                            />
+                        {% else %}
+                            <span>👤</span>
+                        {% endif %}
+                    </div>
+                    <div class="text-white">
+                        <div class="fw-bold">{{ account.acctnum }}</div>
+                        <div class="text-info fw-bold">${{ balance|floatformat:2 }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="container py-4">
+        <!-- Quick stats - mobile -->
+        <div class="d-md-none mb-3">
+            <div class="balance-widget">
+                <div class="d-flex align-items-center gap-3 mb-4">
+                    <div class="p-2 bg-info bg-opacity-25 rounded-xl">💰</div>
+                    <h3 class="h6 mb-0">{% translate "Your Balance" %}</h3>
+                </div>
+                <div class="row text-center g-2">
+                    <div class="col-4 card-item">
+                        <div class="text-light small mb-1">💵 {% translate "BALANCE" %}</div>
+                        <div class="text-info fw-bold fs-5" id="balanceTotal">${{ balance|floatformat:2 }}</div>
+                    </div>
+                    <div class="col-4 card-item">
+                        <div class="text-light small mb-1">⏰ {% translate "PENDING" %}</div>
+                        <div class="text-warning fw-bold fs-5" id="balancePending">${{ pending|floatformat:2 }}</div>
+                    </div>
+                    <div class="col-4 card-item">
+                        <div class="text-light small mb-1">📈 {% translate "AVAILABLE" %}</div>
+                        <div class="text-success fw-bold fs-5" id="balanceAvailable">
+                            ${{ available|floatformat:2 }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-3">
+            <!-- Left Column -->
+            <div class="col-lg-8">
+                <!-- Withdraw Amount and Withdraw Methods Row -->
+                <div class="row mt-3 g-3">
+                    <!-- Withdraw widget  -->
+                    <div class="col-md-6">
+                        <div class="sidebar-card text-center">
+                            <div class="d-flex align-items-center gap-2 mb-3 justify-content-center">
+                                <div class="p-2 bg-warning bg-opacity-25 rounded-xl">⚡</div>
+                                <div>
+                                    <h6 class="mb-0">{% translate "Withdraw Request" %}</h6>
+                                    <small class="text-purple">{% translate "Select amount or enter custom" %}</small>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-wrap justify-content-center gap-2 mb-3" id="quickAmountButtons">
+                                <button class="btn btn-outline-light btn-sm wd-amount-btn">$25</button>
+                                <button class="btn btn-outline-light btn-sm wd-amount-btn">$50</button>
+                                <button class="btn btn-outline-light btn-sm wd-amount-btn">$100</button>
+                                <button class="btn btn-outline-light btn-sm wd-amount-btn">$250</button>
+                                <button class="btn btn-outline-light btn-sm wd-amount-btn">$500</button>
+                                <button class="btn btn-outline-light btn-sm wd-amount-btn">$1000</button>
+                            </div>
+                            <div class="input-group mb-3" style="max-width:300px; margin:auto;">
+                                <span class="input-group-text">$</span>
+                                <input type="text" class="form-control text-white bg-dark border-secondary"
+                                       placeholder="{% translate "Enter custom amount" %}" id="customAmountInput">
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center p-2 bg-dark bg-opacity-25 rounded mb-3">
+                                <span class="text-purple">{% translate "Withdraw Amount:" %}</span>
+                                <span class="fw-bold text-info fs-4" id="withdrawDisplay">$100</span>
+                            </div>
+                            <button class="btn w-100 gradient-btn py-2 fw-bold" id="desktopWithdrawBtn" disabled>▬ {% translate "Withdraw" %} $100 →
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Withdraw Methods -->
+                    <div class="col-md-6">
+                        <div class="payment-widget">
+                            <div class="d-flex align-items-center gap-3 mb-4">
+                                <div class="p-2 bg-emerald-500/20 rounded-xl">🛡️</div>
+                                <div>
+                                    <h6 class="mb-0">{% translate "Withdraw Methods" %}</h6>
+                                    <small class="text-purple">{% translate "All transactions are secure & encrypted" %}</small>
+                                </div>
+                            </div>
+                            <div id="withdrawMethodButtons" class="d-grid gap-2">
+                                <button class="btn btn-outline-light text-start p-3 rounded payment-method-btn"
+                                        data-id="crypto">{% translate "Cryptocurrency" %}<br><small class="text-purple">BTC, ETH, USDT,
+                                    LTC</small></button>
+                                <button class="btn btn-outline-light text-start p-3 rounded payment-method-btn"
+                                        data-id="bank">{% translate "SEPA Bank Transfer" %}<br><small class="text-purple">{% translate "Direct bank transfer" %}</small></button>
+                            </div>
+                            <div id="cryptoOptions" class="d-none mt-3 p-2 bg-dark bg-opacity-25 rounded"><div class="crypto-inner"></div></div>
+                            <!-- NEW: E-Wallet submenu container -->
+                            <div id="ewalletOptions" class="d-none mt-3 p-2 bg-dark bg-opacity-25 rounded"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-lg-4">
+                <!-- Balance - desktop -->
+                <div class="d-none d-md-block balance-widget mb-3">
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <div class="p-2 bg-info bg-opacity-25 rounded-xl">💰</div>
+                        <h3 class="h6 mb-0">{% translate "Your Balance" %}</h3>
+                    </div>
+                    <div class="row text-center g-2">
+                        <div class="col-4 card-item">
+                            <div class="text-muted small mb-1">💵 {% translate "BALANCE" %}</div>
+                            <div class="text-info fw-bold fs-5" id="balanceTotalDesktop">
+                                ${{ balance|floatformat:2 }}</div>
+                        </div>
+                        <div class="col-4 card-item">
+                            <div class="text-muted small mb-1">⏰ {% translate "PENDING" %}</div>
+                            <div class="text-warning fw-bold fs-5" id="balancePendingDesktop">
+                                ${{ pending|floatformat:2 }}</div>
+                        </div>
+                        <div class="col-4 card-item">
+                            <div class="text-muted small mb-1">📈 {% translate "AVAILABLE" %}</div>
+                            <div class="text-success fw-bold fs-5" id="balanceAvailableDesktop">
+                                ${{ available|floatformat:2 }}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pro Tips -->
+                <div class="tips-card mb-3">
+                    <h6>💡 {% translate "Pro Tips" %}</h6>
+                    <ul class="mb-0">
+                        {% blocktranslate %}
+                        <li>Use crypto for 0% fees and faster processing</li>
+                        <li>SEPA transfers available for cash withdraws</li>
+                        {% endblocktranslate %}
+                    </ul>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="sidebar-card recent-activity mb-3 p-3" id="recentActivityWidget">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <div class="p-2 bg-blue-500 bg-opacity-25 rounded-xl">🕒</div>
+                        <div>
+                            <h6 class="mb-0">{% translate "Recent Activity" %}</h6>
+                            <small class="text-purple">{% translate "Your latest transactions" %}</small>
+                        </div>
+                    </div>
+                    <div class="list-group list-group-flush" id="recentActivityList">
+                        <!-- Transactions will be injected here -->
+                        {% for tx in ledger %}
+                            {% if tx.type == "DEPOSIT" %}
+                                <div class="list-group-item d-flex justify-content-between align-items-center p-2 mb-2 rounded bg-opacity-10">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="p-2 rounded-lg"
+                                             style="min-width:40px; text-align:center; font-weight:bold; border-radius:0.5rem;">
+                                            <div style="font-size:1rem;">⬇</div>
+                                        </div>
+                                        <div>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <span class="fw-bold">Deposit</span>
+                                            </div>
+                                            <small class="text-muted">{{ tx.created }}</small>
+                                        </div>
+                                    </div>
+                                    <div class="text-end">
+                                        <div class="fw-bold text-emerald-400">
+                                            +${{ tx.deposit_change|floatformat:2 }}</div>
+                                    </div>
+                                </div>
+                            {% elif tx.type == "WITHDRAWAL" %}
+                                <div class="list-group-item d-flex justify-content-between align-items-center p-2 mb-2 rounded bg-opacity-10">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="p-2 rounded-lg"
+                                             style="min-width:40px; text-align:center; font-weight:bold; border-radius:0.5rem;">
+                                            <div style="font-size:1rem;">⬆</div>
+                                        </div>
+                                        <div>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <span class="fw-bold">Withdraw</span>
+                                            </div>
+                                            <small class="text-muted">{{ tx.created }}</small>
+                                        </div>
+                                    </div>
+                                    <div class="text-end">
+                                        <div class="fw-bold text-orange-400">
+                                            -${{ tx.withdrawable_change|floatformat:2 }}</div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% empty %}
+                            <!-- Empty state -->
+                            <div class="text-center text-muted py-4">
+                                <i class="fa-solid fa-coins"></i>
+                                <div class="fw-semibold mt-2">{% translate "No Transactions Available" %}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="btn w-100 mt-3 btn-outline-info btn-sm" id="viewFullHistoryBtn">
+                        {% translate "View Full History" %} →
+                    </button>
+                </div>
+
+                <!-- Support -->
+                <div class="sidebar-card text-center">
+                    <div class="mb-2" style="font-size:2rem; color:purple;">❓</div>
+                    <h6>{% translate "Need Help?" %}</h6>
+                    <p class="text-purple small mb-2">{% translate "Our support team is available 24/7" %}</p>
+                    <a href="mailto:support@sportslotto.vip?subject=Support%20Request"
+                       class="btn w-100 gradient-btn py-2 fw-bold">
+                        📩 {% translate "Contact Support" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Full History Modal -->
+        <div class="modal fade" id="fullHistoryModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                <div class="modal-content bg-dark text-white border-secondary rounded-xl">
+                    <div class="modal-header border-secondary">
+                        <h5 class="modal-title">{% translate "Transaction History" %}</h5>
+                        <button
+                                type="button"
+                                class="btn-close btn-close-white"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                        ></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div id="fullHistoryContent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alerts Modal -->
+        <div class="modal fade" id="alertsModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content bg-dark text-white border-secondary rounded-xl">
+                    <div class="modal-header border-secondary">
+                        <h5 class="modal-title">{% translate "Alerts" %}</h5>
+                        <button
+                                type="button"
+                                class="btn-close btn-close-white"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                        ></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div id="alertsModalContent">
+                            <p class="text-muted text-center mb-0">
+                                {% for alert in messageEngine %}
+                                    <div class="alert-item d-flex justify-content-between align-items-start
+                                        {% if not alert.seen_at %}unread{% endif %}"
+                                         data-alert-id="{{ alert.uuid }}">
+
+                                        <div>
+                                            <strong>{{ alert.title }}</strong>
+                                            <p class="mb-1">{{ alert.text }}</p>
+                                            <small class="text-muted">{{ alert.created_at }}</small>
+                                        </div>
+
+                                        {% if not alert.seen_at %}
+                                            <button
+                                                    class="btn btn-sm btn-outline-secondary mark-read-btn"
+                                                    data-alert-id="{{ alert.uuid }}">
+                                                {% translate "Mark as Read" %}
+                                            </button>
+                                        {% endif %}
+                                    </div>
+                                {% empty %}
+                                    {% translate "You have no new alerts." %}
+                                {% endfor %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Bottom sticky bar - mobile -->
+    <div class="d-md-none fixed-bottom p-3 bg-dark text-center">
+        <button class="btn gradient-btn w-100 py-3" id="withdrawBtn" disabled>
+            Withdraw $<span id="selectedAmountDisplay">50</span> →
+        </button>
+    </div>
+    <script type="module">
+    import {CashierApp} from "/static/mycashier/js/CashierV2/main.js"
+    window.cashierV2 = new CashierApp({"csrf_token":"{{ csrf_token }}",
+        "isWithdraw":true,
+    },{
+        "read_message":"read-message/",
+        "crypto_withdraw_url":"withdraw/start/cashier.providers.ionBlock",
+        "sepa_withdraw_url":"sepa-transfer"
+    })
+    </script>
+{% endblock %}
+
+{% block DYNAMIC_DASHBOARD_SIDE_MENU_HEADER %}
+    {% include "lobby/dashboard/components/account_sidebar_header.html" %}
+{% endblock %}
+{% block DYNAMIC_DASHBOARD_BODY_FOOTER %}
+    {% include "lobby/index/theme_switcher.html" %}
+{% endblock %}

@@ -1,0 +1,109 @@
+// ---------------------------------------------
+// Custom Inferno Theme Variables
+// ---------------------------------------------
+$primary: #000000 !default;
+$secondary: #2A4EDF !default;
+$success: #c60077 !default;
+$danger: #dc3545 !default;
+$warning: #f58a07 !default;
+$info: #FFB41F !default;
+$dark: #200819 !default;
+$text-white: #D6C3C9 !default;
+$white: #D6C3C9 !default;
+
+$success-hover: #FF99D6 !default;
+$success-hover-hl: #FF47B6 !default;
+$primary-hover: #FF99A7 !default;
+$primary-hover-hl: #FFC2CA !default;
+
+$dark-red: #630310;
+$dark-grey: #303136;
+
+// Optional extras
+$soft-pink: #ffe6f9 !default;
+$neon-cyan: #00f0ff !default;
+$neon-green: #8aff00 !default;
+$neon-orange: #ff7a00 !default;
+$neon-teal: #00ffd9 !default;
+$neon-violet: #a761ff !default;
+$neon-rose: #ff3cac !default;
+$neon-yellow: #fff200 !default;
+$neon-electric: #72ffff !default;
+$ticket-bg-2: #150607 !default;
+
+
+$bg1: #000013 !default;
+$bg2: #00111f !default;
+$glow1: #00eaff !default;
+$glow2: #ff00f2 !default;
+$border: #00eaff !default;
+$ticket-border: #00eaff !default;
+$ticket-bg-1: #001f2e !default;
+$ticket-bg-2: #000000 !default;
+$ticket-text: #ffffff !default;
+$ticket-glow-outer: #00eaff !default;
+$ticket-glow-inner: #ff00f2 !default;
+$ticket-text-glow: #00eaff!default;
+$ticket-text-glow-2: #ff00f2 !default;
+$prize-bg: #001a2a !default;
+$prize-border: #00c9ff !default;
+$prize-text: #ff00f2 !default;
+$prize-glow-1: #00eaff !default;
+$prize-glow-2: #ff00f2 !default;/* Bootstrap CSS variable stubs (IDE only) */
+/* =========================================================
+   IDE / LINTER VARIABLE STUBS
+   ---------------------------------------------------------
+   Purpose:
+   - Silence "Cannot resolve custom property"
+   - Do NOT override runtime Bootstrap or theme values
+   - Safe fallbacks only
+   ========================================================= */
+/* =========================================================
+   Vendor pseudo selector stubs (IDE silence)
+   ========================================================= */
+
+:root {
+  /* ---------- Bootstrap core ---------- */
+  --bs-body-text-align: left;
+
+  --bs-dropdown-item-border-radius: 0.375rem;
+  --bs-nav-link-font-size: 1rem;
+  --bs-scroll-height: auto;
+
+  --bs-breadcrumb-font-size: 0.875rem;
+  --bs-breadcrumb-divider: "/";
+
+  --bs-focus-ring-x: 0;
+  --bs-focus-ring-y: 0;
+  --bs-focus-ring-blur: 0;
+  --bs-focus-ring-width: 0.25rem;
+
+  --bs-icon-link-transform: none;
+
+  /* ---------- Bootstrap form controls ---------- */
+  --bs-form-control-border-color: rgba(255, 255, 255, 0.25);
+  --bs-form-control-focus-border-color: rgba(150, 120, 255, 0.7);
+
+  /* ---------- Theme text tokens ---------- */
+  --text1: inherit;
+  --text-primary: inherit;
+  --text-secondary: inherit;
+  --theme-text: inherit;
+
+  /* ---------- Glow / neon tokens ---------- */
+  --glow: rgba(150, 120, 255, 0.6);
+  --glow1: rgba(150, 120, 255, 0.6);
+
+  --neon-rose: rgba(255, 80, 160, 0.85);
+  --neon-cyan: rgba(80, 220, 255, 0.85);
+
+  /* ---------- Accent tokens ---------- */
+
+  /* ---------- Surface / misc ---------- */
+  --surface-shadow: rgba(0, 0, 0, 0.25);
+   --accent-light-purple: #cbbcff;
+  --accent-purple: #9678ff;
+
+}
+
+

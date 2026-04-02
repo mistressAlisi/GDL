@@ -1,0 +1,80 @@
+
+<link rel="stylesheet" href="/static/gdlfront/css/winners.css"/>
+{% include "minerve/pages/dynamic_dashboard/loading_toast.html" %}
+    <div class="winners-container">
+        <div class="max-width-wrapper">
+            <!-- Winners Board -->
+            <div class="winners-board">
+                <!-- Header -->
+                <div class="winners-header">
+                    <i class="fas fa-trophy trophy-icon"></i>
+                    <h2 class="header-title">Winners Leaderboard</h2>
+                    <i class="fas fa-trophy trophy-icon"></i>
+                </div>
+
+                <!-- Scrollable Content -->
+                <div class="winners-scroll-container">
+                    <!-- Top 10 Section -->
+                    <div class="top-winners-section">
+                        <!-- Decorative corners -->
+                        <i class="fas fa-star corner-star corner-top-left"></i>
+                        <i class="fas fa-star corner-star corner-top-right"></i>
+                        <i class="fas fa-star corner-star corner-bottom-left"></i>
+                        <i class="fas fa-star corner-star corner-bottom-right"></i>
+
+                        <!-- Top winners list -->
+                        <div class="winners-list top-winners" id="topWinnersList">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Remaining Winners Section -->
+                    <div class="remaining-winners-section" id="remainingWinnersSection" style="display: none;">
+                        <div class="winners-list remaining-winners" id="remainingWinnersList">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Winners Ticker -->
+{#            <div class="recent-winners-ticker" id="recentWinnersTicker">#}
+{#                <div class="ticker-content">#}
+{#                    <div class="ticker-info">#}
+{#                        <!-- Trophy (hidden on mobile) -->#}
+{#                        <div class="trophy-container d-none d-sm-block">#}
+{#                            <div class="trophy-wrapper">#}
+{#                                <i class="fas fa-trophy trophy-icon-ticker"></i>#}
+{#                            </div>#}
+{#                            <div class="trophy-pulse"></div>#}
+{#                        </div>#}
+{##}
+{#                        <!-- Winner info -->#}
+{#                        <div class="winner-info">#}
+{#                            <div class="winner-label-wrapper">#}
+{#                                <div class="winner-label">Recent Winner</div>#}
+{#                                <div class="winner-underline"></div>#}
+{#                            </div>#}
+{#                            <div class="winner-name" id="currentWinnerName">Loading...</div>#}
+{#                        </div>#}
+{#                    </div>#}
+{##}
+{#                    <!-- Win Badge -->#}
+{#                    <div class="win-badge">#}
+{#                        <i class="fas fa-star star-icon"></i>#}
+{#                        <span class="win-text">WIN!</span>#}
+{#                        <span class="win-time" id="winTime">Just now</span>#}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{#                <!-- Progress bar -->#}
+{#                <div class="progress-bar-container">#}
+{#                    <div class="progress-bar-fill" id="progressBar"></div>#}
+{#                </div>#}
+{#            </div>#}
+        </div>
+    </div>
+    <script type="module">
+    import {WinnerBoard} from "/static/gdlfront/js/GDLWinners/main.js";
+    window.winnerBoard = new WinnerBoard();
+    </script>
